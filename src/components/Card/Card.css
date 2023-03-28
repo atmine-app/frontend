@@ -1,0 +1,32 @@
+.property__link {
+  display: block;
+  text-decoration: none;
+}
+
+.property__card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.property__card img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.property__card-content {
+  margin-top: 16px;
+}
+
+.property__card-content h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.property__card-content p {
+  font-size: 1rem;
+  color: #666;
+}
