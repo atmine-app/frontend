@@ -1,32 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import propertyService from "../../services/propertyService";
+import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 
-const initialState = {
-  title: "",
-  description: "",
-  category: "",
-  price: "",
-  size: "",
-  images: "",
-  address: "",
-  city: "",
-  country: "",
-  zipCode: "",
-};
+const libraries = ["places"];
+
 
 const RegisterPropertyForm = () => {
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+    libraries,
+  });
+
+  const initialState = {
+    title: "",
+    description: "",
+    category: "",
+    price: "",
+    size: "",
+    images: "",
+    address: "",
+    city: "",
+    country: "",
+    zipCode: "",
+  };
+  
   const [formData, setFormData] = useState(initialState);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [center, setCenter] = useState({ lat: 41.394043, lng:2.173094  }); 
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newProperty = await propertyService.addProperty(formData);
-      console.log(newProperty);
+      const propertyData = {
+        ...formData,
+        coordinates: {
+          lat: coordinates.lat,
+          lng: coordinates.lng
+        }
+      };
+      console.log(propertyData);
+      await propertyService.addProperty(propertyData);
     } catch (error) {
       console.error(error);
     }
   };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -35,7 +53,31 @@ const RegisterPropertyForm = () => {
     }));
   };
 
+useEffect(() => {
+  if (!window.google) return;
+  const geocoder = new window.google.maps.Geocoder();
+  geocoder.geocode({ address: formData.address }, (results, status) => {
+    if (status === "OK") {
+      const location = results[0].geometry.location;
+      setSelectedLocation({ lat: location.lat(), lng: location.lng() });
+      setCenter({ lat: location.lat(), lng: location.lng() });
+      setCoordinates({ lat: location.lat(), lng: location.lng() });
+    } else {
+      setCoordinates({ lat: null, lng: null });
+    }
+  });
+}, [formData.address]);
+
+
+const handleMapLoad = (map) => {
+  setCenter({ lat: map.center.lat(), lng: map.center.lng() });
+};
+
+if (loadError) return "Error loading maps";
+if (!isLoaded) return "Loading maps";
+
   return (
+    <div>
     <form onSubmit={handleSubmit}>
       <label htmlFor="title">Title:</label>
       <input
@@ -146,7 +188,23 @@ const RegisterPropertyForm = () => {
 
   <button type="submit">Register Property</button>
 </form>
-
+<br />
+      <label>
+        Property Location:
+        {isLoaded && (
+          <GoogleMap
+            mapContainerStyle={{ height: "200px", width: "100%" }}
+            center={center}
+            zoom={15}
+            onLoad={handleMapLoad}
+          >
+            {selectedLocation && (
+              <Marker position={selectedLocation} />
+            )}
+          </GoogleMap>
+        )}
+      </label>
+      </div>
 
 );
 };
