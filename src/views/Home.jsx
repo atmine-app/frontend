@@ -2,10 +2,16 @@ import React from 'react'
 import propertyService from '../services/propertyService'
 import { useState, useEffect } from 'react'
 import Card from '../components/Card/Card';
+import SearchBar from '../components/Search/SearchBar';
 
 export default function Properties() {
   const [properties, setProperties] = useState(null);
-  
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearch = (value) => {
+    setSearchValue(value);
+  }
+
   const getAllProperties = async () => {
     try {
       const response = await propertyService.getAllProperties();
@@ -21,17 +27,25 @@ export default function Properties() {
 
   return (
     <div>
-      <h1>All Properties</h1>
-      <div className="card__container">
+    <SearchBar handleSearchValue={handleSearch} />
+    <h1>All Properties</h1>
+    <div className="card__container">
       {properties &&
-        properties.map((property) => {
-          return (
-          <div key={property._id}>
-            <Card property={property} />
-          </div>
-        )
-        })}
+        properties
+          .filter(
+            (property) =>
+              property.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+              property.description.toLowerCase().includes(searchValue.toLowerCase()) ||
+              property.category.toLowerCase().includes(searchValue.toLowerCase())
+          )
+          .map((property) => {
+            return (
+              <div key={property._id}>
+                <Card property={property} />
+              </div>
+            );
+          })}
     </div>
-    </div>
+  </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 
-const Map = ({ center, selectedLocation }) => {
+const Map = ({ center, selectedLocation, locations }) => {
   return (
     <GoogleMap
       mapContainerStyle={{ height: "200px", width: "100%" }}
