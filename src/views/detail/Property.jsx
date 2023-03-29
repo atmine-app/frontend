@@ -5,10 +5,14 @@ import Card from '../../components/Card/Card';
 import Map from '../../components/Map/Map';
 import { googleMapsConfig } from '../../googleMapsConfig';
 import { useLoadScript } from '@react-google-maps/api';
+import authService from '../../services/authService';
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
   const [property, setProperty] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  console.log(currentUser)
 
   const getProperty = async () => {
     try {
@@ -19,8 +23,18 @@ export default function PropertyDetail() {
     }
   };
 
+  const getCurrentUser = async () => {
+    try {
+      const response = await authService.getCurrentUser();
+      setCurrentUser(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getProperty();
+    getCurrentUser();
     // eslint-disable-next-line
   }, [propertyId]);
 
@@ -34,9 +48,9 @@ export default function PropertyDetail() {
 
   return (
     <div>
-      {property && (
+      {property && currentUser && (
         <>
-          <Card property={property} />
+          <Card property={property} currentUser={currentUser} />
           <Map center={property.coordinates} selectedLocation={property.coordinates} />
         </>
       )}
