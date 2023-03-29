@@ -34,15 +34,20 @@ const RegisterPropertyForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const propertyData = {
+      title: formData.title,
+      description: formData.description,
+      category: formData.category,
+      price: formData.price,
+      size: formData.size,
+      images: formData.images,
+      address: formData.address,
+      city: formData.city,
+      country: formData.country,
+      zipCode: formData.zipCode,
+      coordinates: coordinates,
+    };
     try {
-      const propertyData = {
-        ...formData,
-        coordinates: {
-          lat: coordinates.lat,
-          lng: coordinates.lng,
-        },
-      };
-      console.log(propertyData);
       await propertyService.addProperty(propertyData);
     } catch (error) {
       console.error(error);
@@ -72,9 +77,6 @@ const RegisterPropertyForm = () => {
     });
   }, [formData.address]);
 
-  const handleMapLoad = (map) => {
-    setCenter({ lat: map.center.lat(), lng: map.center.lng() });
-  };
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading maps";
@@ -91,7 +93,7 @@ const RegisterPropertyForm = () => {
           onChange={handleChange}
           required
         />
-    
+
         <label htmlFor="description">Description:</label>
         <textarea
           id="description"
@@ -100,7 +102,7 @@ const RegisterPropertyForm = () => {
           onChange={handleChange}
           required
         />
-    
+
         <label htmlFor="category">Category:</label>
         <select
           id="category"
@@ -119,7 +121,7 @@ const RegisterPropertyForm = () => {
           <option value="photostudio">Photostudio</option>
           <option value="other">Other</option>
         </select>
-    
+
         <label htmlFor="price">Price:</label>
         <input
           type="number"
@@ -129,7 +131,7 @@ const RegisterPropertyForm = () => {
           onChange={handleChange}
           required
         />
-    
+
         <label htmlFor="size">Size:</label>
         <input
           type="number"
@@ -139,7 +141,7 @@ const RegisterPropertyForm = () => {
           onChange={handleChange}
           required
         />
-    
+
         <label htmlFor="images">Images:</label>
         <input
           type="text"
@@ -148,7 +150,7 @@ const RegisterPropertyForm = () => {
           value={formData.images}
           onChange={handleChange}
         />
-    
+
         <label htmlFor="address">Address:</label>
         <input
           type="text"
@@ -158,7 +160,7 @@ const RegisterPropertyForm = () => {
           onChange={handleChange}
           required
         />
-    
+
         <label htmlFor="city">City:</label>
         <input
           type="text"
@@ -168,7 +170,7 @@ const RegisterPropertyForm = () => {
           onChange={handleChange}
           required
         />
-    
+
         <label htmlFor="country">Country:</label>
         <input
           type="text"
@@ -178,28 +180,27 @@ const RegisterPropertyForm = () => {
           onChange={handleChange}
           required
         />
-    
         <label htmlFor="zipCode">Zip Code:</label>
-        <input
-          type="text"
-          id="zipCode"
-          name="zipCode"
-          value={formData.zipCode}
-          onChange={handleChange}
-          required
-        />
-    
-        <button type="submit">Register Property</button>
-      </form>
-      <br />
+    <input
+      type="text"
+      id="zipCode"
+      name="zipCode"
+      value={formData.zipCode}
+      onChange={handleChange}
+      required
+    />
+
+    <button type="submit">Register Property</button>
+  </form>
+  <br />
       <label>
         Property Location:
         {isLoaded && (
-          <Map center={center} selectedLocation={selectedLocation} />
+          <Map center={center} selectedLocation={selectedLocation} coordinates={coordinates} />
         )}
       </label>
-    </div>
-    );
+</div>
+  );
   };
   
   export default RegisterPropertyForm;

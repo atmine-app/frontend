@@ -3,7 +3,7 @@ import axios from 'axios';
 class PropertyService {
   constructor() {
     this.api = axios.create({
-      baseURL: `${process.env.REACT_APP_BACKEND_URL}`
+      baseURL: `${process.env.REACT_APP_BACKEND_URL}/properties`
     });
 
     this.api.interceptors.request.use(config => {
@@ -24,6 +24,7 @@ class PropertyService {
   }
 
   addProperty(property) {
+    console.log(property);
     return this.api.post('/', property).then(({ data }) => data);
   }
 
