@@ -11,6 +11,7 @@ import PrivateView from './views/PrivateView';
 import IsPrivate from './components/IsPrivate';
 import RegisterPropertyForm from './components/RegisterPropertyForm/RegisterPropertyForm';
 import Property from './views/detail/Property'
+import EditProperty from './views/detail/EditProperty';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
         <Route path="/register-property" element={<IsPrivate><RegisterPropertyForm /></IsPrivate>} />
         <Route path='/:propertyId' element={<Property />}/>
+        <Route path='/edit/:propertyId' element={<EditProperty />}/>
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
