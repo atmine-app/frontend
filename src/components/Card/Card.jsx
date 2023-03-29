@@ -11,10 +11,10 @@ export default function Card({ property }) {
       to={`/${property._id}`}
     >
       <div className="property__card">
-        <img src={property.images} alt={property.title} />
+        <img src={property.images} alt={property.title}/>
         <div className="property__card-content">
           <h2>{property.title}</h2>
-          <p>Host: {property.owner.username}</p>
+          <p>Host: {property.owner && property.owner.username}</p>
         </div>
       </div>
     </Link>

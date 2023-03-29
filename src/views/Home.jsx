@@ -22,6 +22,7 @@ export default function Properties() {
   return (
     <div>
       <h1>All Properties</h1>
+      <div className="card__container">
       {properties &&
         properties.map((property) => {
           return (
@@ -30,6 +31,7 @@ export default function Properties() {
           </div>
         )
         })}
+    </div>
     </div>
   );
 }

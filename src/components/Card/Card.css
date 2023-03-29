@@ -1,3 +1,8 @@
+.card__container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .property__link {
   display: block;
   text-decoration: none;
@@ -9,10 +14,13 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
+  width: 250px; 
+  margin: 8px; 
+  box-sizing: border-box;
 }
 
 .property__card img {
-  width: 100%;
+  max-width: 100%;
   border-radius: 4px;
 }
 
