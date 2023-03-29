@@ -24,7 +24,6 @@ class PropertyService {
   }
 
   addProperty(property) {
-    console.log(property);
     return this.api.post('/', property).then(({ data }) => data);
   }
 

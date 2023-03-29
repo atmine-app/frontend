@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './Card.css'
 
 export default function Card({ property }) {
-  console.log(property)
   return (
     <Link
       className="property__link"

@@ -10,6 +10,7 @@ import Login from './views/auth/Login';
 import PrivateView from './views/PrivateView';
 import IsPrivate from './components/IsPrivate';
 import RegisterPropertyForm from './components/RegisterPropertyForm/RegisterPropertyForm';
+import Property from './views/detail/Property'
 
 function App() {
   return (
@@ -17,11 +18,12 @@ function App() {
       <Toaster/>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
         <Route path="/register-property" element={<IsPrivate><RegisterPropertyForm /></IsPrivate>} />
+        <Route path='/:propertyId' element={<Property />}/>
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
