@@ -5,7 +5,6 @@ import Map from "../Map/Map";
 import { googleMapsConfig } from "../../googleMapsConfig";
 
 
-const libraries = ["places"];
 
 const initialState = {
   title: "",

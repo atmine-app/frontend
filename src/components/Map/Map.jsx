@@ -1,8 +1,7 @@
 import React from "react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 
-const Map = ({ locations ,center, selectedLocation}) => {
-    console.log(locations)
+const Map = ({ center, selectedLocation}) => {
   
   return (
     <GoogleMap
@@ -19,9 +18,7 @@ const Map = ({ locations ,center, selectedLocation}) => {
       {selectedLocation && (
         <Marker position={selectedLocation} />
       )}
-      {locations && locations.map((location, index) => (
-        <Marker key={index} position={{lat: location.coordinates.lat, lng: location.coordinates.lng}} />
-      ))}
+    
     </GoogleMap>
   );
 };
