@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import propertyService from "../../services/propertyService";
 import { useLoadScript } from "@react-google-maps/api";
 import Map from "../Map/Map";
+import { googleMapsConfig } from "../../googleMapsConfig";
+
 
 const libraries = ["places"];
 
@@ -20,8 +22,8 @@ const initialState = {
 
 const RegisterPropertyForm = () => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-    libraries,
+    googleMapsApiKey: googleMapsConfig.apiKey,
+    libraries: googleMapsConfig.libraries,
   });
 
   const [formData, setFormData] = useState(initialState);
