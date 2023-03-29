@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import propertyService from "../../services/propertyService";
 import { useLoadScript } from "@react-google-maps/api";
-import Map from "../../components/Map/Map";
+import Map from "../Map/Map";
 
 const libraries = ["places"];
 
