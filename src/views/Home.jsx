@@ -1,23 +1,23 @@
 import React from 'react'
-import axios from 'axios';
+import propertyService from '../services/propertyService'
 import { useState, useEffect } from 'react'
 import Card from '../components/Card/Card';
 
 export default function Properties() {
   const [properties, setProperties] = useState(null);
-
-  const getProperties = async () => {
+  
+  const getAllProperties = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/"
-      );
-      setProperties(response.data);
-    } catch (error) {}
-  };
+      const response = await propertyService.getAllProperties();
+      setProperties(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    getProperties();
-  }, []);
+    getAllProperties()
+  }, [])
 
   return (
     <div>
