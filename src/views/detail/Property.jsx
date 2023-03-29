@@ -5,6 +5,7 @@ import Card from '../../components/Card/Card';
 import Map from '../../components/Map/Map';
 import { googleMapsConfig } from '../../googleMapsConfig';
 import { useLoadScript } from '@react-google-maps/api';
+import Calendar from '../../components/Calendar/Calendar';
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -38,6 +39,7 @@ export default function PropertyDetail() {
         <>
           <Card property={property} />
           <Map center={property.coordinates} selectedLocation={property.coordinates} />
+          <Calendar />
         </>
       )}
     </div>
