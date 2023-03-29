@@ -9,7 +9,7 @@ import Signup from './views/auth/Signup';
 import Login from './views/auth/Login';
 import PrivateView from './views/PrivateView';
 import IsPrivate from './components/IsPrivate';
-import RegisterPropertyForm from './components/RegisterPropertyForm/RegisterPropertyForm';
+import RegisterPropertyForm from './views/RegisterPropertyForm/RegisterPropertyForm';
 
 function App() {
   return (
