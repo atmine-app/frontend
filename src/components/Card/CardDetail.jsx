@@ -50,25 +50,25 @@ export default function Card({property, currentUser}) {
             <p>City: {property.city}</p>
             <Map center={property.coordinates} selectedLocation={property.coordinates} />
           </div>
-        <div className="card-buttons">
-          {isOwner && (
-            <>
-              <button type="submit">
-                <NavLink to={`/properties/${property._id}/edit`} className="nav-link">
-                  Edit
-                </NavLink>
-              </button>
-              <button type="submit" onClick={() => handleDelete(propertyId)}>
-                Delete
-              </button>
-              <button type="submit">
-                <NavLink to={`/properties/${property._id}/book`} className="nav-link">
-                  Book
-                </NavLink>
-              </button>  
-            </>
-          )}
-        </div>
+          <div className="card-buttons">
+            {isOwner && (
+              <>
+                <button type="submit">
+                  <NavLink to={`/properties/${property._id}/edit`} className="nav-link">
+                    Edit
+                  </NavLink>
+                </button>
+                <button type="submit" onClick={() => handleDelete(propertyId)}>
+                  Delete
+                </button>
+              </>
+            )}
+            <button type="submit">
+              <NavLink to={`/properties/${property._id}/book`} className="nav-link">
+                Book
+              </NavLink>
+            </button>
+          </div>
       </div>
     </NavLink>
   );
