@@ -50,9 +50,9 @@ const RegisterPropertyForm = () => {
       coordinates: coordinates,
     };
     try {
-      const newProperty = await propertyService.addProperty(propertyData);
-      console.log(newProperty)
+      await propertyService.addProperty(propertyData);
       navigate(`/`);
+      setFormData(initialState);
     } catch (error) {
       console.error(error);
     }

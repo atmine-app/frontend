@@ -12,8 +12,6 @@ export default function PropertyDetail() {
   const [property, setProperty] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
 
-  console.log(currentUser)
-
   const getProperty = async () => {
     try {
       const response = await propertyService.getProperty(propertyId);
