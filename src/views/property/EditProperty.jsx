@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import propertyService from "../../services/propertyService";
 
+
 export default function EditProperty() {
   const { propertyId } = useParams();
   const [property, setProperty] = useState({
@@ -16,7 +17,7 @@ export default function EditProperty() {
     country: "",
     zipCode: "",
   });
-
+  const [error, setError] = useState(false)
   const navigate = useNavigate();
 
   const getProperty = async () => {
@@ -46,7 +47,7 @@ export default function EditProperty() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await propertyService.editProperty(propertyId);
+      await propertyService.editProperty(propertyId, property);
       navigate('/')
     } catch (error) {
       console.log(error);
@@ -56,6 +57,7 @@ export default function EditProperty() {
   return (
     <div>
       <h2>Edit Property</h2>
+      {error && <p>Something went wrong. Couldn't find your course</p>}
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title:</label>
         <input

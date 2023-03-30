@@ -16,31 +16,31 @@ class PropertyService {
   }
 
   getAllProperties() {
-    return this.api.get(`/`).then(({ data }) => data);
+    return this.api.get(`/`).then(({ data }) => data).catch(err => console.error(err));
   }
 
   getProperty(propertyId) {
-    return this.api.get(`/${propertyId}`).then(({ data }) => data);
+    return this.api.get(`/${propertyId}`).then(({ data }) => data).catch(err => console.error(err));;
   }
 
   addProperty(property) {
-    return this.api.post('/', property).then(({ data }) => data);
+    return this.api.post('/', property).then(({ data }) => data).catch(err => console.error(err));;
   }
 
-  editProperty(propertyId, property) {
-    return this.api.put(`/${propertyId}`, property).then(({ data }) => data);
+  editProperty(propertyId, body) {
+    return this.api.put(`/${propertyId}`, body).then(({ data }) => data).catch(err => console.error(err));;
   }
 
   deleteProperty(propertyId) {
-    return this.api.delete(`/${propertyId}`).then(({ data }) => data);
+    return this.api.delete(`/${propertyId}`).then(({ data }) => data).catch(err => console.error(err));;
   }
 
   getPropertyVotes(propertyId) {
-    return this.api.get(`/${propertyId}/votes`).then(({ data }) => data);
+    return this.api.get(`/${propertyId}/votes`).then(({ data }) => data).catch(err => console.error(err));;
   }
 
   addPropertyVote(propertyId, rating) {
-    return this.api.post(`/${propertyId}/vote`, { rating }).then(({ data }) => data);
+    return this.api.post(`/${propertyId}/vote`, { rating }).then(({ data }) => data).catch(err => console.error(err));;
   }
 }
 
