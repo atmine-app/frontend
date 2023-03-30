@@ -7,15 +7,15 @@ import { useNavigate } from "react-router-dom";
 
 const initialState = {
   title: "",
-  description: "",
-  category: "",
-  price: "",
-  size: "",
-  images: "",
-  address: "",
-  city: "",
-  country: "",
-  zipCode: "",
+  description: "plendid Sunny Apartment in Benidorm, Frontline West and with Amazing Views from its Splendid Terrace! You are above the beach and close to all restaurants. In 15 min. by foot you will be in the middle of Casco Antiguo. It has two bedrooms, two bathrooms, kitchen, kitchen, living room-dining room. Plus, you'll have Wifi to make the most of your time for both leisure and work. The apartment has a spectacular Infinity pool!!!",
+  category: "Attic",
+  price: "50",
+  size: "100",
+  images: "https://a0.muscache.com/im/pictures/miso/Hosting-48926456/original/97a3176c-15dd-440f-b954-035d5b01b2c7.jpeg?im_w=960",
+  address: "Benidorm",
+  city: "Benidorm",
+  country: "Spain",
+  zipCode: "12345",
 };
 
 const RegisterPropertyForm = () => {

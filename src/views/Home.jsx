@@ -42,7 +42,9 @@ if (loadError) return "Error loading maps";
         property.title.toLowerCase().includes(searchValue.toLowerCase()) ||
         property.description.toLowerCase().includes(searchValue.toLowerCase()) ||
         property.category.toLowerCase().includes(searchValue.toLowerCase())
-      ): null;
+      )
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    : null;
   
   return (
     <div>
