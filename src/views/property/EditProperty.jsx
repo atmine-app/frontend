@@ -4,8 +4,6 @@ import propertyService from "../../services/propertyService";
 
 export default function EditProperty() {
   const { propertyId } = useParams();
-  
-
   const [property, setProperty] = useState({
     title: "",
     description: "",

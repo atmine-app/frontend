@@ -7,7 +7,7 @@ import propertyService from "../../services/propertyService";
 export default function Card({property, currentUser}) {
   const isOwner = property.owner && currentUser && property.owner._id === currentUser._id;
   const { propertyId } = useParams();
-  const [prop, setProperty] = useState({});
+  const [ , setProperty] = useState({});
 
   const navigate = useNavigate();
 

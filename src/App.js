@@ -9,9 +9,9 @@ import Signup from './views/auth/Signup';
 import Login from './views/auth/Login';
 import PrivateView from './views/PrivateView';
 import IsPrivate from './components/IsPrivate';
-import RegisterPropertyForm from './components/RegisterPropertyForm/RegisterPropertyForm';
-import Property from './views/detail/Property'
-import EditProperty from './views/detail/EditProperty';
+import Property from './views/property/Property'
+import EditProperty from './views/property/EditProperty';
+import NewProperty from './views/property/NewProperty';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
-        <Route path="/register-property" element={<IsPrivate><RegisterPropertyForm /></IsPrivate>} />
+        <Route path="/register-property" element={<IsPrivate><NewProperty /></IsPrivate>} />
         <Route path='/properties/:propertyId' element={<Property />}/>
         <Route path='/properties/:propertyId/edit' element={<EditProperty />}/>
         <Route path="/error" element={<ErrorPage />} />
