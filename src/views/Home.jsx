@@ -1,15 +1,15 @@
 import React from "react";
 import propertyService from "../services/propertyService";
 import { useState, useEffect } from "react";
-import Card from "../components/Card/Card";
-import SearchBar from "../components/Search/SearchBar";
+import CardMin from "../components/Card/CardMin";
+/* import SearchBar from "../components/Search/SearchBar"; */
 // import MapSearch from "../components/Map/MapSearch";
 // import { googleMapsConfig } from "../googleMapsConfig";
 // import { useJsApiLoader } from "@react-google-maps/api";
 
 export default function Properties() {
-  const [properties, setProperties] = useState(null);
-  const [searchValue, setSearchValue] = useState("");
+  const [properties, setProperties] = useState([]);
+  /* const [searchValue, setSearchValue] = useState(""); */
 
   // const { isLoaded, loadError } = useJsApiLoader({
   //   id: "google-map-script",
@@ -17,9 +17,9 @@ export default function Properties() {
   //   libraries: googleMapsConfig.libraries,
   // });
 
-  const handleSearch = (value) => {
+  /* const handleSearch = (value) => {
     setSearchValue(value);
-  };
+  }; */
 
   const getAllProperties = async () => {
     try {
@@ -37,7 +37,7 @@ export default function Properties() {
   // if (loadError) return "Error loading maps";
   //   if (!isLoaded) return "Loading maps";
 
-  const filteredProperties = properties
+  /* const filteredProperties = properties
     ? properties
         .filter(
           (property) =>
@@ -48,11 +48,11 @@ export default function Properties() {
             property.category.toLowerCase().includes(searchValue.toLowerCase())
         )
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    : null;
+    : null; */
 
   return (
     <div>
-      <SearchBar handleSearchValue={handleSearch} />
+      {/* <SearchBar handleSearchValue={handleSearch} /> */}
       {/* {searchValue && filteredProperties.length > 0 && (
         <div style={{ height: "200px" }}>
           <MapSearch
@@ -66,10 +66,10 @@ export default function Properties() {
       <div className="card__container">
         {properties !== null ? (
           <div className="card__container">
-            {filteredProperties.map((property) => {
+            {properties.map((property) => {
               return (
                 <div key={property._id}>
-                  <Card property={property} />
+                  <CardMin property={property} />
                 </div>
               );
             })}

@@ -9,7 +9,7 @@ import Signup from './views/auth/Signup';
 import Login from './views/auth/Login';
 import PrivateView from './views/PrivateView';
 import IsPrivate from './components/IsPrivate';
-import Property from './views/property/PropertyDetail'
+import PropertyDetail from './views/property/PropertyDetail'
 import EditProperty from './views/property/EditProperty';
 import NewProperty from './views/property/NewProperty';
 import NewBooking from './views/booking/NewBooking';
@@ -25,7 +25,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
         <Route path="/register-property" element={<IsPrivate><NewProperty /></IsPrivate>} />
-        <Route path='/properties/:propertyId' element={<Property />}/>
+        <Route path='/properties/:propertyId' element={<PropertyDetail />}/>
         <Route path='/properties/:propertyId/edit' element={<EditProperty />}/>
         <Route path='/properties/:propertyId/book' element={<NewBooking />}/>
         <Route path="/error" element={<ErrorPage />} />

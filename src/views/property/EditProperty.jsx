@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import propertyService from "../../services/propertyService";
 
-
 export default function EditProperty() {
   const { propertyId } = useParams();
+
   const [property, setProperty] = useState({
     title: "",
     description: "",
@@ -17,13 +17,12 @@ export default function EditProperty() {
     country: "",
     zipCode: "",
   });
-  const [error, setError] = useState(false)
+
   const navigate = useNavigate();
 
   const getProperty = async () => {
     try {
       const response = await propertyService.getProperty(propertyId);
-      console.log(response)
       setProperty(response);
     } catch (error) {
       console.log(error);
@@ -36,19 +35,19 @@ export default function EditProperty() {
   }, [propertyId]);
 
   const handleChange = (e) => {
-    setProperty((prev) => {
+    setProperty(prev => {
       return {
         ...prev,
         [e.target.name]: e.target.value,
-      };
-    });
+      }
+    })
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await propertyService.editProperty(propertyId, property);
-      navigate('/')
+      navigate(`/properties/${propertyId}`)
     } catch (error) {
       console.log(error);
     }
@@ -57,9 +56,8 @@ export default function EditProperty() {
   return (
     <div>
       <h2>Edit Property</h2>
-      {error && <p>Something went wrong. Couldn't find your course</p>}
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
+        <label>Title:</label>
         <input
           type="text"
           id="title"
@@ -69,7 +67,7 @@ export default function EditProperty() {
           required
         />
 
-        <label htmlFor="description">Description:</label>
+        <label>Description:</label>
         <textarea
           id="description"
           name="description"
@@ -78,7 +76,7 @@ export default function EditProperty() {
           required
         />
 
-        <label htmlFor="category">Category:</label>
+        <label>Category:</label>
         <select
           id="category"
           name="category"
@@ -97,7 +95,7 @@ export default function EditProperty() {
           <option value="other">Other</option>
         </select>
 
-        <label htmlFor="price">Price:</label>
+        <label>Price:</label>
         <input
           type="number"
           id="price"
@@ -107,7 +105,7 @@ export default function EditProperty() {
           required
         />
 
-        <label htmlFor="size">Size:</label>
+        <label>Size:</label>
         <input
           type="number"
           id="size"
@@ -117,7 +115,7 @@ export default function EditProperty() {
           required
         />
 
-        <label htmlFor="images">Images:</label>
+        <label>Images:</label>
         <input
           type="text"
           id="images"
@@ -126,7 +124,7 @@ export default function EditProperty() {
           onChange={handleChange}
         />
 
-        <label htmlFor="address">Address:</label>
+        <label>Address:</label>
         <input
           type="text"
           id="address"
@@ -136,7 +134,7 @@ export default function EditProperty() {
           required
         />
 
-        <label htmlFor="city">City:</label>
+        <label>City:</label>
         <input
           type="text"
           id="city"
@@ -146,7 +144,7 @@ export default function EditProperty() {
           required
         />
 
-        <label htmlFor="country">Country:</label>
+        <label>Country:</label>
         <input
           type="text"
           id="country"
@@ -155,7 +153,7 @@ export default function EditProperty() {
           onChange={handleChange}
           required
         />
-        <label htmlFor="zipCode">Zip Code:</label>
+        <label>Zip Code:</label>
         <input
           type="text"
           id="zipCode"
