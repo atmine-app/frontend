@@ -9,7 +9,7 @@ import Signup from './views/auth/Signup';
 import Login from './views/auth/Login';
 import PrivateView from './views/PrivateView';
 import IsPrivate from './components/IsPrivate';
-import Property from './views/property/Property'
+import Property from './views/property/PropertyDetail'
 import EditProperty from './views/property/EditProperty';
 import NewProperty from './views/property/NewProperty';
 
