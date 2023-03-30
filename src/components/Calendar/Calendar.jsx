@@ -1,29 +1,31 @@
+// import React, { useState } from 'react';
+// import { DateRangePicker } from 'react-dates';
+// import 'react-dates/initialize';
+// import 'react-dates/lib/css/_datepicker.css';
 
-import React, { useState } from 'react';
-import { DateRangePicker } from 'react-dates';
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
+// const Calendar = () => {
+//   const [startDate, setStartDate] = useState(null);
+//   const [endDate, setEndDate] = useState(null);
+//   const [focusedInput, setFocusedInput] = useState(null);
 
-const Calendar = () => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [focusedInput, setFocusedInput] = useState(null);
-  console.log(startDate, endDate)
+//   console.log(startDate, endDate)
 
-  return (
-    <div className='calendarContainer'>
-    <DateRangePicker
-      startDate={startDate}
-      endDate={endDate}
-      onDatesChange={({ startDate, endDate }) => {
-        setStartDate(startDate);
-        setEndDate(endDate);
-      }}
-      focusedInput={focusedInput}
-      onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
-    />
-    </div>
-  );
-};
+//   return (
+//     <div className='calendar-container'>
+//       <DateRangePicker
+//         startDate={startDate}
+//         endDate={endDate}
+//         onDatesChange={({ startDate, endDate }) => {
+//           setStartDate(startDate);
+//           setEndDate(endDate);
+//         }}
+//         focusedInput={focusedInput}
+//         onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
+//         displayFormat="DD/MM/YYYY"
+//         numberOfMonths={2}
+//       />
+//     </div>
+//   );
+// };
 
-export default Calendar;
+// export default Calendar;

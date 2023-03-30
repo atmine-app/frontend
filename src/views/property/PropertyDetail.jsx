@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import propertyService from '../../services/propertyService';
 import CardDetail from '../../components/Card/CardDetail';
 import Map from '../../components/Map/Map';
-import { googleMapsConfig } from '../../googleMapsConfig';
-import { useLoadScript } from '@react-google-maps/api';
+// import { googleMapsConfig } from '../../googleMapsConfig';
+// import { useLoadScript } from '@react-google-maps/api';
 import authService from '../../services/authService';
+// import ReviewForm from '../../components/ReviewForm/ReviewForm';
+// import Calendar from '../../components/Calendar/Calendar';
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -36,19 +38,20 @@ export default function PropertyDetail() {
     // eslint-disable-next-line
   }, [propertyId]);
 
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: googleMapsConfig.apiKey,
-    libraries: googleMapsConfig.libraries,
-  });
+  // const { isLoaded, loadError } = useLoadScript({
+  //   googleMapsApiKey: googleMapsConfig.apiKey,
+  //   libraries: googleMapsConfig.libraries,
+  // });
 
-  if (loadError) return "Error loading maps";
-  if (!isLoaded) return "Loading maps";
+  // if (loadError) return "Error loading maps";
+  // if (!isLoaded) return "Loading maps";
 
   return (
     <div>
       {property && currentUser && (
         <>
           <CardDetail property={property} currentUser={currentUser} />
+          {/* <ReviewForm propertyId={propertyId}/> */}
         </>
       )}
     </div>

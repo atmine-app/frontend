@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import propertyService from "../../services/propertyService";
 import { useLoadScript } from "@react-google-maps/api";
-import Map from "../Map/Map";
 import { googleMapsConfig } from "../../googleMapsConfig";
 import { useNavigate } from "react-router-dom";
 
@@ -197,12 +196,12 @@ const RegisterPropertyForm = () => {
     <button type="submit">Register Property</button>
   </form>
   <br />
-      <label>
+      {/* <label>
         Property Location:
         {isLoaded && (
           <Map center={center} selectedLocation={selectedLocation} coordinates={coordinates} />
         )}
-      </label>
+      </label> */}
 </div>
   );
   };

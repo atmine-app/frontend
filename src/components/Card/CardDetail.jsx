@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useParams, useNavigate } from 'react-router-dom';
 import "./Card.css";
 import propertyService from "../../services/propertyService";
-import Map from '../Map/Map';
+// import Map from '../Map/Map';
 
 export default function Card({property, currentUser}) {
   const isOwner = property.owner && currentUser && property.owner._id === currentUser._id;
@@ -48,7 +48,7 @@ export default function Card({property, currentUser}) {
             <p>Size: {property.size}</p>
             <p>Address: {property.address}</p>
             <p>City: {property.city}</p>
-            <Map center={property.coordinates} selectedLocation={property.coordinates} />
+            {/* <Map center={property.coordinates} selectedLocation={property.coordinates} /> */}
           </div>
         <div className="card-buttons">
           {isOwner && (

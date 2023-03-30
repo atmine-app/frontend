@@ -46,8 +46,8 @@ export default function EditProperty() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await propertyService.editProperty(propertyId, property);
-      navigate(`/properties/${propertyId}`)
+      await propertyService.editProperty(propertyId);
+      navigate('/')
     } catch (error) {
       console.log(error);
     }
