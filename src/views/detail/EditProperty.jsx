@@ -49,7 +49,7 @@ export default function EditProperty() {
     e.preventDefault();
     try {
       await propertyService.editProperty(propertyId, property);
-      navigate(`/${propertyId}`)
+      navigate(`/properties/${propertyId}`)
     } catch (error) {
       console.log(error);
     }

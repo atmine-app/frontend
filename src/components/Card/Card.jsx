@@ -35,7 +35,7 @@ export default function Card({property, currentUser}) {
   }
 
   return (
-    <NavLink className="property__link" key={property._id} to={`/${property._id}`}>
+    <NavLink className="property__link" key={property._id} to={`/properties/${property._id}`}>
       <div className="property__card">
         <img src={property.images} alt={property.title} />
         <div className="property__card-content">
@@ -46,11 +46,11 @@ export default function Card({property, currentUser}) {
           {isOwner && (
             <>
               <button type="submit">
-                <NavLink to={`/edit/${property._id}`} className="nav-link">
+                <NavLink to={`/properties/${property._id}/edit`} className="nav-link">
                   Edit
                 </NavLink>
               </button>
-              <button type="submit" onClick={() => handleDelete(property._id)}>
+              <button type="submit" onClick={() => handleDelete(propertyId)}>
                 Delete
               </button>
             </>

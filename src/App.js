@@ -23,9 +23,9 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
-        <Route path="/register-property" element={<IsPrivate><RegisterPropertyForm /></IsPrivate>} />
-        <Route path='/:propertyId' element={<Property />}/>
-        <Route path='/edit/:propertyId' element={<EditProperty />}/>
+        <Route path="/properties/register-property" element={<IsPrivate><RegisterPropertyForm /></IsPrivate>} />
+        <Route path='/properties/:propertyId' element={<Property />}/>
+        <Route path='/properties/:propertyId/edit' element={<EditProperty />}/>
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

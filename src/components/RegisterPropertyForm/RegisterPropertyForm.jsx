@@ -52,7 +52,7 @@ const RegisterPropertyForm = () => {
     try {
       const newProperty = await propertyService.addProperty(propertyData);
       console.log(newProperty)
-      navigate(`/${newProperty._id}`);
+      navigate(`/`);
     } catch (error) {
       console.error(error);
     }
