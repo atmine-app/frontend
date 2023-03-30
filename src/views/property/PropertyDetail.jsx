@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import propertyService from '../../services/propertyService';
 import CardDetail from '../../components/Card/CardDetail';
-import Map from '../../components/Map/Map';
 import { googleMapsConfig } from '../../googleMapsConfig';
 import { useLoadScript } from '@react-google-maps/api';
 import authService from '../../services/authService';

@@ -12,6 +12,7 @@ import IsPrivate from './components/IsPrivate';
 import Property from './views/property/PropertyDetail'
 import EditProperty from './views/property/EditProperty';
 import NewProperty from './views/property/NewProperty';
+import NewBooking from './views/booking/NewBooking';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/register-property" element={<IsPrivate><NewProperty /></IsPrivate>} />
         <Route path='/properties/:propertyId' element={<Property />}/>
         <Route path='/properties/:propertyId/edit' element={<EditProperty />}/>
+        <Route path='/properties/:propertyId/book' element={<NewBooking />}/>
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
