@@ -61,6 +61,11 @@ export default function Card({property, currentUser}) {
               <button type="submit" onClick={() => handleDelete(propertyId)}>
                 Delete
               </button>
+              <button type="submit">
+                <NavLink to={`/properties/${property._id}/book`} className="nav-link">
+                  Book
+                </NavLink>
+              </button>  
             </>
           )}
         </div>
