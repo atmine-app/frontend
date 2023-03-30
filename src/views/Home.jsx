@@ -10,7 +10,6 @@ import { useJsApiLoader } from "@react-google-maps/api";
 export default function Properties() {
   const [properties, setProperties] = useState(null);
   const [searchValue, setSearchValue] = useState('');
-  console.log(properties)
 
 const { isLoaded, loadError } = useJsApiLoader({
   id: "google-map-script",

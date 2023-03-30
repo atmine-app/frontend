@@ -3,8 +3,7 @@ import propertyService from "../../services/propertyService";
 import { useLoadScript } from "@react-google-maps/api";
 import Map from "../Map/Map";
 import { googleMapsConfig } from "../../googleMapsConfig";
-
-
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   title: "",
@@ -24,6 +23,8 @@ const RegisterPropertyForm = () => {
     googleMapsApiKey: googleMapsConfig.apiKey,
     libraries: googleMapsConfig.libraries,
   });
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState(initialState);
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -49,7 +50,9 @@ const RegisterPropertyForm = () => {
       coordinates: coordinates,
     };
     try {
-      await propertyService.addProperty(propertyData);
+      const newProperty = await propertyService.addProperty(propertyData);
+      console.log(newProperty)
+      navigate(`/${newProperty._id}`);
     } catch (error) {
       console.error(error);
     }
