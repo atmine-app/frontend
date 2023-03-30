@@ -5,10 +5,10 @@ import "./Card.css";
 import propertyService from "../../services/propertyService";
 // import Map from '../Map/Map';
 
-export default function Card({property, currentUser}) {
-  const isOwner = property.owner && currentUser && property.owner._id === currentUser._id;
+export default function Card({x, currentUser}) {
+ /*  const isOwner = x.owner && currentUser && x.owner._id === currentUser._id; */
   const { propertyId } = useParams();
-  const [ , setProperty] = useState({});
+  const [property, setProperty] = useState({});
 
   const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ export default function Card({property, currentUser}) {
             {/* <Map center={property.coordinates} selectedLocation={property.coordinates} /> */}
           </div>
           <div className="card-buttons">
-            {isOwner && (
+            {/* {isOwner && ( */}
               <>
                 <button type="submit">
                   <NavLink to={`/properties/${property._id}/edit`} className="nav-link">
@@ -62,7 +62,7 @@ export default function Card({property, currentUser}) {
                   Delete
                 </button>
               </>
-            )}
+            {/* )} */}
             <button type="submit">
               <NavLink to={`/properties/${property._id}/book`} className="nav-link">
                 Book
