@@ -6,6 +6,8 @@ import Map from '../../components/Map/Map';
 import { googleMapsConfig } from '../../googleMapsConfig';
 import { useLoadScript } from '@react-google-maps/api';
 import Calendar from '../../components/Calendar/Calendar';
+import ReviewForm from '../../components/ReviewForm/ReviewForm';
+
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -40,6 +42,7 @@ export default function PropertyDetail() {
           <Card property={property} />
           <Map center={property.coordinates} selectedLocation={property.coordinates} />
           <Calendar />
+          <ReviewForm propertyId={propertyId}/>
         </>
       )}
     </div>
