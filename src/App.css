@@ -1,3 +1,30 @@
 .active {
   color: green;
 }
+
+.DayPicker__selected_span {
+  background-color: #ff4000;;
+  opacity: 0.3;
+}
+.DayPicker__selected_span:after {
+  background-color: #ff4000;
+  opacity: 0.3;
+}
+.DayPicker__selected_span:hover {
+  background-color: #ff4000;;
+  opacity: 0.5;
+}
+.DayPicker__selected_span:hover:after {
+  background-color: #ff4000;;
+  opacity: 0.5;
+}
+.DayPicker__selected_span:active,
+.DayPicker__selected_span:focus {
+  background-color: #ff4000;;
+  opacity: 0.7;
+}
+.DayPicker__selected_span:active:after,
+.DayPicker__selected_span:focus:after {
+  background-color: #ff4000;;
+  opacity: 0.7;
+}
