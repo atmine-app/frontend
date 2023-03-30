@@ -20,8 +20,6 @@ class ReviewService {
   }
 
   createReview(propertyId, review) {
-    console.log(`propertyId: ${propertyId}`);
-  console.log(`review: ${review}`);
     const data = { propertyId, review };
   return this.api.post("/", data).then(({ data }) => data);
   }

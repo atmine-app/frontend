@@ -3,19 +3,19 @@ import propertyService from "../services/propertyService";
 import { useState, useEffect } from "react";
 import Card from "../components/Card/Card";
 import SearchBar from "../components/Search/SearchBar";
-import MapSearch from "../components/Map/MapSearch";
-import { googleMapsConfig } from "../googleMapsConfig";
-import { useJsApiLoader } from "@react-google-maps/api";
+// import MapSearch from "../components/Map/MapSearch";
+// import { googleMapsConfig } from "../googleMapsConfig";
+// import { useJsApiLoader } from "@react-google-maps/api";
 
 export default function Properties() {
   const [properties, setProperties] = useState(null);
   const [searchValue, setSearchValue] = useState("");
 
-  const { isLoaded, loadError } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: googleMapsConfig.apiKey,
-    libraries: googleMapsConfig.libraries,
-  });
+  // const { isLoaded, loadError } = useJsApiLoader({
+  //   id: "google-map-script",
+  //   googleMapsApiKey: googleMapsConfig.apiKey,
+  //   libraries: googleMapsConfig.libraries,
+  // });
 
   const handleSearch = (value) => {
     setSearchValue(value);
@@ -64,15 +64,19 @@ export default function Properties() {
       )} */}
       <h1>All Properties</h1>
       <div className="card__container">
-        {filteredProperties !== null
-          ? filteredProperties.map((property) => {
+        {properties !== null ? (
+          <div className="card__container">
+            {filteredProperties.map((property) => {
               return (
                 <div key={property._id}>
                   <Card property={property} />
                 </div>
               );
-            })
-          : null}
+            })}
+          </div>
+        ) : (
+          <div>Loading properties...</div>
+        )}
       </div>
     </div>
   );

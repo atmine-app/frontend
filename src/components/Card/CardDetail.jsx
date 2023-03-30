@@ -5,7 +5,7 @@ import "./Card.css";
 import propertyService from "../../services/propertyService";
 // import Map from '../Map/Map';
 
-export default function Card({property, currentUser}) {
+export default function CardDetail ({property, currentUser}) {
   const isOwner = property.owner && currentUser && property.owner._id === currentUser._id;
   const { propertyId } = useParams();
   const [ , setProperty] = useState({});
@@ -37,38 +37,34 @@ export default function Card({property, currentUser}) {
 
   return (
     <NavLink className="property__link" key={property._id} to={`/properties/${property._id}`}>
-        <div className="property__card-detail">
-          <img src={property.images} alt={property.title} />
-          <div className="property__card-content">
-            <h2>{property.title}</h2>
-            <p>Host: {property.owner && property.owner.username}</p>
-            <p>Catergory: {property.category}</p>
-            <p>Description: {property.description}</p>
-            <p>Price: {property.price}</p>
-            <p>Size: {property.size}</p>
-            <p>Address: {property.address}</p>
-            <p>City: {property.city}</p>
-            {/* <Map center={property.coordinates} selectedLocation={property.coordinates} /> */}
-          </div>
-          <div className="card-buttons">
-            {isOwner && (
-              <>
-                <button type="submit">
-                  <NavLink to={`/properties/${property._id}/edit`} className="nav-link">
-                    Edit
-                  </NavLink>
-                </button>
-                <button type="submit" onClick={() => handleDelete(propertyId)}>
-                  Delete
-                </button>
-              </>
-            )}
-            <button type="submit">
-              <NavLink to={`/properties/${property._id}/book`} className="nav-link">
-                Book
+      <div className="property__card-detail">
+        <img src={property.images} alt={property.title} />
+        <div className="property__card-content">
+          <h2>{property.title}</h2>
+          <p>Host: {property.owner && property.owner.username}</p>
+          <p>Catergory: {property.category}</p>
+          <p>Description: {property.description}</p>
+          <p>Price: {property.price}</p>
+          <p>Size: {property.size}</p>
+          <p>Address: {property.address}</p>
+          <p>City: {property.city}</p>
+          {/* <Map center={property.coordinates} selectedLocation={property.coordinates} /> */}
+        </div>
+        <div className="card-buttons">
+          {isOwner && (
+            <>
+              <NavLink to={`/properties/${property._id}/edit`} className="nav-link">
+                Edit
               </NavLink>
-            </button>
-          </div>
+              <button type="submit" onClick={() => handleDelete(propertyId)}>
+                Delete
+              </button>
+            </>
+          )}
+          <NavLink to={`/properties/${property._id}/book`} className="nav-link">
+            Book
+          </NavLink>
+        </div>
       </div>
     </NavLink>
   );

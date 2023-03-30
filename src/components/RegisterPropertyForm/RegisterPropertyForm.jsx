@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import propertyService from "../../services/propertyService";
-import { useLoadScript } from "@react-google-maps/api";
-import { googleMapsConfig } from "../../googleMapsConfig";
+// import { useLoadScript } from "@react-google-maps/api";
+// import { googleMapsConfig } from "../../googleMapsConfig";
 import { useNavigate } from "react-router-dom";
 
 const initialState = {
@@ -18,20 +18,20 @@ const initialState = {
 };
 
 const RegisterPropertyForm = () => {
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: googleMapsConfig.apiKey,
-    libraries: googleMapsConfig.libraries,
-  });
+  // const { isLoaded, loadError } = useLoadScript({
+  //   googleMapsApiKey: googleMapsConfig.apiKey,
+  //   libraries: googleMapsConfig.libraries,
+  // });
 
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState(initialState);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  const [center, setCenter] = useState({
-    lat: 41.394043,
-    lng: 2.173094,
-  });
-  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+  // const [selectedLocation, setSelectedLocation] = useState(null);
+  // const [center, setCenter] = useState({
+  //   lat: 41.394043,
+  //   lng: 2.173094,
+  // });
+  // const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,7 +46,6 @@ const RegisterPropertyForm = () => {
       city: formData.city,
       country: formData.country,
       zipCode: formData.zipCode,
-      coordinates: coordinates,
     };
     try {
       await propertyService.addProperty(propertyData);
@@ -65,24 +64,24 @@ const RegisterPropertyForm = () => {
     }));
   };
 
-  useEffect(() => {
-    if (!window.google) return;
-    const geocoder = new window.google.maps.Geocoder();
-    geocoder.geocode({ address: formData.address }, (results, status) => {
-      if (status === "OK") {
-        const location = results[0].geometry.location;
-        setSelectedLocation({ lat: location.lat(), lng: location.lng() });
-        setCenter({ lat: location.lat(), lng: location.lng() });
-        setCoordinates({ lat: location.lat(), lng: location.lng() });
-      } else {
-        setCoordinates({ lat: null, lng: null });
-      }
-    });
-  }, [formData.address]);
+  // useEffect(() => {
+  //   if (!window.google) return;
+  //   const geocoder = new window.google.maps.Geocoder();
+  //   geocoder.geocode({ address: formData.address }, (results, status) => {
+  //     if (status === "OK") {
+  //       const location = results[0].geometry.location;
+  //       setSelectedLocation({ lat: location.lat(), lng: location.lng() });
+  //       setCenter({ lat: location.lat(), lng: location.lng() });
+  //       setCoordinates({ lat: location.lat(), lng: location.lng() });
+  //     } else {
+  //       setCoordinates({ lat: null, lng: null });
+  //     }
+  //   });
+  // }, [formData.address]);
 
 
-  if (loadError) return "Error loading maps";
-  if (!isLoaded) return "Loading maps";
+  // if (loadError) return "Error loading maps";
+  // if (!isLoaded) return "Loading maps";
 
   return (
     <div>
