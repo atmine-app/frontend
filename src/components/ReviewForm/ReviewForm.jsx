@@ -1,3 +1,44 @@
+import React, { useState } from "react";
+import reviewService from "../../services/reviewService";
+
+export default function ReviewForm({ propertyId }) {
+  console.log(`propertyId: ${propertyId}`);
+  const [review, setReview] = useState("");
+
+  const handleReviewChange = (event) => {
+    setReview(event.target.value);
+    console.log(review);
+  };
+
+  const handleFormSubmit = async (event) => {
+    console.log("submitting form");
+    console.log(review)
+    event.preventDefault();
+    try {
+      await reviewService.createReview(propertyId, review);
+      setReview("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleFormSubmit}>
+        <label htmlFor="comment">Review</label>
+        <input
+          type="text"
+          id="comment"
+          name="comment"
+          value={review}
+          onChange={handleReviewChange}
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+}
+
 // import React, { useState } from "react";
 // import * as tf from '@tensorflow/tfjs';
 // import { load } from '@tensorflow-models/toxicity';
