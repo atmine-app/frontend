@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 
 export default function ReviewForm({ propertyId, handleReviewSubmit }) {
-  console.log(`propertyId: ${propertyId}`);
   const [review, setReview] = useState("");
 
   const handleReviewChange = (event) => {
     setReview(event.target.value);
-    console.log(review);
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
       handleReviewSubmit(review);
+      setReview("");
     } catch (error) {
       console.log(error);
     }

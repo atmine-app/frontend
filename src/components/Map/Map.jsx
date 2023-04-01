@@ -15,10 +15,8 @@ const Map = ({ formData }) => {
         const location = results[0].geometry.location;
         setSelectedLocation({ lat: location.lat(), lng: location.lng() });
         setCenter({ lat: location.lat(), lng: location.lng() });
-        console.log("location", location)
       } else {
         setSelectedLocation({ lat: null, lng: null });
-        console.log("location", JSON.stringify(status))
       }
     });
   }, [formData]);

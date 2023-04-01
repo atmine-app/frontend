@@ -29,7 +29,6 @@ export default function PropertyDetail() {
 
   const getReviews = async () => {
     try {
-      console.log('im inside getReviews')
       const response = await reviewService.getReviews(propertyId);
       setReviews(response);
     } catch (error) {
