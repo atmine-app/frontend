@@ -34,7 +34,7 @@ function App() {
         <Route path='/properties/:propertyId' element={<PropertyDetail />}/>
         <Route path='/properties/:propertyId/edit' element={<EditProperty />}/>
         <Route path='/properties/:propertyId/book' element={<NewBooking />}/>
-        <Route path="/bookings" element={<IsPrivate><BookingList /></IsPrivate>} />
+        {/* <Route path="/bookings" element={<IsPrivate><BookingList /></IsPrivate>} /> */}
         <Route path="/bookings/:bookingId" element={<IsPrivate><BookingDetail /></IsPrivate>} />
         <Route path="/bookings/:bookingId/confirmation" element={<IsPrivate><BookingConfirmation /></IsPrivate>} />
         {/* realmente no hace falta la de confirmation => podemos ir al detail directamente */}
