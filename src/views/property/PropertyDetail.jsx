@@ -2,7 +2,6 @@ import React,{useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import CardDetail from '../../components/Card/CardDetail'
 import Map from '../../components/Map/Map'
-// import Map from '../../components/Map/Map'
 import propertyService from '../../services/propertyService'
 
 
@@ -25,6 +24,9 @@ export default function PropertyDetail() {
   }, [propertyId])
 
   return (
-    <CardDetail />
+    <div>
+    <CardDetail property={property}/>
+    <Map formData={property}/>
+    </div>
   )
 }
