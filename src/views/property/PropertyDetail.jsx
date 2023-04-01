@@ -4,6 +4,7 @@ import CardDetail from '../../components/Card/CardDetail'
 import Map from '../../components/Map/Map'
 import ReviewForm from '../../components/ReviewForm/ReviewForm'
 import propertyService from '../../services/propertyService'
+import Reviews from '../../components/Reviews/Reviews'
 
 
 export default function PropertyDetail() {
@@ -30,6 +31,7 @@ export default function PropertyDetail() {
     <Map formData={property}/>
     <br />
     <ReviewForm propertyId={propertyId}/>
+    <Reviews propertyId={propertyId}/>
     </div>
   )
 }

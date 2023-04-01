@@ -15,8 +15,9 @@ class ReviewService {
     });
   }
 
-  getReview(reviewId) {
-    return this.api.get(`/${reviewId}`).then(({ data }) => data);
+  getReviews(propertyId) {
+    console.log('Service review', propertyId)
+    return this.api.get(`/${propertyId}`).then(({ data }) => data);
   }
 
   createReview(propertyId, review) {
@@ -32,9 +33,9 @@ class ReviewService {
     return this.api.delete(`/${reviewId}`).then(({ data }) => data);
   }
 
-  getReviews() {
-    return this.api.get('/').then(({ data }) => data);
-  }
+//   getAllReviews() {
+//     return this.api.get('/').then(({ data }) => data);
+//   }
 }
 
 const reviewService = new ReviewService();

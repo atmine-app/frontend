@@ -14,7 +14,7 @@ import EditProperty from './views/property/EditProperty';
 import NewProperty from './views/property/NewProperty';
 import NewBooking from './views/booking/NewBooking';
 import BookingConfirmation from './views/booking/BookingConfirmation';
-import BookingList from './views/booking/BookingList';
+// import BookingList from './views/booking/BookingList';
 import MyProfile from './views/profile/MyProfile';
 import BookingDetail from './views/booking/BookingDetail';
 
