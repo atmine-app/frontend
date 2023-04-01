@@ -3,29 +3,11 @@ import {Link} from "react-router-dom";
 import { useParams, useNavigate } from 'react-router-dom';
 import "./Card.css";
 import propertyService from "../../services/propertyService";
-// import Map from '../Map/Map';
 
-export default function CardDetail({prop}) {
+
+export default function CardDetail({property,propertyId}) {
  /*  const isOwner = x.owner && currentUser && x.owner._id === currentUser._id; */
-  const { propertyId } = useParams();
-  const [property, setProperty] = useState({});
-
   const navigate = useNavigate();
-
-  const getProperty = async () => {
-    try {
-      const response = await propertyService.getProperty(propertyId);
-      setProperty(response)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getProperty()
-    // eslint-disable-next-line
-  }, [propertyId])
-
   const handleDelete = async (propertyId) => {
     try {
       await propertyService.deleteProperty(propertyId)

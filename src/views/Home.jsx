@@ -75,11 +75,9 @@ export default function Properties() {
           <div className="card__container">
             {filteredProperties.map((property) => {
               return (
-                
-                  <div key={property._id}>
-                    <CardMin  property={property} />
-                  </div>
-             
+                <div key={property._id}>
+                  <CardMin property={property} />
+                </div>
               );
             })}
           </div>
