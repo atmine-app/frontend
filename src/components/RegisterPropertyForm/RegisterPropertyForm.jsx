@@ -3,7 +3,7 @@ import propertyService from "../../services/propertyService";
 import { useNavigate } from "react-router-dom";
 
 
-const RegisterPropertyForm = ({onAddressChange}) => {
+const RegisterPropertyForm = ({onFormDataChange}) => {
   const initialState = {
     title: "",
     description:
@@ -24,14 +24,12 @@ const RegisterPropertyForm = ({onAddressChange}) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
+    const updatedFormData = {
+      ...formData,
       [name]: value,
-    }));
-    
-    if (name === 'address') {
-      onAddressChange(value);
-    }
+    };
+    setFormData(updatedFormData);
+    onFormDataChange(updatedFormData);
   };
 
   const handleSubmit = async (e) => {

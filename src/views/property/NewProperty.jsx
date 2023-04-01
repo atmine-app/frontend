@@ -3,17 +3,20 @@ import RegisterPropertyForm from '../../components/RegisterPropertyForm/Register
 import Map from '../../components/Map/Map'
 
 export default function NewProperty() {
-  const [address, setAddress] = useState('');
+  const [formData, setFormData] = useState('');
 
-  const handleAddressChange = (newAddress) => {
-    setAddress(newAddress);
+  const handleFormChange = (newAddress) => {
+    setFormData(newAddress);
+    console.log(formData)
   };
+
+  
   return (
     <div>
-    <RegisterPropertyForm  onAddressChange={handleAddressChange}/>
+    <RegisterPropertyForm  onFormDataChange={handleFormChange}/>
     <label>
         Property Location:
-        <Map address={address} />
+        <Map formData={formData} />
       </label>
     </div>
   )
