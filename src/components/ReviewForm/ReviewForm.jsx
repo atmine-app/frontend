@@ -23,7 +23,7 @@ export default function ReviewForm({ propertyId, handleReviewSubmit }) {
         <label htmlFor="comment">Review</label>
         <input
           type="text"
-          id="comment"
+          id="content"
           name="comment"
           value={review}
           onChange={handleReviewChange}

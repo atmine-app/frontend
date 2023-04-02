@@ -31,6 +31,7 @@ export default function PropertyDetail() {
     try {
       const response = await reviewService.getReviews(propertyId);
       setReviews(response);
+      console.log(response)
     } catch (error) {
       console.log(error);
     }
@@ -50,13 +51,24 @@ export default function PropertyDetail() {
     }
   };
 
+  const handleDelete = async (reviewId) => {
+    try {
+      const deletedReview = await reviewService.deleteReview(reviewId);
+    } catch (error) {
+      console.error(error)
+    } finally {
+      getReviews();
+      setReviews(reviews.filter((review) => review._id !== reviewId));
+    }
+  }
+
   return (
     <div>
     <CardDetail property={property}/>
     <Map formData={property}/>
     <br />
     <ReviewForm propertyId={propertyId} handleReviewSubmit={handleReviewSubmit}/>
-    <Reviews reviews={reviews}/>
+    <Reviews reviews={reviews} handleDelete={handleDelete}/>
     </div>
   )
 }
