@@ -1,12 +1,11 @@
-import React,{useState,useEffect} from 'react'
-import { useParams } from 'react-router-dom'
-import CardDetail from '../../components/Card/CardDetail'
-import Map from '../../components/Map/Map'
-import ReviewForm from '../../components/ReviewForm/ReviewForm'
-import propertyService from '../../services/propertyService'
-import Reviews from '../../components/Reviews/Reviews'
-import reviewService from '../../services/reviewService'
-
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import CardDetail from '../../components/Card/CardDetail';
+import Map from '../../components/Map/Map';
+import ReviewForm from '../../components/ReviewForm/ReviewForm';
+import propertyService from '../../services/propertyService';
+import Reviews from '../../components/Reviews/Reviews';
+import reviewService from '../../services/reviewService';
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -16,22 +15,22 @@ export default function PropertyDetail() {
   const getProperty = async () => {
     try {
       const response = await propertyService.getProperty(propertyId);
-      setProperty(response)
+      setProperty(response);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    getProperty()
+    getProperty();
     // eslint-disable-next-line
-  }, [propertyId])
+  }, [propertyId]);
 
   const getReviews = async () => {
     try {
       const response = await reviewService.getReviews(propertyId);
       setReviews(response);
-      console.log(response)
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -55,20 +54,34 @@ export default function PropertyDetail() {
     try {
       await reviewService.deleteReview(reviewId);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     } finally {
       getReviews();
       setReviews(reviews.filter((review) => review._id !== reviewId));
     }
-  }
+  };
+
+  const handleUpdate = async (reviewId, updatedReviewText) => {
+    try {
+      const updatedReview = await reviewService.updateReview(reviewId, { review: updatedReviewText });
+      getReviews();
+      setReviews(
+        reviews.map((review) =>
+          review._id === updatedReview._id ? updatedReview : review
+        )
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
-    <CardDetail property={property}/>
-    <Map formData={property}/>
-    <br />
-    <ReviewForm propertyId={propertyId} handleReviewSubmit={handleReviewSubmit}/>
-    <Reviews reviews={reviews} handleDelete={handleDelete}/>
+      <CardDetail property={property} />
+      <Map formData={property} />
+      <br />
+      <ReviewForm propertyId={propertyId} handleReviewSubmit={handleReviewSubmit} />
+      <Reviews reviews={reviews} handleDelete={handleDelete} handleUpdate={handleUpdate} />
     </div>
-  )
+  );
 }
