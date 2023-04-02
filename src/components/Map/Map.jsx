@@ -13,6 +13,7 @@ const Map = ({ formData }) => {
     geocoder.geocode({ address: fullAddress }, (results, status) => {
       if (status === "OK") {
         const location = results[0].geometry.location;
+        console.log(location.lat(), location.lng());
         setSelectedLocation({ lat: location.lat(), lng: location.lng() });
         setCenter({ lat: location.lat(), lng: location.lng() });
       } else {

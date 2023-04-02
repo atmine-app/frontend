@@ -6,6 +6,7 @@ import ReviewForm from '../../components/ReviewForm/ReviewForm';
 import propertyService from '../../services/propertyService';
 import Reviews from '../../components/Reviews/Reviews';
 import reviewService from '../../services/reviewService';
+import Calendar from '../../components/Calendar/Calendar';
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -82,6 +83,7 @@ export default function PropertyDetail() {
       <br />
       <ReviewForm propertyId={propertyId} handleReviewSubmit={handleReviewSubmit} />
       <Reviews reviews={reviews} handleDelete={handleDelete} handleUpdate={handleUpdate} />
+      <Calendar propertyId={propertyId} />
     </div>
   );
 }
