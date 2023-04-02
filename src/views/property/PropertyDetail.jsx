@@ -53,7 +53,7 @@ export default function PropertyDetail() {
 
   const handleDelete = async (reviewId) => {
     try {
-      const deletedReview = await reviewService.deleteReview(reviewId);
+      await reviewService.deleteReview(reviewId);
     } catch (error) {
       console.error(error)
     } finally {

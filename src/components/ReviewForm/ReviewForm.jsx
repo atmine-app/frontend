@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-export default function ReviewForm({ propertyId, handleReviewSubmit }) {
-  const [review, setReview] = useState("");
+export default function ReviewForm({ initialReviewText, handleReviewSubmit }) {
+  const [review, setReview] = useState(initialReviewText || "");
 
   const handleReviewChange = (event) => {
     setReview(event.target.value);
