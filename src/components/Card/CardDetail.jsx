@@ -5,7 +5,7 @@ import "./Card.css";
 import propertyService from "../../services/propertyService";
 
 
-export default function CardDetail({property,propertyId}) {
+export default function CardDetail({property,propertyId,rating}) {
  /*  const isOwner = x.owner && currentUser && x.owner._id === currentUser._id; */
   const navigate = useNavigate();
   const handleDelete = async (propertyId) => {
@@ -29,6 +29,16 @@ export default function CardDetail({property,propertyId}) {
           <p>Size: {property.size}</p>
           <p>Address: {property.address}</p>
           <p>City: {property.city}</p>
+          <p>Rating: {rating && rating && rating.averageRating} </p>
+        </div>
+        <div className='ratingsContainer'>
+          <p>Location: {rating && rating && rating.location}</p>
+          <p>Cleanliness: {rating && rating && rating.cleanliness}</p>
+          <p>Communication: {rating && rating && rating.communication}</p>
+          <p>Value: {rating && rating && rating.valueForMoney}</p>
+          <p>Amenities: {rating && rating && rating.amenities}</p>
+
+          
         </div>
         <div className="card-buttons">
           <>
