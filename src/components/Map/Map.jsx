@@ -3,13 +3,18 @@ import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 import { googleMapsConfig } from "../../googleMapsConfig";
 
 const Map = ({ formData }) => {
-  const [selectedLocation, setSelectedLocation] = useState({ lat: null, lng: null});
+  const [selectedLocation, setSelectedLocation] = useState({
+    lat: null,
+    lng: null,
+  });
   const [center, setCenter] = useState({ lat: 41.3851, lng: 2.1734 });
 
   useEffect(() => {
     if (!window.google) return;
     const geocoder = new window.google.maps.Geocoder();
-    const fullAddress = formData.address + ", " + formData.city;
+    const fullAddress =
+      formData.address + ", " + formData.city + ", " + formData.country;
+    console.log(fullAddress);
     geocoder.geocode({ address: fullAddress }, (results, status) => {
       if (status === "OK") {
         const location = results[0].geometry.location;
@@ -23,7 +28,10 @@ const Map = ({ formData }) => {
   }, [formData]);
 
   return center ? (
-    <LoadScript googleMapsApiKey={googleMapsConfig.apiKey} libraries={googleMapsConfig.libraries}>
+    <LoadScript
+      googleMapsApiKey={googleMapsConfig.apiKey}
+      libraries={googleMapsConfig.libraries}
+    >
       <GoogleMap
         mapContainerStyle={{ height: "200px", width: "100%" }}
         center={center}
@@ -35,8 +43,8 @@ const Map = ({ formData }) => {
         }}
       >
         {selectedLocation.lat !== null && selectedLocation.lng !== null && (
-  <Marker position={selectedLocation} />
-)}
+          <Marker position={selectedLocation} />
+        )}
       </GoogleMap>
     </LoadScript>
   ) : (

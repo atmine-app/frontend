@@ -5,7 +5,8 @@ import { addDays, parseISO } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import bookingService from "../../services/bookingsServices"; // import the bookingService you created
-import { eachDayOfInterval } from "date-fns";
+import "./Calendar.css"
+import {Link} from 'react-router-dom'
 
 export default function CalendarComp({ propertyId }) {
   const [range, setRange] = useState([
@@ -18,6 +19,7 @@ export default function CalendarComp({ propertyId }) {
   const [open, setOpen] = useState(false);
   const [bookedDates, setBookedDates] = useState([]);
   const refOne = useRef(null);
+  const [rangeString, setRangeString] = useState("");
 
   const hideOnOutsideClick = (event) => {
     if (refOne.current && !refOne.current.contains(event.target)) {
@@ -28,11 +30,9 @@ export default function CalendarComp({ propertyId }) {
   const fetchBookings = async () => {
     try {
       const bookings = await bookingService.getAllBookings();
-      console.log("bookings", bookings)
       const propertyBookings = bookings.filter(
         (booking) => booking.property === propertyId
       );
-      console.log('propertyBookings', propertyBookings)
       let bookedDatesArray = [];
       propertyBookings.forEach((booking) => {
         let currentDate = parseISO(booking.startDate);
@@ -42,7 +42,6 @@ export default function CalendarComp({ propertyId }) {
           currentDate = addDays(currentDate, 1);
         }
       });
-      console.log("bookedDatesArray", bookedDatesArray);
       setBookedDates(bookedDatesArray);
     } catch (error) {
       console.error("Error fetching bookings:", error);
@@ -72,9 +71,11 @@ export default function CalendarComp({ propertyId }) {
             direction="horizontal"
             editableDateInputs={true}
             onChange={(item) => {
-                
-                setRange([item.selection])
-                console.log(range)}}
+                setRange([item.selection]);
+                const rangeString = `${format(item.selection.startDate, "yyyy-MM-dd")}&${format(item.selection.endDate, "yyyy-MM-dd")}`;
+                setRangeString(rangeString);
+                console.log('rangeString', rangeString);
+              }}
             moveRangeOnFirstSelection={false}
             ranges={range}
             months={1}
@@ -83,6 +84,12 @@ export default function CalendarComp({ propertyId }) {
           />
         )}
       </div>
+      <button>
+  <Link to={`/properties/${propertyId}/${rangeString}`} className="nav-link">
+    Book
+  </Link>
+</button>
+
     </div>
   );
 }

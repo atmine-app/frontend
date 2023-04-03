@@ -5,8 +5,8 @@ import Map from '../../components/Map/Map'
 export default function NewProperty() {
   const [formData, setFormData] = useState('');
 
-  const handleFormChange = (newAddress) => {
-    setFormData(newAddress);
+  const handleFormChange = (updatedFormData) => {
+    setFormData(updatedFormData);
     console.log(formData)
   };
 

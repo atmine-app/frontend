@@ -33,7 +33,7 @@ function App() {
         <Route path="/register-property" element={<IsPrivate><NewProperty /></IsPrivate>} />
         <Route path='/properties/:propertyId' element={<PropertyDetail />}/>
         <Route path='/properties/:propertyId/edit' element={<EditProperty />}/>
-        <Route path='/properties/:propertyId/book' element={<NewBooking />}/>
+        <Route path='/properties/:propertyId/:range' element={<NewBooking />}/>
         {/* <Route path="/bookings" element={<IsPrivate><BookingList /></IsPrivate>} /> */}
         <Route path="/bookings/:bookingId" element={<IsPrivate><BookingDetail /></IsPrivate>} />
         <Route path="/bookings/:bookingId/confirmation" element={<IsPrivate><BookingConfirmation /></IsPrivate>} />
