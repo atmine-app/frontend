@@ -3,7 +3,7 @@ import propertyService from "../services/propertyService";
 import { useState, useEffect } from "react";
 import CardMin from "../components/Card/CardMin";
 import SearchBar from "../components/Search/SearchBar";
-// import MapSearch from "../components/Map/MapSearch";
+import MapSearch from "../components/Map/MapSearch";
 // import { googleMapsConfig } from "../googleMapsConfig";
 // import { useJsApiLoader } from "@react-google-maps/api";
 
@@ -60,15 +60,17 @@ export default function Properties() {
   return (
     <div>
       <SearchBar handleSearchValue={handleSearch} />
-      {/* {searchValue && filteredProperties.length > 0 && (
-        <div style={{ height: "200px" }}>
-          <MapSearch
-            center={filteredProperties[0].coordinates}
-            locations={filteredProperties}
-            isLoaded={isLoaded}
-          />
-        </div>
-      )} */}
+      {searchValue && filteredProperties.length > 0 && (
+  <div style={{ height: "200px" }}>
+    <MapSearch
+      center={{
+        lat: filteredProperties[0].coordinates.lat,
+        lng: filteredProperties[0].coordinates.lng,
+      }}
+      properties={filteredProperties}
+    />
+  </div>
+)}
       <h1>All Properties</h1>
       <div className="card__container">
         {properties !== null ? (

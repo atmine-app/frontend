@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 import { googleMapsConfig } from "../../googleMapsConfig";
 
+
 const Map = ({ formData, onLocationChange = () => {} }) => {
   // set initial state for selectedLocation and center
   const [selectedLocation, setSelectedLocation] = useState({
