@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 import { googleMapsConfig } from "../../googleMapsConfig";
 
-
 const Map = ({ formData, onLocationChange = () => {} }) => {
   // set initial state for selectedLocation and center
   const [selectedLocation, setSelectedLocation] = useState({
@@ -31,33 +30,37 @@ const Map = ({ formData, onLocationChange = () => {} }) => {
         setSelectedLocation({ lat: null, lng: null }); // set selectedLocation state to null if Geocoder fails
       }
     });
-  }, [formData]);
+  }, [formData, onLocationChange]);
 
-  return center ? ( // if center state is not null, return Google Map component with marker at selectedLocation
+  return (
     <LoadScript
       googleMapsApiKey={googleMapsConfig.apiKey}
       libraries={googleMapsConfig.libraries}
+      onLoad={() => console.log("Google Maps API loaded")} // optional callback to handle API load
+      onError={() => console.log("Error loading Google Maps API")} // optional callback to handle API error
     >
-      <GoogleMap
-        mapContainerStyle={{ height: "200px", width: "100%" }}
-        center={center}
-        zoom={13}
-        options={{
-          disableDefaultUI: true,
-          streetViewControl: false,
-          mapTypeControl: false,
-        }}
-      >
-        {selectedLocation && selectedLocation.lat && selectedLocation.lng && (
-          <Marker position={selectedLocation} />
-        )}
-      </GoogleMap>
+      {center ? ( // if center state is not null, return Google Map component with marker at selectedLocation
+        <GoogleMap
+          mapContainerStyle={{ height: "200px", width: "100%" }}
+          center={center}
+          zoom={13}
+          options={{
+            disableDefaultUI: true,
+            streetViewControl: false,
+            mapTypeControl: false,
+          }}
+        >
+          {selectedLocation && selectedLocation.lat && selectedLocation.lng && (
+            <Marker position={selectedLocation} />
+          )}
+        </GoogleMap>
+      ) : (
+        // if center state is null, display loading message or placeholder
+        <div>
+          <p>Loading map...</p>
+        </div>
+      )}
     </LoadScript>
-  ) : (
-    // if center state is null, display loading message or placeholder
-    <div>
-      <p>Loading map...</p>
-    </div>
   );
 };
 

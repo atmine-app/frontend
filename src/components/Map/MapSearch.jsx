@@ -4,18 +4,11 @@ import {
   Marker,
   InfoWindow,
   OverlayView,
+  LoadScript,
 } from "@react-google-maps/api";
-import { useJsApiLoader } from "@react-google-maps/api";
 import { googleMapsConfig } from "../../googleMapsConfig";
 
 const MapSearch = ({ center, properties }) => {
-  console.log(properties);
-
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: googleMapsConfig.apiKey,
-    libraries: googleMapsConfig.libraries,
-  });
   const customMapStyle = [
     {
       featureType: "poi",
@@ -26,7 +19,6 @@ const MapSearch = ({ center, properties }) => {
   const [markers, setMarkers] = useState([]);
 
   const onMarkerClick = (marker) => {
-    console.log('overlay clicked')
     setSelectedMarker(marker);
   };
 
@@ -35,7 +27,6 @@ const MapSearch = ({ center, properties }) => {
   };
 
   useEffect(() => {
-    // Clear existing markers
     setMarkers([]);
     const newMarkers = properties.map((property, index) => {
       const marker = (
@@ -56,9 +47,9 @@ const MapSearch = ({ center, properties }) => {
               width: "50px",
               textAlign: "center",
               fontSize: "14px",
-              cursor: "pointer", // Add cursor style
+              cursor: "pointer",
             }}
-            onClick={() => onMarkerClick(property)} // Move onClick event here
+            onClick={() => onMarkerClick(property)}
           >
             €{property.price}
           </div>
@@ -70,10 +61,11 @@ const MapSearch = ({ center, properties }) => {
   }, [properties]);
 
   return (
-    <div className="App">
-      {!isLoaded ? (
-        <h1>Loading...</h1>
-      ) : (
+    <LoadScript
+      googleMapsApiKey={googleMapsConfig.apiKey}
+      libraries={googleMapsConfig.libraries}
+    >
+      <div className="App">
         <GoogleMap
           mapContainerStyle={{ height: "200px", width: "100%" }}
           center={center}
@@ -101,13 +93,12 @@ const MapSearch = ({ center, properties }) => {
                 <h3>{selectedMarker.title}</h3>
                 <p>Price: €{selectedMarker.price}</p>
                 <p>{selectedMarker.description}</p>
-                {/* Add more property information as needed */}
               </div>
             </InfoWindow>
           )}
         </GoogleMap>
-      )}
-    </div>
+      </div>
+    </LoadScript>
   );
 };
 
