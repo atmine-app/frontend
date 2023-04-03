@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import "./Rating.css";
 import "../../App.css";
 
-const RatingForm = ({ propertyId, onSubmit }) => {
+const RatingForm = ({ propertyId, onSubmit,rating }) => {
   const categories = [
     { label: "Location", key: "location" },
     { label: "Cleanliness", key: "cleanliness" },
@@ -30,6 +30,10 @@ const RatingForm = ({ propertyId, onSubmit }) => {
   const styles = {
     display: "none",
   };
+
+  useEffect(() => {
+    console.log("rating", rating);
+  }, [rating]);
 
   return (
     <div>

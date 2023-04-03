@@ -14,6 +14,7 @@ export default function PropertyDetail() {
   const { propertyId } = useParams();
   const [property, setProperty] = useState({});
   const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(0);
 
   const getProperty = async () => {
     try {
@@ -42,6 +43,22 @@ export default function PropertyDetail() {
     getReviews();
     // eslint-disable-next-line
   }, [propertyId]);
+
+  const getRating = async () => {
+    try {
+      const response = await propertyService.getPropertyVotes(propertyId);
+      setRating(response[0]);
+      console.log('rating', response[0])
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+    useEffect(() => {
+      getRating();
+      // eslint-disable-next-line
+    }, [propertyId]);
+
 
   const handleReviewSubmit = async (review) => {
     try {
@@ -101,7 +118,7 @@ export default function PropertyDetail() {
 
   return (
     <div>
-      <CardDetail property={property} />
+      <CardDetail property={property} rating={rating}/>
       <GoogleMapsProvider>
       <Map formData={property} />
       </GoogleMapsProvider>
@@ -109,7 +126,7 @@ export default function PropertyDetail() {
       <ReviewForm propertyId={propertyId} handleReviewSubmit={handleReviewSubmit} />
       <Reviews reviews={reviews} handleDelete={handleDelete} handleUpdate={handleUpdate} />
       <Calendar propertyId={propertyId} />
-      <StarForm propertyId={propertyId} onSubmit={handleRatingSubmit}/>
+      <StarForm propertyId={propertyId} onSubmit={handleRatingSubmit} rating={rating}/>
     </div>
   );
 }

@@ -51,6 +51,7 @@ export default function CalendarComp({ propertyId }) {
   useEffect(() => {
     document.addEventListener("click", hideOnOutsideClick, true);
     fetchBookings();
+    //eslint-disable-next-line
   }, [propertyId]);
 
   return (
