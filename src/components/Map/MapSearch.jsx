@@ -1,9 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
+import React, { useState, useEffect } from "react";
+import {
+  GoogleMap,
+  Marker,
+  InfoWindow,
+  OverlayView,
+  LoadScript,
+} from "@react-google-maps/api";
+import { googleMapsConfig } from "../../googleMapsConfig";
 
-const MapSearch = ({ center, locations, isLoaded }) => {
-  console.log(locations);
-
+const MapSearch = ({ center, properties }) => {
+  const customMapStyle = [
+    {
+      featureType: "poi",
+      stylers: [{ visibility: "off" }],
+    },
+  ];
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [markers, setMarkers] = useState([]);
 
@@ -16,56 +27,79 @@ const MapSearch = ({ center, locations, isLoaded }) => {
   };
 
   useEffect(() => {
-    // Clear existing markers
     setMarkers([]);
-    const newMarkers = locations.map((location, index) => {
-        const marker = (
-        <Marker
-        key={index}
-        position={{ lat: location.coordinates.lat, lng: location.coordinates.lng }}
-        onClick={() => onMarkerClick(location)}
-        />
-        );
-        return marker;
-        });
-        setMarkers(newMarkers);
-    }, [locations]);
-
-    return (
-        <div className="App">
-        {!isLoaded ? (
-        <h1>Loading...</h1>
-        ) : (
-        <GoogleMap
-        mapContainerStyle={{ height: "200px", width: "100%" }}
-        center={center}
-        zoom={15}
-        options={{
-        disableDefaultUI: true,
-        streetViewControl: false,
-        zoomControl: false,
-        mapTypeControl: false,
-        }}
+    const newMarkers = properties.map((property, index) => {
+      const marker = (
+        <OverlayView
+          key={index}
+          position={{
+            lat: property.coordinates.lat,
+            lng: property.coordinates.lng,
+          }}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
         >
-        {markers}
-        {selectedMarker && (
-              <InfoWindow
-                position={{ lat: selectedMarker.lat, lng: selectedMarker.lng }}
-                onCloseClick={onCloseInfoWindow}
-                className="info-window"
-                zIndex={999}
-              >
-                <div>
-                  <h3>{selectedMarker.name}</h3>
-                  <p>{selectedMarker.description}</p>
-                </div>
-              </InfoWindow>
-            )}
-          </GoogleMap>
-        )}
-      </div>
-    );
-  };
-  
+          <div
+            style={{
+              backgroundColor: "white",
+              borderRadius: "10px",
+              padding: "5px 10px",
+              border: "2px solid #60C2A4",
+              width: "50px",
+              textAlign: "center",
+              fontSize: "14px",
+              cursor: "pointer",
+            }}
+            onClick={() => onMarkerClick(property)}
+          >
+            €{property.price}
+          </div>
+        </OverlayView>
+      );
+      return marker;
+    });
+    setMarkers(newMarkers);
+  }, [properties]);
 
-  export default MapSearch;
+  return (
+    <LoadScript
+      googleMapsApiKey={googleMapsConfig.apiKey}
+      libraries={googleMapsConfig.libraries}
+    >
+      <div className="App">
+        <GoogleMap
+          mapContainerStyle={{ height: "200px", width: "100%" }}
+          center={center}
+          zoom={15}
+          options={{
+            disableDefaultUI: true,
+            streetViewControl: false,
+            zoomControl: false,
+            mapTypeControl: false,
+            styles: customMapStyle,
+          }}
+        >
+          {markers}
+          {selectedMarker && (
+            <InfoWindow
+              position={{
+                lat: selectedMarker.coordinates.lat,
+                lng: selectedMarker.coordinates.lng,
+              }}
+              onCloseClick={onCloseInfoWindow}
+              className="info-window"
+              zIndex={999}
+            >
+              <div>
+                <h3>{selectedMarker.title}</h3>
+                <p>Price: €{selectedMarker.price}</p>
+                <p>{selectedMarker.description}</p>
+              </div>
+            </InfoWindow>
+          )}
+        </GoogleMap>
+      </div>
+    </LoadScript>
+  );
+};
+
+export default MapSearch;
