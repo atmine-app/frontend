@@ -8,6 +8,7 @@ import Reviews from '../../components/Reviews/Reviews';
 import reviewService from '../../services/reviewService';
 import Calendar from '../../components/Calendar/Calendar';
 import GoogleMapsProvider from '../../components/GoogleMapsProvider/GoogleMapsProvider';
+import StarForm from '../../components/Rating/StarForm';
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -76,6 +77,28 @@ export default function PropertyDetail() {
     }
   };
 
+  const handleRatingSubmit = async (propertyId, rating) => {
+    console.log("Submitting rating for propertyId: ", propertyId);
+    console.log("Rating data: ", rating);
+  
+    // Calculate the average rating only for rated categories
+    const ratedCategories = Object.values(rating).filter(value => value > 0);
+    const totalRating = ratedCategories.reduce((sum, value) => sum + value, 0);
+    const averageRating = totalRating / ratedCategories.length;
+  
+    // Add the average rating to the rating object
+    const ratingWithAverage = { ...rating, averageRating };
+    console.log("Rating data with average: ", ratingWithAverage);
+  
+    try {
+      await propertyService.addPropertyVote(propertyId, ratingWithAverage);
+      // handle successful vote submission
+    } catch (error) {
+      // handle vote submission error
+    }
+  };
+  
+
   return (
     <div>
       <CardDetail property={property} />
@@ -86,6 +109,7 @@ export default function PropertyDetail() {
       <ReviewForm propertyId={propertyId} handleReviewSubmit={handleReviewSubmit} />
       <Reviews reviews={reviews} handleDelete={handleDelete} handleUpdate={handleUpdate} />
       <Calendar propertyId={propertyId} />
+      <StarForm propertyId={propertyId} onSubmit={handleRatingSubmit}/>
     </div>
   );
 }
