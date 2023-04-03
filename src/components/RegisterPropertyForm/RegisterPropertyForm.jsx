@@ -3,7 +3,7 @@ import propertyService from "../../services/propertyService";
 import { useNavigate } from "react-router-dom";
 
 
-const RegisterPropertyForm = ({onFormDataChange}) => {
+const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
   const initialState = {
     title: "",
     description:
@@ -35,7 +35,11 @@ const RegisterPropertyForm = ({onFormDataChange}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const createdProperty = await propertyService.addProperty(formData);
+      const propertyData = {
+        ...formData,
+        coordinates,
+      };
+      const createdProperty = await propertyService.addProperty(propertyData);
       navigate(`/properties/${createdProperty._id}`);
       setFormData(initialState);
     } catch (error) {

@@ -5,8 +5,8 @@ import { addDays, parseISO } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import bookingService from "../../services/bookingsServices"; // import the bookingService you created
-import "./Calendar.css"
-import {Link} from 'react-router-dom'
+import "./Calendar.css";
+import { Link } from "react-router-dom";
 
 export default function CalendarComp({ propertyId }) {
   const [range, setRange] = useState([
@@ -47,7 +47,6 @@ export default function CalendarComp({ propertyId }) {
       console.error("Error fetching bookings:", error);
     }
   };
-  
 
   useEffect(() => {
     document.addEventListener("click", hideOnOutsideClick, true);
@@ -71,10 +70,13 @@ export default function CalendarComp({ propertyId }) {
             direction="horizontal"
             editableDateInputs={true}
             onChange={(item) => {
-                setRange([item.selection]);
-                const rangeString = `${format(item.selection.startDate, "yyyy-MM-dd")}&${format(item.selection.endDate, "yyyy-MM-dd")}`;
-                setRangeString(rangeString);
-              }}
+              setRange([item.selection]);
+              const rangeString = `${format(
+                item.selection.startDate,
+                "yyyy-MM-dd"
+              )}&${format(item.selection.endDate, "yyyy-MM-dd")}`;
+              setRangeString(rangeString);
+            }}
             moveRangeOnFirstSelection={false}
             ranges={range}
             months={1}
@@ -84,11 +86,13 @@ export default function CalendarComp({ propertyId }) {
         )}
       </div>
       <button>
-  <Link to={`/properties/${propertyId}/${rangeString}`} className="nav-link">
-    Book
-  </Link>
-</button>
-
+        <Link
+          to={`/properties/${propertyId}/${rangeString}`}
+          className="nav-link"
+        >
+          Book
+        </Link>
+      </button>
     </div>
   );
 }

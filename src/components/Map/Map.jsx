@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 import { googleMapsConfig } from "../../googleMapsConfig";
 
-const Map = ({ formData }) => {
+const Map = ({ formData, onLocationChange = () => {} }) => {
+  // set initial state for selectedLocation and center
   const [selectedLocation, setSelectedLocation] = useState({
     lat: null,
     lng: null,
@@ -10,22 +11,28 @@ const Map = ({ formData }) => {
   const [center, setCenter] = useState({ lat: 41.3851, lng: 2.1734 });
 
   useEffect(() => {
+    // check if Google Maps API has loaded
     if (!window.google) return;
+
+    // initialize Geocoder object to convert address to coordinates
     const geocoder = new window.google.maps.Geocoder();
-    const fullAddress =
-      formData.address + ", " + formData.city + ", " + formData.country;
+    const fullAddress = formData.address + ", " + formData.city;
+
+    // call Geocoder to get coordinates of the address
     geocoder.geocode({ address: fullAddress }, (results, status) => {
       if (status === "OK") {
         const location = results[0].geometry.location;
-        setSelectedLocation({ lat: location.lat(), lng: location.lng() });
-        setCenter({ lat: location.lat(), lng: location.lng() });
+        const coordinates = { lat: location.lat(), lng: location.lng() }; // create a new object
+        setSelectedLocation(coordinates);
+        setCenter(coordinates);
+        onLocationChange(coordinates); // pass the new object to onLocationChange callback function
       } else {
-        setSelectedLocation({ lat: null, lng: null });
+        setSelectedLocation({ lat: null, lng: null }); // set selectedLocation state to null if Geocoder fails
       }
     });
   }, [formData]);
 
-  return center ? (
+  return center ? ( // if center state is not null, return Google Map component with marker at selectedLocation
     <LoadScript
       googleMapsApiKey={googleMapsConfig.apiKey}
       libraries={googleMapsConfig.libraries}
@@ -40,14 +47,14 @@ const Map = ({ formData }) => {
           mapTypeControl: false,
         }}
       >
-        {selectedLocation.lat !== null && selectedLocation.lng !== null && (
+        {selectedLocation && selectedLocation.lat && selectedLocation.lng && (
           <Marker position={selectedLocation} />
         )}
       </GoogleMap>
     </LoadScript>
   ) : (
+    // if center state is null, display loading message or placeholder
     <div>
-      {/* You can display a placeholder or a loading spinner here */}
       <p>Loading map...</p>
     </div>
   );
