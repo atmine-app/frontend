@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import CardDetail from '../../components/Card/CardDetail';
-import Map from '../../components/Map/Map';
-import ReviewForm from '../../components/ReviewForm/ReviewForm';
-import propertyService from '../../services/propertyService';
-import Reviews from '../../components/Reviews/Reviews';
-import reviewService from '../../services/reviewService';
-import Calendar from '../../components/Calendar/Calendar';
-import GoogleMapsProvider from '../../components/GoogleMapsProvider/GoogleMapsProvider';
-import StarForm from '../../components/Rating/StarForm';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import CardDetail from "../../components/Card/CardDetail";
+import Map from "../../components/Map/Map";
+import ReviewForm from "../../components/ReviewForm/ReviewForm";
+import propertyService from "../../services/propertyService";
+import Reviews from "../../components/Reviews/Reviews";
+import reviewService from "../../services/reviewService";
+import Calendar from "../../components/Calendar/Calendar";
+import GoogleMapsProvider from "../../components/GoogleMapsProvider/GoogleMapsProvider";
+import StarForm from "../../components/Rating/StarForm";
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -47,18 +47,51 @@ export default function PropertyDetail() {
   const getRating = async () => {
     try {
       const response = await propertyService.getPropertyVotes(propertyId);
-      setRating(response[0]);
-      console.log('rating', response[0])
+
+      const totalRatings = response.length;
+      const initialCategorySums = {
+        location: 0,
+        cleanliness: 0,
+        communication: 0,
+        valueForMoney: 0,
+        amenities: 0,
+        averageRatings: 0,
+      };
+
+      const ratingSums = response.reduce((acc, vote) => {
+        acc.location += vote.location;
+        acc.cleanliness += vote.cleanliness;
+        acc.communication += vote.communication;
+        acc.valueForMoney += vote.valueForMoney;
+        acc.amenities += vote.amenities;
+        acc.averageRatings += vote.averageRatings;
+        return acc;
+      }, initialCategorySums);
+
+      const formatRating = (value) => {
+        const rating = parseFloat(value).toFixed(1);
+        return rating.endsWith(".0") ? rating.slice(0, -2) : rating;
+      };
+
+      const averageRatings = {
+        location: formatRating(ratingSums.location / totalRatings),
+        cleanliness: formatRating(ratingSums.cleanliness / totalRatings),
+        communication: formatRating(ratingSums.communication / totalRatings),
+        valueForMoney: formatRating(ratingSums.valueForMoney / totalRatings),
+        amenities: formatRating(ratingSums.amenities / totalRatings),
+        averageRatings: formatRating(ratingSums.averageRatings / totalRatings),
+      };
+
+      setRating(averageRatings);
     } catch (error) {
       console.log(error);
     }
   };
 
-    useEffect(() => {
-      getRating();
-      // eslint-disable-next-line
-    }, [propertyId]);
-
+  useEffect(() => {
+    getRating();
+    // eslint-disable-next-line
+  }, [propertyId]);
 
   const handleReviewSubmit = async (review) => {
     try {
@@ -82,7 +115,9 @@ export default function PropertyDetail() {
 
   const handleUpdate = async (reviewId, updatedReviewText) => {
     try {
-      const updatedReview = await reviewService.updateReview(reviewId, { review: updatedReviewText });
+      const updatedReview = await reviewService.updateReview(reviewId, {
+        review: updatedReviewText,
+      });
       getReviews();
       setReviews(
         reviews.map((review) =>
@@ -95,18 +130,14 @@ export default function PropertyDetail() {
   };
 
   const handleRatingSubmit = async (propertyId, rating) => {
-    console.log("Submitting rating for propertyId: ", propertyId);
-    console.log("Rating data: ", rating);
-  
     // Calculate the average rating only for rated categories
-    const ratedCategories = Object.values(rating).filter(value => value > 0);
+    const ratedCategories = Object.values(rating).filter((value) => value > 0);
     const totalRating = ratedCategories.reduce((sum, value) => sum + value, 0);
     const averageRating = totalRating / ratedCategories.length;
-  
+
     // Add the average rating to the rating object
     const ratingWithAverage = { ...rating, averageRating };
-    console.log("Rating data with average: ", ratingWithAverage);
-  
+
     try {
       await propertyService.addPropertyVote(propertyId, ratingWithAverage);
       // handle successful vote submission
@@ -114,19 +145,29 @@ export default function PropertyDetail() {
       // handle vote submission error
     }
   };
-  
 
   return (
     <div>
-      <CardDetail property={property} rating={rating}/>
+      <CardDetail property={property} rating={rating} />
       <GoogleMapsProvider>
-      <Map formData={property} />
+        <Map formData={property} />
       </GoogleMapsProvider>
       <br />
-      <ReviewForm propertyId={propertyId} handleReviewSubmit={handleReviewSubmit} />
-      <Reviews reviews={reviews} handleDelete={handleDelete} handleUpdate={handleUpdate} />
+      <ReviewForm
+        propertyId={propertyId}
+        handleReviewSubmit={handleReviewSubmit}
+      />
+      <Reviews
+        reviews={reviews}
+        handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
+      />
       <Calendar propertyId={propertyId} />
-      <StarForm propertyId={propertyId} onSubmit={handleRatingSubmit} rating={rating}/>
+      <StarForm
+        propertyId={propertyId}
+        onSubmit={handleRatingSubmit}
+        rating={rating}
+      />
     </div>
   );
 }
