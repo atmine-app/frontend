@@ -17,6 +17,7 @@ import BookingConfirmation from './views/booking/BookingConfirmation';
 // import BookingList from './views/booking/BookingList';
 import MyProfile from './views/profile/MyProfile';
 import BookingDetail from './views/booking/BookingDetail';
+import Payment from './components/Payment/Payment';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/pay" element={<Payment />} />
         <Route path="/profile" element={<IsPrivate><MyProfile/></IsPrivate>} /> 
         {/* aqui hacemos el edit and save */}
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
