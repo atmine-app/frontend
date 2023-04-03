@@ -4,9 +4,9 @@ import propertyService from "../../services/propertyService";
 import bookingService from "../../services/bookingsServices";
 import { useAuth } from "../../hooks/useAuth";
 import { differenceInDays, parse } from "date-fns";
+import Payment from "../../components/Payment/Payment";
 
 export default function NewBooking() {
-  // add props of the propertyId selected
   const [property, setProperty] = useState({});
   const { propertyId, range } = useParams();
   const [startDate, endDate] = range.split("&");
@@ -15,7 +15,6 @@ export default function NewBooking() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [formattedDateRange, setFormattedDateRange] = useState("");
 
-  // Calculate days booked and total price when property and dates are set
   useEffect(() => {
     if (property.price) {
       const parsedStartDate = parse(startDate, "yyyy-MM-dd", new Date());
@@ -31,7 +30,6 @@ export default function NewBooking() {
 
   const navigate = useNavigate();
 
-  // Fetch the property details from the server
   const getProperty = async () => {
     try {
       const response = await propertyService.getProperty(propertyId);
@@ -41,14 +39,11 @@ export default function NewBooking() {
     }
   };
 
-  // Call getProperty when the component mounts
   useEffect(() => {
     getProperty();
-    // eslint-disable-next-line
   }, [propertyId]);
 
-  // Handle creating a new booking
-  const handleBooking = async () => {
+  const handlePaymentSuccess = async () => {
     try {
       const booking = {
         property: propertyId,
@@ -58,17 +53,14 @@ export default function NewBooking() {
         endDate: endDate,
       };
 
-      // Send the booking details to the server
-      await bookingService.createBooking(booking);
+      const response = await bookingService.createBooking(booking);
 
-      // Navigate back to the homepage
-      navigate(`/`);
+      navigate(`/bookings/${response._id}/confirmation`);
     } catch (error) {
       console.error("Error creating booking:", error);
     }
   };
 
-  // Render the property details and booking buttons
   return (
     <div className="property__card-detail">
       <img src={property.images} alt={property.title} />
@@ -81,14 +73,16 @@ export default function NewBooking() {
         <p>Days booked: {formattedDateRange}</p>
       </div>
       <div className="card-buttons">
-        <button onClick={() => navigate(-1)}>cancel</button>
-        <button type="submit" onClick={handleBooking}>
-          Book
-        </button>
+        <button onClick={() => navigate(-1)}>Cancel (go back)</button>
       </div>
+      <Payment
+        onPaymentSuccess={handlePaymentSuccess}
+        totalPrice={totalPrice}
+        property={property}
+        renter={user}
+        startDate={startDate}
+        endDate={endDate}
+      />
     </div>
   );
 }
-
-// Here we would add code to process Stripe payment
-// After confirmation, we would send the booking details to the backend and redirect the user to the booking confirmation page.

@@ -6,6 +6,7 @@ import axios from "axios";
 const stripePromise = loadStripe("pk_test_51MmyyDKnGwuMyNJVONhuTT5rVNMCvb0myhaquhex7FCieyfT2PSQhs2gr8SR102hgdYR8n0jiWdWv4pRY4NXVNuo00jIHuiXfc");
 
 const CheckoutForm = ({ totalPrice, property, renter, startDate, endDate, onPaymentSuccess }) => {
+const CheckoutForm = ({ totalPrice, property, renter, startDate, endDate, onPaymentSuccess }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -36,10 +37,10 @@ const CheckoutForm = ({ totalPrice, property, renter, startDate, endDate, onPaym
 
         elements.getElement(CardElement).clear();
 
-        // Call the onPaymentSuccess prop function
-        if (data.success) {
-          onPaymentSuccess();
-        }
+        // Redirect to confirmation page
+      if (data.success) {
+        onPaymentSuccess();
+      }
       } catch (error) {
         console.log(error);
       }
