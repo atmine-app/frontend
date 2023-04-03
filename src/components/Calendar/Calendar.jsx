@@ -5,6 +5,7 @@ import { addDays, parseISO } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import bookingService from "../../services/bookingsServices"; // import the bookingService you created
+import { eachDayOfInterval } from "date-fns";
 
 export default function CalendarComp({ propertyId }) {
   const [range, setRange] = useState([
@@ -27,20 +28,27 @@ export default function CalendarComp({ propertyId }) {
   const fetchBookings = async () => {
     try {
       const bookings = await bookingService.getAllBookings();
+      console.log("bookings", bookings)
       const propertyBookings = bookings.filter(
         (booking) => booking.property === propertyId
       );
-      const bookedRanges = propertyBookings.map((booking) => (
-        {  
-        start:booking.startDate,
-        end: booking.endDate,
-      }));
-      console.log("bookedRanges", bookedRanges)
-      setBookedDates(bookedRanges);
+      console.log('propertyBookings', propertyBookings)
+      let bookedDatesArray = [];
+      propertyBookings.forEach((booking) => {
+        let currentDate = parseISO(booking.startDate);
+        const endDate = parseISO(booking.endDate);
+        while (currentDate <= endDate) {
+          bookedDatesArray.push(new Date(currentDate));
+          currentDate = addDays(currentDate, 1);
+        }
+      });
+      console.log("bookedDatesArray", bookedDatesArray);
+      setBookedDates(bookedDatesArray);
     } catch (error) {
       console.error("Error fetching bookings:", error);
     }
   };
+  
 
   useEffect(() => {
     document.addEventListener("click", hideOnOutsideClick, true);
@@ -63,12 +71,15 @@ export default function CalendarComp({ propertyId }) {
           <DateRange
             direction="horizontal"
             editableDateInputs={true}
-            onChange={(item) => setRange([item.selection])}
+            onChange={(item) => {
+                
+                setRange([item.selection])
+                console.log(range)}}
             moveRangeOnFirstSelection={false}
             ranges={range}
             months={1}
             className="calendarElement"
-            disabledDates={[bookedDates]}
+            disabledDates={bookedDates}
           />
         )}
       </div>
