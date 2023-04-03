@@ -67,9 +67,9 @@ export default function NewBooking() {
       <div className="property__card-content">
     <h2>{property.title}</h2>
     <p>Host: {property.owner && property.owner.username}</p>
-    <p>Price per day: {property.price}</p>
+    <p>Price per day: {property.price}€</p>
     <p> Days booked: {daysBooked}</p>
-    <p>Total price: {totalPrice}</p>
+    <p>Total price: {totalPrice}€</p>
     <p>Days booked: {formattedDateRange}</p>
   </div>
       <div className="card-buttons">

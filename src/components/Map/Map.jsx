@@ -14,11 +14,9 @@ const Map = ({ formData }) => {
     const geocoder = new window.google.maps.Geocoder();
     const fullAddress =
       formData.address + ", " + formData.city + ", " + formData.country;
-    console.log(fullAddress);
     geocoder.geocode({ address: fullAddress }, (results, status) => {
       if (status === "OK") {
         const location = results[0].geometry.location;
-        console.log(location.lat(), location.lng());
         setSelectedLocation({ lat: location.lat(), lng: location.lng() });
         setCenter({ lat: location.lat(), lng: location.lng() });
       } else {

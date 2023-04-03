@@ -16,7 +16,6 @@ class ReviewService {
   }
 
   getReviews(propertyId) {
-    console.log('Service review', propertyId)
     return this.api.get(`/${propertyId}`).then(({ data }) => data);
   }
 

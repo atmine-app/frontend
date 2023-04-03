@@ -31,7 +31,6 @@ export default function PropertyDetail() {
     try {
       const response = await reviewService.getReviews(propertyId);
       setReviews(response);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

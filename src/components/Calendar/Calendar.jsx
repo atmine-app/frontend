@@ -74,12 +74,11 @@ export default function CalendarComp({ propertyId }) {
                 setRange([item.selection]);
                 const rangeString = `${format(item.selection.startDate, "yyyy-MM-dd")}&${format(item.selection.endDate, "yyyy-MM-dd")}`;
                 setRangeString(rangeString);
-                console.log('rangeString', rangeString);
               }}
             moveRangeOnFirstSelection={false}
             ranges={range}
             months={1}
-            className="calendarElement"
+            className="calendarEle©ment"
             disabledDates={bookedDates}
           />
         )}
