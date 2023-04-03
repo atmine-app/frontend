@@ -5,6 +5,8 @@
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.3.27",
     "@react-google-maps/api": "^2.18.1",
+    "@stripe/react-stripe-js": "^2.1.0",
+    "@stripe/stripe-js": "^1.52.0",
     "@tensorflow-models/toxicity": "^1.2.2",
     "@tensorflow/tfjs": "^4.2.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -20,6 +22,7 @@
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "stripe": "^11.17.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
