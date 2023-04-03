@@ -6,7 +6,6 @@ import axios from "axios";
 const stripePromise = loadStripe("pk_test_51MmyyDKnGwuMyNJVONhuTT5rVNMCvb0myhaquhex7FCieyfT2PSQhs2gr8SR102hgdYR8n0jiWdWv4pRY4NXVNuo00jIHuiXfc");
 
 const CheckoutForm = ({ totalPrice, property, renter, startDate, endDate, onPaymentSuccess }) => {
-const CheckoutForm = ({ totalPrice, property, renter, startDate, endDate, onPaymentSuccess }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -14,13 +13,13 @@ const CheckoutForm = ({ totalPrice, property, renter, startDate, endDate, onPaym
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
     });
     setLoading(true);
-
+  
     if (!error) {
       const { id } = paymentMethod;
       try {
@@ -32,15 +31,14 @@ const CheckoutForm = ({ totalPrice, property, renter, startDate, endDate, onPaym
           startDate,
           endDate,
         });
-
+  
         console.log(data);
-
+  
         elements.getElement(CardElement).clear();
-
-        // Redirect to confirmation page
-      if (data.success) {
+  
+        // Call onPaymentSuccess function
         onPaymentSuccess();
-      }
+  
       } catch (error) {
         console.log(error);
       }
