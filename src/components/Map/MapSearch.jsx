@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {
   GoogleMap,
-  Marker,
   InfoWindow,
   OverlayView,
-  LoadScript,
 } from "@react-google-maps/api";
-import { googleMapsConfig } from "../../googleMapsConfig";
 
 const MapSearch = ({ center, properties }) => {
   const customMapStyle = [
@@ -58,13 +55,15 @@ const MapSearch = ({ center, properties }) => {
       return marker;
     });
     setMarkers(newMarkers);
+    return () => {
+        if (window.google) {
+          // Clean up Google Maps API resources
+          window.google.maps.event.clearInstanceListeners(window.google);
+        }
+      };
   }, [properties]);
 
   return (
-    <LoadScript
-      googleMapsApiKey={googleMapsConfig.apiKey}
-      libraries={googleMapsConfig.libraries}
-    >
       <div className="App">
         <GoogleMap
           mapContainerStyle={{ height: "200px", width: "100%" }}
@@ -98,7 +97,6 @@ const MapSearch = ({ center, properties }) => {
           )}
         </GoogleMap>
       </div>
-    </LoadScript>
   );
 };
 

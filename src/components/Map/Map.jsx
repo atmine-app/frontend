@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
-import { googleMapsConfig } from "../../googleMapsConfig";
+import React, { useEffect, useState, useRef } from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 
 const Map = ({ formData, onLocationChange = () => {} }) => {
   // set initial state for selectedLocation and center
@@ -10,9 +9,19 @@ const Map = ({ formData, onLocationChange = () => {} }) => {
   });
   const [center, setCenter] = useState({ lat: 41.3851, lng: 2.1734 });
 
+  // Add a ref to store the previous formData
+  const prevFormDataRef = useRef(formData);
+
   useEffect(() => {
     // check if Google Maps API has loaded
     if (!window.google) return;
+
+    // Check if formData has changed
+    if (JSON.stringify(prevFormDataRef.current) === JSON.stringify(formData)) {
+      return;
+    }
+
+    prevFormDataRef.current = formData;
 
     // initialize Geocoder object to convert address to coordinates
     const geocoder = new window.google.maps.Geocoder();
@@ -23,6 +32,7 @@ const Map = ({ formData, onLocationChange = () => {} }) => {
       if (status === "OK") {
         const location = results[0].geometry.location;
         const coordinates = { lat: location.lat(), lng: location.lng() }; // create a new object
+       console.log(coordinates)
         setSelectedLocation(coordinates);
         setCenter(coordinates);
         onLocationChange(coordinates); // pass the new object to onLocationChange callback function
@@ -32,35 +42,27 @@ const Map = ({ formData, onLocationChange = () => {} }) => {
     });
   }, [formData, onLocationChange]);
 
-  return (
-    <LoadScript
-      googleMapsApiKey={googleMapsConfig.apiKey}
-      libraries={googleMapsConfig.libraries}
-      onLoad={() => console.log("Google Maps API loaded")} // optional callback to handle API load
-      onError={() => console.log("Error loading Google Maps API")} // optional callback to handle API error
+  return center ? (
+    // if center state is not null, return Google Map component with marker at selectedLocation
+    <GoogleMap
+      mapContainerStyle={{ height: "200px", width: "100%" }}
+      center={center}
+      zoom={13}
+      options={{
+        disableDefaultUI: true,
+        streetViewControl: false,
+        mapTypeControl: false,
+      }}
     >
-      {center ? ( // if center state is not null, return Google Map component with marker at selectedLocation
-        <GoogleMap
-          mapContainerStyle={{ height: "200px", width: "100%" }}
-          center={center}
-          zoom={13}
-          options={{
-            disableDefaultUI: true,
-            streetViewControl: false,
-            mapTypeControl: false,
-          }}
-        >
-          {selectedLocation && selectedLocation.lat && selectedLocation.lng && (
-            <Marker position={selectedLocation} />
-          )}
-        </GoogleMap>
-      ) : (
-        // if center state is null, display loading message or placeholder
-        <div>
-          <p>Loading map...</p>
-        </div>
+      {selectedLocation && selectedLocation.lat && selectedLocation.lng && (
+        <Marker position={selectedLocation} />
       )}
-    </LoadScript>
+    </GoogleMap>
+  ) : (
+    // if center state is null, display loading message or placeholder
+    <div>
+      <p>Loading map...</p>
+    </div>
   );
 };
 

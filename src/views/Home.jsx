@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import CardMin from "../components/Card/CardMin";
 import SearchBar from "../components/Search/SearchBar";
 import MapSearch from "../components/Map/MapSearch";
+import GoogleMapsProvider from "../components/GoogleMapsProvider/GoogleMapsProvider";
 // import { googleMapsConfig } from "../googleMapsConfig";
 // import { useJsApiLoader } from "@react-google-maps/api";
 
@@ -62,6 +63,7 @@ export default function Properties() {
       <SearchBar handleSearchValue={handleSearch} />
       {searchValue && filteredProperties.length > 0 && (
   <div style={{ height: "200px" }}>
+    <GoogleMapsProvider>
     <MapSearch
       center={{
         lat: filteredProperties[0].coordinates.lat,
@@ -69,6 +71,7 @@ export default function Properties() {
       }}
       properties={filteredProperties}
     />
+    </GoogleMapsProvider>
   </div>
 )}
       <h1>All Properties</h1>

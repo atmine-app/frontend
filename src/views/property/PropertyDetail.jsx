@@ -7,6 +7,7 @@ import propertyService from '../../services/propertyService';
 import Reviews from '../../components/Reviews/Reviews';
 import reviewService from '../../services/reviewService';
 import Calendar from '../../components/Calendar/Calendar';
+import GoogleMapsProvider from '../../components/GoogleMapsProvider/GoogleMapsProvider';
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -78,7 +79,9 @@ export default function PropertyDetail() {
   return (
     <div>
       <CardDetail property={property} />
+      <GoogleMapsProvider>
       <Map formData={property} />
+      </GoogleMapsProvider>
       <br />
       <ReviewForm propertyId={propertyId} handleReviewSubmit={handleReviewSubmit} />
       <Reviews reviews={reviews} handleDelete={handleDelete} handleUpdate={handleUpdate} />

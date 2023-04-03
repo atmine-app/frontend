@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import RegisterPropertyForm from '../../components/RegisterPropertyForm/RegisterPropertyForm'
 import Map from '../../components/Map/Map'
+import GoogleMapsProvider from '../../components/GoogleMapsProvider/GoogleMapsProvider';
 
 
 export default function NewProperty() {
@@ -21,7 +22,9 @@ export default function NewProperty() {
       <RegisterPropertyForm onFormDataChange={handleFormChange} coordinates={coordinates} />
       <label>
         Property Location:
+        <GoogleMapsProvider>
         <Map formData={formData} onLocationChange={handleLocationChange} />
+        </GoogleMapsProvider>
       </label>
     </div>
   )
