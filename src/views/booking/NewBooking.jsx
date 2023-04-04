@@ -41,6 +41,7 @@ export default function NewBooking() {
 
   useEffect(() => {
     getProperty();
+    // eslint-disable-next-line
   }, [propertyId]);
 
   const handlePaymentSuccess = async () => {
