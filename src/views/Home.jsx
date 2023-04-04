@@ -5,7 +5,7 @@ import CardMin from "../components/Card/CardMin";
 import SearchBar from "../components/Search/SearchBar";
 import MapSearch from "../components/Map/MapSearch";
 import GoogleMapsProvider from "../components/GoogleMapsProvider/GoogleMapsProvider";
-
+import SearchFilter from "../components/Search/SearchFilter";
 
 export default function Properties() {
   const [properties, setProperties] = useState([]);
@@ -13,11 +13,28 @@ export default function Properties() {
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [mapVisible, setMapVisible] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+  const [filters, setFilters] = useState({});
 
+
+  const handleFilterClick = () => {
+    setShowFilter(!showFilter);
+  };
+
+  const applyFilters = (appliedFilters) => {
+    setFilters({ ...filters, ...appliedFilters });
+    setShowFilter(false);
+  };
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
     setMapVisible(true);
+    setFilters({ ...filters, selectedCategory: category });
   };
+
+  const closeFilter = () => {
+    setShowFilter(false);
+  };
+
 
   
   const handleSearch = (value) => {
@@ -40,7 +57,7 @@ export default function Properties() {
 
   useEffect(() => {
     let filtered = properties;
-  
+
     if (searchValue) {
       filtered = filtered.filter((property) =>
         property.title.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -48,18 +65,52 @@ export default function Properties() {
         property.category.toLowerCase().includes(searchValue.toLowerCase())
       );
     }
-  
-    if (selectedCategory) {
-      console.log('selected category',selectedCategory)
-      filtered = filtered.filter((property) => property.category.toLowerCase() === selectedCategory.toLowerCase());
+
+    if (filters.selectedCategory) {
+      filtered = filtered.filter((property) => property.category.toLowerCase() === filters.selectedCategory.toLowerCase());
     }
-    console.log('filtered',filtered)
+
+    if (filters.priceRange) {
+      filtered = filtered.filter(
+        (property) =>
+          property.price >= filters.priceRange[0] &&
+          property.price <= filters.priceRange[1]
+      );
+    }
+
+    if (filters.minRating) {
+      filtered = filtered.filter(
+        (property) => property.rating >= filters.minRating
+      );
+    }
+
+    if (filters.selectedCategories && filters.selectedCategories.length > 0) {
+      filtered = filtered.filter((property) =>
+        filters.selectedCategories.includes(property.category.toLowerCase())
+      );
+    }
+
+    if (filters.selectedAmenities && filters.selectedAmenities.length > 0) {
+      filtered = filtered.filter((property) =>
+        filters.selectedAmenities.every((amenity) =>
+          property.amenities.includes(amenity)
+        )
+      );
+    }
+
+    if (filters.city) {
+      filtered = filtered.filter(
+        (property) => property.city.toLowerCase() === filters.city.toLowerCase()
+      );
+    }
+
     setFilteredProperties(filtered);
-  }, [searchValue, properties, selectedCategory]);
+  }, [searchValue, properties, filters]);
 
   return (
     <div>
-      <SearchBar handleSearchValue={handleSearch} handleCategorySelect={handleCategorySelect} />
+     <SearchBar className='searchBarContainer' handleSearchValue={handleSearch} handleCategorySelect={handleCategorySelect} handleFilterClick={handleFilterClick} />
+      <SearchFilter isOpen={showFilter} applyFilters={applyFilters} closeFilter={closeFilter} />
 
       {(searchValue|| mapVisible) && filteredProperties.length > 0 && (
         <div style={{ height: "200px" }}>

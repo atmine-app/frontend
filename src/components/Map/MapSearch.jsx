@@ -4,6 +4,7 @@ import {
   InfoWindow,
   OverlayView,
 } from "@react-google-maps/api";
+import { Link } from "react-router-dom";
 
 const MapSearch = ({ properties }) => {
   const customMapStyle = [
@@ -70,10 +71,10 @@ const MapSearch = ({ properties }) => {
     setMarkers(newMarkers);
     return () => {
         if (window.google) {
-          // Clean up Google Maps API resources
           window.google.maps.event.clearInstanceListeners(window.google);
         }
       };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [properties]);
 
   return (
@@ -81,7 +82,7 @@ const MapSearch = ({ properties }) => {
         <GoogleMap
           mapContainerStyle={{ height: "200px", width: "100%" }}
           center={center}
-          zoom={13}
+          zoom={12}
           options={{
             disableDefaultUI: true,
             streetViewControl: false,
@@ -105,6 +106,9 @@ const MapSearch = ({ properties }) => {
                 <h3>{selectedMarker.title}</h3>
                 <p>Price: €{selectedMarker.price}</p>
                 <p>{selectedMarker.description}</p>
+                <Link to={`/properties/${selectedMarker._id}`}>
+                    View Property
+                </Link>
               </div>
             </InfoWindow>
           )}

@@ -4,11 +4,11 @@ import { AuthContext } from '../../context/AuthContext';
 import "./Navbar.css";
 
 export default function Navbar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext); 
+  const { isLoggedIn, logOutUser } = useContext(AuthContext); 
   const navigate = useNavigate();
   return (
     <div className='navbar'>
-      {user && <p>Hello {user.username}</p> }
+      {/* {user && <p>Hello {user.username}</p> } */}
       <ul className='navbar__list'>
         <li><NavLink to="/">Home</NavLink></li>
         {!isLoggedIn && <li><NavLink to="/signup">Sign up</NavLink></li>}
