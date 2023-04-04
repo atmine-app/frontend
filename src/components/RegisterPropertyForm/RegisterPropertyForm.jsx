@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import propertyService from "../../services/propertyService";
 import { useNavigate } from "react-router-dom";
+import Multiupload from "../Multiupload/Multiupload";
+import "./RegisterPropertyForm.css";
 
 
 const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
+  const [images, setImages] = useState({array: []})
   const initialState = {
     title: "",
     description:
@@ -11,8 +14,6 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
     category: "",
     price: "",
     size: "",
-    images:
-      "",
     address: "",
     city: "",
     country: "",
@@ -21,6 +22,11 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
 
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
+
+  const handleFormImageChange = (updatedImageArray) => {
+    setImages(updatedImageArray.array);
+    console.log(updatedImageArray.array)
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +44,9 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
       const propertyData = {
         ...formData,
         coordinates,
+        images, 
       };
+      console.log(propertyData)
       const createdProperty = await propertyService.addProperty(propertyData);
       navigate(`/properties/${createdProperty._id}`);
       setFormData(initialState);
@@ -109,13 +117,7 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
         />
 
         <label>Images:</label>
-        <input
-          type="text"
-          id="images"
-          name="images"
-          value={formData.images}
-          onChange={handleChange}
-        />
+        <Multiupload onImageDataChange={handleFormImageChange} />
 
         <label>Address:</label>
         <input
