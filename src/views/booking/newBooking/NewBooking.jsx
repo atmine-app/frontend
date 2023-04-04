@@ -33,6 +33,7 @@ export default function NewBooking() {
   const getProperty = async () => {
     try {
       const response = await propertyService.getProperty(propertyId);
+      console.log(response);
       setProperty(response);
     } catch (error) {
       console.log(error);
@@ -65,7 +66,9 @@ export default function NewBooking() {
 
   return (
     <div className="property__card-detail">
-      <img src={property.images[0]} alt={property.title} />
+      {property.images && property.images.length > 0 && (
+        <img src={property.images[0]} alt={property.title} />
+      )}
       <div className="property__card-content">
         <h2>{property.title}</h2>
         <p>Host: {property.owner && property.owner.username}</p>
