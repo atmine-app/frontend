@@ -23,6 +23,7 @@ export default function Properties() {
 
   const handleFilterClick = () => {
     setShowFilter(!showFilter);
+    setMapVisible(!mapVisible);
   };
 
   const applyFilters = (appliedFilters) => {
@@ -32,11 +33,23 @@ export default function Properties() {
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
     setMapVisible(true);
-    setFilters({ ...filters, selectedCategory: category });
+    setFilters({
+      priceRange: [0, 1000],
+      minRating: 0,
+      selectedCategories: [],
+      selectedAmenities: [],
+    });
   };
 
   const closeFilter = () => {
     setShowFilter(false);
+    setMapVisible(false);
+    setFilters({
+      priceRange: [0, 1000],
+      minRating: 0,
+      selectedCategories: [],
+      selectedAmenities: [],
+    });
   };
 
   const handleSearch = (value) => {

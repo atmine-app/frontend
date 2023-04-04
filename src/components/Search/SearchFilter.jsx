@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   FaCar,
@@ -61,11 +61,10 @@ const SearchFilter = ({
   filters,
   setFilters,
 }) => {
-
   const handleApplyFilters = () => {
     applyFilters(filters);
   };
-
+ 
   if (!isOpen) return null;
 
   return (

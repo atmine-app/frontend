@@ -48,15 +48,17 @@ const SearchBar = (props) => {
         />
         <button onClick={handleFilterClick}>
           <i className="fas fa-filter">
-            <BsSliders />{" "}
+            <BsSliders />
           </i>
         </button>
       </div>
       <div className="searchCategoryContainer">
         {Object.keys(categoryIcons).map((category) => (
           <div key={category}>
-            {categoryIcons[category]}{" "}
-            <span onClick={() => handleIconClick(category)}>{category}</span>
+            <span onClick={() => handleIconClick(category)}>
+              {" "}
+              {categoryIcons[category]} {category}
+            </span>
           </div>
         ))}
       </div>
