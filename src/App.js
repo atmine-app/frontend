@@ -18,6 +18,7 @@ import BookingConfirmation from './views/booking/BookingConfirmation';
 import MyProfile from './views/profile/MyProfile';
 import BookingDetail from './views/booking/BookingDetail';
 import Payment from './components/Payment/Payment';
+import Multiupload from './components/Multiupload/Multiupload';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/pay" element={<Payment />} />
+        <Route path="/upload" element={<Multiupload />} />
         <Route path="/profile" element={<IsPrivate><MyProfile/></IsPrivate>} /> 
         {/* aqui hacemos el edit and save */}
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
