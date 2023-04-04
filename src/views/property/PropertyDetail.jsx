@@ -9,12 +9,34 @@ import reviewService from "../../services/reviewService";
 import Calendar from "../../components/Calendar/Calendar";
 import GoogleMapsProvider from "../../components/GoogleMapsProvider/GoogleMapsProvider";
 import StarForm from "../../components/Rating/StarForm";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
   const [property, setProperty] = useState({});
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
+  const { user } = useAuth();
+  const [userVote, setUserVote] = useState({});
+
+  const getUserVote = async () => {
+    try {
+      const response = await propertyService.getUserPropertyVote(
+        propertyId,
+        user.id
+      );
+      console.log("response votes", response);
+      setUserVote(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserVote();
+    console.log(userVote);
+    // eslint-disable-next-line
+  }, [propertyId]);
 
   const getProperty = async () => {
     try {
@@ -72,9 +94,9 @@ export default function PropertyDetail() {
         if (isNaN(value)) {
           return "N/A";
         }
-      
+
         const rating = parseFloat(value).toFixed(1);
-        return rating.endsWith('.0') ? rating.slice(0, -2) : rating;
+        return rating.endsWith(".0") ? rating.slice(0, -2) : rating;
       };
       const averageRatings = {
         location: formatRating(ratingSums.location / totalRatings),
@@ -170,6 +192,7 @@ export default function PropertyDetail() {
         propertyId={propertyId}
         onSubmit={handleRatingSubmit}
         rating={rating}
+        initialRating={userVote}
       />
     </div>
   );

@@ -1,17 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import userService from '../../services/userService';
+import React, { useContext } from 'react';
 import {AuthContext} from '../../context/AuthContext'
+import { useAuth } from '../../hooks/useAuth';
 
 
 export default function MyProfile() {
-  const [user, setUser] = useState(null);
+
   const { isLoggedIn, logOutUser } = useContext(AuthContext); 
-  
-  useEffect(() => {
-    userService.getUser()
-      .then(userData => setUser(userData))
-      .catch(error => console.log(error));
-  }, []);
+  const { user } = useAuth();
 
   return (
     <div>

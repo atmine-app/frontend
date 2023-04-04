@@ -30,6 +30,7 @@ export default function Properties() {
     setFilters({ ...filters, ...appliedFilters });
     setShowFilter(false);
   };
+
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
     setMapVisible(true);
@@ -68,6 +69,9 @@ export default function Properties() {
 
   useEffect(() => {
     getAllProperties();
+    return ()=>{
+      setSelectedCategory("");
+     }
   }, []);
 
   useEffect(() => {
@@ -128,7 +132,7 @@ export default function Properties() {
 
     setFilteredProperties(filtered);
     console.log(filtered);
-  }, [searchValue, properties, filters]);
+  }, [searchValue, properties, filters,selectedCategory]);
 
   return (
     <div>

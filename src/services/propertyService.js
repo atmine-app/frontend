@@ -63,6 +63,13 @@ class PropertyService {
       .then(({ data }) => data)
       .catch((err) => console.error(err));
   }
+  
+  getUserPropertyVote(propertyId, userId) {
+    return this.api
+      .get(`/${propertyId}/votes/${userId}`)
+      .then(({ data }) => data)
+      .catch((err) => console.error(err));
+  }
 }
 
 const propertyService = new PropertyService();

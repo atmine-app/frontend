@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 import "./Rating.css";
 import "../../App.css";
 
-const RatingForm = ({ propertyId, onSubmit}) => {
+const RatingForm = ({ propertyId, onSubmit,initialRating}) => {
   const categories = [
     { label: "Location", key: "location" },
     { label: "Cleanliness", key: "cleanliness" },
@@ -13,11 +13,11 @@ const RatingForm = ({ propertyId, onSubmit}) => {
   ];
 
   const [ratings, setRatings] = useState({
-    location: 0,
-    cleanliness: 0,
-    communication: 0,
-    valueForMoney: 0,
-    amenities: 0,
+    location: initialRating?.location || 0,
+    cleanliness: initialRating?.cleanliness || 0,
+    communication: initialRating?.communication || 0,
+    valueForMoney: initialRating?.valueForMoney || 0,
+    amenities: initialRating?.amenities || 0,
   });
 
   const handleRatingChange = async (category, value) => {
