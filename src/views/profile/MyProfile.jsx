@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import userService from '../../services/userService';
+import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+
 
 export default function MyProfile() {
   const [user, setUser] = useState(null);
-
+  const { isLoggedIn, logOutUser } = useContext(AuthContext); 
+  
   useEffect(() => {
     userService.getUser()
       .then(userData => setUser(userData))
@@ -22,6 +26,7 @@ export default function MyProfile() {
           <p>Google ID: {user.googleId}</p>
           <p>Birthday: {user.birthdate}</p>
           <p>Passport/ID Number: {user.passport}</p>
+        {isLoggedIn && <li><button onClick={() => logOutUser()}>Log out</button></li>}
         </div>
       )}
     </div>
