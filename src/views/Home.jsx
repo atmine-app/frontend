@@ -84,11 +84,11 @@ export default function Properties() {
       );
     }
 
-    if (filters.selectedCategory) {
+    if (selectedCategory) {
       filtered = filtered.filter(
         (property) =>
           property.category.toLowerCase() ===
-          filters.selectedCategory.toLowerCase()
+          selectedCategory.toLowerCase()
       );
     }
 
