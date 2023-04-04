@@ -5,7 +5,7 @@ import {
   OverlayView,
 } from "@react-google-maps/api";
 
-const MapSearch = ({ center, properties }) => {
+const MapSearch = ({ properties }) => {
   const customMapStyle = [
     {
       featureType: "poi",
@@ -14,6 +14,19 @@ const MapSearch = ({ center, properties }) => {
   ];
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [markers, setMarkers] = useState([]);
+  const [center, setCenter] = useState({
+    lat: properties[0].coordinates.lat,
+    lng: properties[0].coordinates.lng,
+  });
+
+  useEffect(() => {
+    if (properties.length > 0) {
+      setCenter({
+        lat: properties[0].coordinates.lat,
+        lng: properties[0].coordinates.lng,
+      });
+    }
+  }, [properties]);
 
   const onMarkerClick = (marker) => {
     setSelectedMarker(marker);
@@ -68,7 +81,7 @@ const MapSearch = ({ center, properties }) => {
         <GoogleMap
           mapContainerStyle={{ height: "200px", width: "100%" }}
           center={center}
-          zoom={15}
+          zoom={13}
           options={{
             disableDefaultUI: true,
             streetViewControl: false,

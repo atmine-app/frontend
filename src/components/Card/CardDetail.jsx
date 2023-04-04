@@ -30,13 +30,13 @@ export default function CardDetail({ property, propertyId, rating }) {
         <p>City: {property.city}</p>
         <p>Rating: {rating && rating && rating.averageRating} </p>
       </div>
-      <div className="ratingsContainer">
+      { rating && <div className="ratingsContainer">
         <p>Location: {rating && rating && rating.location}</p>
         <p>Cleanliness: {rating && rating && rating.cleanliness}</p>
         <p>Communication: {rating && rating && rating.communication}</p>
         <p>Value: {rating && rating && rating.valueForMoney}</p>
         <p>Amenities: {rating && rating && rating.amenities}</p>
-      </div>
+      </div> }
       <div className="card-buttons">
         <>
           <button type="submit">

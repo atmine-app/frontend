@@ -69,10 +69,13 @@ export default function PropertyDetail() {
       }, initialCategorySums);
 
       const formatRating = (value) => {
+        if (isNaN(value)) {
+          return "N/A";
+        }
+      
         const rating = parseFloat(value).toFixed(1);
-        return rating.endsWith(".0") ? rating.slice(0, -2) : rating;
+        return rating.endsWith('.0') ? rating.slice(0, -2) : rating;
       };
-
       const averageRatings = {
         location: formatRating(ratingSums.location / totalRatings),
         cleanliness: formatRating(ratingSums.cleanliness / totalRatings),
