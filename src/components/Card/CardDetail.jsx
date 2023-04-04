@@ -18,7 +18,7 @@ export default function CardDetail({ property, propertyId, rating }) {
 
   return (
     <div className="property__card-detail">
-      <img src={property.images} alt={property.title} />
+      <img src={property.images} alt={property.title} /> {/* [0] */}
       <div className="property__card-content">
         <h2>{property.title}</h2>
         <p>Host: {property.owner && property.owner.username}</p>
