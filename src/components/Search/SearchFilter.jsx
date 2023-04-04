@@ -1,5 +1,4 @@
-
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import {
   FaCar,
@@ -59,53 +58,46 @@ const SearchFilter = ({
   isOpen,
   applyFilters,
   closeFilter,
-  categories,
-  amenities,
-  cities,
+  filters,
+  setFilters,
 }) => {
-  const [priceRange, setPriceRange] = useState([0, 1000]);
-  const [minRating, setMinRating] = useState(0);
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedAmenities, setSelectedAmenities] = useState([]);
-//   const [city, setCity] = React.useState("");
-
 
   const handleApplyFilters = () => {
-    applyFilters({
-      priceRange,
-      minRating,
-      selectedCategories,
-      selectedAmenities,
-    });
+    applyFilters(filters);
   };
 
   if (!isOpen) return null;
 
   return (
     <div className="search-filter">
-      <h2>Filter</h2>
       <div>
         <h3>Price range</h3>
         <input
           type="range"
           min="0"
-          max="1000"
-          value={priceRange[0]}
+          max="200"
+          value={filters.priceRange[0]}
           onChange={(e) =>
-            setPriceRange([parseInt(e.target.value), priceRange[1]])
+            setFilters({
+              ...filters,
+              priceRange: [parseInt(e.target.value), filters.priceRange[1]],
+            })
           }
         />
         <input
           type="range"
           min="0"
-          max="1000"
-          value={priceRange[1]}
+          max="200"
+          value={filters.priceRange[1]}
           onChange={(e) =>
-            setPriceRange([priceRange[0], parseInt(e.target.value)])
+            setFilters({
+              ...filters,
+              priceRange: [filters.priceRange[0], parseInt(e.target.value)],
+            })
           }
         />
         <p>
-          {priceRange[0]} - {priceRange[1]}
+          {filters.priceRange[0]} - {filters.priceRange[1]}
         </p>
       </div>
       <div>
@@ -114,10 +106,12 @@ const SearchFilter = ({
           type="range"
           min="0"
           max="5"
-          value={minRating}
-          onChange={(e) => setMinRating(parseInt(e.target.value))}
+          value={filters.minRating}
+          onChange={(e) =>
+            setFilters({ ...filters, minRating: parseInt(e.target.value) })
+          }
         />
-        <p>{minRating}</p>
+        <p>{filters.minRating}</p>
       </div>
       <div>
         <h3>Category</h3>
@@ -126,13 +120,20 @@ const SearchFilter = ({
             <input
               type="checkbox"
               value={key}
+              checked={filters.selectedCategories.includes(key)}
               onChange={(e) => {
                 if (e.target.checked) {
-                  setSelectedCategories([...selectedCategories, key]);
+                  setFilters({
+                    ...filters,
+                    selectedCategories: [...filters.selectedCategories, key],
+                  });
                 } else {
-                  setSelectedCategories(
-                    selectedCategories.filter((cat) => cat !== key)
-                  );
+                  setFilters({
+                    ...filters,
+                    selectedCategories: filters.selectedCategories.filter(
+                      (cat) => cat !== key
+                    ),
+                  });
                 }
               }}
             />
@@ -140,7 +141,6 @@ const SearchFilter = ({
           </label>
         ))}
       </div>
-
       <div>
         <h3>Amenities</h3>
         {Object.entries(amenitiesIcons).map(([key, icon]) => (
@@ -148,13 +148,20 @@ const SearchFilter = ({
             <input
               type="checkbox"
               value={key}
+              checked={filters.selectedAmenities.includes(key)}
               onChange={(e) => {
                 if (e.target.checked) {
-                  setSelectedAmenities([...selectedAmenities, key]);
+                  setFilters({
+                    ...filters,
+                    selectedAmenities: [...filters.selectedAmenities, key],
+                  });
                 } else {
-                  setSelectedAmenities(
-                    selectedAmenities.filter((amenity) => amenity !== key)
-                  );
+                  setFilters({
+                    ...filters,
+                    selectedAmenities: filters.selectedAmenities.filter(
+                      (amenity) => amenity !== key
+                    ),
+                  });
                 }
               }}
             />
@@ -163,18 +170,18 @@ const SearchFilter = ({
         ))}
       </div>
 
-      <div>
-        {/* <h3>City</h3>
-        <select value={city} onChange={(e) => setCity(e.target.value)}>
-          <option value="">Select a city</option>
-          {cities.map((city) => (
-            <option key={city} value={city}>
-              {city}
-            </option>
-          ))}
-        </select> */}
-      </div>
-
+      {/* <div>
+    <h3>City</h3>
+    <select value={city} onChange={(e) => setCity(e.target.value)}>
+      <option
+value="">Select a city</option>
+{cities.map((city) => (
+<option key={city} value={city}>
+{city}
+</option>
+))}
+</select>
+</div> */}
       <button onClick={handleApplyFilters}>Apply filters</button>
       <button onClick={closeFilter}>Close</button>
     </div>

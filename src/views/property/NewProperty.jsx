@@ -1,16 +1,15 @@
-import React,{useState} from 'react'
-import RegisterPropertyForm from '../../components/RegisterPropertyForm/RegisterPropertyForm'
-import Map from '../../components/Map/Map'
-import GoogleMapsProvider from '../../components/GoogleMapsProvider/GoogleMapsProvider';
-
+import React, { useState } from "react";
+import RegisterPropertyForm from "../../components/RegisterPropertyForm/RegisterPropertyForm";
+import Map from "../../components/Map/Map";
+import GoogleMapsProvider from "../../components/GoogleMapsProvider/GoogleMapsProvider";
 
 export default function NewProperty() {
-  const [formData, setFormData] = useState('');
+  const [formData, setFormData] = useState("");
   const [coordinates, setCoordinates] = useState(null);
 
   const handleFormChange = (updatedFormData) => {
     setFormData(updatedFormData);
-    console.log(formData)
+    console.log(formData);
   };
 
   const handleLocationChange = (coordinates) => {
@@ -19,14 +18,16 @@ export default function NewProperty() {
 
   return (
     <div>
-      <RegisterPropertyForm onFormDataChange={handleFormChange} coordinates={coordinates} />
+      <RegisterPropertyForm
+        onFormDataChange={handleFormChange}
+        coordinates={coordinates}
+      />
       <label>
         Property Location:
         <GoogleMapsProvider>
-        <Map formData={formData} onLocationChange={handleLocationChange} />
+          <Map formData={formData} onLocationChange={handleLocationChange} />
         </GoogleMapsProvider>
       </label>
     </div>
-  )
+  );
 }
-

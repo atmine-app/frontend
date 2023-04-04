@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import propertyService from "../../services/propertyService";
 import { useNavigate } from "react-router-dom";
+import "./RegisterPropertyForm.css";
 
 
 const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
@@ -49,7 +50,7 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='registerPropertyFormContainer'>
         <label>Title:</label>
         <input
           type="text"

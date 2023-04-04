@@ -14,8 +14,12 @@ export default function Properties() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [mapVisible, setMapVisible] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-  const [filters, setFilters] = useState({});
-
+  const [filters, setFilters] = useState({
+    priceRange: [0, 1000],
+    minRating: 0,
+    selectedCategories: [],
+    selectedAmenities: [],
+  });
 
   const handleFilterClick = () => {
     setShowFilter(!showFilter);
@@ -35,8 +39,6 @@ export default function Properties() {
     setShowFilter(false);
   };
 
-
-  
   const handleSearch = (value) => {
     setSearchValue(value);
   };
@@ -59,15 +61,22 @@ export default function Properties() {
     let filtered = properties;
 
     if (searchValue) {
-      filtered = filtered.filter((property) =>
-        property.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-        property.description.toLowerCase().includes(searchValue.toLowerCase()) ||
-        property.category.toLowerCase().includes(searchValue.toLowerCase())
+      filtered = filtered.filter(
+        (property) =>
+          property.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+          property.description
+            .toLowerCase()
+            .includes(searchValue.toLowerCase()) ||
+          property.category.toLowerCase().includes(searchValue.toLowerCase())
       );
     }
 
     if (filters.selectedCategory) {
-      filtered = filtered.filter((property) => property.category.toLowerCase() === filters.selectedCategory.toLowerCase());
+      filtered = filtered.filter(
+        (property) =>
+          property.category.toLowerCase() ===
+          filters.selectedCategory.toLowerCase()
+      );
     }
 
     if (filters.priceRange) {
@@ -80,7 +89,7 @@ export default function Properties() {
 
     if (filters.minRating) {
       filtered = filtered.filter(
-        (property) => property.rating >= filters.minRating
+        (property) => property.averageRating >= filters.minRating
       );
     }
 
@@ -105,26 +114,43 @@ export default function Properties() {
     }
 
     setFilteredProperties(filtered);
+    console.log(filtered);
   }, [searchValue, properties, filters]);
 
   return (
     <div>
-     <SearchBar className='searchBarContainer' handleSearchValue={handleSearch} handleCategorySelect={handleCategorySelect} handleFilterClick={handleFilterClick} />
-      <SearchFilter isOpen={showFilter} applyFilters={applyFilters} closeFilter={closeFilter} />
+      <SearchBar
+        className="searchBarContainer"
+        handleSearchValue={handleSearch}
+        handleCategorySelect={handleCategorySelect}
+        handleFilterClick={handleFilterClick}
+      />
+      <SearchFilter
+        isOpen={showFilter}
+        applyFilters={applyFilters}
+        closeFilter={closeFilter}
+        categories={filters.categories}
+        amenities={filters.amenities}
+        cities={filters.cities}
+        filters={filters}
+        setFilters={setFilters}
+      />
 
-      {(searchValue|| mapVisible) && filteredProperties.length > 0 && (
-        <div style={{ height: "200px" }}>
-          <GoogleMapsProvider>
-            <MapSearch
-              center={{
-                lat: filteredProperties[0].coordinates.lat,
-                lng: filteredProperties[0].coordinates.lng,
-              }}
-              properties={filteredProperties}
-            />
-          </GoogleMapsProvider>
-        </div>
-      )}
+      {(searchValue || mapVisible) &&
+        filteredProperties.length > 0 &&
+        filteredProperties[0].coordinates && (
+          <div style={{ height: "200px" }}>
+            <GoogleMapsProvider>
+              <MapSearch
+                center={{
+                  lat: filteredProperties[0].coordinates.lat,
+                  lng: filteredProperties[0].coordinates.lng,
+                }}
+                properties={filteredProperties}
+              />
+            </GoogleMapsProvider>
+          </div>
+        )}
       <h1>All Properties</h1>
       <div className="card__container">
         {properties !== null ? (

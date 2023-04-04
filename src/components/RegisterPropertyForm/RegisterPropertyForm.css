@@ -1,0 +1,4 @@
+.registerPropertyFormContainer{
+    display: flex;
+    flex-direction: column;
+}
