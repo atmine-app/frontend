@@ -12,11 +12,11 @@ import IsPrivate from './components/IsPrivate';
 import PropertyDetail from './views/property/PropertyDetail'
 import EditProperty from './views/property/EditProperty';
 import NewProperty from './views/property/NewProperty';
-import NewBooking from './views/booking/NewBooking';
-import BookingConfirmation from './views/booking/BookingConfirmation';
-// import BookingList from './views/booking/BookingList';
+import NewBooking from './views/booking/newBooking/NewBooking';
+import BookingConfirmation from './views/booking/bookingconfirmation/BookingConfirmation';
 import MyProfile from './views/profile/MyProfile';
-import BookingDetail from './views/booking/BookingDetail';
+import BookingList from './views/booking/bookingList/BookingList';
+import BookingDetail from './views/booking/bookingDetail/BookingDetail';
 import Payment from './components/Payment/Payment';
 import Multiupload from './components/Multiupload/Multiupload';
 
@@ -39,6 +39,7 @@ function App() {
         <Route path='/properties/:propertyId/edit' element={<EditProperty />}/>
         <Route path='/properties/:propertyId/:range' element={<NewBooking />}/>
         {/* <Route path="/bookings" element={<IsPrivate><BookingList /></IsPrivate>} /> */}
+        <Route path="/bookings" element={<IsPrivate><BookingList /></IsPrivate>} />
         <Route path="/bookings/:bookingId" element={<IsPrivate><BookingDetail /></IsPrivate>} />
         <Route path="/bookings/:bookingId/confirmation" element={<IsPrivate><BookingConfirmation /></IsPrivate>} />
         {/* realmente no hace falta la de confirmation => podemos ir al detail directamente */}

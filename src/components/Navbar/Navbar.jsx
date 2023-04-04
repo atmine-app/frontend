@@ -17,6 +17,7 @@ export default function Navbar() {
         {isLoggedIn && <li><NavLink to="/pay">Pay</NavLink></li>}
         {isLoggedIn && <li><NavLink to="/upload">Upload</NavLink></li>}
         {isLoggedIn && <li><NavLink to="/profile">My Profile</NavLink></li>}
+        {isLoggedIn && <li><NavLink to="/bookings">My Bookings</NavLink></li>}
         {isLoggedIn && <li><NavLink to="/register-property">Add property</NavLink></li>}
         {isLoggedIn && <li><button onClick={() => logOutUser()}>Log out</button></li>}
         <li><button onClick={() => navigate(-1)}>Go back</button></li>

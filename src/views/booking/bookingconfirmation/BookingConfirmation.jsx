@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import bookingService from '../../services/bookingsServices';
-/* import './BookingConfirmation.css'; */
+import bookingService from '../../../services/bookingsServices';
+import './BookingConfirmation.css';
 
 export default function BookingConfirmation() {
   const { bookingId } = useParams();
@@ -25,6 +25,10 @@ export default function BookingConfirmation() {
       <h2>Booking Confirmation</h2>
       {booking ? (
         <div className="booking-confirmation__content">
+        <img 
+          src={booking.property?.images[0]} 
+          alt={booking.title} 
+          style={{ width: '40%' }} />
           <p>
             <span className="bold">Booking ID:</span> {booking._id}
           </p>
@@ -32,7 +36,7 @@ export default function BookingConfirmation() {
             <span className="bold">Property:</span> {booking.property?.title}
           </p>
           <p>
-            <span className="bold">Host:</span> {booking.property?.owner?.username}
+            <span className="bold">Host:</span> {booking.owner?.username}
           </p>
           <p>
             <span className="bold">Renter:</span> {booking.renter?.username}

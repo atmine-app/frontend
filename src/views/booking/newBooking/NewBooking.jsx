@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import propertyService from "../../services/propertyService";
-import bookingService from "../../services/bookingsServices";
-import { useAuth } from "../../hooks/useAuth";
+import propertyService from "../../../services/propertyService";
+import bookingService from "../../../services/bookingsServices";
+import { useAuth } from "../../../hooks/useAuth";
 import { differenceInDays, parse } from "date-fns";
-import Payment from "../../components/Payment/Payment";
+import Payment from "../../../components/Payment/Payment";
 
 export default function NewBooking() {
   const [property, setProperty] = useState({});
@@ -52,6 +52,7 @@ export default function NewBooking() {
         owner: property.owner._id,
         startDate: startDate,
         endDate: endDate,
+        totalPrice: totalPrice,
       };
 
       const response = await bookingService.createBooking(booking);
@@ -64,7 +65,7 @@ export default function NewBooking() {
 
   return (
     <div className="property__card-detail">
-      <img src={property.images} alt={property.title} />
+      <img src={property.images[0]} alt={property.title} />
       <div className="property__card-content">
         <h2>{property.title}</h2>
         <p>Host: {property.owner && property.owner.username}</p>
