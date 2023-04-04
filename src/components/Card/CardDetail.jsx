@@ -53,11 +53,6 @@ export default function CardDetail({ property, propertyId, rating }) {
             Delete
           </button>
         </>
-        <button type="submit">
-          <Link to={`/properties/${property._id}/book`} className="nav-link">
-            Book
-          </Link>
-        </button>
       </div>
     </div>
   );
