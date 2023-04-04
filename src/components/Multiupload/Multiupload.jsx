@@ -1,11 +1,11 @@
 import axios from 'axios'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Dropzone from 'react-dropzone'
 import {Container} from 'reactstrap'
 import './Multiupload.css'
 
-export default function Multiupload(props) {
-  const [Image, setImage] = useState({array: []})
+export default function Multiupload({onImageDataChange}) {
+  const [Image, setImageState] = useState({array: []})
   const [loading, setLoading] = useState(false)
 
   const handleDrop = (files) => {
@@ -26,24 +26,28 @@ export default function Multiupload(props) {
           const fileURL = data.secure_url;
           let specificArrayObject = Image.array;
           specificArrayObject.push(fileURL);
-          const newObject = {...Image, specificArrayObject};
-          setImage(newObject);
-          console.log(Image)
+          setImageState({array: specificArrayObject});
         })
       })
       axios.all(uploaders).then(() => {
         setLoading(false)  
       })
-    }
+  };
+  
 
-    function ImagePreview() {
+    useEffect(() => {
+      onImageDataChange(Image)
+      console.log(Image)
+    }, [Image])
+
+  function ImagePreview() {
   if(loading) {
     return <h3>Loading...</h3>
   }
   if(!loading) {
     return (
       <div>
-        {Image.array.length <= 0 ? 
+        {Image?.array?.length <= 0 ? 
           <p>No images uploaded</p> 
           : Image.array.map((item, index) => (
             // eslint-disable-next-line jsx-a11y/img-redundant-alt
@@ -67,7 +71,7 @@ export default function Multiupload(props) {
         <Dropzone 
           className="dropzone"
           onDrop={handleDrop}
-          onChange={(e) => setImage(e.target.value)}
+          onChange={(e) => setImageState(e.target.value)}
           value={Image}>
           {({getRootProps, getInputProps}) => (
             <section>

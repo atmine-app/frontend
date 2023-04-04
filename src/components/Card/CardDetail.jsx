@@ -18,7 +18,12 @@ export default function CardDetail({ property, propertyId, rating }) {
 
   return (
     <div className="property__card-detail">
-      <img src={property.images} alt={property.title} />
+      <div className="property__card-images">
+        {property.images && property.images.length > 0 && property.images.map((image, index) => (
+          // eslint-disable-next-line jsx-a11y/img-redundant-alt
+          <img key={index} src={image} alt={`${property.title} - Image ${index + 1}`} />
+        ))} 
+      </div>
       <div className="property__card-content">
         <h2>{property.title}</h2>
         <p>Host: {property.owner && property.owner.username}</p>
