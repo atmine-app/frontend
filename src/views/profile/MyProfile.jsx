@@ -1,6 +1,6 @@
-/* import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import userService from '../../services/userService';
-import AuthContext from '../../context/AuthContext'
+import {AuthContext} from '../../context/AuthContext'
 
 
 export default function MyProfile() {
@@ -30,4 +30,4 @@ export default function MyProfile() {
       )}
     </div>
   )
-} */
+}
