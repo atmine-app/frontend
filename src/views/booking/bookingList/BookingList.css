@@ -1,45 +1,17 @@
-/* .booking-list {
-  margin-top: 2rem;
-}
-
-.booking-list h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.booking-list ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 .booking-list__item {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  margin-bottom: 1rem;
-  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
 }
 
-.booking-list__item-property {
-  display: flex;
-  flex-direction: row;
+.booking-list__item h3 {
+  margin: 0;
 }
 
-.booking-list__item-property img {
-  border-radius: 4px;
-  margin-right: 1rem;
-  max-height: 150px;
-  object-fit: cover;
-  width: 150px;
+.booking-list__item p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
 }
-
-.booking-list__item-property-details {
-  display: flex;
-  flex-direction: column;
-}
-
-.bold {
-  font-weight: bold;
-} */
