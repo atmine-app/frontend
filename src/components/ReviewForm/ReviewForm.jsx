@@ -9,12 +9,8 @@ export default function ReviewForm({ initialReviewText, handleReviewSubmit }) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    try {
-      handleReviewSubmit(review);
-      setReview("");
-    } catch (error) {
-      console.log(error);
-    }
+    handleReviewSubmit(review);
+    setReview("");
   };
 
   return (

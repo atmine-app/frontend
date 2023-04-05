@@ -34,10 +34,12 @@ export default function Card({property}) {
       <div className="card-info-flex">
         <h3 className="card-title">{property.title}</h3>
         <div className="card-rating">
-          <HiStar />
+          <HiStar color='var(--color-secondary-green)'
+          fontSize="1.3rem"/>
           <p>{property.averageRating}</p>
         </div>
       </div>
+      <p style={{ margin: 0, color: "var(--font-grey)" }}>{property.address},{property.city}</p>
       <p style={{ margin: 0, color: "var(--font-grey)" }}>{property.summary}</p>
       {/* <p style={{ margin: 0, color: "var(--font-grey)" }}>{card.date}</p> */}
       <p style={{ margin: "0.2rem", fontSize: "1rem", color: "var(--black" }}>
