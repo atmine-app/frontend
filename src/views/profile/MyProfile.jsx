@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useAuth } from '../../hooks/useAuth';
 import userService from '../../services/userService';
-import Multiupload from '../../components/Multiupload/Multiupload';
+import SingleImageUpload from '../../components/SingleUpload/SingleImageUpload';
 
 export default function MyProfile() {
   const { isLoggedIn, logOutUser } = useContext(AuthContext);
@@ -12,7 +12,7 @@ export default function MyProfile() {
    console.log(user);
 
   const handleAvatarUpload = (imageData) => {
-    setAvatarImage(imageData.array[0]);
+    setAvatarImage(imageData);
   };
 
   const handleSaveAvatar = async () => {
@@ -41,7 +41,7 @@ export default function MyProfile() {
           )}
           {isLoggedIn && (
             <div>
-              <Multiupload onImageDataChange={handleAvatarUpload} />
+              <SingleImageUpload onImageDataChange={handleAvatarUpload} />
               <button onClick={handleSaveAvatar}>Save</button>
               <button onClick={() => logOutUser()}>Log out</button>
             </div>
