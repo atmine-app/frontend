@@ -38,7 +38,7 @@ export default function Multiupload({onImageDataChange}) {
     useEffect(() => {
       onImageDataChange(Image)
       console.log(Image)
-    }, [Image])
+    }, [onImageDataChange, Image])
 
   function ImagePreview() {
   if(loading) {

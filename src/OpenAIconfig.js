@@ -46,6 +46,6 @@ export default async function summarizeText(text, res, req) {
 }
 
 function generatePromptSummary(description) {
-  return `You are given this text that is the description of a property, i want you to summarize it in less than 20 words: ${description}
+  return `You are given this text that is the description of a property, i want you to summarize it in less than 30 words: ${description}
 `;
 }

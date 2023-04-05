@@ -21,12 +21,10 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
   };
 
   const [formData, setFormData] = useState(initialState);
-  const [summary, setSummary] = useState("");
   const navigate = useNavigate();
 
   const handleFormImageChange = (updatedImageArray) => {
     setImages(updatedImageArray.array);
-    console.log(updatedImageArray.array);
   };
 
   const handleChange = (e) => {
@@ -42,17 +40,14 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await openAIService.summarize(formData.description);
-      setSummary(data);
-      console.log("data",data)
       const propertyData = {
         ...formData,
         coordinates,
         images,
-        summary,
+        summary: "",
       };
-      console.log("summary",summary)
-      console.log(propertyData);
+      const summary = await openAIService.summarize(formData.description);
+      propertyData.summary = summary;
       const createdProperty = await propertyService.addProperty(propertyData);
       navigate(`/properties/${createdProperty._id}`);
       setFormData(initialState);
@@ -60,6 +55,7 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
       console.log(error);
     }
   };
+  
   return (
     <div>
       <form onSubmit={handleSubmit} className='registerPropertyFormContainer'>

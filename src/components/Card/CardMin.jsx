@@ -38,7 +38,7 @@ export default function Card({property}) {
           <p>{property.averageRating}</p>
         </div>
       </div>
-      <p style={{ margin: 0, color: "var(--font-grey)" }}>{property.description}</p>
+      <p style={{ margin: 0, color: "var(--font-grey)" }}>{property.summary}</p>
       {/* <p style={{ margin: 0, color: "var(--font-grey)" }}>{card.date}</p> */}
       <p style={{ margin: "0.2rem", fontSize: "1rem", color: "var(--black" }}>
         <span style={{ fontWeight: "600" }}>€{property.price}</span> day
