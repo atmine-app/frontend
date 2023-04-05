@@ -13,8 +13,8 @@ export default function Multiupload({onImageDataChange}) {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("tags", `codeinfuse, medium, gist`);
-      formData.append("upload_preset", "at_mine");
-      formData.append("api_key", "777765161876794");
+      formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+      formData.append("api_key", process.env.REACT_APP_CLOUDINARY_API_KEY);
       formData.append("timestamp", (Date.now() / 1000) | 0);
       setLoading(true)
       return axios
