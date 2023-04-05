@@ -3,14 +3,14 @@ import propertyService from "../../services/propertyService";
 import { useNavigate } from "react-router-dom";
 import Multiupload from "../Multiupload/Multiupload";
 import "./RegisterPropertyForm.css";
+import openAIService from "../../services/openaiService";
 
 
 const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
-  const [images, setImages] = useState({array: []})
+  const [images, setImages] = useState({ array: [] });
   const initialState = {
     title: "",
-    description:
-      "",
+    description: "",
     category: "",
     price: "",
     size: "",
@@ -21,11 +21,12 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
   };
 
   const [formData, setFormData] = useState(initialState);
+  const [summary, setSummary] = useState("");
   const navigate = useNavigate();
 
   const handleFormImageChange = (updatedImageArray) => {
     setImages(updatedImageArray.array);
-    console.log(updatedImageArray.array)
+    console.log(updatedImageArray.array);
   };
 
   const handleChange = (e) => {
@@ -41,12 +42,17 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const data = await openAIService.summarize(formData.description);
+      setSummary(data);
+      console.log("data",data)
       const propertyData = {
         ...formData,
         coordinates,
-        images, 
+        images,
+        summary,
       };
-      console.log(propertyData)
+      console.log("summary",summary)
+      console.log(propertyData);
       const createdProperty = await propertyService.addProperty(propertyData);
       navigate(`/properties/${createdProperty._id}`);
       setFormData(initialState);
@@ -54,7 +60,6 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
       console.log(error);
     }
   };
-
   return (
     <div>
       <form onSubmit={handleSubmit} className='registerPropertyFormContainer'>
@@ -160,81 +165,11 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
 
         <button type="submit">Register Property</button>
       </form>
-{/*       <br />
-      <label>
-        Property Location:
-        {isLoaded && (
-          <Map center={center} selectedLocation={selectedLocation} coordinates={coordinates} />
-        )}
-      </label> */}
+
        
     </div>
   );
 };
 
-  /* GOOGLE STUFF */
-
-  /*   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }; */
-
-  // const { isLoaded, loadError } = useLoadScript({
-  //   googleMapsApiKey: googleMapsConfig.apiKey,
-  //   libraries: googleMapsConfig.libraries,
-  // });
-
-  // const [selectedLocation, setSelectedLocation] = useState(null);
-  // const [center, setCenter] = useState({
-  //   lat: 41.394043,
-  //   lng: 2.173094,
-  // });
-  // const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
-
-  /* const handleSubmit = async (e) => {
-    e.preventDefault();
-    const propertyData = {
-      title: formData.title,
-      description: formData.description,
-      category: formData.category,
-      price: formData.price,
-      size: formData.size,
-      images: formData.images,
-      address: formData.address,
-      city: formData.city,
-      country: formData.country,
-      zipCode: formData.zipCode,
-    };
-    try {
-      await propertyService.addProperty(propertyData);
-      navigate(`/`);
-      setFormData(initialState);
-    } catch (error) {
-      console.error(error);
-    }
-  }; */
-
-  // useEffect(() => {
-  //   if (!window.google) return;
-  //   const geocoder = new window.google.maps.Geocoder();
-  //   geocoder.geocode({ address: formData.address }, (results, status) => {
-  //     if (status === "OK") {
-  //       const location = results[0].geometry.location;
-  //       setSelectedLocation({ lat: location.lat(), lng: location.lng() });
-  //       setCenter({ lat: location.lat(), lng: location.lng() });
-  //       setCoordinates({ lat: location.lat(), lng: location.lng() });
-  //     } else {
-  //       setCoordinates({ lat: null, lng: null });
-  //     }
-  //   });
-  // }, [formData.address]);
-
-  // if (loadError) return "Error loading maps";
-  // if (!isLoaded) return "Loading maps";
-
   
-
 export default RegisterPropertyForm;
