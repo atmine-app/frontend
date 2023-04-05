@@ -1,9 +1,9 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Map from "../../components/Map/Map";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
-import propertyService from "../../services/propertyService";
 import Reviews from "../../components/Reviews/Reviews";
+import propertyService from "../../services/propertyService";
 import reviewService from "../../services/reviewService";
 import Calendar from "../../components/Calendar/Calendar";
 import GoogleMapsProvider from "../../components/GoogleMapsProvider/GoogleMapsProvider";
@@ -13,7 +13,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
-import './PropertyDetail.css'
+import "./PropertyDetail.css";
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -22,6 +22,7 @@ export default function PropertyDetail() {
   const [rating, setRating] = useState(0);
   const { user } = useAuth();
   const [userVote, setUserVote] = useState({});
+  const [userReview, setUserReview] = useState(null);
   const navigate = useNavigate();
   const getUserVote = async () => {
     try {
@@ -38,7 +39,7 @@ export default function PropertyDetail() {
   useEffect(() => {
     getUserVote();
     // eslint-disable-next-line
-  }, [propertyId]);
+  }, [propertyId,user]);
 
   const getProperty = async () => {
     try {
@@ -57,7 +58,12 @@ export default function PropertyDetail() {
   const getReviews = async () => {
     try {
       const response = await reviewService.getReviews(propertyId);
+      console.log("response",response)
+      const userReview = response.find((review) => review.user._id === user._id);
+      setUserReview(userReview);
       setReviews(response);
+      console.log("userReview",userReview);
+      console.log("user id",user._id)
     } catch (error) {
       console.log(error);
     }
@@ -65,8 +71,9 @@ export default function PropertyDetail() {
 
   useEffect(() => {
     getReviews();
+    
     // eslint-disable-next-line
-  }, [propertyId]);
+  }, [propertyId,user]);
 
   const getRating = async () => {
     try {
@@ -120,9 +127,13 @@ export default function PropertyDetail() {
     // eslint-disable-next-line
   }, [propertyId]);
 
-  const handleReviewSubmit = async (review) => {
+  const handleReviewSubmit = async (reviewText) => {
     try {
-      await reviewService.createReview(propertyId, review);
+      if (userReview) {
+        await reviewService.updateReview(userReview._id, { review: reviewText });
+      } else {
+        await reviewService.createReview(propertyId, { review: reviewText });
+      }
       getReviews();
     } catch (error) {
       console.log(error);
@@ -160,10 +171,10 @@ export default function PropertyDetail() {
       await propertyService.deleteProperty(propertyId);
     } catch (error) {
       console.error(error);
-    } finally{
-      navigate('/')
+    } finally {
+      navigate("/");
     }
-    }
+  };
   const handleRatingSubmit = async (propertyId, rating) => {
     // Calculate the average rating only for rated categories
     const ratedCategories = Object.values(rating).filter((value) => value > 0);
@@ -185,26 +196,22 @@ export default function PropertyDetail() {
     <div>
       <div className="propertyCardDetail">
         <div className="DetailImageSection">
-        <Swiper
-        className=" ImageContainer mySwiper"
-        spaceBetween={30}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-      >
-          {property.images &&
-            property.images.length > 0 &&
-            property.images.map((image, index) => (
-              <SwiperSlide key={index}
-              className="imageSwiper">
-        <img
-          src={image}
-          alt={`${property.title} - ${index + 1}`}
-        />
-      </SwiperSlide>
-            ))}
-             </Swiper>
+          <Swiper
+            className=" ImageContainer mySwiper"
+            spaceBetween={30}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Pagination]}
+          >
+            {property.images &&
+              property.images.length > 0 &&
+              property.images.map((image, index) => (
+                <SwiperSlide key={index} className="imageSwiper">
+                  <img src={image} alt={`${property.title} - ${index + 1}`} />
+                </SwiperSlide>
+              ))}
+          </Swiper>
         </div>
         <div className="property__card-content">
           <h2>{property.title}</h2>
@@ -236,7 +243,10 @@ export default function PropertyDetail() {
                 Edit
               </Link>
             </button>
-            <button type="submit" onClick={() => handlePropertyDelete(propertyId)}>
+            <button
+              type="submit"
+              onClick={() => handlePropertyDelete(propertyId)}
+            >
               Delete
             </button>
           </>
@@ -247,11 +257,14 @@ export default function PropertyDetail() {
       </GoogleMapsProvider>
       <br />
       <ReviewForm
-        propertyId={propertyId}
-        handleReviewSubmit={handleReviewSubmit}
-      />
+  propertyId={propertyId}
+  initialReviewText={userReview && userReview.review}
+  handleReviewSubmit={handleReviewSubmit}
+/>
       <Reviews
-        reviews={reviews}
+        reviews={reviews.filter(
+          (review) => !user || review.user._id !== user.id
+        )}
         handleDelete={handleDelete}
         handleUpdate={handleUpdate}
       />
