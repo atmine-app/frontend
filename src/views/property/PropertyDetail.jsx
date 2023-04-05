@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import CardDetail from "../../components/Card/CardDetail";
+import { useParams, Link } from "react-router-dom";
 import Map from "../../components/Map/Map";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import propertyService from "../../services/propertyService";
@@ -69,7 +68,7 @@ export default function PropertyDetail() {
   const getRating = async () => {
     try {
       const response = await propertyService.getPropertyVotes(propertyId);
-
+      console.log('response', response)
       const totalRatings = response.length;
       const initialCategorySums = {
         location: 0,
@@ -77,7 +76,7 @@ export default function PropertyDetail() {
         communication: 0,
         valueForMoney: 0,
         amenities: 0,
-        averageRatings: 0,
+        averageRating: 0,
       };
 
       const ratingSums = response.reduce((acc, vote) => {
@@ -86,10 +85,11 @@ export default function PropertyDetail() {
         acc.communication += vote.communication;
         acc.valueForMoney += vote.valueForMoney;
         acc.amenities += vote.amenities;
-        acc.averageRatings += vote.averageRatings;
+        acc.averageRating += vote.averageRating;
         return acc;
       }, initialCategorySums);
 
+      console.log("ratingSums", ratingSums);
       const formatRating = (value) => {
         if (isNaN(value)) {
           return "N/A";
@@ -98,16 +98,18 @@ export default function PropertyDetail() {
         const rating = parseFloat(value).toFixed(1);
         return rating.endsWith(".0") ? rating.slice(0, -2) : rating;
       };
+
       const averageRatings = {
         location: formatRating(ratingSums.location / totalRatings),
         cleanliness: formatRating(ratingSums.cleanliness / totalRatings),
         communication: formatRating(ratingSums.communication / totalRatings),
         valueForMoney: formatRating(ratingSums.valueForMoney / totalRatings),
         amenities: formatRating(ratingSums.amenities / totalRatings),
-        averageRatings: formatRating(ratingSums.averageRatings / totalRatings),
+        averageRating: formatRating(ratingSums.averageRating / totalRatings),
       };
 
       setRating(averageRatings);
+      console.log("averageRatings", averageRatings);
     } catch (error) {
       console.log(error);
     }
@@ -173,7 +175,55 @@ export default function PropertyDetail() {
 
   return (
     <div>
-      <CardDetail property={property} rating={rating} />
+      <div className="property__card-detail">
+        <div className="property__card-images">
+          {property.images &&
+            property.images.length > 0 &&
+            property.images.map((image, index) => (
+              // eslint-disable-next-line jsx-a11y/img-redundant-alt
+              <img
+                key={index}
+                src={image}
+                alt={`${property.title} - Image ${index + 1}`}
+              />
+            ))}
+        </div>
+        <div className="property__card-content">
+          <h2>{property.title}</h2>
+          <p>Host: {property.owner && property.owner.username}</p>
+          <p>Catergory: {property.category}</p>
+          <p>Description: {property.description}</p>
+          <p>Price: {property.price}</p>
+          <p>Size: {property.size}</p>
+          <p>Address: {property.address}</p>
+          <p>City: {property.city}</p>
+          <p>Rating: {rating && rating && rating.averageRating} </p>
+        </div>
+        {rating && (
+          <div className="ratingsContainer">
+            <p>Location: {rating && rating && rating.location}</p>
+            <p>Cleanliness: {rating && rating && rating.cleanliness}</p>
+            <p>Communication: {rating && rating && rating.communication}</p>
+            <p>Value: {rating && rating && rating.valueForMoney}</p>
+            <p>Amenities: {rating && rating && rating.amenities}</p>
+          </div>
+        )}
+        <div className="card-buttons">
+          <>
+            <button type="submit">
+              <Link
+                to={`/properties/${property._id}/edit`}
+                className="nav-link"
+              >
+                Edit
+              </Link>
+            </button>
+            <button type="submit" onClick={() => handleDelete(propertyId)}>
+              Delete
+            </button>
+          </>
+        </div>
+      </div>
       <GoogleMapsProvider>
         <Map formData={property} />
       </GoogleMapsProvider>
