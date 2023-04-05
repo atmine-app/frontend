@@ -31,7 +31,9 @@ img{
 
 html{
   scroll-behavior: smooth;
-  background: var(--color-bg);
+}
+body{
+  padding-bottom: 75px;
 }
 
 

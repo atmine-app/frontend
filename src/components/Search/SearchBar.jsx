@@ -55,13 +55,16 @@ const SearchBar = (props) => {
       <div className="searchCategoryContainer">
         {Object.keys(categoryIcons).map((category) => (
           <div key={category} onClick={() => handleIconClick(category)}>
-            {categoryIcons[category]}
-            <span className="categoryText">{category}</span>
+            <div className="categoryItem">
+              {categoryIcons[category]}
+              <span className="categoryText">{category}</span>
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
+  
 };
 
 export default SearchBar;

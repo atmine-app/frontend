@@ -168,10 +168,9 @@ export default function Properties() {
             </GoogleMapsProvider>
           </div>
         )}
-      <h1>All Properties</h1>
-      <div className="card__container">
+      <div>
         {properties !== null ? (
-          <div className="card__container">
+          <div className="cards-flex">
             {filteredProperties.map((property) => {
               return (
                 <div key={property._id}>
