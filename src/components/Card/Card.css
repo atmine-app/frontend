@@ -1,66 +1,70 @@
-.card__container {
+.cards-flex {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  padding: 1rem 3rem;
+}
+.card-box {
+  margin: 1rem;
+  margin-bottom: 2rem;
+  color: #000;
 }
 
-.property__link {
-  display: block;
-  text-decoration: none;
+.swiper-container {
+  height: 270px;
+  width: 270px;
+  overflow: hidden;
 }
 
-.property__card {
+.card-img {
+  height: 270px;
+  width: 270px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.card-info-flex {
   display: flex;
-  flex-direction: column;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  width: 250px; 
-  margin: 8px; 
-  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.property__card img {
-  max-width: 100%;
-  border-radius: 4px;
-}
-
-.property__card-content {
-  margin-top: 16px;
-}
-
-.property__card-content h2 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.property__card-content p {
-  font-size: 1rem;
-  color: #666;
-}
-
-
-
-.property__card-detail {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    width: 100%; 
-    margin: 0px; 
-    box-sizing: border-box;
-}
-
-.card-buttons {
+.card-rating {
   display: flex;
-  flex-direction: row;
-  justify-content: right;
-  gap: 10px;
-  margin-top: 25px;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.property__card-detail img {
-  max-width: 30%;
-  border-radius: 4px;
+.card-box .swiper-pagination-bullet-active {
+  background-color: var(--color-primary-lime) !important;
 }
+
+.imageSwiper{
+  background: var(--color-bg-variant);
+  text-align: center;
+  border-radius: 2rem;
+  user-select: none;
+}
+
+@media only screen and (max-width: 1000px) {
+  .swiper-container,
+  .card-img {
+    height: 400px;
+    width: 40vw;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .swiper-container,
+  .card-img {
+    height: 50%;
+    max-height: 400px;
+    width: 90vw;
+  }
+
+  .cards-flex {
+    padding: 0px;
+  }
+}
+

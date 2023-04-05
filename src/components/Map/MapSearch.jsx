@@ -5,6 +5,7 @@ import {
   OverlayView,
 } from "@react-google-maps/api";
 import { Link } from "react-router-dom";
+import "./MapSearch.css";
 
 const MapSearch = ({ properties }) => {
   const customMapStyle = [
@@ -78,9 +79,9 @@ const MapSearch = ({ properties }) => {
   }, [properties]);
 
   return (
-      <div className="App">
+      <div className="map-search-container">
         <GoogleMap
-          mapContainerStyle={{ height: "200px", width: "100%" }}
+          mapContainerStyle={{ height: "210px", width: "100%" }}
           center={center}
           zoom={12}
           options={{
@@ -103,6 +104,7 @@ const MapSearch = ({ properties }) => {
               zIndex={999}
             >
               <div>
+                <img className="info-window-image" src={selectedMarker.images[0]} alt="property" />
                 <h3>{selectedMarker.title}</h3>
                 <p>Price: €{selectedMarker.price}</p>
                 <p>{selectedMarker.description}</p>

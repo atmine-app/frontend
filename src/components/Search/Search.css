@@ -12,13 +12,19 @@
   }
   
   .searchCategoryContainer > div {
-    display: inline-block;
-  font-size: 1rem;
-  align-items: center;
-  text-align: center; /* Center text and icon */
-  margin: 0 1rem; 
-  color: var(--color-primary-pruple);
-  vertical-align: middle;
+    display: inline-flex;
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 1rem;
+    color: var(--color-primary-pruple);
+  }
+  
+  .categoryItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
   
   .icon {
