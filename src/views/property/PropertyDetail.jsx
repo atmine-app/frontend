@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Map from "../../components/Map/Map";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import propertyService from "../../services/propertyService";
@@ -22,7 +22,7 @@ export default function PropertyDetail() {
   const [rating, setRating] = useState(0);
   const { user } = useAuth();
   const [userVote, setUserVote] = useState({});
-
+  const navigate = useNavigate();
   const getUserVote = async () => {
     try {
       const response = await propertyService.getUserPropertyVote(
@@ -155,7 +155,15 @@ export default function PropertyDetail() {
       console.error(error);
     }
   };
-
+  const handlePropertyDelete = async (propertyId) => {
+    try {
+      await propertyService.deleteProperty(propertyId);
+    } catch (error) {
+      console.error(error);
+    } finally{
+      navigate('/')
+    }
+    }
   const handleRatingSubmit = async (propertyId, rating) => {
     // Calculate the average rating only for rated categories
     const ratedCategories = Object.values(rating).filter((value) => value > 0);
@@ -228,7 +236,7 @@ export default function PropertyDetail() {
                 Edit
               </Link>
             </button>
-            <button type="submit" onClick={() => handleDelete(propertyId)}>
+            <button type="submit" onClick={() => handlePropertyDelete(propertyId)}>
               Delete
             </button>
           </>
