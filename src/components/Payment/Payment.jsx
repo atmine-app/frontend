@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from "axios";
 
-const stripePromise = loadStripe("pk_test_51MmyyDKnGwuMyNJVONhuTT5rVNMCvb0myhaquhex7FCieyfT2PSQhs2gr8SR102hgdYR8n0jiWdWv4pRY4NXVNuo00jIHuiXfc");
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const CheckoutForm = ({ totalPrice, property, renter, startDate, endDate, onPaymentSuccess }) => {
   const stripe = useStripe();
