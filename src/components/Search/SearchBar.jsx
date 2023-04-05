@@ -1,3 +1,4 @@
+import React from "react";
 import {
   FaCar,
   FaSwimmingPool,
@@ -10,7 +11,6 @@ import {
 } from "react-icons/fa";
 import { BsSliders } from "react-icons/bs";
 import "./Search.css";
-// Add more icons as needed
 
 const SearchBar = (props) => {
   const { handleSearchValue, handleCategorySelect, handleFilterClick } = props;
@@ -25,16 +25,16 @@ const SearchBar = (props) => {
   };
 
   const categoryIcons = {
-    parking: <FaCar />,
-    storage: <FaWarehouse />,
-    garden: <FaTree />,
-    garage: <FaHome />,
-    basement: <FaHome />,
-    attic: <FaHome />,
-    pool: <FaSwimmingPool />,
-    barbecue: <FaUtensils />,
-    photostudio: <FaCamera />,
-    other: <FaPlusSquare />,
+    parking: <FaCar className="icon" />,
+    storage: <FaWarehouse className="icon" />,
+    garden: <FaTree className="icon" />,
+    garage: <FaHome className="icon" />,
+    basement: <FaHome className="icon" />,
+    attic: <FaHome className="icon" />,
+    pool: <FaSwimmingPool className="icon" />,
+    barbecue: <FaUtensils className="icon" />,
+    photostudio: <FaCamera className="icon" />,
+    other: <FaPlusSquare className="icon" />,
   };
 
   return (
@@ -54,15 +54,14 @@ const SearchBar = (props) => {
       </div>
       <div className="searchCategoryContainer">
         {Object.keys(categoryIcons).map((category) => (
-          <div key={category}>
-            <span onClick={() => handleIconClick(category)}>
-              {" "}
-              {categoryIcons[category]} {category}
-            </span>
+          <div key={category} onClick={() => handleIconClick(category)}>
+            {categoryIcons[category]}
+            <span className="categoryText">{category}</span>
           </div>
         ))}
       </div>
     </div>
   );
 };
+
 export default SearchBar;

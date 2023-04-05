@@ -1,0 +1,16 @@
+.swiper-pagination-clickable .swiper-pagination-bullet-active{
+    background: var(--color-primary-lime);
+    color:var(--color-primary-lime);
+}
+
+.imageSwiper{
+    background: var(--color-bg-variant);
+    text-align: center;
+    border-radius: 2rem;
+    user-select: none;
+}
+
+.container.imageContainer{
+    width: 100vw;
+    padding-bottom: 4rem;
+}

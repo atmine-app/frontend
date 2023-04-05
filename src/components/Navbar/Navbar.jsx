@@ -1,23 +1,80 @@
 import React, { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./Navbar.css";
+import { AiFillHome } from "react-icons/ai";
+import { BsFillHouseAddFill } from "react-icons/bs";
+import { HiUser } from "react-icons/hi";
+import { MdFavorite } from "react-icons/md";
 
 export default function Navbar() {
-  const { isLoggedIn} = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AuthContext);
+  // const navigate = useNavigate();
   return (
-    <div className="navbar">
-      {/* {user && <p>Hello {user.username}</p> } */}
-      <ul className='navbar__list'>
-        <li><NavLink to="/">Home</NavLink></li>
-        {!isLoggedIn && <li><NavLink to="/signup">Sign up</NavLink></li>}
-        {!isLoggedIn && <li><NavLink to="/login">Login</NavLink></li>}
-        {isLoggedIn && <li><NavLink to="/profile">My Profile</NavLink></li>}
-        {isLoggedIn && <li><NavLink to="/bookings">My Bookings</NavLink></li>}
-        {isLoggedIn && <li><NavLink to="/register-property">Add property</NavLink></li>}
-        <li><button onClick={() => navigate(-1)}>Go back</button></li>
+    <nav className="navbar">
+      <ul className="navbarList">
+        <li>
+          <NavLink to="/">
+            <div className="navItem">
+              <AiFillHome className="navIcon" />
+              Home
+            </div>
+          </NavLink>
+        </li>
+        {!isLoggedIn && (
+          <li>
+            <NavLink to="/signup">
+              <div className="navItem">
+                <HiUser className="navIcon" />
+                Sign up
+              </div>
+            </NavLink>
+          </li>
+        )}
+        {!isLoggedIn && (
+          <li>
+            <NavLink to="/login">
+              <div className="navItem">
+                <HiUser className="navIcon" />
+                Login
+              </div>
+            </NavLink>
+          </li>
+        )}
+        {isLoggedIn && (
+          <li>
+            <NavLink to="/profile">
+              <div className="navItem">
+                <HiUser className="navIcon" />
+                Profile
+              </div>
+            </NavLink>
+          </li>
+        )}
+        {isLoggedIn && (
+          <li>
+            <NavLink to="/bookings">
+              <div className="navItem">
+                <MdFavorite className="navIcon" />
+                Saved
+              </div>
+            </NavLink>
+          </li>
+        )}
+        {isLoggedIn && (
+          <li>
+            <NavLink to="/register-property">
+              <div className="navItem">
+                <BsFillHouseAddFill className="navIcon" />
+                Add 
+              </div>
+            </NavLink>
+          </li>
+        )}
+        {/* <li>
+          <button onClick={() => navigate(-1)}>Go back</button>
+        </li> */}
       </ul>
-    </div>
+    </nav>
   );
 }

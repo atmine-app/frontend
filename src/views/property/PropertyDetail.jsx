@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { useParams, Link } from "react-router-dom";
 import Map from "../../components/Map/Map";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
@@ -9,6 +9,11 @@ import Calendar from "../../components/Calendar/Calendar";
 import GoogleMapsProvider from "../../components/GoogleMapsProvider/GoogleMapsProvider";
 import StarForm from "../../components/Rating/StarForm";
 import { useAuth } from "../../hooks/useAuth";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
+import './PropertyDetail.css'
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -175,18 +180,28 @@ export default function PropertyDetail() {
 
   return (
     <div>
-      <div className="property__card-detail">
-        <div className="property__card-images">
+      <div className="propertyCardDetail">
+        <div className="DetailImageSection">
+        <Swiper
+        className=" ImageContainer mySwiper"
+        spaceBetween={30}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Pagination]}
+      >
           {property.images &&
             property.images.length > 0 &&
             property.images.map((image, index) => (
-              // eslint-disable-next-line jsx-a11y/img-redundant-alt
-              <img
-                key={index}
-                src={image}
-                alt={`${property.title} - Image ${index + 1}`}
-              />
+              <SwiperSlide key={index}
+              className="imageSwiper">
+        <img
+          src={image}
+          alt={`${property.title} - ${index + 1}`}
+        />
+      </SwiperSlide>
             ))}
+             </Swiper>
         </div>
         <div className="property__card-content">
           <h2>{property.title}</h2>
