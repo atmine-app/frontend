@@ -30,9 +30,12 @@ export default function CalendarComp({ propertyId }) {
   const fetchBookings = async () => {
     try {
       const bookings = await bookingService.getAllBookings();
+      console.log('propertyId',propertyId)
+      console.log('bookings',bookings)
       const propertyBookings = bookings.filter(
-        (booking) => booking.property === propertyId
+        (booking) => booking.property && booking.property._id === propertyId
       );
+      console.log('propertyBookings',propertyBookings)
       let bookedDatesArray = [];
       propertyBookings.forEach((booking) => {
         let currentDate = parseISO(booking.startDate);

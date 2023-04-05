@@ -33,7 +33,6 @@ export default function NewBooking() {
   const getProperty = async () => {
     try {
       const response = await propertyService.getProperty(propertyId);
-      console.log(response);
       setProperty(response);
     } catch (error) {
       console.log(error);

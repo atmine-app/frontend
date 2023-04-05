@@ -131,7 +131,6 @@ export default function Properties() {
     }
 
     setFilteredProperties(filtered);
-    console.log(filtered);
   }, [searchValue, properties, filters,selectedCategory]);
 
   return (

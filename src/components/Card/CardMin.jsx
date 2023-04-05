@@ -11,7 +11,6 @@ import {HiStar} from "react-icons/hi";
 export default function Card({property}) {
 
   useEffect(() => {
-    console.log(property)
   }, [property])
   return (
     <Link className="property__link" key={property._id} to={`/properties/${property._id}`}>

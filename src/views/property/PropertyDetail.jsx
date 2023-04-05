@@ -29,7 +29,6 @@ export default function PropertyDetail() {
         propertyId,
         user.id
       );
-      console.log("response votes", response);
       setUserVote(response);
     } catch (error) {
       console.log(error);
@@ -38,7 +37,6 @@ export default function PropertyDetail() {
 
   useEffect(() => {
     getUserVote();
-    console.log(userVote);
     // eslint-disable-next-line
   }, [propertyId]);
 
@@ -73,7 +71,6 @@ export default function PropertyDetail() {
   const getRating = async () => {
     try {
       const response = await propertyService.getPropertyVotes(propertyId);
-      console.log('response', response)
       const totalRatings = response.length;
       const initialCategorySums = {
         location: 0,
@@ -94,7 +91,6 @@ export default function PropertyDetail() {
         return acc;
       }, initialCategorySums);
 
-      console.log("ratingSums", ratingSums);
       const formatRating = (value) => {
         if (isNaN(value)) {
           return "N/A";
@@ -114,7 +110,6 @@ export default function PropertyDetail() {
       };
 
       setRating(averageRatings);
-      console.log("averageRatings", averageRatings);
     } catch (error) {
       console.log(error);
     }
