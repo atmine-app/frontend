@@ -76,7 +76,7 @@ export default function Multiupload({onImageDataChange}) {
           {({getRootProps, getInputProps}) => (
             <section>
               <div {...getRootProps({className: "dropzone"})}>
-                <span>Folder Icon</span>
+                <span>📁</span>
                 <p>Drag and drop images</p>
               </div>
             </section>
