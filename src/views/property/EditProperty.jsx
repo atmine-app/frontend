@@ -58,7 +58,7 @@ export default function EditProperty() {
     <div>
     <BackNavigationFloat />
       <h2>Edit Property</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="genericForm">
         <label>Title:</label>
         <input
           type="text"

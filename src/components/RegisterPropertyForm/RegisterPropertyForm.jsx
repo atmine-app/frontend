@@ -57,7 +57,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="registerPropertyFormContainer">
+      <form onSubmit={handleSubmit} className="genericForm">
         <div className="formColumn">
           <label>Title:</label>
           <input
