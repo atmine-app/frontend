@@ -9,8 +9,10 @@ import {
   FaCamera,
   FaPlusSquare,
 } from "react-icons/fa";
-import { BsSliders } from "react-icons/bs";
+import { BiSliderAlt } from "react-icons/bi";
 import "./Search.css";
+import { AiOutlineSearch } from "react-icons/ai";
+import logo from "../../assets/atmine_small.png";
 
 const SearchBar = (props) => {
   const { handleSearchValue, handleCategorySelect, handleFilterClick } = props;
@@ -39,19 +41,36 @@ const SearchBar = (props) => {
 
   return (
     <div>
-      <div>
-        <input
-          type="text"
-          name="search"
-          onChange={handleChange}
-          placeholder="What are you looking for?"
-        />
-        <button onClick={handleFilterClick}>
-          <i className="fas fa-filter">
-            <BsSliders />
-          </i>
-        </button>
+      <div className="header">
+        <div className="logo-search-container">
+          <img
+            src={logo}
+            alt="logo"
+            style={{ width: "45px", height: "45px" }}
+            className="navbar-logo"
+          />
+          <div className="search-bar">
+            <div className="search-icon-div">
+              <AiOutlineSearch className="search-icon" />
+            </div>
+            <input
+              type="text"
+              name="search"
+              onChange={handleChange}
+              placeholder="What are you looking for?"
+            />
+            <div className="search-icon-button">
+            <button onClick={handleFilterClick}>
+              
+                <BiSliderAlt />
+              
+            </button>
+            </div>
+            
+          </div>
+        </div>
       </div>
+
       <div className="searchCategoryContainer">
         {Object.keys(categoryIcons).map((category) => (
           <div key={category} onClick={() => handleIconClick(category)}>
@@ -64,7 +83,6 @@ const SearchBar = (props) => {
       </div>
     </div>
   );
-  
 };
 
 export default SearchBar;
