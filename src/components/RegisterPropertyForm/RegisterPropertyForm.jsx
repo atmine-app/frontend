@@ -5,8 +5,7 @@ import Multiupload from "../Multiupload/Multiupload";
 import "./RegisterPropertyForm.css";
 import openAIService from "../../services/openaiService";
 
-
-const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
+const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   const [images, setImages] = useState({ array: [] });
   const initialState = {
     title: "",
@@ -55,19 +54,42 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
       console.log(error);
     }
   };
-  
+
   return (
     <div>
-      <form onSubmit={handleSubmit} className='registerPropertyFormContainer'>
-        <label>Title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
+      <form onSubmit={handleSubmit} className="registerPropertyFormContainer">
+        <div className="formColumn">
+          <label>Title:</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="formColumn">
+          <label>Category:</label>
+          <select
+            id="category"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select a category</option>
+            <option value="parking">Parking</option>
+            <option value="storage">Storage</option>
+            <option value="garden">Garden</option>
+            <option value="garage">Garage</option>
+            <option value="basement">Basement</option>
+            <option value="attic">Attic</option>
+            <option value="photostudio">Photostudio</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
 
         <label>Description:</label>
         <textarea
@@ -78,44 +100,29 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
           required
         />
 
-        <label>Category:</label>
-        <select
-          id="category"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select a category</option>
-          <option value="parking">Parking</option>
-          <option value="storage">Storage</option>
-          <option value="garden">Garden</option>
-          <option value="garage">Garage</option>
-          <option value="basement">Basement</option>
-          <option value="attic">Attic</option>
-          <option value="photostudio">Photostudio</option>
-          <option value="other">Other</option>
-        </select>
+        <div className="formColumn">
+          <label>Price:</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <label>Price:</label>
-        <input
-          type="number"
-          id="price"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
-
-        <label>Size:</label>
-        <input
-          type="number"
-          id="size"
-          name="size"
-          value={formData.size}
-          onChange={handleChange}
-          required
-        />
+        <div className="formColumn">
+          <label>Size:</label>
+          <input
+            type="number"
+            id="size"
+            name="size"
+            value={formData.size}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
         <label>Images:</label>
         <Multiupload onImageDataChange={handleFormImageChange} />
@@ -129,26 +136,28 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
           onChange={handleChange}
           required
         />
-
-        <label>City:</label>
-        <input
-          type="text"
-          id="city"
-          name="city"
-          value={formData.city}
-          onChange={handleChange}
-          required
-        />
-
-        <label>Country:</label>
-        <input
-          type="text"
-          id="country"
-          name="country"
-          value={formData.country}
-          onChange={handleChange}
-          required
-        />
+        <div className="formColumn">
+          <label>City:</label>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="formColumn">
+          <label>Country:</label>
+          <input
+            type="text"
+            id="country"
+            name="country"
+            value={formData.country}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <label>Zip Code:</label>
         <input
           type="text"
@@ -158,14 +167,11 @@ const RegisterPropertyForm = ({onFormDataChange, coordinates}) => {
           onChange={handleChange}
           required
         />
-
+        
         <button type="submit">Register Property</button>
       </form>
-
-       
     </div>
   );
 };
 
-  
 export default RegisterPropertyForm;

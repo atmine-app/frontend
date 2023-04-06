@@ -7,6 +7,7 @@ import { BsFillHouseAddFill } from "react-icons/bs";
 import { Link} from "react-router-dom";
 import { HiUser } from "react-icons/hi";
 import './MyProfile.css'
+import BackNavigation from '../../components/BackNavigation/BackNavigation';
 
 export default function MyProfile() {
   const { isLoggedIn, logOutUser } = useContext(AuthContext);
@@ -36,7 +37,10 @@ export default function MyProfile() {
   };
 
   return (
-    <div className="profileContainer">
+    <div>
+      <BackNavigation />
+      <div className="contentWrapper">
+      <div className="profileContainer">
       <div className="profileHeader">
         <HiUser className="profileIcon" />
         <h1 className="profileTitle">Profile</h1>
@@ -106,5 +110,8 @@ export default function MyProfile() {
         </div>
       )}
     </div>
+    </div>
+      </div>
+    
   );
 }

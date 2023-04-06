@@ -1,6 +1,7 @@
-/* form {
+form {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: flex-start;
 }
 
@@ -8,6 +9,7 @@ label {
   font-size: 1.2rem;
   font-weight: bold;
   margin-top: 1rem;
+  width: 100%;
 }
 
 input[type="text"],
@@ -47,4 +49,9 @@ button[type="submit"] {
 button[type="submit"]:hover,
 button[type="submit"]:focus {
   background-color: #005ea2;
-} */
+}
+
+.formColumn {
+  width: calc(50% - 1rem);
+  margin-bottom: 1rem;
+}

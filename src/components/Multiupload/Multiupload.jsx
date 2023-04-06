@@ -67,7 +67,6 @@ export default function Multiupload({onImageDataChange}) {
   return (
     <div>
       <Container>
-        <h1 className="text-center">Upload Your Image</h1>
         <Dropzone 
           className="dropzone"
           onDrop={handleDrop}
