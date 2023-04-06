@@ -45,9 +45,9 @@ const Map = ({ formData, onLocationChange = () => {} }) => {
   return center ? (
     // if center state is not null, return Google Map component with marker at selectedLocation
     <GoogleMap
-      mapContainerStyle={{ height: "200px", width: "100%" }}
+      mapContainerStyle={{ height: "400px", width: "100%" }}
       center={center}
-      zoom={13}
+      zoom={14}
       options={{
         disableDefaultUI: true,
         streetViewControl: false,

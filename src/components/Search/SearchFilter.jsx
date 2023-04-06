@@ -68,7 +68,7 @@ const SearchFilter = ({
   if (!isOpen) return null;
 
   return (
-    <div className="search-filter">
+    <div className="search-filter expand">
       <div>
         <h3>Price range</h3>
         <input

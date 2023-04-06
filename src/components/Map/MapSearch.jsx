@@ -79,7 +79,7 @@ const MapSearch = ({ properties }) => {
   }, [properties]);
 
   return (
-      <div className="map-search-container">
+      <div className="map-search-container expand">
         <GoogleMap
           mapContainerStyle={{ height: "210px", width: "100%" }}
           center={center}

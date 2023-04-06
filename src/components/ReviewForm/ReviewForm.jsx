@@ -14,7 +14,7 @@ export default function ReviewForm({ initialReviewText, handleReviewSubmit }) {
   };
 
   return (
-    <div>
+    <div className="section">
       <form onSubmit={handleFormSubmit}>
         <label htmlFor="comment">Review</label>
         <input

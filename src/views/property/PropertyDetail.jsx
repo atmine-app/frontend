@@ -39,9 +39,11 @@ export default function PropertyDetail() {
   };
 
   useEffect(() => {
-    getUserVote();
+    if (user) {
+      getUserVote();
+    }
     // eslint-disable-next-line
-  }, [propertyId,user]);
+  }, [propertyId, user]);
 
   const getProperty = async () => {
     try {
@@ -60,26 +62,32 @@ export default function PropertyDetail() {
   const getReviews = async () => {
     try {
       const response = await reviewService.getReviews(propertyId);
-      const userReview = response.find((review) => review.user._id === user._id);
+      const userReview = response.find(
+        (review) => review.user._id === user._id
+      );
       setUserReview(userReview);
       setReviews(response);
-      console.log('all reviews',response)
+      console.log("all reviews", response);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getReviews();
-    
-    // eslint-disable-next-line
-  }, [propertyId,user]);
+    if (user) {
+      getReviews();
+    }
+    //eslint-disable-next-line
+  }, [propertyId, user]);
+
   const handleReviewSubmit = async (reviewText) => {
     try {
       if (userReview) {
-        await reviewService.updateReview(userReview._id, { review: reviewText });
+        await reviewService.updateReview(userReview._id, {
+          review: reviewText,
+        });
       } else {
-        await reviewService.createReview(propertyId, reviewText );
+        await reviewService.createReview(propertyId, reviewText);
       }
       getReviews();
     } catch (error) {
@@ -139,7 +147,6 @@ export default function PropertyDetail() {
     // eslint-disable-next-line
   }, [propertyId]);
 
-  
   const handleDelete = async (reviewId) => {
     try {
       await reviewService.deleteReview(reviewId);
@@ -193,8 +200,8 @@ export default function PropertyDetail() {
   };
 
   return (
-    <div>
-    <BackNavigationFloat />
+    <div className="page" >
+      <BackNavigationFloat />
       <div className="propertyCardDetail">
         <div className="DetailImageSection">
           <Swiper
@@ -257,20 +264,20 @@ export default function PropertyDetail() {
         <Map formData={property} />
       </GoogleMapsProvider>
       <br />
-      <ReviewForm
-  propertyId={propertyId}
-  initialReviewText={userReview && userReview.review}
-  handleReviewSubmit={handleReviewSubmit}
-/>
+     
       <Reviews
         reviews={reviews.filter(
           (review) => !user || review.user._id !== user.id
         )}
         handleDelete={handleDelete}
         handleUpdate={handleUpdate}
-        
       />
-      <Calendar propertyId={propertyId} />
+      <Calendar propertyId={propertyId} className="section" />
+      <ReviewForm
+        propertyId={propertyId}
+        initialReviewText={userReview && userReview.review}
+        handleReviewSubmit={handleReviewSubmit}
+      />
       <StarForm
         propertyId={propertyId}
         onSubmit={handleRatingSubmit}
