@@ -1,0 +1,16 @@
+.calendarWrap{
+    margin-top:20px;
+    border-top: var(--border-grey);
+}
+
+.calendarWrap .buttonWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+
+  .rdrYearPicker
+  {
+    width: 100%;
+  }

@@ -24,7 +24,7 @@ export default function ReviewForm({ initialReviewText, handleReviewSubmit }) {
           value={review}
           onChange={handleReviewChange}
         />
-        <button type="submit">Submit</button>
+        <button className="cta-button" type="submit">Submit</button>
       </form>
     </div>
   );

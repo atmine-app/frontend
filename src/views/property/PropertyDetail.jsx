@@ -243,14 +243,17 @@ export default function PropertyDetail() {
         )}
         <div className="card-buttons">
           <>
-            <button type="submit">
+            
               <Link
                 to={`/properties/${property._id}/edit`}
                 className="nav-link"
               >
+                <button type="submit" className="cta-button">
                 Edit
+                </button>
               </Link>
-            </button>
+             
+            
             <button
               type="submit"
               onClick={() => handlePropertyDelete(propertyId)}

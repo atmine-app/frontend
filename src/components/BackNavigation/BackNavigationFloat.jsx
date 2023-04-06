@@ -23,9 +23,9 @@ const BackNavigationFloat = () => {
 
   return (
     <div className={`back-navigation-float ${showBackButton ? "show" : ""}`}>
-      <button onClick={() => window.history.back()}>
+      <div id="back-navigation-btn"onClick={() => window.history.back()}>
         <FiArrowLeft />
-      </button>
+      </div>
     </div>
   );
 };

@@ -16,14 +16,15 @@ export default function CalendarComp({ propertyId }) {
       key: "selection",
     },
   ]);
-  const [open, setOpen] = useState(false);
+
   const [bookedDates, setBookedDates] = useState([]);
   const refOne = useRef(null);
   const [rangeString, setRangeString] = useState("");
+  const [calendarVisible, setCalendarVisible] = useState(false);
 
   const hideOnOutsideClick = (event) => {
     if (refOne.current && !refOne.current.contains(event.target)) {
-      setOpen(false);
+      setCalendarVisible(false);
     }
   };
 
@@ -56,19 +57,25 @@ export default function CalendarComp({ propertyId }) {
   }, [propertyId]);
 
   return (
-    <div className="calendarWrap">
-      <input
-        value={`${format(range[0].startDate, "dd/MM/yyyy")} - ${format(
-          range[0].endDate,
-          "dd/MM/yyyy"
-        )} `}
-        readOnly
-        className="inputBox"
-        onClick={() => setOpen((open) => !open)}
-      />
-      <div ref={refOne}>
-        {open && (
-          <DateRange
+    <div className="calendarWrap section">
+      <button 
+      className="cta-button" 
+      onClick={() => setCalendarVisible(!calendarVisible)}>
+        Check availability
+      </button>
+      {calendarVisible && (
+        <>
+          {/* <input
+            value={`${format(range[0].startDate, "dd/MM/yyyy")} - ${format(
+              range[0].endDate,
+              "dd/MM/yyyy"
+            )} `}
+            readOnly
+            className="inputBox"
+          /> */}
+          <div ref={refOne}>
+            {calendarVisible && (
+              <DateRange
             direction="horizontal"
             editableDateInputs={true}
             onChange={(item) => {
@@ -82,19 +89,22 @@ export default function CalendarComp({ propertyId }) {
             moveRangeOnFirstSelection={false}
             ranges={range}
             months={1}
-            className="calendarEle©ment"
+            className="calendarElement expand"
             disabledDates={bookedDates}
+            rangeColors={["#605cb8"]}
           />
         )}
-      </div>
-      <button>
-        <Link
-          to={`/properties/${propertyId}/${rangeString}`}
-          className="nav-link"
-        >
-          Book
-        </Link>
-      </button>
+       </div>
+          <button className="cta-button">
+            <Link
+              to={`/properties/${propertyId}/${rangeString}`}
+              className="nav-link"
+            >
+              Book
+            </Link>
+          </button>
+        </>
+      )}
     </div>
   );
 }

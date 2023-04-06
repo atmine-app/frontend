@@ -9,7 +9,7 @@ import { formatTimestamp } from "../../utils/index.js";
 
 export default function Reviews({ reviews }) {
   return (
-    <div className="section">
+    <div>
       <Swiper
         className="reviews-swiper mySwiper"
         spaceBetween={20}

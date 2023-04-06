@@ -48,7 +48,7 @@ export default function MyProfile() {
         <div className="profileBody">
           <div className="profileSection">
             <h2 className="profileSectionTitle">Personal Information</h2>
-            <div className="avatarSection">
+            <div className="avatarSection expand">
               {avatarImage && (
                 <img
                   src={avatarImage}

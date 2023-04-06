@@ -7,7 +7,7 @@
   transition: background-color 0.5s ease;
 }
 
-.back-navigation-float button {
+.back-navigation-float #back-navigation-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 
-.back-navigation-float button:hover {
+.back-navigation-float #back-navigation-btn:hover {
   background-color: #f1f1f1;
 }
 
@@ -74,7 +74,7 @@
     transition: background-color 0.5s ease;
   }
 
-  .back-navigation-float button {
+  .back-navigation-float #back-navigation-btn  {
     margin-right: 20px;
   }
 
@@ -88,7 +88,7 @@
     border: #f1f1f1 1px solid;
   }
 
-  .show button {
+  .show #back-navigation-btn {
     background-color: transparent;
     box-shadow: none;
   }
