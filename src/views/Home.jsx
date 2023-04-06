@@ -135,6 +135,7 @@ export default function Properties() {
 
   return (
     <div>
+      <div className="sticky__searchBar">
       <SearchBar
         className="searchBarContainer"
         handleSearchValue={handleSearch}
@@ -151,6 +152,8 @@ export default function Properties() {
         filters={filters}
         setFilters={setFilters}
       />
+      </div>
+      
 
       {(searchValue || mapVisible) &&
         filteredProperties.length > 0 &&

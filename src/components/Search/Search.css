@@ -1,4 +1,11 @@
 /* Search */
+.sticky__searchBar {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 999;
+  padding: 5px;
+}
 
 .header {
   margin-top: 1rem;
@@ -84,6 +91,7 @@
     white-space: nowrap;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;  /* Firefox */
+    margin-bottom: 5px;
   }
   
   .searchCategoryContainer::-webkit-scrollbar { /* Chrome, Safari, and Edge */
