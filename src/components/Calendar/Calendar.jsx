@@ -30,8 +30,6 @@ export default function CalendarComp({ propertyId }) {
   const fetchBookings = async () => {
     try {
       const bookings = await bookingService.getAllBookings();
-      console.log('propertyId',propertyId)
-      console.log('bookings',bookings)
       const propertyBookings = bookings.filter(
         (booking) => booking.property && booking.property._id === propertyId
       );
