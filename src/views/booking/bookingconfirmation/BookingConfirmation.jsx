@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import bookingService from '../../../services/bookingsServices';
 import './BookingConfirmation.css';
+import BackNavigationFloat from '../../../components/BackNavigation/BackNavigationFloat';
 
 export default function BookingConfirmation() {
   const { bookingId } = useParams();
@@ -21,6 +22,8 @@ export default function BookingConfirmation() {
   }, [bookingId]);
 
   return (
+    <div>
+      <BackNavigationFloat />
     <div className="booking-confirmation">
       <h2>Booking Confirmation</h2>
       {booking ? (
@@ -53,6 +56,7 @@ export default function BookingConfirmation() {
       ) : (
         <p>Loading...</p>
       )}
+    </div>
     </div>
   );
 }

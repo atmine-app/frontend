@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
 import bookingService from '../../../services/bookingsServices';
 import './BookingList.css';
-import BackNavigation from '../../../components/BackNavigation/BackNavigation';
+import BackNavigationFloat from '../../../components/BackNavigation/BackNavigationFloat';
 
 export default function BookingList() {
   const { user } = useAuth();
@@ -26,8 +26,7 @@ export default function BookingList() {
 
   return (
     <div>
-      <BackNavigation />
-      <div className="contentWrapper">
+      <BackNavigationFloat />
     <div className="booking-list">
       <h2>My Bookings</h2>
       {bookings.length > 0 ? (
@@ -55,8 +54,6 @@ export default function BookingList() {
         <p>No bookings found.</p>
       )}
     </div>
-    </div>
-    </div>
-    
+    </div>    
   );
 }
