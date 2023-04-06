@@ -74,6 +74,19 @@ export default function PropertyDetail() {
     
     // eslint-disable-next-line
   }, [propertyId,user]);
+  const handleReviewSubmit = async (reviewText) => {
+    try {
+      if (userReview) {
+        await reviewService.updateReview(userReview._id, { review: reviewText });
+      } else {
+        console.log('reviewText',reviewText)
+        await reviewService.createReview(propertyId, reviewText );
+      }
+      getReviews();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getRating = async () => {
     try {
@@ -127,19 +140,7 @@ export default function PropertyDetail() {
     // eslint-disable-next-line
   }, [propertyId]);
 
-  const handleReviewSubmit = async (reviewText) => {
-    try {
-      if (userReview) {
-        await reviewService.updateReview(userReview._id, { review: reviewText });
-      } else {
-        await reviewService.createReview(propertyId, { review: reviewText });
-      }
-      getReviews();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  
   const handleDelete = async (reviewId) => {
     try {
       await reviewService.deleteReview(reviewId);
