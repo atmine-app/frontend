@@ -5,6 +5,7 @@ import bookingService from "../../../services/bookingsServices";
 import { useAuth } from "../../../hooks/useAuth";
 import { differenceInDays, parse } from "date-fns";
 import Payment from "../../../components/Payment/Payment";
+import BackNavigationFloat from "../../../components/BackNavigation/BackNavigationFloat";
 
 export default function NewBooking() {
   const [property, setProperty] = useState({});
@@ -64,6 +65,8 @@ export default function NewBooking() {
   };
 
   return (
+    <div>
+      <BackNavigationFloat />
     <div className="property__card-detail">
       {property.images && property.images.length > 0 && (
         <img src={property.images[0]} alt={property.title} />
@@ -87,6 +90,7 @@ export default function NewBooking() {
         startDate={startDate}
         endDate={endDate}
       />
+    </div>
     </div>
   );
 }

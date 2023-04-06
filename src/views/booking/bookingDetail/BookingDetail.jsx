@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import "./BookingDetail.css";
-import BackNavigation from '../../../components/BackNavigation/BackNavigation';
+import BackNavigationFloat from "../../../components/BackNavigation/BackNavigationFloat";
 
 export default function BookingDetail() {
   const { bookingId } = useParams();
@@ -32,10 +32,8 @@ export default function BookingDetail() {
 
   return (
     <div>
-      <BackNavigation />
-      <div className="contentWrapper">
+      <BackNavigationFloat />
     <div>
-      <h2>Booking Details</h2>
       <div className="booking-list__item-property">
         <Swiper
           className=" ImageContainer mySwiper"
@@ -80,7 +78,6 @@ export default function BookingDetail() {
           </div>
         </div>
       </div>
-    </div>
     </div>
     </div>
   );

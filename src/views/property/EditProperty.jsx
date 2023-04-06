@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import propertyService from "../../services/propertyService";
-import BackNavigation from "../../components/BackNavigation/BackNavigation";
+import BackNavigationFloat from "../../components/BackNavigation/BackNavigationFloat";
 
 export default function EditProperty() {
   const { propertyId } = useParams();
@@ -56,8 +56,7 @@ export default function EditProperty() {
 
   return (
     <div>
-    <BackNavigation />
-    <div className="contentWrapper">
+    <BackNavigationFloat />
       <h2>Edit Property</h2>
       <form onSubmit={handleSubmit}>
         <label>Title:</label>
@@ -168,7 +167,6 @@ export default function EditProperty() {
 
         <button type="submit">Submit Changes</button>
       </form>
-    </div>
     </div>
   );
 }

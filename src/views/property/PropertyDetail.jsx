@@ -14,6 +14,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import "./PropertyDetail.css";
+import BackNavigationFloat from "../../components/BackNavigation/BackNavigationFloat";
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -193,6 +194,7 @@ export default function PropertyDetail() {
 
   return (
     <div>
+    <BackNavigationFloat />
       <div className="propertyCardDetail">
         <div className="DetailImageSection">
           <Swiper
