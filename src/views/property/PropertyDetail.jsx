@@ -24,11 +24,12 @@ export default function PropertyDetail() {
   const [userVote, setUserVote] = useState({});
   const [userReview, setUserReview] = useState(null);
   const navigate = useNavigate();
+
   const getUserVote = async () => {
     try {
       const response = await propertyService.getUserPropertyVote(
         propertyId,
-        user.id
+        user._id
       );
       setUserVote(response);
     } catch (error) {
@@ -58,12 +59,10 @@ export default function PropertyDetail() {
   const getReviews = async () => {
     try {
       const response = await reviewService.getReviews(propertyId);
-      console.log("response",response)
       const userReview = response.find((review) => review.user._id === user._id);
       setUserReview(userReview);
       setReviews(response);
-      console.log("userReview",userReview);
-      console.log("user id",user._id)
+      console.log('all reviews',response)
     } catch (error) {
       console.log(error);
     }
@@ -79,7 +78,6 @@ export default function PropertyDetail() {
       if (userReview) {
         await reviewService.updateReview(userReview._id, { review: reviewText });
       } else {
-        console.log('reviewText',reviewText)
         await reviewService.createReview(propertyId, reviewText );
       }
       getReviews();
@@ -268,6 +266,7 @@ export default function PropertyDetail() {
         )}
         handleDelete={handleDelete}
         handleUpdate={handleUpdate}
+        
       />
       <Calendar propertyId={propertyId} />
       <StarForm

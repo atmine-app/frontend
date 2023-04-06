@@ -5,6 +5,7 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import "./Reviews.css";
 import { RxAvatar } from "react-icons/rx";
+import { formatTimestamp } from "../../utils/index.js";
 
 export default function Reviews({ reviews }) {
   return (
@@ -22,15 +23,17 @@ export default function Reviews({ reviews }) {
         {reviews.map((review, i) => {
           return (
             <SwiperSlide key={i} className="review-swiper">
-              <div className="">
-                <div className="review-slide-user">
-                  <RxAvatar />
-                  <h4>{review.user.username}</h4>
+              <div className="review-slide-infocontainer">
+                <div className="review-slide-header">
+                  <div className="review-slide-avatar">
+                    <RxAvatar className="review-slide-avatar"/>
+                  </div>
+                  <div className="review-slide-user-container">
+                    <h4>{review.user.username}</h4>
+                    <p>{formatTimestamp(review.createdAt)}</p>
+                  </div>
                 </div>
-                <div className="review-slide-rating">
-                  <p>{review.rating}</p>
-                </div>
-                <p>{review.review}</p>
+                <p>"{review.review}"</p>
               </div>
             </SwiperSlide>
           );

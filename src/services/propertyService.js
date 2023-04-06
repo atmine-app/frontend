@@ -69,7 +69,7 @@ class PropertyService {
       .get(`/${propertyId}/votes/${userId}`)
       .then(({ data }) => data)
       .catch((err) => console.error(err));
-  }
+}
 }
 
 const propertyService = new PropertyService();
