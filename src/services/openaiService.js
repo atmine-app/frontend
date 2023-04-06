@@ -5,11 +5,11 @@ const openAIService = {
   async summarize(description) {
     const prompt = `You are given this text that is the description of a property, i want you to summarize it in less than 20 words: ${description}
 `;
-    const apiKey = "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"; // Do NOT expose your API key on the client-side
+    const apiKey = process.env.REACT_APP_OPENAI_API_KEY ; // Do NOT expose your API key on the client-side
 
     try {
       const response = await axios.post(
-        "https://api.openai.com/v1/engines/text-davinci-002/completions",
+        "https://api.openai.com/v1/engines/text-davinci-003/completions",
         {
           prompt: prompt,
           max_tokens: 50,

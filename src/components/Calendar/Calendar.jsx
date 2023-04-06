@@ -34,7 +34,7 @@ export default function CalendarComp({ propertyId }) {
       const propertyBookings = bookings.filter(
         (booking) => booking.property && booking.property._id === propertyId
       );
-      console.log('propertyBookings',propertyBookings)
+      console.log("propertyBookings", propertyBookings);
       let bookedDatesArray = [];
       propertyBookings.forEach((booking) => {
         let currentDate = parseISO(booking.startDate);
@@ -58,9 +58,10 @@ export default function CalendarComp({ propertyId }) {
 
   return (
     <div className="calendarWrap section">
-      <button 
-      className="cta-button" 
-      onClick={() => setCalendarVisible(!calendarVisible)}>
+      <button
+        className="cta-button"
+        onClick={() => setCalendarVisible(!calendarVisible)}
+      >
         Check availability
       </button>
       {calendarVisible && (
@@ -76,33 +77,31 @@ export default function CalendarComp({ propertyId }) {
           <div ref={refOne}>
             {calendarVisible && (
               <DateRange
-            direction="horizontal"
-            editableDateInputs={true}
-            onChange={(item) => {
-              setRange([item.selection]);
-              const rangeString = `${format(
-                item.selection.startDate,
-                "yyyy-MM-dd"
-              )}&${format(item.selection.endDate, "yyyy-MM-dd")}`;
-              setRangeString(rangeString);
-            }}
-            moveRangeOnFirstSelection={false}
-            ranges={range}
-            months={1}
-            className="calendarElement expand"
-            disabledDates={bookedDates}
-            rangeColors={["#605cb8"]}
-          />
-        )}
-       </div>
-          <button className="cta-button">
-            <Link
-              to={`/properties/${propertyId}/${rangeString}`}
-              className="nav-link"
-            >
-              Book
-            </Link>
-          </button>
+                direction="horizontal"
+                editableDateInputs={true}
+                onChange={(item) => {
+                  setRange([item.selection]);
+                  const rangeString = `${format(
+                    item.selection.startDate,
+                    "yyyy-MM-dd"
+                  )}&${format(item.selection.endDate, "yyyy-MM-dd")}`;
+                  setRangeString(rangeString);
+                }}
+                moveRangeOnFirstSelection={false}
+                ranges={range}
+                months={1}
+                className="calendarElement expand"
+                disabledDates={bookedDates}
+                rangeColors={["#605cb8"]}
+              />
+            )}
+          </div>
+          <Link
+            to={`/properties/${propertyId}/${rangeString}`}
+            className="nav-link"
+          >
+            <button className="cta-button">Book</button>
+          </Link>
         </>
       )}
     </div>

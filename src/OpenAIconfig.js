@@ -20,7 +20,7 @@ export default async function summarizeText(text, res, req) {
 
   try {
     const response = await openai.Completion.create({
-      engine: "text-curie-002",
+      engine: "text-davinci-003",
       prompt: generatePromptSummary(description),
       max_tokens: 100,
       stop: null,
