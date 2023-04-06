@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import Dropzone from 'react-dropzone'
 import { Container } from 'reactstrap'
+import './SingleImageUpload.css'
 
 export default function SingleImageupload({ onImageDataChange }) {
   const [image, setImage] = useState(null)
@@ -59,7 +60,6 @@ export default function SingleImageupload({ onImageDataChange }) {
   return (
     <div>
       <Container>
-        <h1 className="text-center">Upload Your Image</h1>
         <Dropzone className="dropzone" onDrop={handleDrop}>
           {({ getRootProps, getInputProps }) => (
             <section>

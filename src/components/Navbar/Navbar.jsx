@@ -3,7 +3,6 @@ import { NavLink} from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./Navbar.css";
 import { AiFillHome } from "react-icons/ai";
-import { BsFillHouseAddFill } from "react-icons/bs";
 import { HiUser } from "react-icons/hi";
 import { MdFavorite } from "react-icons/md";
 
@@ -17,7 +16,7 @@ export default function Navbar() {
           <NavLink to="/">
             <div className="navItem">
               <AiFillHome className="navIcon" />
-              Home
+              Explore
             </div>
           </NavLink>
         </li>
@@ -43,10 +42,10 @@ export default function Navbar() {
         )}
         {isLoggedIn && (
           <li>
-            <NavLink to="/profile">
+            <NavLink to="/wishlists">
               <div className="navItem">
-                <HiUser className="navIcon" />
-                Profile
+                <MdFavorite className="navIcon" />
+                Wishlists
               </div>
             </NavLink>
           </li>
@@ -56,24 +55,21 @@ export default function Navbar() {
             <NavLink to="/bookings">
               <div className="navItem">
                 <MdFavorite className="navIcon" />
-                Saved
+                Bookings
               </div>
             </NavLink>
           </li>
         )}
         {isLoggedIn && (
           <li>
-            <NavLink to="/register-property">
+            <NavLink to="/profile">
               <div className="navItem">
-                <BsFillHouseAddFill className="navIcon" />
-                Add 
+                <HiUser className="navIcon" />
+                Profile
               </div>
             </NavLink>
           </li>
         )}
-        {/* <li>
-          <button onClick={() => navigate(-1)}>Go back</button>
-        </li> */}
       </ul>
     </nav>
   );

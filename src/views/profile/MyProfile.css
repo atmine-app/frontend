@@ -1,0 +1,100 @@
+.profileContainer {
+  padding: 24px;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.profileIcon {
+  font-size: 36px;
+  margin-right: 16px;
+}
+
+.profileTitle {
+  font-size: 28px;
+}
+
+.profileBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.profileSectionTitle {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.profileAvatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.avatarActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileButton {
+  background-color: #008489;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.profileButton:hover {
+  background-color: #005f5f;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.profileInfoItem {
+  margin-bottom: 8px;
+}
+
+.logoutSection {
+  margin-top: 16px;
+}
+
+.profileLink {
+  text-decoration: none;
+}
+
+.profileLinkText {
+  color: #008489;
+  text-decoration: underline;
+  cursor: pointer;
+}
