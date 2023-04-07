@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ReviewForm.css";
 
 export default function ReviewForm({ initialReviewText, handleReviewSubmit }) {
   const [review, setReview] = useState(initialReviewText || "");
@@ -15,9 +16,9 @@ export default function ReviewForm({ initialReviewText, handleReviewSubmit }) {
 
   return (
     <div className="section">
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor="comment">Review</label>
-        <input
+      <form onSubmit={handleFormSubmit} className="review-form">
+        <label htmlFor="comment">Tell us your experience</label>
+        <textarea
           type="text"
           id="content"
           name="comment"

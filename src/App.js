@@ -19,6 +19,8 @@ import BookingList from './views/booking/bookingList/BookingList';
 import BookingDetail from './views/booking/bookingDetail/BookingDetail';
 import Payment from './components/Payment/Payment';
 import Multiupload from './components/Multiupload/Multiupload';
+import ChatComponent from './components/Chat/ChatComponent';
+import InboxComponent from './components/Chat/InboxComponent';
 
 function App() {
   return (
@@ -44,7 +46,9 @@ function App() {
         <Route path="/bookings/:bookingId/confirmation" element={<IsPrivate><BookingConfirmation /></IsPrivate>} />
         {/* realmente no hace falta la de confirmation => podemos ir al detail directamente */}
         <Route path="/error" element={<ErrorPage />} />
+        <Route path="/chat/:otherUserId" element={<ChatComponent />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/messages" element={<InboxComponent />} />
       </Routes>
     </div>
   );

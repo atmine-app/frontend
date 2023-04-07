@@ -7,6 +7,8 @@ import MapSearch from "../components/Map/MapSearch";
 import GoogleMapsProvider from "../components/GoogleMapsProvider/GoogleMapsProvider";
 import SearchFilter from "../components/Search/SearchFilter";
 
+
+
 export default function Properties() {
   const [properties, setProperties] = useState([]);
   const [searchValue, setSearchValue] = useState("");

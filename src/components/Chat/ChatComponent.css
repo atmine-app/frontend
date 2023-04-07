@@ -1,0 +1,23 @@
+.chat-container{
+    height: 100vh;
+}
+
+.inbox-container>*{
+width: 100vw;
+
+}
+
+.inbox-container {
+    height: 92vh;
+    width: 100%;
+    margin: 30px 0 0 0;
+    background-color: #bf3c3c;
+    border-radius: 10px;
+    overflow: auto;
+  }
+  
+  .loading-text {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 20px;
+  }

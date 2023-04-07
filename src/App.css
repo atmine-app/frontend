@@ -24,12 +24,16 @@
   --border-grey: 1px solid rgba(162, 162, 162, 0.276);
   
 }
+button .rdrDay:active, button .rdrDay:focus{
+  background-color: transparent;
+}
 html{
   scroll-behavior: smooth;
 }
 body{
   padding-bottom: 75px;
-  color:var(--color-primary-black)
+  color:var(--color-primary-black);
+  font-family: 'Manrope', sans-serif;
 }
 
 .container{
@@ -63,12 +67,12 @@ img{
   }
 }
 
-form {
+/* form {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-}
+} */
 
 label {
   font-size: 1.2rem;
@@ -83,7 +87,6 @@ textarea,
 select {
   width: 100%;
   padding: 0.5rem;
-  margin-top: 0.5rem;
   font-size: 1rem;
   border: var(--border-grey);
   border-radius: var(--border-radius);
@@ -108,11 +111,11 @@ button {
   transition: background-color var(--transition);
 }
 
-button:hover,
+/* button:hover,
 button:focus {
   background-color: var(--color-primary-lime);
   color:var(--color-primary-black);
-}
+} */
 
 .cta-button:hover,
 .cta-button:focus {

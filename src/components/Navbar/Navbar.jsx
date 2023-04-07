@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { NavLink} from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./Navbar.css";
-import { AiFillHome } from "react-icons/ai";
+import { AiFillHome , AiOutlineMessage } from "react-icons/ai";
 import { HiUser } from "react-icons/hi";
 import { MdFavorite } from "react-icons/md";
 
@@ -60,6 +60,16 @@ export default function Navbar() {
             </NavLink>
           </li>
         )}
+        {isLoggedIn && (
+  <li>
+    <NavLink to="/messages">
+      <div className="navItem">
+        <AiOutlineMessage className="navIcon" />
+        Messages
+      </div>
+    </NavLink>
+  </li>
+)}
         {isLoggedIn && (
           <li>
             <NavLink to="/profile">

@@ -67,7 +67,6 @@ export default function PropertyDetail() {
       );
       setUserReview(userReview);
       setReviews(response);
-      console.log("all reviews", response);
     } catch (error) {
       console.log(error);
     }
@@ -200,7 +199,7 @@ export default function PropertyDetail() {
   };
 
   return (
-    <div className="page" >
+    <div className="page">
       <BackNavigationFloat />
       <div className="propertyCardDetail">
         <div className="DetailImageSection">
@@ -243,17 +242,12 @@ export default function PropertyDetail() {
         )}
         <div className="card-buttons">
           <>
-            
-              <Link
-                to={`/properties/${property._id}/edit`}
-                className="nav-link"
-              >
-                <button type="submit" className="cta-button">
+            <Link to={`/properties/${property._id}/edit`} className="nav-link">
+              <button type="submit" className="cta-button">
                 Edit
-                </button>
-              </Link>
-             
-            
+              </button>
+            </Link>
+
             <button
               type="submit"
               onClick={() => handlePropertyDelete(propertyId)}
@@ -267,7 +261,7 @@ export default function PropertyDetail() {
         <Map formData={property} />
       </GoogleMapsProvider>
       <br />
-     
+
       <Reviews
         reviews={reviews.filter(
           (review) => !user || review.user._id !== user.id
@@ -287,6 +281,9 @@ export default function PropertyDetail() {
         rating={rating}
         initialRating={userVote}
       />
+      <button onClick={() => navigate(`/chat/${property.owner._id}`)}>
+        Chat with owner
+      </button>
     </div>
   );
 }
