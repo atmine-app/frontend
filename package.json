@@ -23,6 +23,7 @@
     "react-dropzone": "^14.2.3",
     "react-hot-toast": "^2.3.0",
     "react-icons": "^4.8.0",
+    "react-payment-icons": "^1.2.6",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "reactstrap": "^9.1.8",
