@@ -14,7 +14,6 @@ export default function BookingList() {
       try {
         const allBookings = await bookingService.getAllBookings();
         const filteredBookings = allBookings.filter(booking => booking.renter === user._id);
-        console.log(filteredBookings)
         setBookings(filteredBookings);
       } catch (error) {
         console.log(error);

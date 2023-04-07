@@ -9,7 +9,6 @@ export default function ChatComponent() {
   const chatboxEl = useRef();
   const { user } = useAuth();
   const { otherUserId } = useParams();
-  // wait for TalkJS to load
   const [talkLoaded, markTalkLoaded] = useState(false);
   const [recipient, setRecipient] = useState(null);
 
@@ -87,5 +86,4 @@ export default function ChatComponent() {
       </div>
     </span>
   );
-  // <div ref={chatboxEl} className="chat-container"/>;
 }

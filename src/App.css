@@ -58,6 +58,10 @@ img{
   overflow: hidden;
   animation: expand 1.5s ease-in-out forwards;
 }
+.slide-out-top {
+	-webkit-animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
 @keyframes expand {
   0% {
     max-height: 0;
@@ -67,6 +71,18 @@ img{
   }
 }
 
+@keyframes slide-out-top {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px);
+            transform: translateY(-1000px);
+    opacity: 0;
+  }
+}
 /* form {
   display: flex;
   flex-wrap: wrap;
