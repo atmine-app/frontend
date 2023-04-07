@@ -17,7 +17,7 @@ class FavoriteService {
 
   getAllFavorites() {
     return this.api.get('/').then(({ data }) => data).catch(err => console.error(err));
-  }
+  }  
 
   addPropertyToFavorites(propertyId) {
     return this.api.post(`/${propertyId}`).then(({ data }) => data).catch(err => console.error(err));
@@ -27,9 +27,6 @@ class FavoriteService {
     return this.api.delete(`/${favoriteId}`).then(({ data }) => data).catch(err => console.error(err));
   }
 
-  getUserFavorites() {
-    return this.api.get('/').then(({ data }) => data).catch(err => console.error(err));
-  }
 
   getFavoriteId(propertyId) {
     return this.api
@@ -41,24 +38,6 @@ class FavoriteService {
       .catch((err) => console.error(err));
   }
 
-  async hasUserLikedProperty(propertyId) {
-    try {
-      const favorites = await this.getUserFavorites();
-      console.log("Favorites:", favorites); // Debug the favorites data
-  
-      return favorites.some((favorite) => {
-        console.log("Favorite:", favorite); // Debug the favorite item
-        if (!favorite.property) {
-          return false;
-        }
-        const favoritePropertyId = favorite.property._id;
-        return favoritePropertyId === propertyId;
-      });
-    } catch (error) {
-      console.error(error);
-      return false;
-    }
-  }
 }
 
 const favoriteService = new FavoriteService();

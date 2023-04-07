@@ -9,34 +9,61 @@ import { HiStar } from "react-icons/hi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import favoriteService from "../../services/favoriteService";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Card({ property }) {
   const [liked, setLiked] = useState(false);
+  const {user}  = useAuth();
+  const [favorites, setFavorites] = useState([]);
 
-  useEffect(() => {
-    const checkLikedProperty = async () => {
-      const hasUserLiked = await favoriteService.hasUserLikedProperty(
-        property._id
-      );
-      setLiked(hasUserLiked);
-      console.log("hasUserLiked", hasUserLiked)
-    };
-    checkLikedProperty();
-  }, [property]);
 
-  const handleAddFavorite = async () => {
+
+  //Gets all favorites
+  const getFavorites = async () => {
     try {
-      if (liked) {
-        const favoriteId = await favoriteService.getFavoriteId(property._id);
-        await favoriteService.deleteFavorite(favoriteId);
-      } else {
-        await favoriteService.addPropertyToFavorites(property._id);
-      }
-      setLiked(!liked);
+      const response = await favoriteService.getAllFavorites();
+      setFavorites(response);
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    getFavorites();
+    // eslint-disable-next-line
+  }, [property]);
+
+  //Checks if the property is in the favorites for the user logged in
+  useEffect(() => {
+    if (user) {
+      const hasLiked = favorites.some((favorite) => favorite.property === property._id && favorite.user === user._id);
+      setLiked(hasLiked);
+      console.log('hasLiked', hasLiked)
+    }
+  }, [favorites, property, user]);
+
+  const handleAddFavorite = async () => {
+    try {
+      if (liked) {
+        const favorite = favorites.find(
+          (favorite) => favorite.property === property._id && favorite.user=== user._id
+        );
+          console.log('favorite search', favorite)
+        if (favorite) {
+          await favoriteService.deleteFavorite(favorite._id);
+          setLiked(false);
+        }
+      } else {
+        await favoriteService.addPropertyToFavorites(property._id);
+        setLiked(true)
+      }
+      setLiked(!liked);
+      getFavorites(); // Call getFavorites() to refresh the favorites list in the state after adding or removing a favorite
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
 
   const handleCardClick = (event) => {
     if (event.target.closest(".heart-container")) {
