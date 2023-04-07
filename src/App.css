@@ -58,6 +58,7 @@ img{
   overflow: hidden;
   animation: expand 1.5s ease-in-out forwards;
 }
+
 @keyframes expand {
   0% {
     max-height: 0;
@@ -130,8 +131,32 @@ button:focus {
 }
 
 
+/* SPINNER */
 
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 
+.spinner {
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--color-primary-pruple);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 /*========MEDIA QUERYS MEDIUM =========*/
 
