@@ -73,7 +73,7 @@ export default function NewBooking() {
         {property.images && property.images.length > 0 && (
           <img src={property.images[0]} alt={property.title} />
         )}
-        <div className="property__card-content">
+        <div className="property__card-content section">
           <h2>{property.title}</h2>
           <p>Host: {property.owner && property.owner.username}</p>
           <p>Price per day: {property.price}€</p>

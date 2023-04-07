@@ -5,13 +5,16 @@
 .payment-form {
   max-width: 500px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
+  padding: 15px;
+  background-color: whitesmoke;
+  border: var(--border-grey);
+  border-radius: var(--border-radius);
 }
 
 .payment-title {
-  margin-bottom: 20px;
-  font-size: 18px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  font-size: 16px;
   font-weight: bold;
   color: var(--color-primary-pruple);
   text-align: left;
@@ -47,12 +50,13 @@
 .payment-methods {
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
-  font-size: 14px;
+  margin-top: 10px;
+  font-size: 12px;
 }
 
 .payment-methods-title {
   text-align: center;
+  font-size: 14px;
 }
 
 .payment-methods-icons {
@@ -73,4 +77,8 @@
 .payment-methods-icon img {
   max-width: 100%;
   max-height: 100%;
+}
+
+.payment-sm small {
+  font-size: 6px;
 }

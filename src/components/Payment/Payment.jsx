@@ -106,12 +106,11 @@ const CheckoutForm = ({
       </div>
 
       <div className="payment-security">
-        <span style={{ marginRight: "8px" }}>
-          <RiSecurePaymentFill />
+        <span style={{ marginRight: "6px" }}>
+        <RiSecurePaymentFill style={{ color: "#0096FF" }} />
         </span>
         <small>
-          Your payment is secure with us. <br></br>
-          <br></br>We are a verified payment solution and use the latest
+          <strong>Your payment is secure with us.</strong><br></br>We are a verified payment solution and use the latest
           encryption technology to protect your personal and payment
           information.
         </small>
