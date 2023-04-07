@@ -90,19 +90,19 @@ const CheckoutForm = ({
       </div>
 
       <div className="text-center mt-4">
-        <button
-          type="submit"
-          className="cta-button payment"
-          disabled={!stripe || loading}
-        >
-          {loading ? (
-            <div className="spinner-border text-light" role="status">
-              <span className="sr-only"></span>
-            </div>
-          ) : (
-            "Book Now"
-          )}
-        </button>
+      <button
+  type="submit"
+  className={`cta-button payment ${loading ? "loading" : ""}`}
+  disabled={!stripe || loading}
+>
+  {loading ? (
+    <div className="spinner-container">
+      <div className="spinner"></div>
+    </div>
+  ) : (
+    "Book Now"
+  )}
+</button>
       </div>
 
       <div className="payment-security">
