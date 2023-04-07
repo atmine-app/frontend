@@ -126,13 +126,14 @@ button:focus {
 .cta-button:hover,
 .cta-button:focus {
   background-color: var(--color-primary-lime);
-  color:var(--color-primary-black);
+  color:var(--color-primary-pruple);
 }
 
 .cta-button{
   border: var(--border-grey);
   background-color: var(--color-primary-green);
-  color:var(--color-primary-black);
+  color:var(--color-primary-pruple);
+  font-weight: 100;
 }
 
 /* LOADING PUFF */
