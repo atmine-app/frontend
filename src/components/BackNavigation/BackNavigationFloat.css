@@ -24,6 +24,15 @@
   background-color: #f1f1f1;
 }
 
+.back-navigation-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.65);
+  width: 120px;
+  height: 45px;
+}
+
 @media screen and (max-width: 768px) {
   .backNavigationFloat {
     width: 50px;
