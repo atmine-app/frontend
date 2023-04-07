@@ -1,65 +1,79 @@
-.swiper-pagination-clickable .swiper-pagination-bullet-active{
-  background: var(--color-primary-lime);
-  color:var(--color-primary-lime);
-}
-
-.imageSwiper{
-  background: var(--color-bg-variant);
-  text-align: center;
-  border-radius: 2rem;
-  user-select: none;
-}
-
-.container.imageContainer{
-  width: 100vw;
-  padding-bottom: 4rem;
-}
-
-.booking-confirmation {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px;
-  background-color: #f5f5f5;
-}
-
-.booking-confirmation__header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.booking-confirmation__details {
-  border: 1px solid #ccc;
-  background-color: #fff;
-  padding: 40px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  border-radius: 10px;
-}
-
-.booking-confirmation__property-details h3 {
-  font-size: 32px;
+.booking-detail__header {
+  background-color: #f1f1f1;
+  padding: 10px;
   margin-bottom: 20px;
 }
 
-.bold {
+.booking-detail__status {
+  font-size: 18px;
   font-weight: bold;
+  color: green;
+  margin-bottom: 10px;
+}
+
+.booking-detail__title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.booking-detail__paragraph {
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.booking-detail__confirmation-number {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 20px;
+  background-color: var(--color-primary-green);
+  color: var(--color-primary-black);
+  padding: 10px 10px;
+  display: inline-block;
 }
 
 .booking-confirmation__property-info {
-  margin-top: 30px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-confirmation__property-icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.booking-confirmation__property-date,
+.booking-confirmation__property-address,
+.bold {
+  margin-bottom: 10px;
+  font-size: 16px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.booking-confirmation__property-date {
+  font-weight: bold;
+}
+
+.booking-confirmation__property-address {
+  margin-top: 5px;
 }
 
 .booking-confirmation__property-info p {
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
-  font-size: 18px;
 }
 
-.booking-confirmation__property-info span {
-  display: inline-block;
-  width: 200px;
-  margin-right: 20px;
-  font-size: 16px;
+.booking-confirmation__cancel-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.booking-confirmation__property-info p:last-of-type {
-  margin-bottom: 0;
+.booking-confirmation__cancel-button button {
+  width: 100%;
 }

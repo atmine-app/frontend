@@ -10,6 +10,7 @@
 }
  :root{
   --transition: all 400ms ease;
+  --color-primary-white: #ececec;
   --color-primary-lime: #dbef98;
   --color-primary-pruple: #605cb8;
   --color-primary-green: #9df0ac;
@@ -134,6 +135,12 @@ button:focus {
   background-color: var(--color-primary-green);
   color:var(--color-primary-pruple);
   font-weight: 100;
+}
+
+.danger {
+  background-color: var(--color-primary-red) !important;
+  color:var(--color-primary-white) !important;
+  font-size: 0.8rem;
 }
 
 /* LOADING PUFF */
