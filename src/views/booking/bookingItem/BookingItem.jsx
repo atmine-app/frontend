@@ -1,13 +1,15 @@
 import React from 'react';
 import './BookingItem.css';
-import {HiOutlineChevronRight} from 'react-icons/hi';
+import { HiOutlineChevronRight } from 'react-icons/hi';
 
 const BookingItem = ({ booking }) => {
   const startDate = new Date(booking.startDate);
   const endDate = new Date(booking.endDate);
   const month = startDate.toLocaleString('default', { month: 'short' });
   const dateString = `${startDate.getDate()} - ${endDate.getDate()} ${month}`;
-  
+
+  const today = new Date();
+  const isCompleted = endDate < today;
 
   return (
     <div className="booking-item">
@@ -19,7 +21,9 @@ const BookingItem = ({ booking }) => {
         <p className="booking-item__date-price">
           <span className="bold"></span> {dateString} · {booking.totalPrice} €
         </p>
-        <p className="booking-item__status">Confirmed</p>
+        <p className={`booking-item__status ${isCompleted ? 'completed' : 'confirmed'}`}>
+  {isCompleted ? "Completed" : "Confirmed"}
+</p>
       </div>
       <div className="booking-item__arrow">
         <HiOutlineChevronRight />

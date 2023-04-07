@@ -40,11 +40,18 @@
   align-items: center; 
 }
 
-.booking-item__status {
+.booking-item__status.confirmed {
   font-size: 14px;
   font-weight: bold;
-  color: var(--color-secondary-green) !important;
-  margin-left: 12px; 
+  color: var(--color-secondary-green);
+}
+
+.booking-item__status.completed {
+  color: var(--color-primary-blue);
+}
+
+.booking-item__status.completed .add-review {
+  color: var(--color-primary-black);
 }
 
 .booking-item__price {

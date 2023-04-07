@@ -21,3 +21,16 @@
   font-size: 14px;
   color: #666;
 }
+
+.booking-list__filters {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.booking-list__filters button {
+  flex: 1;
+  margin-right: 10px;
+}
