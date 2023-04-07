@@ -26,7 +26,7 @@ export default function NewBooking() {
       setFormattedDateRange(
         `${startDate.replace(/-/g, "/")} - ${endDate.replace(/-/g, "/")}`
       );
-      console.log("days",days)
+      console.log("days", days);
     }
   }, [property.price, startDate, endDate]);
 
@@ -69,31 +69,27 @@ export default function NewBooking() {
   return (
     <div>
       <BackNavigationFloat />
-    <div className="property__card-detail">
-      {property.images && property.images.length > 0 && (
-        <img src={property.images[0]} alt={property.title} />
-      )}
-      <div className="property__card-content">
-        <h2>{property.title}</h2>
-        <p>Host: {property.owner && property.owner.username}</p>
-        <p>Price per day: {property.price}€</p>
-        <p> Days booked: {daysBooked}</p>
-        <p>Total price: {totalPrice}€</p>
-        <p>Days booked: {formattedDateRange}</p>
+      <div className="property__card-detail">
+        {property.images && property.images.length > 0 && (
+          <img src={property.images[0]} alt={property.title} />
+        )}
+        <div className="property__card-content">
+          <h2>{property.title}</h2>
+          <p>Host: {property.owner && property.owner.username}</p>
+          <p>Price per day: {property.price}€</p>
+          <p> Days booked: {daysBooked}</p>
+          <p>Total price: {totalPrice}€</p>
+          <p>Days booked: {formattedDateRange}</p>
+        </div>
+        <Payment
+          onPaymentSuccess={handlePaymentSuccess}
+          totalPrice={totalPrice}
+          property={property}
+          renter={user}
+          startDate={startDate}
+          endDate={endDate}
+        />
       </div>
-      <div className="card-buttons">
-        <button onClick={() => navigate(-1)}>Cancel (go back)</button>
-      </div>
-      <Payment
-        onPaymentSuccess={handlePaymentSuccess}
-        totalPrice={totalPrice}
-        property={property}
-        renter={user}
-        startDate={startDate}
-        endDate={endDate}
-      />
-    </div>
     </div>
   );
 }
-

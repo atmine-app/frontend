@@ -1,63 +1,69 @@
-*{
-  margin:0;
-  padding:0;
+* {
+  margin: 0;
+  padding: 0;
   border: 0;
-  outline:0;
+  outline: 0;
   box-sizing: border-box;
   list-style: none;
   text-decoration: none;
   background-color: transparent;
 }
- :root{
+
+:root {
   --transition: all 400ms ease;
   --color-primary-lime: #dbef98;
   --color-primary-pruple: #605cb8;
   --color-primary-green: #9df0ac;
   --color-secondary-green: #60c2a4;
   --color-primary-black: #2a2a2a;
-  --border-radius:2rem;
-  --container-width-lg:75%;
+  --border-radius: 2rem;
+  --container-width-lg: 75%;
   --container-width-md: 86%;
   --container-width-sm: 90%;
-  --border-radius:1.2rem;
-  --border-radius-sm:0.5rem;
+  --border-radius: 1.2rem;
+  --border-radius-sm: 0.5rem;
   --border-grey: 1px solid rgba(162, 162, 162, 0.276);
-  
-}
-html{
-  scroll-behavior: smooth;
-}
-body{
-  padding-bottom: 75px;
-  color:var(--color-primary-black)
+
 }
 
-.container{
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding-bottom: 75px;
+  color: var(--color-primary-black)
+}
+
+.container {
   width: var(--container-width-lg);
   margin: 0 auto;
 }
 
-.section{
+.section {
   margin-bottom: 30px;
   border-bottom: 1px solid #ececec;
   padding: 20px 0;
   width: 85vw;
   margin: 0 auto;
 }
-img{
+
+img {
   display: block;
   width: 100%;
   object-fit: cover;
 }
 
-.expand{
+.expand {
   overflow: hidden;
   animation: expand 1.5s ease-in-out forwards;
 }
+
 @keyframes expand {
   0% {
     max-height: 0;
   }
+
   100% {
     max-height: 200px;
   }
@@ -111,19 +117,19 @@ button {
 button:hover,
 button:focus {
   background-color: var(--color-primary-lime);
-  color:var(--color-primary-black);
+  color: var(--color-primary-black);
 }
 
 .cta-button:hover,
 .cta-button:focus {
   background-color: var(--color-primary-lime);
-  color:var(--color-primary-black);
+  color: var(--color-primary-black);
 }
 
-.cta-button{
+.cta-button {
   border: var(--border-grey);
   background-color: var(--color-primary-green);
-  color:var(--color-primary-black);
+  color: var(--color-primary-black);
 }
 
 
@@ -133,19 +139,21 @@ button:focus {
 /*========MEDIA QUERYS MEDIUM =========*/
 
 @media screen and (max-width:1024px) {
-  .container{
-      width: var(--container-width-md)
+  .container {
+    width: var(--container-width-md)
   }
-  section{
-      margin-top:6rem
+
+  section {
+    margin-top: 6rem
   }
 }
 
 @media screen and (max-width:600px) {
-  .container{
-      width: var(--container-width-sm)
+  .container {
+    width: var(--container-width-sm)
   }
-  section>h2{
-      margin-bottom:2rem
+
+  section>h2 {
+    margin-bottom: 2rem
   }
 }
