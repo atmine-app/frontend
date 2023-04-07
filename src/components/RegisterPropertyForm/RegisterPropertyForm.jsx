@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import propertyService from "../../services/propertyService";
 import { useNavigate } from "react-router-dom";
 import Multiupload from "../Multiupload/Multiupload";
 import "./RegisterPropertyForm.css";
 import openAIService from "../../services/openaiService";
+import amenitiesOptions from "../../data/amenities";
 
 const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   const [images, setImages] = useState({ array: [] });
@@ -36,11 +37,29 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
     onFormDataChange(updatedFormData);
   };
 
+  const [amenities, setSelectedAmenities] = useState([]);
+
+  const handleAmenityChange = (e) => {
+    const { name, checked } = e.target;
+    if (checked) {
+      setSelectedAmenities([...amenities, name]);
+      console.log("selected amenities: ", amenities);
+    } else {
+      setSelectedAmenities(
+        amenities.filter((amenity) => amenity !== name)
+      );
+    }
+  };
+  useEffect(() => {
+    console.log("selected amenities: ", amenities);
+  }, [amenities]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const propertyData = {
         ...formData,
+        amenities,
         coordinates,
         images,
         summary: "",
@@ -167,7 +186,21 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
           onChange={handleChange}
           required
         />
-        
+        <div>
+          <label>Amenities:</label>
+          <div className="amenities">
+            {amenitiesOptions.map((amenity) => (
+              <label key={amenity.value}>
+                <input
+                  type="checkbox"
+                  name={amenity.value}
+                  onChange={handleAmenityChange}
+                />
+                {amenity.label}
+              </label>
+            ))}
+          </div>
+        </div>
         <button type="submit">Register Property</button>
       </form>
     </div>

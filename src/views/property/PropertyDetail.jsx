@@ -15,16 +15,21 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import "./PropertyDetail.css";
 import BackNavigationFloat from "../../components/BackNavigation/BackNavigationFloat";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { usePropertyLike } from "../../hooks/usePropertyLike";
+import PropertyInfo from "../../components/PropertyInfo/PropertyInfo";
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
-  const [property, setProperty] = useState({});
-  const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
   const { user } = useAuth();
+  const [property, setProperty] = useState({});
+  const { liked, handleAddFavorite } = usePropertyLike(property, user);
+  const [reviews, setReviews] = useState([]);
   const [userVote, setUserVote] = useState({});
   const [userReview, setUserReview] = useState(null);
   const navigate = useNavigate();
+ 
 
   const getUserVote = async () => {
     try {
@@ -49,6 +54,7 @@ export default function PropertyDetail() {
     try {
       const response = await propertyService.getProperty(propertyId);
       setProperty(response);
+      console.log("property", response);
     } catch (error) {
       console.log(error);
     }
@@ -181,6 +187,7 @@ export default function PropertyDetail() {
       navigate("/");
     }
   };
+
   const handleRatingSubmit = async (propertyId, rating) => {
     // Calculate the average rating only for rated categories
     const ratedCategories = Object.values(rating).filter((value) => value > 0);
@@ -202,10 +209,20 @@ export default function PropertyDetail() {
     <div className="page">
       <BackNavigationFloat />
       <div className="propertyCardDetail">
+        <div
+          className="heart-container heart-container-detail"
+          style={{ pointerEvents: "auto" }}
+        >
+          {liked ? (
+            <AiFillHeart onClick={handleAddFavorite} />
+          ) : (
+            <AiOutlineHeart onClick={handleAddFavorite} />
+          )}
+        </div>
         <div className="DetailImageSection">
           <Swiper
             className=" ImageContainer mySwiper"
-            spaceBetween={30}
+            spaceBetween={0}
             pagination={{
               clickable: true,
             }}
@@ -220,17 +237,7 @@ export default function PropertyDetail() {
               ))}
           </Swiper>
         </div>
-        <div className="property__card-content">
-          <h2>{property.title}</h2>
-          <p>Host: {property.owner && property.owner.username}</p>
-          <p>Catergory: {property.category}</p>
-          <p>Description: {property.description}</p>
-          <p>Price: {property.price}</p>
-          <p>Size: {property.size}</p>
-          <p>Address: {property.address}</p>
-          <p>City: {property.city}</p>
-          <p>Rating: {rating && rating && rating.averageRating} </p>
-        </div>
+        <PropertyInfo property={property} rating={rating} />
         {rating && (
           <div className="ratingsContainer">
             <p>Location: {rating && rating && rating.location}</p>

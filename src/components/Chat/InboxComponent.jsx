@@ -21,7 +21,7 @@ export default function InboxComponent() {
         });
   
         const session = new Talk.Session({
-          appId: "tDg75EBd",
+          appId: process.env.REACT_APP_TALKJS_APP_ID,
           me: currentUser,
         });
   
