@@ -1,5 +1,6 @@
 import React from 'react';
 import './BookingItem.css';
+import {HiOutlineChevronRight} from 'react-icons/hi';
 
 const BookingItem = ({ booking }) => {
   const startDate = new Date(booking.startDate);
@@ -19,6 +20,9 @@ const BookingItem = ({ booking }) => {
           <span className="bold"></span> {dateString} · {booking.totalPrice} €
         </p>
         <p className="booking-item__status">Confirmed</p>
+      </div>
+      <div className="booking-item__arrow">
+        <HiOutlineChevronRight />
       </div>
     </div>
   );

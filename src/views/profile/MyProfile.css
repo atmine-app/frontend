@@ -3,6 +3,11 @@
   margin-top: 30px;
 }
 
+.profileIconContainer {
+  display:inline-flex;
+  align-items: center;
+}
+
 .profileHeader {
   display: flex;
   align-items: center;
