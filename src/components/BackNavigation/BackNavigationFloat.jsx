@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import "./BackNavigationFloat.css";
+import atminelogo from "../../assets//atmine_large.png";
 
 const BackNavigationFloat = () => {
   const [showBackButton, setShowBackButton] = useState(false);
@@ -26,6 +27,14 @@ const BackNavigationFloat = () => {
       <div id="back-navigation-btn" onClick={() => window.history.back()}>
         <FiArrowLeft />
       </div>
+      {showBackButton && (
+        // eslint-disable-next-line jsx-a11y/img-redundant-alt
+        <img
+          src={atminelogo}
+          alt="atminelogo"
+          className="back-navigation-image"
+        />
+      )}
     </div>
   );
 };
