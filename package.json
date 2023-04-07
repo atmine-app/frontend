@@ -26,6 +26,7 @@
     "react-payment-icons": "^1.2.6",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "reactstrap": "^9.1.8",
     "stripe": "^11.17.0",
     "swiper": "^9.2.0",

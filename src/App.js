@@ -1,4 +1,5 @@
 import './App.css';
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Home from './views/Home';
@@ -21,8 +22,29 @@ import Payment from './components/Payment/Payment';
 import Multiupload from './components/Multiupload/Multiupload';
 import ChatComponent from './components/Chat/ChatComponent';
 import InboxComponent from './components/Chat/InboxComponent';
+import PuffLoader from "react-spinners/PuffLoader";
 
 function App() {
+  const [loading, setLoading] = useState(true); 
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <PuffLoader color={"#60c2a4"}/>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
       <Toaster/>
@@ -34,17 +56,14 @@ function App() {
         <Route path="/pay" element={<Payment />} />
         <Route path="/upload" element={<Multiupload />} />
         <Route path="/profile" element={<IsPrivate><MyProfile/></IsPrivate>} /> 
-        {/* aqui hacemos el edit and save */}
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
         <Route path="/register-property" element={<IsPrivate><NewProperty /></IsPrivate>} />
         <Route path='/properties/:propertyId' element={<PropertyDetail />}/>
         <Route path='/properties/:propertyId/edit' element={<EditProperty />}/>
         <Route path='/properties/:propertyId/:range' element={<NewBooking />}/>
-        {/* <Route path="/bookings" element={<IsPrivate><BookingList /></IsPrivate>} /> */}
         <Route path="/bookings" element={<IsPrivate><BookingList /></IsPrivate>} />
         <Route path="/bookings/:bookingId" element={<IsPrivate><BookingDetail /></IsPrivate>} />
         <Route path="/bookings/:bookingId/confirmation" element={<IsPrivate><BookingConfirmation /></IsPrivate>} />
-        {/* realmente no hace falta la de confirmation => podemos ir al detail directamente */}
         <Route path="/error" element={<ErrorPage />} />
         <Route path="/chat/:otherUserId" element={<ChatComponent />} />
         <Route path="*" element={<NotFound />} />

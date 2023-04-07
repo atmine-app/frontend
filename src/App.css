@@ -133,6 +133,13 @@ button:focus {
   color:var(--color-primary-black);
 }
 
+/* LOADING PUFF */
+.loading-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 /* SPINNER */
 
