@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { NavLink} from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./Navbar.css";
-import { AiFillHome , AiOutlineMessage } from "react-icons/ai";
-import { HiUser } from "react-icons/hi";
-import { MdFavorite } from "react-icons/md";
+import { AiOutlineSearch, AiOutlineHeart } from "react-icons/ai";
+import { RxAvatar } from "react-icons/rx";
+import { MdAlternateEmail } from "react-icons/md";
+import { BiMessage } from "react-icons/bi";
 
 export default function Navbar() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -15,7 +16,7 @@ export default function Navbar() {
         <li>
           <NavLink to="/">
             <div className="navItem">
-              <AiFillHome className="navIcon" />
+              <AiOutlineSearch className="navIcon" />
               Explore
             </div>
           </NavLink>
@@ -24,7 +25,7 @@ export default function Navbar() {
           <li>
             <NavLink to="/signup">
               <div className="navItem">
-                <HiUser className="navIcon" />
+                <RxAvatar className="navIcon" />
                 Sign up
               </div>
             </NavLink>
@@ -34,7 +35,7 @@ export default function Navbar() {
           <li>
             <NavLink to="/login">
               <div className="navItem">
-                <HiUser className="navIcon" />
+                <RxAvatar className="navIcon" />
                 Login
               </div>
             </NavLink>
@@ -44,7 +45,7 @@ export default function Navbar() {
           <li>
             <NavLink to="/wishlists">
               <div className="navItem">
-                <MdFavorite className="navIcon" />
+                <AiOutlineHeart className="navIcon" />
                 Wishlists
               </div>
             </NavLink>
@@ -54,7 +55,7 @@ export default function Navbar() {
           <li>
             <NavLink to="/bookings">
               <div className="navItem">
-                <MdFavorite className="navIcon" />
+                <MdAlternateEmail className="navIcon" />
                 Bookings
               </div>
             </NavLink>
@@ -64,8 +65,8 @@ export default function Navbar() {
   <li>
     <NavLink to="/messages">
       <div className="navItem">
-        <AiOutlineMessage className="navIcon" />
-        Messages
+        <BiMessage className="navIcon" />
+        Inbox
       </div>
     </NavLink>
   </li>
@@ -74,7 +75,7 @@ export default function Navbar() {
           <li>
             <NavLink to="/profile">
               <div className="navItem">
-                <HiUser className="navIcon" />
+                <RxAvatar className="navIcon" />
                 Profile
               </div>
             </NavLink>
