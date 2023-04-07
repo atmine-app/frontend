@@ -26,7 +26,7 @@ export default function BookingDetail() {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const options = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
+    const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
     return date.toLocaleDateString('en-US', options);
   }
 
@@ -65,7 +65,7 @@ export default function BookingDetail() {
           <div className="booking-detail__status">{booking.status}</div>
           <h1 className="booking-detail__title">Your Booking</h1>
           <p className="booking-detail__paragraph">
-            You're all set. We've sent your confirmation email to {booking.renter.email}.
+            You're all set. We've sent your confirmation email to {booking.renter?.email}.
           </p>
           <div className="booking-detail__confirmation-number">
             Confirmation Number: {booking._id}

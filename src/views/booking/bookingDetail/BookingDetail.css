@@ -1,13 +1,12 @@
 .booking-detail__header {
   background-color: #f1f1f1;
   padding: 10px;
-  margin-bottom: 20px;
 }
 
 .booking-detail__status {
   font-size: 18px;
   font-weight: bold;
-  color: green;
+  color: var(--color-secondary-green-strong);
   margin-bottom: 10px;
 }
 
@@ -25,9 +24,9 @@
 }
 
 .booking-detail__confirmation-number {
-  font-size: 14px;
-  font-weight: bold;
-  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 10px;
   background-color: var(--color-primary-green);
   color: var(--color-primary-black);
   padding: 10px 10px;
