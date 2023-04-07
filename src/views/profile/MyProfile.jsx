@@ -9,6 +9,7 @@ import { HiUser } from "react-icons/hi";
 import './MyProfile.css'
 import BackNavigationFloat from '../../components/BackNavigation/BackNavigationFloat';
 
+
 export default function MyProfile() {
   const { isLoggedIn, logOutUser } = useContext(AuthContext);
   const { user } = useAuth();

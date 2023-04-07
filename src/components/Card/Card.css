@@ -46,6 +46,18 @@
   border-radius: 2rem;
   user-select: none;
 }
+.card-box {
+  position: relative;
+}
+
+.heart-container {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  font-size: 1.5rem;
+  color:var(--color-secondary-green)
+}
 
 @media only screen and (max-width: 1000px) {
   .swiper-container,

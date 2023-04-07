@@ -1,0 +1,13 @@
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.review-form>textarea{
+    height:200px;
+    border: var(--border-grey);
+    font:inherit;
+}
+
