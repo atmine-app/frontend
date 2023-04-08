@@ -51,6 +51,13 @@ body{
   width: 90vw;
   margin: 0 auto;
 }
+.section-title{
+  display: flex;
+  align-items: center;
+  width: 90vw;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
 img{
   display: block;
   width: 100%;

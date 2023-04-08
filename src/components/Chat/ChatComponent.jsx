@@ -23,6 +23,7 @@ export default function ChatComponent() {
 
   useEffect(() => {
     getRecipient();
+    console.log(recipient)
     // eslint-disable-next-line
   }, [otherUserId]);
 
@@ -38,7 +39,7 @@ export default function ChatComponent() {
         id: user._id,
         name: user.username,
         email: user.email,
-        photoUrl: user.photoUrl,
+        photoUrl: user.avatar,
         welcomeMessage: "Hello!",
         role: "default",
       });
@@ -47,7 +48,7 @@ export default function ChatComponent() {
         id: recipient._id,
         name: recipient.username,
         email: recipient.email,
-        photoUrl: recipient.photoUrl,
+        photoUrl: recipient.avatar,
         welcomeMessage: "Hello!",
         role: "default",
       });

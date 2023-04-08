@@ -17,5 +17,9 @@
 
 .heart-container-detail {
     pointer-events: auto;
-    z-index: 1000;
+    z-index: 999;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    color:var(--color-secondary-green)
   }
