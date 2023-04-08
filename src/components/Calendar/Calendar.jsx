@@ -8,7 +8,7 @@ import bookingService from "../../services/bookingsServices"; // import the book
 import "./Calendar.css";
 import { Link } from "react-router-dom";
 
-export default function CalendarComp({ propertyId }) {
+export default function CalendarComp({ propertyId,property }) {
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -100,7 +100,7 @@ export default function CalendarComp({ propertyId }) {
             to={`/properties/${propertyId}/${rangeString}`}
             className="nav-link"
           >
-            <button className="cta-button">Book</button>
+            <button className="cta-button">Book for {property.price}€ a day</button>
           </Link>
         </>
       )}

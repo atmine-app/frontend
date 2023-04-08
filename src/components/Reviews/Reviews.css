@@ -57,4 +57,25 @@
     opacity: 0.6;
     font-size: smaller;
 }
+
+/* RATINGS  */
+
+.rating-bar-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
   
+  .rating-bar {
+    flex-grow: 1;
+    height: 10px;
+    background-color: #ddd;
+    margin-left: 5px;
+  }
+  
+  .rating-bar-fill {
+    height: 100%;
+    background-color: var(--color-secondary-green);
+  }
+
+ 
