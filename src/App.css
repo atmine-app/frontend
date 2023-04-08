@@ -140,7 +140,7 @@ button:focus {
 .cta-button{
   border: var(--border-grey);
   background-color: var(--color-primary-green);
-  color:var(--color-primary-pruple);
+  color:var(--color-primary-black);
   font-weight: 100;
 }
 

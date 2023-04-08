@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -7,9 +7,27 @@ import "./Reviews.css";
 import { RxAvatar } from "react-icons/rx";
 import { formatTimestamp } from "../../utils/index.js";
 
-export default function Reviews({ reviews }) {
+export default function Reviews({ reviews,rating }) {
+  const [showRatings, setShowRatings] = useState(false)
+
+  const toggleRatings = () => {
+    setShowRatings(!showRatings);
+  };
+  const renderRatingsBar = (label, value) => {
+    const fillWidth = (value / 5) * 100;
+
+    return (
+      <div className="rating-bar-container">
+        <span>{label}</span>
+        <div className="rating-bar">
+          <div className="rating-bar-fill" style={{ width: `${fillWidth}%` }} />
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div>
+    <div className="user-reviews-section">
       <Swiper
         className="reviews-swiper mySwiper"
         spaceBetween={20}
@@ -39,16 +57,22 @@ export default function Reviews({ reviews }) {
           );
         })}
       </Swiper>
+      <div id="see-ratings-btn-container">
+      <button onClick={toggleRatings} className="cta-button" >
+        {showRatings ? "Hide Ratings" : "See Ratings"}
+      </button>
+      </div>
+      {showRatings && rating && (
+        <div className="ratingsContainer">
+          {renderRatingsBar("Location:", rating.location)}
+          {renderRatingsBar("Cleanliness:", rating.cleanliness)}
+          {renderRatingsBar("Communication:", rating.communication)}
+          {renderRatingsBar("Value:", rating.valueForMoney)}
+          {renderRatingsBar("Amenities:", rating.amenities)}
+        </div>
+      )}
+      <div className="section"></div>
     </div>
   );
 }
 
-// const isReviewCreator = user && user._id === review.user._id;
-// {isReviewCreator && (
-//   <div>
-//     <button onClick={() => handleEditClick(review._id)}>Edit</button>
-//     <button onClick={() => handleDeleteReview(review._id)}>
-//       Delete
-//     </button>
-//   </div>
-// )}

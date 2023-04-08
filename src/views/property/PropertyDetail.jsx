@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect,useRef } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Map from "../../components/Map/Map";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import Reviews from "../../components/Reviews/Reviews";
@@ -20,6 +20,7 @@ import { usePropertyLike } from "../../hooks/usePropertyLike";
 import PropertyInfo from "../../components/PropertyInfo/PropertyInfo";
 import { HiStar } from "react-icons/hi";
 import UserInfo from "../../components/UserInfo/UserInfo";
+import Description from "../../components/Description/Description";
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -180,15 +181,7 @@ export default function PropertyDetail() {
       console.error(error);
     }
   };
-  const handlePropertyDelete = async (propertyId) => {
-    try {
-      await propertyService.deleteProperty(propertyId);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      navigate("/");
-    }
-  };
+
 
   const handleRatingSubmit = async (propertyId, rating) => {
     // Calculate the average rating only for rated categories
@@ -207,11 +200,33 @@ export default function PropertyDetail() {
     }
   };
 
+  const heartIconRef = useRef(); // Add this line to create a reference for the heart icon
+
+  // ... existing code ...
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const yOffset = window.pageYOffset;
+      if (yOffset > 0) {
+        heartIconRef.current.style.display = "none";
+      } else {
+        heartIconRef.current.style.display = "block";
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div className="page">
       <BackNavigationFloat />
       <div className="propertyCardDetail">
-        <div
+      <div
+          ref={heartIconRef} // Add this line to assign the reference to the heart icon
           className="heart-container heart-container-detail"
           style={{ pointerEvents: "auto" }}
         >
@@ -242,31 +257,9 @@ export default function PropertyDetail() {
         </div>
         <PropertyInfo property={property} rating={rating} />
         {property.owner && <UserInfo property={property} />}
-        {rating && (
-          <div className="ratingsContainer">
-            <p>Location: {rating && rating && rating.location}</p>
-            <p>Cleanliness: {rating && rating && rating.cleanliness}</p>
-            <p>Communication: {rating && rating && rating.communication}</p>
-            <p>Value: {rating && rating && rating.valueForMoney}</p>
-            <p>Amenities: {rating && rating && rating.amenities}</p>
-          </div>
-        )}
-        <div className="card-buttons">
-          <>
-            <Link to={`/properties/${property._id}/edit`} className="nav-link">
-              <button type="submit" className="cta-button">
-                Edit
-              </button>
-            </Link>
-
-            <button
-              type="submit"
-              onClick={() => handlePropertyDelete(propertyId)}
-            >
-              Delete
-            </button>
-          </>
-        </div>
+        <Description property={property} />
+       
+        
       </div>
       <div>
         <h2 className="section-title">Where is the {property.category}?</h2>
@@ -282,8 +275,10 @@ export default function PropertyDetail() {
         )}
         handleDelete={handleDelete}
         handleUpdate={handleUpdate}
+        rating={rating}
       />
-      <Calendar propertyId={propertyId} className="section" />
+      <h2 className="section-title">Check availability</h2>
+      <Calendar propertyId={propertyId} className="section" property={property} />
       <ReviewForm
         propertyId={propertyId}
         initialReviewText={userReview && userReview.review}
@@ -301,3 +296,31 @@ export default function PropertyDetail() {
     </div>
   );
 }
+
+
+// {/* <div className="card-buttons">
+//           <>
+//             <Link to={`/properties/${property._id}/edit`} className="nav-link">
+//               <button type="submit" className="cta-button">
+//                 Edit
+//               </button>
+//             </Link>
+
+//             <button
+//               type="submit"
+//               onClick={() => handlePropertyDelete(propertyId)}
+//             >
+//               Delete
+//             </button>
+//           </>
+//         </div> */}
+
+          // const handlePropertyDelete = async (propertyId) => {
+  //   try {
+  //     await propertyService.deleteProperty(propertyId);
+  //   } catch (error) {
+  //     console.error(error);
+  //   } finally {
+  //     navigate("/");
+  //   }
+  // };
