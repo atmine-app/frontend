@@ -18,6 +18,8 @@ import BackNavigationFloat from "../../components/BackNavigation/BackNavigationF
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { usePropertyLike } from "../../hooks/usePropertyLike";
 import PropertyInfo from "../../components/PropertyInfo/PropertyInfo";
+import { HiStar } from "react-icons/hi";
+import UserInfo from "../../components/UserInfo/UserInfo";
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -220,6 +222,7 @@ export default function PropertyDetail() {
           )}
         </div>
         <div className="DetailImageSection">
+         
           <Swiper
             className=" ImageContainer mySwiper"
             spaceBetween={0}
@@ -238,6 +241,7 @@ export default function PropertyDetail() {
           </Swiper>
         </div>
         <PropertyInfo property={property} rating={rating} />
+        {property.owner && <UserInfo property={property} />}
         {rating && (
           <div className="ratingsContainer">
             <p>Location: {rating && rating && rating.location}</p>
@@ -264,11 +268,14 @@ export default function PropertyDetail() {
           </>
         </div>
       </div>
+      <div>
+        <h2 className="section-title">Where is the {property.category}?</h2>
       <GoogleMapsProvider>
         <Map formData={property} />
       </GoogleMapsProvider>
+      </div>
       <br />
-
+      <h2 className="section-title">Users Reviews -  <HiStar color="var(--color-secondary-green)" fontSize="1.7rem" />{rating.averageRating}</h2>
       <Reviews
         reviews={reviews.filter(
           (review) => !user || review.user._id !== user.id

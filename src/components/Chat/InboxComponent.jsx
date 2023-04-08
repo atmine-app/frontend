@@ -15,7 +15,7 @@ export default function InboxComponent() {
           id: user._id,
           name: user.username,
           email: user.email,
-          photoUrl: user.photoUrl,
+          photoUrl: user.avatar,
           welcomeMessage: "Hello!",
           role: "default",
         });
