@@ -7,6 +7,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
+import { toast } from "react-toastify";
 import "./Payment.css";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import visa from "../../assets/visa.svg";
@@ -75,6 +76,16 @@ const CheckoutForm = ({
 
         // Call onPaymentSuccess function
         onPaymentSuccess();
+        toast.success('Successful payment!', {
+          position: "top-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true, 
+          progress: undefined,
+          theme: "light",
+        });
       } catch (error) {
         console.log(error);
       }
@@ -90,27 +101,28 @@ const CheckoutForm = ({
       </div>
 
       <div className="text-center mt-4">
-      <button
-  type="submit"
-  className={`cta-button payment ${loading ? "loading" : ""}`}
-  disabled={!stripe || loading}
->
-  {loading ? (
-    <div className="spinner-container">
-      <div className="spinner"></div>
-    </div>
-  ) : (
-    "Book Now"
-  )}
-</button>
+        <button
+          type="submit"
+          className={`cta-button payment ${loading ? "loading" : ""}`}
+          disabled={!stripe || loading}
+        >
+          {loading ? (
+            <div className="spinner-container">
+              <div className="spinner"></div>
+            </div>
+          ) : (
+            "Book Now"
+          )}
+        </button>
       </div>
 
       <div className="payment-security">
         <span style={{ marginRight: "6px" }}>
-        <RiSecurePaymentFill style={{ color: "#0096FF" }} />
+          <RiSecurePaymentFill style={{ color: "#0096FF" }} />
         </span>
         <small>
-          <strong>Your payment is secure with us.</strong><br></br>We are a verified payment solution and use the latest
+          <strong>Your payment is secure with us.</strong>
+          <br></br>We are a verified payment solution and use the latest
           encryption technology to protect your personal and payment
           information.
         </small>

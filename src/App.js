@@ -1,7 +1,8 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from './views/Home';
 import Navbar from './components/Navbar/Navbar';
 import ErrorPage from './views/ErrorPage';
@@ -47,7 +48,18 @@ function App() {
 
   return (
     <div className="App">
-      <Toaster/>
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />

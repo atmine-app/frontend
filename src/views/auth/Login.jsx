@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify'; // Import toast from react-toastify
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
@@ -30,12 +30,41 @@ export default function Login() {
         storeToken(response.authToken);
         authenticateUser();
         navigate('/');
-        toast.success('Welcome back!')
+        toast.success('Successful payment!', {
+          position: "top-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true, 
+          progress: undefined,
+          theme: "light",
+        });
       } else {
-        setErrorMessage('Unable to authenticate user')
+        setErrorMessage('Unable to authenticate user');
+        toast.error(errorMessage, {
+          position: "top-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (error) {
       setErrorMessage('Unable to authenticate user');
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
 
@@ -54,7 +83,6 @@ export default function Login() {
         <input required type="email" name="email" value={user.email} onChange={handleChange} />
         <label>Password</label>
         <input required type="password" name="password" value={user.password} onChange={handleChange} />
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         <button type="submit">Log in </button>
       </form>
     </div>
