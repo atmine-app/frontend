@@ -30,7 +30,7 @@ export default function Login() {
         storeToken(response.authToken);
         authenticateUser();
         navigate('/');
-        toast.success('Successful payment!', {
+        toast.success('Welcome back!', {
           position: "top-right",
           autoClose: 2500,
           hideProgressBar: false,
