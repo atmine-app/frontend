@@ -28,7 +28,6 @@ export const usePropertyLike = (property, user) => {
   }, [favorites, property, user]);
 
   const handleAddFavorite = async () => {
-    console.log('handleAddFavorite details', property, user)
     try {
       if (liked) {
         const favorite = favorites.find(
@@ -38,12 +37,13 @@ export const usePropertyLike = (property, user) => {
         if (favorite) {
           await favoriteService.deleteFavorite(favorite._id);
           setLiked(false);
+          setFavorites(favorites.filter((fav) => fav._id !== favorite._id));
         }
       } else {
         await favoriteService.addPropertyToFavorites(property._id);
         setLiked(true);
+        setFavorites([...favorites, { property: property._id, user: user._id }]);
       }
-      getFavorites();
     } catch (error) {
       console.error(error);
     }
