@@ -18,7 +18,7 @@ const BookingList = () => {
         const filteredBookings = allBookings.filter(
           (booking) => booking.renter === user._id
         );
-  
+          console.log(filteredBookings)
         // Sort bookings by start date, with the nearest date first
         const sortedBookings = filteredBookings.sort((a, b) => {
           const startDateA = new Date(a.startDate);

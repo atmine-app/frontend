@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import propertyService from "../../services/propertyService";
 import { useNavigate } from "react-router-dom";
 import Multiupload from "../Multiupload/Multiupload";
-import "./RegisterPropertyForm.css";
 import openAIService from "../../services/openaiService";
 import amenitiesOptions from "../../data/amenities";
+import "./RegisterPropertyForm.css";
 
 const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   const [images, setImages] = useState({ array: [] });
@@ -42,14 +42,14 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   const handleAmenityChange = (e) => {
     const { name, checked } = e.target;
     if (checked) {
-      setSelectedAmenities([...amenities, name]);
-      console.log("selected amenities: ", amenities);
+      setSelectedAmenities((prevAmenities) => [...prevAmenities, name]);
     } else {
-      setSelectedAmenities(
-        amenities.filter((amenity) => amenity !== name)
+      setSelectedAmenities((prevAmenities) =>
+        prevAmenities.filter((amenity) => amenity !== name)
       );
     }
   };
+
   useEffect(() => {
     console.log("selected amenities: ", amenities);
   }, [amenities]);
@@ -77,7 +77,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   return (
     <div>
       <form onSubmit={handleSubmit} className="genericForm">
-        <div className="formColumn">
+        <div className="formField">
           <label>Title:</label>
           <input
             type="text"
@@ -89,7 +89,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
           />
         </div>
 
-        <div className="formColumn">
+        <div className="formField">
           <label>Category:</label>
           <select
             id="category"
@@ -110,6 +110,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
           </select>
         </div>
 
+        <div className="formField">
         <label>Description:</label>
         <textarea
           id="description"
@@ -118,8 +119,9 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
           onChange={handleChange}
           required
         />
+        </div>
 
-        <div className="formColumn">
+        <div className="formField">
           <label>Price:</label>
           <input
             type="number"
@@ -131,7 +133,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
           />
         </div>
 
-        <div className="formColumn">
+        <div className="formField">
           <label>Size:</label>
           <input
             type="number"
@@ -146,6 +148,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
         <label>Images:</label>
         <Multiupload onImageDataChange={handleFormImageChange} />
 
+        <div className="formField">
         <label>Address:</label>
         <input
           type="text"
@@ -155,7 +158,9 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
           onChange={handleChange}
           required
         />
-        <div className="formColumn">
+        </div>
+        
+        <div className="formField">
           <label>City:</label>
           <input
             type="text"
@@ -166,7 +171,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
             required
           />
         </div>
-        <div className="formColumn">
+        <div className="formField">
           <label>Country:</label>
           <input
             type="text"
@@ -177,6 +182,8 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
             required
           />
         </div>
+        
+        <div className="formField">
         <label>Zip Code:</label>
         <input
           type="text"
@@ -186,6 +193,8 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
           onChange={handleChange}
           required
         />
+        </div>
+
         <div>
           <label>Amenities:</label>
           <div className="amenities">
@@ -194,6 +203,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
                 <input
                   type="checkbox"
                   name={amenity.value}
+                  checked={amenities.includes(amenity.value)}
                   onChange={handleAmenityChange}
                 />
                 {amenity.label}
@@ -201,7 +211,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
             ))}
           </div>
         </div>
-        <button type="submit">Register Property</button>
+        <button className="cta-button propertyForm" type="submit">Register Property</button>
       </form>
     </div>
   );

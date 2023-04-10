@@ -1,4 +1,12 @@
-.formColumn {
+/* .formColumn {
   width: calc(50% - 1rem);
   margin-bottom: 1rem;
+} */
+
+.propertyForm {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
 }

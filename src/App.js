@@ -24,6 +24,7 @@ import InboxComponent from "./components/Chat/InboxComponent";
 import PuffLoader from "react-spinners/PuffLoader";
 import EditProfile from "./views/profile/EditProfile";
 import WishList from "./views/wishlist/WishList";
+import MyReservations from "./views/profile/MyReservations";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -82,10 +83,10 @@ function App() {
           }
         />
         <Route
-          path="/profile/bookings"
+          path="/profile/reservations"
           element={
             <IsPrivate>
-              <BookingList />
+              <MyReservations />
             </IsPrivate>
           }
         />

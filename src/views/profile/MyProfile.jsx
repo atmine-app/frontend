@@ -14,7 +14,7 @@ export default function MyProfile() {
   };
 
   const handleYourReservations = () => {
-    navigate("/properties/bookings");
+    navigate("/profile/reservations");
   };
 
   const handleHosting = () => {
@@ -40,7 +40,7 @@ export default function MyProfile() {
           >
             <HiOutlineBookOpen className="profileIcon" />
             <h2 className="profileSectionTitle">Your reservations</h2>
-            <p>Manage your property bookings</p>
+            <p>Manage your property reservations</p>
           </div>
           <div className="profileSection section" onClick={handleHosting}>
             <RxUpload className="profileIcon" />

@@ -46,15 +46,17 @@ const CheckoutForm = ({
     disabled: false,
   };
 
+  const [paymentDetails, setPaymentDetails] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
     });
     setLoading(true);
-
+  
     if (!error) {
       const { id } = paymentMethod;
       try {
@@ -69,11 +71,14 @@ const CheckoutForm = ({
             endDate,
           }
         );
-
+  
         console.log(data);
-
+        console.log(paymentDetails)
+        // Store payment details
+        setPaymentDetails(data);
+  
         elements.getElement(CardElement).clear();
-
+  
         // Call onPaymentSuccess function
         onPaymentSuccess();
         toast.success('Successful payment!', {

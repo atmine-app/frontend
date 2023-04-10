@@ -1,15 +1,24 @@
 .contentWrapper {
-  margin-top: 100px;
+  position: relative;
+  height: calc(100vh - 60px); /* subtract the height of the navigation bar */
 }
 
-.RegisterPropertyForm {
+.registerPropertyForm {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 24px;
+  height: 70%; /* adjust the height as needed */
+  z-index: 1;
+}
+
+.map {
+  position: absolute;
+  top: 70%; /* adjust the top position to match the height of the form */
+  left: 0;
+  width: 100%;
+  height: 30%; /* adjust the height as needed */
+  z-index: 0;
 }
 
 .RegisterPropertyForm input,
