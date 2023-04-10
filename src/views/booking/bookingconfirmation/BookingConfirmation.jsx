@@ -35,6 +35,9 @@ export default function BookingConfirmation() {
             <span className="bold">Booking ID:</span> {booking._id}
           </p>
           <p>
+            <span className="bold">Transaction ID:</span> {booking.transactionId}
+          </p>
+          <p>
             <span className="bold">Property:</span> {booking.property?.title}
           </p>
           <p>
