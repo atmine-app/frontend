@@ -37,86 +37,86 @@ export default function EditProfile() {
   return (
     <div>
       <BackNavigationFloat />
-    <div className="editProfileContainer">
-      <div className="editProfileHeader">
-        <h1 className="editProfileTitle">Edit Profile</h1>
-      </div>
-      <div className="editProfileBody">
-        <div className="editProfileSection">
-          <RxAvatar className="editProfileIcon" />
-          <h2 className="editProfileSectionTitle">Personal Information</h2>
-          <div className="avatarSection expand">
-            {avatarImage && (
-              <img
-                src={avatarImage}
-                alt="Avatar"
-                className="editProfileAvatar"
-              />
-            )}
-            {user.avatar && (
-              <img
-                src={user.avatar}
-                alt="Avatar"
-                className="editProfileAvatar"
-              />
-            )}
-            <div className="avatarActions">
-              {isLoggedIn && (
-                <>
-                  {showAvatarUpload ? (
-                    <>
-                      <SingleImageUpload
-                        onImageDataChange={handleAvatarUpload}
-                      />
+      <div className="editProfileContainer">
+        <div className="editProfileHeader">
+          <h1 className="editProfileTitle">Edit Profile</h1>
+        </div>
+        <div className="editProfileBody">
+          <div className="editProfileSection">
+            <RxAvatar className="editProfileIcon" />
+            <h2 className="editProfileSectionTitle">Personal Information</h2>
+            <div className="avatarSection expand">
+              {avatarImage && (
+                <img
+                  src={avatarImage}
+                  alt="Avatar"
+                  className="editProfileAvatar"
+                />
+              )}
+              {user.avatar && (
+                <img
+                  src={user.avatar}
+                  alt="Avatar"
+                  className="editProfileAvatar"
+                />
+              )}
+              <div className="avatarActions">
+                {isLoggedIn && (
+                  <>
+                    {showAvatarUpload ? (
+                      <>
+                        <SingleImageUpload
+                          onImageDataChange={handleAvatarUpload}
+                        />
+                        <button
+                          className="editProfileButton"
+                          onClick={handleSaveAvatar}
+                        >
+                          Save
+                        </button>
+                      </>
+                    ) : (
                       <button
                         className="editProfileButton"
-                        onClick={handleSaveAvatar}
+                        onClick={handleUpdateAvatar}
                       >
-                        Save
+                        Update Avatar
                       </button>
-                    </>
-                  ) : (
-                    <button
-                      className="editProfileButton"
-                      onClick={handleUpdateAvatar}
-                    >
-                      Update Avatar
-                    </button>
-                  )}
-                </>
-              )}
+                    )}
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="editProfileInfo">
-            <p className="editProfileInfoItem">
-              <strong>Email: </strong>
-              {user.email}
-            </p>
-            <p className="editProfileInfoItem">
-              <strong>Name: </strong>
-              {user.username}
-            </p>
-            <p className="editProfileInfoItem">
-              <strong>Google ID: </strong>
-              {user.googleId}
-            </p>
-            <p className="editProfileInfoItem">
-              <strong>Status: </strong>
-              {user.status}
-            </p>
-            <p className="editProfileInfoItem">
-              <strong>Role: </strong>
-              {user.role}
-            </p>
-          </div>
-          <div className="editProfileLogoutSection">
-            <button className="editProfileButton" onClick={handleLogout}>
-              Log out
-            </button>
+            <div className="editProfileInfo">
+              <p className="editProfileInfoItem">
+                <strong>Email: </strong>
+                {user.email}
+              </p>
+              <p className="editProfileInfoItem">
+                <strong>Name: </strong>
+                {user.username}
+              </p>
+              <p className="editProfileInfoItem">
+                <strong>Google ID: </strong>
+                {user.googleId}
+              </p>
+              <p className="editProfileInfoItem">
+                <strong>Status: </strong>
+                {user.status}
+              </p>
+              <p className="editProfileInfoItem">
+                <strong>Role: </strong>
+                {user.role}
+              </p>
+            </div>
+            <div className="editProfileLogoutSection">
+              <button className="editProfileButton" onClick={handleLogout}>
+                Log out
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

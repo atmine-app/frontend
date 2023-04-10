@@ -19,12 +19,11 @@ import BookingConfirmation from "./views/booking/bookingconfirmation/BookingConf
 import MyProfile from "./views/profile/MyProfile";
 import BookingList from "./views/booking/bookingList/BookingList";
 import BookingDetail from "./views/booking/bookingDetail/BookingDetail";
-import Payment from "./components/Payment/Payment";
-import Multiupload from "./components/Multiupload/Multiupload";
 import ChatComponent from "./components/Chat/ChatComponent";
 import InboxComponent from "./components/Chat/InboxComponent";
 import PuffLoader from "react-spinners/PuffLoader";
 import EditProfile from "./views/profile/EditProfile";
+import WishList from "./views/wishlist/WishList";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -66,8 +65,6 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/pay" element={<Payment />} />
-        <Route path="/upload" element={<Multiupload />} />
         <Route
           path="/profile"
           element={
@@ -105,6 +102,14 @@ function App() {
           element={
             <IsPrivate>
               <NewProperty />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <IsPrivate>
+              <WishList />
             </IsPrivate>
           }
         />

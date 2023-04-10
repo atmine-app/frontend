@@ -34,7 +34,10 @@ export default function MyProfile() {
             <h2 className="profileSectionTitle">Personal Information</h2>
             <p>Provide personal details and how we can reach you</p>
           </div>
-          <div className="profileSection section" onClick={handleYourReservations}>
+          <div
+            className="profileSection section"
+            onClick={handleYourReservations}
+          >
             <HiOutlineBookOpen className="profileIcon" />
             <h2 className="profileSectionTitle">Your reservations</h2>
             <p>Manage your property bookings</p>

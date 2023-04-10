@@ -43,10 +43,10 @@ export default function Navbar() {
         )}
         {isLoggedIn && (
           <li>
-            <NavLink to="/wishlists">
+            <NavLink to="/wishlist">
               <div className="navItem">
                 <AiOutlineHeart className="navIcon" />
-                Wishlists
+                Wishlist
               </div>
             </NavLink>
           </li>
