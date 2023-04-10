@@ -17,10 +17,12 @@
 .profileIcon {
   font-size: 36px;
   margin-right: 16px;
+  color: var(--color-primary-pruple);
 }
 
 .profileTitle {
   font-size: 28px;
+  color: var(--color-primary-pruple);
 }
 
 .profileBody {
@@ -42,7 +44,10 @@
 
 .profileSectionTitle {
   font-size: 24px;
-  margin-bottom: 16px;
+  margin-top: 16px;
+  margin-bottom: 5px;
+  text-align: center;
+  color: var(--color-primary-pruple);
 }
 
 .avatarSection {
@@ -95,12 +100,8 @@
   margin-top: 16px;
 }
 
-.profileLink {
-  text-decoration: none;
-}
-
-.profileLinkText {
-  color: #008489;
-  text-decoration: underline;
-  cursor: pointer;
+.profileSection p {
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 0;
 }
