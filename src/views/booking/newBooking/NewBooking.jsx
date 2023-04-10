@@ -47,7 +47,7 @@ export default function NewBooking() {
     // eslint-disable-next-line
   }, [propertyId]);
 
-  const handlePaymentSuccess = async () => {
+  const handlePaymentSuccess = async (transactionId) => {
     try {
       const booking = {
         property: propertyId,
@@ -56,6 +56,8 @@ export default function NewBooking() {
         startDate: startDate,
         endDate: endDate,
         totalPrice: totalPrice,
+        status: "accepted",
+        transactionId: transactionId,
       };
 
       const response = await bookingService.createBooking(booking);

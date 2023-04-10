@@ -73,14 +73,14 @@ const CheckoutForm = ({
         );
   
         console.log(data);
-        console.log(paymentDetails)
+        
         // Store payment details
         setPaymentDetails(data);
   
         elements.getElement(CardElement).clear();
   
         // Call onPaymentSuccess function
-        onPaymentSuccess();
+        onPaymentSuccess(data.transactionId);
         toast.success('Successful payment!', {
           position: "top-right",
           autoClose: 2500,
