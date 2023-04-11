@@ -93,7 +93,7 @@ export default function Login() {
           <input required type="password" name="password" value={user.password} onChange={handleChange} />
         </div>
         <button className="cta-button" type="submit">Log in </button>
-        <p>Don't have an account?<Link to="/login">Sign up</Link></p>
+        <p className="cta-small-text"><small>Don't have an account?</small><br></br><Link to="/login">Sign up</Link></p>
       </form>
     </div>
   )

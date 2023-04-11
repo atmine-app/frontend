@@ -178,6 +178,10 @@ select:focus {
   border-color: var(--color-primary-pruple);
 }
 
+.cta-small-text {
+  text-align: center;
+  margin-top: 1rem;
+}
 /* BUTTONS */
 
 button {

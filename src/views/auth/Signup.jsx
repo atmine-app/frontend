@@ -116,9 +116,7 @@ export default function Signup() {
         <button className="cta-button" type="submit">
           Register
         </button>
-        <p>
-          Already a member? <Link to="/login">Log in</Link>
-        </p>
+        <p className="cta-small-text"><small>Already a member?</small><br></br><Link to="/login">Log in</Link></p>
       </form>
     </div>
   );
