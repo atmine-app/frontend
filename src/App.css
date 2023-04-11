@@ -116,6 +116,53 @@ select:focus {
   border-color: var(--color-primary-pruple);
 } */
 
+/* FORMS NEW */
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.generic-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  width: 100%;
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 0.5rem;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-left: 1px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--color-primary-pruple);
+}
+
+/* BUTTONS */
+
 button {
   padding: 0.5rem 1rem;
   font-size: 1rem;

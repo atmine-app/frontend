@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify'; // Import toast from react-toastify
+import { toast } from 'react-toastify';
 import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
 
 export default function Login() {
@@ -77,13 +77,18 @@ export default function Login() {
   }, [isLoggedIn])
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className='genericForm'>
-        <label>Email</label>
-        <input required type="email" name="email" value={user.email} onChange={handleChange} />
-        <label>Password</label>
-        <input required type="password" name="password" value={user.password} onChange={handleChange} />
-        <button type="submit">Log in </button>
+    <div className="form-container">
+      <form onSubmit={handleSubmit} className='generic-form'>
+        <div className="form-field">
+          <label>Email</label>
+          <input required type="email" name="email" value={user.email} onChange={handleChange} />
+        </div>
+        <div className="form-field">
+          <label>Password</label>
+          <input required type="password" name="password" value={user.password} onChange={handleChange} />
+        </div>
+        <button className="cta-button" type="submit">Log in </button>
+        <p>Don't have an account? ? <Link to="/login">Sign up</Link></p>
       </form>
     </div>
   )
