@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   padding: 1rem 3rem;
 }
+
 .card-box {
   margin: 1rem;
   margin-bottom: 2rem;
@@ -46,6 +47,7 @@
   border-radius: 2rem;
   user-select: none;
 }
+
 .card-box {
   position: relative;
 }

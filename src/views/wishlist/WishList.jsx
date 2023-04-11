@@ -3,6 +3,8 @@ import CardMin from "../../components/Card/CardMin";
 import favoriteService from "../../services/favoriteService";
 import propertyService from "../../services/propertyService";
 import { useAuth } from "../../hooks/useAuth";
+import BackNavigationFloat from "../../components/BackNavigation/BackNavigationFloat";
+import "./WishList.css";
 
 export default function WishList() {
   const { user } = useAuth();
@@ -43,14 +45,18 @@ export default function WishList() {
 
   return (
     <div>
+    <BackNavigationFloat />
+    <div className="wish-list">
       <h2>Wishlist</h2>
       {likedProperties.length === 0 ? (
         <p>No properties added to wishlist</p>
       ) : (
         likedProperties
           .filter((property) => property !== null && property !== undefined)
-          .map((property) => <CardMin key={property._id} property={property} />)
+          .map((property) => <CardMin className="wish" key={property._id} property={property} />
+          )
       )}
+    </div>
     </div>
   );
 }

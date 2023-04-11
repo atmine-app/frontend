@@ -58,7 +58,7 @@ const BookingList = () => {
     <div>
       <BackNavigationFloat />
       <div className="booking-list">
-        <h2>My Bookings</h2>
+        <h2>Bookings</h2>
         <div className="booking-list__filters">
           <button
             className={`cta-button ${status === 'Confirmed' ? 'active' : ''}`}
