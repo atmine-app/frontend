@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import Dropzone from 'react-dropzone'
 import { Container } from 'reactstrap'
 import './SingleImageUpload.css'
+import PuffLoader from "react-spinners/PuffLoader";
+import { RxUpload } from "react-icons/rx";
 
 export default function SingleImageupload({ onImageDataChange }) {
   const [image, setImage] = useState(null)
@@ -35,20 +37,33 @@ export default function SingleImageupload({ onImageDataChange }) {
     onImageDataChange(image)
   }, [onImageDataChange, image])
 
+  function removeImage() {
+    setImage(null);
+  }
+
   function ImagePreview() {
     if (loading) {
-      return <h3>Loading...</h3>
+      return (
+        <div className="loadingImage">
+          <PuffLoader color={"#60c2a4"} />
+        </div>
+      );
     }
     if (!loading) {
       return (
-        <div>
+        <div className="image-preview">
           {image ? (
-            // eslint-disable-next-line jsx-a11y/img-redundant-alt
-            <img
-              alt="uploaded image"
-              style={{ width: '100px', height: '100px', backgroundSize: 'cover', marginRight: '10px' }}
-              src={image}
-            />
+            <div className="image-container">
+              <div className="image-wrapper">
+                <img
+                  alt="uploaded"
+                  src={image}
+                />
+                <button className="remove-image single-image" onClick={removeImage}>
+                  X
+                </button>
+              </div>
+            </div>
           ) : (
             <p>No image uploaded</p>
           )}
@@ -64,8 +79,9 @@ export default function SingleImageupload({ onImageDataChange }) {
           {({ getRootProps, getInputProps }) => (
             <section>
               <div {...getRootProps({ className: 'dropzone' })}>
-                <span>📁</span>
-                <p>Drag and drop an image</p>
+              <span className="icon"><RxUpload /></span>
+                <p>Drag and drop an image or click here to browse.</p>
+                <input {...getInputProps()} />
               </div>
             </section>
           )}

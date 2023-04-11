@@ -3,6 +3,8 @@ import React, {useState, useEffect} from 'react'
 import Dropzone from 'react-dropzone'
 import {Container} from 'reactstrap'
 import './Multiupload.css'
+import PuffLoader from "react-spinners/PuffLoader";
+import { RxUpload } from "react-icons/rx";
 
 export default function Multiupload({onImageDataChange}) {
   const [Image, setImageState] = useState({array: []})
@@ -41,42 +43,51 @@ export default function Multiupload({onImageDataChange}) {
     }, [onImageDataChange, Image])
 
   function ImagePreview() {
-  if(loading) {
-    return <h3>Loading...</h3>
+    const removeImage = (index) => {
+      let specificArrayObject = Image.array;
+      specificArrayObject.splice(index, 1);
+      setImageState({ array: specificArrayObject });
+    };
+
+    if (loading) {
+      return (
+        <div className="loadingImage">
+          <PuffLoader color={"#60c2a4"} />
+        </div>
+      );
+    }
+    if (!loading) {
+      return (
+        <div className="image-preview">
+          {Image?.array?.length <= 0 ? (
+            <p>No images uploaded</p>
+          ) : (
+            Image.array.map((item, index) => (
+              <div key={index} className="image-container">
+                <img alt="uploaded" src={item} />
+                <button className="remove-image" onClick={() => removeImage(index)}>
+                  X
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      );
+    }
   }
-  if(!loading) {
-    return (
-      <div>
-        {Image?.array?.length <= 0 ? 
-          <p>No images uploaded</p> 
-          : Image.array.map((item, index) => (
-            // eslint-disable-next-line jsx-a11y/img-redundant-alt
-            <img
-              key={index}
-              alt="uploaded image"
-              style={{width: "100px", height: "100px", backgroundSize: "cover", marginRight: "10px"}}
-              src={item}
-            />
-          ))
-        }
-      </div>
-    )
-  }
-}
 
   return (
     <div>
       <Container>
         <Dropzone 
           className="dropzone"
-          onDrop={handleDrop}
-          onChange={(e) => setImageState(e.target.value)}
-          value={Image}>
+          onDrop={handleDrop}>
           {({getRootProps, getInputProps}) => (
             <section>
               <div {...getRootProps({className: "dropzone"})}>
-                <span>📁</span>
-                <p>Drag and drop images</p>
+                <span className="icon"><RxUpload /></span>
+                <p>Drag and drop your images or click here to browse.</p>
+                <input {...getInputProps()} />
               </div>
             </section>
             )}
