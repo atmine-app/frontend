@@ -94,7 +94,7 @@ export default function BookingDetail() {
               : `You're all set. We've sent your confirmation email to ${booking.renter?.email}.`}
           </p>
           <div className="booking-detail__confirmation-number">
-            Confirmation Number: {booking._id}
+            <strong>Confirmation Number</strong><br></br>{booking._id}
           </div>
         </div>
         <div className="booking-confirmation">
@@ -125,16 +125,14 @@ export default function BookingDetail() {
                   </button>
                 </div>
               ) : null}
-              <div className="booking-confirmation__cancel-button section">
                 <button
-                  className="cta-button"
+                  className="cta-button section"
                   onClick={() =>
                     navigate(`/chat/${booking.property.owner._id}`)
                   }
                 >
                   Chat with owner
                 </button>
-              </div>
             </div>
           </div>
         </div>
