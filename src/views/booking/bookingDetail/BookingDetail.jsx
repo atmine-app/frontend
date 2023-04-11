@@ -11,7 +11,6 @@ import { IoCalendarNumberOutline } from "react-icons/io5";
 import { BsCashCoin } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 
-
 export default function BookingDetail() {
   const { bookingId } = useParams();
   const [booking, setBooking] = useState({});
@@ -82,14 +81,16 @@ export default function BookingDetail() {
           <div
             className={`booking-detail__status ${
               booking.status === "cancelled" ? "cancelled" : ""
-            }`}
+            } ${booking.status === "completed" ? "completed" : ""}`}
           >
-            {booking.status}
+            {booking.status === "completed" ? "completed" : booking.status}
           </div>
           <h1 className="booking-detail__title">Your Booking</h1>
           <p className="booking-detail__paragraph">
             {booking.status === "cancelled"
               ? `We've sent your cancellation email to ${booking.renter?.email}.`
+              : booking.status === "completed"
+              ? "We hope you've enjoyed your booking."
               : `You're all set. We've sent your confirmation email to ${booking.renter?.email}.`}
           </p>
           <div className="booking-detail__confirmation-number">
@@ -116,18 +117,24 @@ export default function BookingDetail() {
                   Total Price: {booking.totalPrice} €
                 </p>
               </div>
-              {booking.status !== "cancelled" && (
+              {booking.status !== "cancelled" &&
+              booking.status !== "completed" ? (
                 <div className="booking-confirmation__cancel-button section">
                   <button className="cta-button danger" onClick={cancelBooking}>
                     Cancel Booking
                   </button>
                 </div>
-              )}
+              ) : null}
               <div className="booking-confirmation__cancel-button section">
-                <button className="cta-button" onClick={() => navigate(`/chat/${booking.property.owner._id}`)}>
+                <button
+                  className="cta-button"
+                  onClick={() =>
+                    navigate(`/chat/${booking.property.owner._id}`)
+                  }
+                >
                   Chat with owner
                 </button>
-                </div>
+              </div>
             </div>
           </div>
         </div>

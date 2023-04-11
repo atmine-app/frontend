@@ -155,6 +155,10 @@ button:focus {
   color: var(--color-primary-red) !important;
 }
 
+.completed {
+  color: var(--color-primary-blue) !important;
+} 
+
 /* LOADING PUFF */
 .loading-container {
   position: fixed;
