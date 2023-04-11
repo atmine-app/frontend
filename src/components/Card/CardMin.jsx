@@ -26,9 +26,9 @@ export default function Card({ property }) {
 
   const handleAddRemoveFavorite = () => {
     if (liked) {
-      toast.info("Property removed from wishlist");
+      toast.info(`${property.title} removed from wishlist`);
     } else {
-      toast.info("Property added to wishlist");
+      toast.info(`${property.title} added to wishlist`);
     }
     handleAddFavorite();
   };
