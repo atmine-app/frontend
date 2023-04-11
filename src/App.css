@@ -124,6 +124,23 @@ select:focus {
   align-items: center;
   padding: 2rem;
   margin-top: 3rem;
+  position: relative;
+}
+
+.form-image img {
+  position: absolute; 
+  top: 0; 
+  left: 50%; 
+  transform: translateX(-50%);
+  max-width: 75%;
+  height: auto;
+}
+
+.form-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #605cb8;
+  margin-top: 6rem;
 }
 
 .generic-form {

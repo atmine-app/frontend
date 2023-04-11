@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { useAuth } from '../../hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
+import atminelogo from "../../assets//atmine_large.png";
 
 export default function Login() {
   const { storeToken, authenticateUser, isLoggedIn } = useAuth(); 
@@ -78,6 +79,10 @@ export default function Login() {
 
   return (
     <div className="form-container">
+    <div className="form-image">
+        <img src={atminelogo} alt="atminelogo" />
+      </div>
+      <h1>Log in</h1>
       <form onSubmit={handleSubmit} className='generic-form'>
         <div className="form-field">
           <label>Email</label>
@@ -88,7 +93,7 @@ export default function Login() {
           <input required type="password" name="password" value={user.password} onChange={handleChange} />
         </div>
         <button className="cta-button" type="submit">Log in </button>
-        <p>Don't have an account? ? <Link to="/login">Sign up</Link></p>
+        <p>Don't have an account?<Link to="/login">Sign up</Link></p>
       </form>
     </div>
   )
