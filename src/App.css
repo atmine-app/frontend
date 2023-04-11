@@ -182,6 +182,35 @@ select:focus {
   text-align: center;
   margin-top: 1rem;
 }
+
+.password-input {
+  position: relative;
+}
+
+.password-input input[type="password"] {
+  padding-right: 40px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.password-toggle svg {
+  font-size: 1.2rem;
+}
+
+/* Hide the password by default */
+input[type="password"] {
+  font-family: sans-serif;
+  -webkit-text-security: disc;
+  -moz-text-security: disc;
+  text-security: disc;
+}
+
 /* BUTTONS */
 
 button {

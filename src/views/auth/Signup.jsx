@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/authService";
 import { toast } from "react-toastify";
 import atminelogo from "../../assets//atmine_large.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Signup() {
   const [user, setUser] = useState({
@@ -12,6 +13,8 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [passwordControl, setPasswordControl] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordControl, setShowPasswordControl] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -66,6 +69,14 @@ export default function Signup() {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const togglePasswordControlVisibility = () => {
+    setShowPasswordControl((prev) => !prev);
+  };
+
   return (
     <div className="form-container">
       <div className="form-image">
@@ -95,28 +106,48 @@ export default function Signup() {
         </div>
         <div className="form-field">
           <label>Password</label>
-          <input
-            required
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="password-input">
+            <input
+              required
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <span
+              className="password-toggle"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
         </div>
         <div className="form-field">
           <label>Repeat the password</label>
-          <input
-            required
-            type="password"
-            name="passwordControl"
-            value={passwordControl}
-            onChange={(e) => setPasswordControl(e.target.value)}
-          />
+          <div className="password-input">
+            <input
+              required
+              type={showPasswordControl ? "text" : "password"}
+              name="passwordControl"
+              value={passwordControl}
+              onChange={(e) => setPasswordControl(e.target.value)}
+            />
+            <span
+              className="password-toggle"
+              onClick={togglePasswordControlVisibility}
+            >
+              {showPasswordControl ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
         </div>
         <button className="cta-button" type="submit">
           Register
         </button>
-        <p className="cta-small-text"><small>Already a member?</small><br></br><Link to="/login">Log in</Link></p>
+        <p className="cta-small-text">
+          <small>Already a member?</small>
+          <br></br>
+          <Link to="/login">Log in</Link>
+        </p>
       </form>
     </div>
   );
