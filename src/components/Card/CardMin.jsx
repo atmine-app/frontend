@@ -10,9 +10,11 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import { useAuth } from "../../hooks/useAuth";
 import { usePropertyLike } from "../../hooks/usePropertyLike";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Card({ property }) {
-  const {user}  = useAuth();
+  const { user } = useAuth();
   const { liked, handleAddFavorite } = usePropertyLike(property, user);
 
   const handleCardClick = (event) => {
@@ -20,6 +22,15 @@ export default function Card({ property }) {
       return;
     }
     window.location.href = `/properties/${property._id}`;
+  };
+
+  const handleAddRemoveFavorite = () => {
+    if (liked) {
+      toast.info("Property removed from wishlist");
+    } else {
+      toast.info("Property added to wishlist");
+    }
+    handleAddFavorite();
   };
 
   return (
@@ -31,9 +42,9 @@ export default function Card({ property }) {
       <div className="card-box">
         <div className="heart-container">
           {liked ? (
-            <AiFillHeart onClick={handleAddFavorite} />
+            <AiFillHeart onClick={handleAddRemoveFavorite} />
           ) : (
-            <AiOutlineHeart onClick={handleAddFavorite} />
+            <AiOutlineHeart onClick={handleAddRemoveFavorite} />
           )}
         </div>
         <Swiper
@@ -55,7 +66,10 @@ export default function Card({ property }) {
         <div className="card-info-flex">
           <h3 className="card-title">{property.title}</h3>
           <div className="card-rating">
-            <HiStar color="var(--color-secondary-green)" fontSize="1.3rem" />
+            <HiStar
+              color="var(--color-secondary-green)"
+              fontSize="1.3rem"
+            />
             <p>{property.averageRating}</p>
           </div>
         </div>
