@@ -50,6 +50,10 @@
   color: var(--color-primary-blue);
 }
 
+.booking-item__status.cancelled {
+  color: var(--color-primary-red);
+}
+
 .booking-item__status.completed .add-review {
   color: var(--color-primary-black);
 }

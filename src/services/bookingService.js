@@ -30,7 +30,7 @@ class BookingService {
   editBooking(bookingId, body) {
     return this.api.put(`/${bookingId}`, body).then(({ data }) => data).catch(err => console.error(err));;
   }
-
+  
   deleteBooking(bookingId) {
     return this.api.delete(`/${bookingId}`).then(({ data }) => data).catch(err => console.error(err));;
   }

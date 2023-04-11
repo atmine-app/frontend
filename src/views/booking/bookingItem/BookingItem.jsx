@@ -7,9 +7,7 @@ const BookingItem = ({ booking }) => {
   const endDate = new Date(booking.endDate);
   const month = startDate.toLocaleString('default', { month: 'short' });
   const dateString = `${startDate.getDate()} - ${endDate.getDate()} ${month}`;
-
-  const today = new Date();
-  const isCompleted = endDate < today;
+  const status = booking.status.charAt(0).toUpperCase() + booking.status.slice(1);
 
   return (
     <div className="booking-item">
@@ -21,9 +19,9 @@ const BookingItem = ({ booking }) => {
         <p className="booking-item__date-price">
           <span className="bold"></span> {dateString} · {booking.totalPrice} €
         </p>
-        <p className={`booking-item__status ${isCompleted ? 'completed' : 'confirmed'}`}>
-  {isCompleted ? "Completed" : "Confirmed"}
-</p>
+        <p className={`booking-item__status ${booking.status}`}>
+          {status}
+        </p>
       </div>
       <div className="booking-item__arrow">
         <HiOutlineChevronRight />

@@ -7,9 +7,9 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import "./BookingDetail.css";
 import BackNavigationFloat from "../../../components/BackNavigation/BackNavigationFloat";
-import {IoCalendarNumberOutline} from "react-icons/io5";
-import {BsCashCoin} from "react-icons/bs";
-import {IoLocationOutline} from "react-icons/io5";
+import { IoCalendarNumberOutline } from "react-icons/io5";
+import { BsCashCoin } from "react-icons/bs";
+import { IoLocationOutline } from "react-icons/io5";
 
 export default function BookingDetail() {
   const { bookingId } = useParams();
@@ -26,9 +26,24 @@ export default function BookingDetail() {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-  }
+    const options = {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    };
+    return date.toLocaleDateString("en-US", options);
+  };
+
+  const cancelBooking = async () => {
+    try {
+      const updatedBooking = { ...booking, status: "cancelled" };
+      await bookingService.editBooking(bookingId, updatedBooking);
+      setBooking(updatedBooking);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     getBooking();
@@ -62,10 +77,18 @@ export default function BookingDetail() {
             ))}
         </Swiper>
         <div className="booking-detail__header">
-          <div className="booking-detail__status">{booking.status}</div>
+          <div
+            className={`booking-detail__status ${
+              booking.status === "cancelled" ? "cancelled" : ""
+            }`}
+          >
+            {booking.status}
+          </div>
           <h1 className="booking-detail__title">Your Booking</h1>
           <p className="booking-detail__paragraph">
-            You're all set. We've sent your confirmation email to {booking.renter?.email}.
+            {booking.status === "cancelled"
+              ? `We've sent your cancellation email to ${booking.renter?.email}.`
+              : `You're all set. We've sent your confirmation email to ${booking.renter?.email}.`}
           </p>
           <div className="booking-detail__confirmation-number">
             Confirmation Number: {booking._id}
@@ -78,26 +101,26 @@ export default function BookingDetail() {
               <div className="booking-confirmation__property-info">
                 <p>
                   <IoCalendarNumberOutline className="booking-confirmation__property-icon far" />
-                  
-                    {formatDate(booking.startDate)} - {formatDate(booking.endDate)}
-                  
+                  {formatDate(booking.startDate)} -{" "}
+                  {formatDate(booking.endDate)}
                 </p>
                 <p>
                   <IoLocationOutline className="booking-confirmation__property-icon far" />
-                  {booking.property?.address}, {booking.property?.city}, {booking.property?.country}
+                  {booking.property?.address}, {booking.property?.city},{" "}
+                  {booking.property?.country}
                 </p>
                 <p>
                   <BsCashCoin className="booking-confirmation__property-icon" />
                   Total Price: {booking.totalPrice} €
                 </p>
               </div>
-              <div className="booking-confirmation__cancel-button section">
-                <button 
-                  className="cta-button danger"
-                  >
-                  Cancel Booking
-                </button>
-              </div>
+              {booking.status !== "cancelled" && (
+                <div className="booking-confirmation__cancel-button section">
+                  <button className="cta-button danger" onClick={cancelBooking}>
+                    Cancel Booking
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -151,6 +151,10 @@ button:focus {
   font-size: 0.8rem;
 }
 
+.cancelled {
+  color: var(--color-primary-red) !important;
+}
+
 /* LOADING PUFF */
 .loading-container {
   position: fixed;
