@@ -26,9 +26,27 @@ export default function Card({ property }) {
 
   const handleAddRemoveFavorite = () => {
     if (liked) {
-      toast.info(`${property.title} removed from wishlist`);
+      toast.info(`${property.title} removed from wishlist`, {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } else {
-      toast.info(`${property.title} added to wishlist`);
+      toast.info(`${property.title} added to wishlist`, {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
     handleAddFavorite();
   };

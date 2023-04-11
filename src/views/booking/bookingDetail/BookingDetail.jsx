@@ -10,6 +10,8 @@ import BackNavigationFloat from "../../../components/BackNavigation/BackNavigati
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { BsCashCoin } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function BookingDetail() {
   const { bookingId } = useParams();
@@ -41,10 +43,20 @@ export default function BookingDetail() {
       const updatedBooking = { ...booking, status: "cancelled" };
       await bookingService.editBooking(bookingId, updatedBooking);
       setBooking(updatedBooking);
+      toast.error(`Your booking at ${booking.property.title} has been cancelled.`, {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } catch (error) {
       console.log(error);
     }
-  };
+};
 
   useEffect(() => {
     getBooking();
