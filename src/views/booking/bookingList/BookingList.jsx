@@ -18,23 +18,22 @@ const BookingList = () => {
         const filteredBookings = allBookings.filter(
           (booking) => booking.renter === user._id
         );
-          console.log(filteredBookings)
         // Sort bookings by start date, with the nearest date first
         const sortedBookings = filteredBookings.sort((a, b) => {
           const startDateA = new Date(a.startDate);
           const startDateB = new Date(b.startDate);
           const timeDiffA = startDateA.getTime() - Date.now();
           const timeDiffB = startDateB.getTime() - Date.now();
-  
+
           return timeDiffA - timeDiffB;
         });
-  
+
         setBookings(sortedBookings);
       } catch (error) {
         console.log(error);
       }
     };
-  
+
     fetchBookings();
   }, [user._id]);
 
@@ -45,11 +44,11 @@ const BookingList = () => {
   const filteredBookings = bookings.filter((booking) => {
     switch (status) {
       case 'Confirmed':
-        return new Date(booking.endDate) >= new Date();
+        return booking.status === 'confirmed';
       case 'Past':
-        return new Date(booking.endDate) < new Date();
+        return booking.status === 'completed';
       case 'Cancelled':
-        return booking.isCancelled;
+        return booking.status === 'cancelled';
       default:
         return true;
     }

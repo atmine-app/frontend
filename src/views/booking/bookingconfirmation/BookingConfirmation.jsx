@@ -32,6 +32,9 @@ export default function BookingConfirmation() {
           <img src={booking.property.images[0]} alt={booking.title} style={{ width: '40%' }} />
         )}
           <p>
+            <span className="bold">Status:</span> {booking.status}
+          </p>
+          <p>
             <span className="bold">Booking ID:</span> {booking._id}
           </p>
           <p>

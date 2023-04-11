@@ -56,7 +56,7 @@ export default function NewBooking() {
         startDate: startDate,
         endDate: endDate,
         totalPrice: totalPrice,
-        status: "accepted",
+        status: "confirmed",
         transactionId: transactionId,
       };
 
