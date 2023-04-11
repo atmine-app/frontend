@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import bookingService from "../../../services/bookingsServices";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -11,9 +11,11 @@ import { IoCalendarNumberOutline } from "react-icons/io5";
 import { BsCashCoin } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 
+
 export default function BookingDetail() {
   const { bookingId } = useParams();
   const [booking, setBooking] = useState({});
+  const navigate = useNavigate();
 
   const getBooking = async () => {
     try {
@@ -121,6 +123,11 @@ export default function BookingDetail() {
                   </button>
                 </div>
               )}
+              <div className="booking-confirmation__cancel-button section">
+                <button className="cta-button" onClick={() => navigate(`/chat/${booking.property.owner._id}`)}>
+                  Chat with owner
+                </button>
+                </div>
             </div>
           </div>
         </div>

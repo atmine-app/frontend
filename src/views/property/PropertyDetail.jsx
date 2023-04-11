@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Map from "../../components/Map/Map";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
@@ -200,9 +200,7 @@ export default function PropertyDetail() {
     }
   };
 
-  const heartIconRef = useRef(); // Add this line to create a reference for the heart icon
-
-  // ... existing code ...
+  const heartIconRef = useRef(); 
 
   useEffect(() => {
     const handleScroll = () => {
