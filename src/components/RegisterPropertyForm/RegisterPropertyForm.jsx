@@ -5,6 +5,7 @@ import Multiupload from "../Multiupload/Multiupload";
 import openAIService from "../../services/openaiService";
 import amenitiesOptions from "../../data/amenities";
 import "./RegisterPropertyForm.css";
+import BackNavigationFloat from "../BackNavigation/BackNavigationFloat";
 
 const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   const [images, setImages] = useState({ array: [] });
@@ -76,143 +77,150 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="genericForm">
-        <div className="formField">
-          <label>Title:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="formField">
-          <label>Category:</label>
-          <select
-            id="category"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select a category</option>
-            <option value="parking">Parking</option>
-            <option value="storage">Storage</option>
-            <option value="garden">Garden</option>
-            <option value="garage">Garage</option>
-            <option value="basement">Basement</option>
-            <option value="attic">Attic</option>
-            <option value="photostudio">Photostudio</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
-        <div className="formField">
-        <label>Description:</label>
-        <textarea
-          id="description"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-        </div>
-
-        <div className="formField">
-          <label>Price:</label>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="formField">
-          <label>Size:</label>
-          <input
-            type="number"
-            id="size"
-            name="size"
-            value={formData.size}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <label>Images:</label>
-        <Multiupload onImageDataChange={handleFormImageChange} />
-
-        <div className="formField">
-        <label>Address:</label>
-        <input
-          type="text"
-          id="address"
-          name="address"
-          value={formData.address}
-          onChange={handleChange}
-          required
-        />
-        </div>
-        
-        <div className="formField">
-          <label>City:</label>
-          <input
-            type="text"
-            id="city"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="formField">
-          <label>Country:</label>
-          <input
-            type="text"
-            id="country"
-            name="country"
-            value={formData.country}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        
-        <div className="formField">
-        <label>Zip Code:</label>
-        <input
-          type="text"
-          id="zipCode"
-          name="zipCode"
-          value={formData.zipCode}
-          onChange={handleChange}
-          required
-        />
-        </div>
-
-        <div>
-          <label>Amenities:</label>
-          <div className="amenities">
-            {amenitiesOptions.map((amenity) => (
-              <label key={amenity.value}>
-                <input
-                  type="checkbox"
-                  name={amenity.value}
-                  checked={amenities.includes(amenity.value)}
-                  onChange={handleAmenityChange}
-                />
-                {amenity.label}
-              </label>
-            ))}
+      <BackNavigationFloat />
+      <div className="register-list">
+        <h2>Register your property</h2>
+        <form onSubmit={handleSubmit} class="generic-form">
+          <div class="form-field">
+            <label for="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
           </div>
-        </div>
-        <button className="cta-button propertyForm" type="submit">Register Property</button>
-      </form>
+
+          <div class="form-field">
+            <label for="category">Category:</label>
+            <select
+              id="category"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a category</option>
+              <option value="parking">Parking</option>
+              <option value="storage">Storage</option>
+              <option value="garden">Garden</option>
+              <option value="garage">Garage</option>
+              <option value="basement">Basement</option>
+              <option value="attic">Attic</option>
+              <option value="photostudio">Photostudio</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="description">Description:</label>
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="price">Price:</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              value={formData.price}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="size">Size:</label>
+            <input
+              type="number"
+              id="size"
+              name="size"
+              value={formData.size}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <label>Images:</label>
+          <Multiupload onImageDataChange={handleFormImageChange} />
+
+          <div>
+            <label>Amenities:</label>
+            <div class="amenities">
+              {amenitiesOptions.map((amenity) => (
+                <label key={amenity.value}>
+                  <input
+                    type="checkbox"
+                    name={amenity.value}
+                    checked={amenities.includes(amenity.value)}
+                    onChange={handleAmenityChange}
+                  />
+                  {amenity.label}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="address">Address:</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="city">City:</label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div class="form-field">
+            <label for="country">Country:</label>
+            <input
+              type="text"
+              id="country"
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="zipCode">Zip Code:</label>
+            <input
+              type="text"
+              id="zipCode"
+              name="zipCode"
+              value={formData.zipCode}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button className="cta-button propertyForm" type="submit">
+            Register Property
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -82,12 +82,12 @@ img{
   }
 }
 
-.genericForm form {
+/* .genericForm form {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-} */
+} 
 
 label {
   font-size: 1.2rem;
@@ -114,7 +114,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: var(--color-primary-pruple);
-}
+} */
 
 button {
   padding: 0.5rem 1rem;
