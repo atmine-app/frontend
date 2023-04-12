@@ -81,26 +81,34 @@ export default function Card({ property }) {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="card-info-flex">
-          <h3 className="card-title">{property.title}</h3>
-          <div className="card-rating">
+        <div className="card-info-flex new-card-info-flex">
+          <div className="card-title-avatar">
+            <img
+              className="card-avatar"
+              src={property.owner.avatar}
+              alt="property owner avatar"
+            />
+            <h3 className="card-title">{property.title}</h3>
+          </div>
+          <div className="card-rating new-card-rating">
             <HiStar
+              className="new-card-star"
               color="var(--color-secondary-green)"
               fontSize="1.3rem"
             />
-            <p>{property.averageRating}</p>
+            <p className="new-card-rating-value">{property.averageRating}</p>
           </div>
         </div>
-        <p style={{ margin: 0, color: "var(--font-grey)" }}>
-          {property.address},{property.city}
-        </p>
-        <p style={{ margin: 0, color: "var(--font-grey)" }}>
-          {property.summary}
-        </p>
-        <p style={{ margin: "0.2rem", fontSize: "1rem", color: "var(--black" }}>
-          <span style={{ fontWeight: "600" }}>€{property.price}</span> day
-        </p>
+        <div className="new-card-info-details">
+          <p className="new-card-info">
+            {property.address}, {property.city}, {property.country}
+          </p>
+          <p className="new-card-summary">{property.summary}</p>
+          <p className="new-card-price">
+  <span className="new-card-price-value">€<span className="new-card-price-number">{property.price}</span></span> day
+</p>
       </div>
+    </div>
     </div>
   );
 }

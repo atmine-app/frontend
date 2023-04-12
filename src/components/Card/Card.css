@@ -25,23 +25,65 @@
   border-radius: 0.5rem;
 }
 
-.card-info-flex {
+.card-info-flex.new-card-info-flex {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  margin-top: 10px;
 }
 
-.card-rating {
+.card-rating.new-card-rating {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+}
+
+.new-card-star {
+  color: var(--color-secondary-green);
+  font-size: 1.3rem;
+}
+
+.new-card-rating-value {
+  margin-right: 5px;
+}
+
+.new-card-info-details {
+  margin-top: 10px;
+  margin-left: 5px;
+  gap: 0.5rem;
+}
+
+.new-card-info {
+  margin: 0;
+  color: var(--font-grey);
+  font-size: 14px;
+}
+
+.new-card-summary {
+  margin: 0;
+  color: var(--font-grey);
+  font-size: 14px;
+}
+
+.new-card-price {
+  margin: 0.2rem;
+  font-size: 1rem;
+  color: var(--black);
+}
+
+.new-card-price-value {
+  font-weight: normal;
+}
+
+.new-card-price-number {
+  font-weight: bold;
 }
 
 .card-box .swiper-pagination-bullet-active {
   background-color: var(--color-primary-lime) !important;
 }
 
-.imageSwiper{
+.imageSwiper {
   background: var(--color-bg-variant);
   text-align: center;
   border-radius: 2rem;
@@ -58,7 +100,25 @@
   right: 15px;
   z-index: 10;
   font-size: 1.8rem;
-  color:var(--color-secondary-green)
+  color: var(--color-secondary-green);
+}
+
+.card-title-avatar {
+  display: flex;
+  align-items: center;
+}
+
+.card-avatar {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.2rem;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -81,4 +141,3 @@
     padding: 0px;
   }
 }
-
