@@ -15,7 +15,6 @@ import PropertyDetail from "./views/property/PropertyDetail";
 import EditProperty from "./views/property/EditProperty";
 import NewProperty from "./views/property/NewProperty";
 import NewBooking from "./views/booking/newBooking/NewBooking";
-import BookingConfirmation from "./views/booking/bookingconfirmation/BookingConfirmation";
 import MyProfile from "./views/profile/MyProfile";
 import BookingList from "./views/booking/bookingList/BookingList";
 import BookingDetail from "./views/booking/bookingDetail/BookingDetail";
@@ -156,14 +155,6 @@ function App() {
           element={
             <IsPrivate>
               <BookingDetail />
-            </IsPrivate>
-          }
-        />
-        <Route
-          path="/bookings/:bookingId/confirmation"
-          element={
-            <IsPrivate>
-              <BookingConfirmation />
             </IsPrivate>
           }
         />

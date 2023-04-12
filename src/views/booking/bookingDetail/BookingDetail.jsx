@@ -97,22 +97,23 @@ export default function BookingDetail() {
           >
             {booking.status === "completed" ? "completed" : booking.status}
           </div>
-          <h1 className="booking-detail__title">Your Booking</h1>
+          <h1 className="booking-detail__title">Your Booking at {booking.property?.title}</h1>
           <p className="booking-detail__paragraph">
             {booking.status === "cancelled"
-              ? `We've sent your cancellation email to ${booking.renter?.email}.`
+              ? `We've sent your cancellation email to: ${booking.renter?.email}.`
               : booking.status === "completed"
               ? "We hope you've enjoyed your booking."
-              : `You're all set. We've sent your confirmation email to ${booking.renter?.email}.`}
+              : `You're all set. We've sent your confirmation email to: ${booking.renter?.email}.`}
           </p>
           <div className="booking-detail__confirmation-number">
-            <strong>Confirmation Number</strong><br></br>{booking._id}
+            <strong>Booking Confirmation Number</strong><br></br>{booking._id}<br></br><br></br>
+            <strong>Payment Transaction Id</strong><br></br>{booking.transactionId}
           </div>
         </div>
         <div className="booking-confirmation">
           <div className="booking-confirmation__details">
             <div className="booking-confirmation__property-details section">
-              <h3>{booking.property?.title}</h3>
+              <h3>Booking Details</h3>
               <div className="booking-confirmation__property-info">
                 <p>
                   <IoCalendarNumberOutline className="booking-confirmation__property-icon far" />
@@ -143,7 +144,7 @@ export default function BookingDetail() {
                     navigate(`/chat/${booking.property.owner._id}`)
                   }
                 >
-                  Chat with owner
+                  Chat with the owner
                 </button>
             </div>
           </div>

@@ -1,37 +1,37 @@
 .booking-detail__header {
-  background-color: #f1f1f1;
-  padding: 10px;
+  background-color: var(--color-secondary-white);
+  padding: 10px 15px;
 }
 
 .booking-detail__status {
   font-size: 20px;
   font-weight: bold;
   color: var(--color-secondary-green-strong);
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .booking-detail__title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .booking-detail__paragraph {
   font-size: 14px;
-  margin-top: 10px;
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 
 .booking-detail__confirmation-number {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  margin-top: 10px;
-  background-color: white;
+  margin-top: 5px;
+  background-color: var(--color-primary-white);
   border-radius: 5px;
   border: 1px solid var(--color-primary-black);
   color: var(--color-primary-black);
-  padding: 10px 10px;
+  padding: 5px 10px;
   display: inline-block;
   width: 100%;
 }

@@ -62,7 +62,7 @@ export default function NewBooking() {
 
       const response = await bookingService.createBooking(booking);
 
-      navigate(`/bookings/${response._id}/confirmation`);
+      navigate(`/bookings/${response._id}`);
     } catch (error) {
       console.error("Error creating booking:", error);
     }
@@ -79,7 +79,7 @@ export default function NewBooking() {
           <h2>{property.title}</h2>
           <p>Host: {property.owner && property.owner.username}</p>
           <p>Price per day: {property.price}€</p>
-          <p> Days booked: {daysBooked}</p>
+          <p>Days booked: {daysBooked}</p>
           <p>Total price: {totalPrice}€</p>
           <p>Days booked: {formattedDateRange}</p>
         </div>
