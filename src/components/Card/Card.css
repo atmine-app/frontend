@@ -39,7 +39,7 @@
 }
 
 .new-card-star {
-  color: var(--color-secondary-green);
+  color: var(--color-primary-green);
   font-size: 1.3rem;
 }
 
@@ -100,7 +100,7 @@
   right: 15px;
   z-index: 10;
   font-size: 1.8rem;
-  color: var(--color-secondary-green);
+  color: var(--color-primary-green);
 }
 
 .card-title-avatar {
