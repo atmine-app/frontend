@@ -124,7 +124,7 @@ export default function Login() {
         <p className="cta-small-text">
           <small>Don't have an account?</small>
           <br></br>
-          <Link to="/login">Sign up</Link>
+          <Link to="/signup">Sign up</Link>
         </p>
       </form>
     </div>

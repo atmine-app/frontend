@@ -25,6 +25,8 @@ import PuffLoader from "react-spinners/PuffLoader";
 import EditProfile from "./views/profile/EditProfile";
 import WishList from "./views/wishlist/WishList";
 import MyReservations from "./views/profile/MyReservations";
+import MyProperties from "./views/profile/MyProperties";
+import MyPropertyDetails from "./views/profile/MyPropertyDetails";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -83,10 +85,34 @@ function App() {
           }
         />
         <Route
-          path="/profile/reservations"
+          path="/profile/properties"
+          element={
+            <IsPrivate>
+              <MyProperties />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/profile/properties/:propertyId"
+          element={
+            <IsPrivate>
+              <MyPropertyDetails />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/profile/properties/:propertyId/bookings"
           element={
             <IsPrivate>
               <MyReservations />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/profile/properties/:propertyId/edit"
+          element={
+            <IsPrivate>
+              <EditProperty />
             </IsPrivate>
           }
         />

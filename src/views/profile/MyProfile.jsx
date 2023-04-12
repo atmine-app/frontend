@@ -13,8 +13,8 @@ export default function MyProfile() {
     navigate("/profile/edit");
   };
 
-  const handleYourReservations = () => {
-    navigate("/profile/reservations");
+  const handleYourProperties = () => {
+    navigate("/profile/properties");
   };
 
   const handleHosting = () => {
@@ -36,11 +36,11 @@ export default function MyProfile() {
           </div>
           <div
             className="profileSection section"
-            onClick={handleYourReservations}
+            onClick={handleYourProperties}
           >
             <HiOutlineBookOpen className="profileIcon" />
-            <h2 className="profileSectionTitle">Your reservations</h2>
-            <p>Manage your property reservations</p>
+            <h2 className="profileSectionTitle">Properties & Bookings</h2>
+            <p>Manage your properties and bookings</p>
           </div>
           <div className="profileSection section" onClick={handleHosting}>
             <RxUpload className="profileIcon" />

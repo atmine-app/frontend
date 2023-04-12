@@ -1,45 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+import { useParams } from 'react-router-dom';
 import bookingService from '../../services/bookingsServices';
+import propertyService from '../../services/propertyService';
 import '../booking/bookingList/BookingList.css';
 import BackNavigationFloat from '../../components/BackNavigation/BackNavigationFloat';
 import BookingItem from '../booking/bookingItem/BookingItem';
 
 const MyReservations = () => {
-  const { user } = useAuth();
+  const { propertyId } = useParams();
   const [bookings, setBookings] = useState([]);
+  const [propertyTitle, setPropertyTitle] = useState('');
 
   useEffect(() => {
     const fetchBookings = async () => {
       try {
         const allBookings = await bookingService.getAllBookings();
         const filteredBookings = allBookings.filter(
-          (booking) => booking.property?.owner === user._id && booking.renter !== user._id
+          (booking) => booking.property?._id === propertyId
         );
-          console.log(filteredBookings)
         setBookings(filteredBookings);
+
+        const property = await propertyService.getProperty(propertyId);
+        setPropertyTitle(property.title);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchBookings();
-  }, [user._id]);
+  }, [propertyId]);
 
   return (
     <div>
       <BackNavigationFloat />
       <div className="booking-list">
-        <h2>Reservations for My Properties</h2>
+        <h2>Reservations for {propertyTitle}</h2>
         {bookings.length > 0 ? (
           <ul>
             {bookings.map((booking) => (
-              <Link to={`/bookings/${booking._id}`} key={booking._id}>
-                <li className="booking-list__item">
-                  <BookingItem booking={booking} />
-                </li>
-              </Link>
+              <li className="booking-list__item" key={booking._id}>
+                <BookingItem booking={booking} />
+              </li>
             ))}
           </ul>
         ) : (
