@@ -68,7 +68,7 @@
 .new-card-price {
   margin: 0.2rem;
   font-size: 1rem;
-  color: var(--black);
+  color: var(--color-primary-black);
 }
 
 .new-card-price-value {
