@@ -1,0 +1,35 @@
+.property__card-content h2 {
+  color: var(--color-primary-pruple);
+}
+
+.booking-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.booking-table td {
+  padding: 4px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.booking-table tr:last-child td {
+  border-bottom: none;
+}
+
+.booking-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.booking-table td:first-child {
+  font-weight: bold;
+  width: 70%;
+}
+
+.booking-table td:last-child {
+  text-align: right;
+  width: 30%;
+}

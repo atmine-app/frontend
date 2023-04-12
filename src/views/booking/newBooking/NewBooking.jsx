@@ -6,6 +6,11 @@ import { useAuth } from "../../../hooks/useAuth";
 import { differenceInDays, parse } from "date-fns";
 import Payment from "../../../components/Payment/Payment";
 import BackNavigationFloat from "../../../components/BackNavigation/BackNavigationFloat";
+import "./NewBooking.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
 
 export default function NewBooking() {
   const [property, setProperty] = useState({});
@@ -13,6 +18,8 @@ export default function NewBooking() {
   const [startDate, endDate] = range.split("&");
   const { user } = useAuth();
   const [daysBooked, setDaysBooked] = useState(0);
+  const [bookingPrice, setBookingPrice] = useState(0);
+  const [serviceFee, setServiceFee] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [formattedDateRange, setFormattedDateRange] = useState("");
 
@@ -22,13 +29,15 @@ export default function NewBooking() {
       const parsedEndDate = parse(endDate, "yyyy-MM-dd", new Date());
       const days = differenceInDays(parsedEndDate, parsedStartDate) + 1; // Add 1 to the result
       setDaysBooked(days);
-      setTotalPrice(days * property.price);
+      setBookingPrice(days * property.price);
+      setServiceFee(Math.round(0.1 * days * property.price));
+      setTotalPrice(bookingPrice + serviceFee);
       setFormattedDateRange(
-        `${startDate.replace(/-/g, "/")} - ${endDate.replace(/-/g, "/")}`
+        `${formatDate(parsedStartDate)} - ${formatDate(parsedEndDate)}`
       );
       console.log("days", days);
     }
-  }, [property.price, startDate, endDate]);
+  }, [property.price, startDate, endDate, bookingPrice, serviceFee]);
 
   const navigate = useNavigate();
 
@@ -55,6 +64,8 @@ export default function NewBooking() {
         owner: property.owner._id,
         startDate: startDate,
         endDate: endDate,
+        bookingPrice: bookingPrice,
+        serviceFee: serviceFee,
         totalPrice: totalPrice,
         status: "confirmed",
         transactionId: transactionId,
@@ -68,20 +79,56 @@ export default function NewBooking() {
     }
   };
 
+  const formatDate = (date) => {
+    const options = {
+      day: "numeric",
+      month: "short",
+    };
+    return date.toLocaleDateString("en-US", options);
+  };
+
   return (
     <div>
       <BackNavigationFloat />
       <div className="property__card-detail">
-        {property.images && property.images.length > 0 && (
-          <img src={property.images[0]} alt={property.title} />
-        )}
+      <Swiper
+          className=" ImageContainer mySwiper"
+          spaceBetween={30}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+        >
+          {property?.images?.length > 0 &&
+            property.images.map((image, index) => (
+              <SwiperSlide key={index}>
+                <img
+                  src={image}
+                  alt={`${property.title} - ${index + 1}`}
+                />
+              </SwiperSlide>
+            ))}
+        </Swiper>
         <div className="property__card-content section">
-          <h2>{property.title}</h2>
-          <p>Host: {property.owner && property.owner.username}</p>
-          <p>Price per day: {property.price}€</p>
-          <p>Days booked: {daysBooked}</p>
-          <p>Total price: {totalPrice}€</p>
-          <p>Days booked: {formattedDateRange}</p>
+        <h2>Booking Request at {property.title}</h2>
+          <table className="booking-table">
+            <tbody>
+              <tr>
+                <td>
+                  {property.price}€ x {daysBooked} days ({formattedDateRange})
+                </td>
+                <td>{bookingPrice}€</td>
+              </tr>
+              <tr>
+                <td>atmine Service Fee (10%)</td>
+                <td>{serviceFee}€</td>
+              </tr>
+              <tr>
+                <td>Total (EUR)</td>
+                <td>{totalPrice}€</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <Payment
           onPaymentSuccess={handlePaymentSuccess}
