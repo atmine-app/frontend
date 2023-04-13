@@ -40,7 +40,7 @@ export default function EditProfile() {
       progress: undefined,
       theme: "light",
     });
-    navigate("/");
+    navigate("/login");
   };
 
   const handleUpdateAvatar = () => {

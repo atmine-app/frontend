@@ -14,6 +14,7 @@ export default function Login() {
   });
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -27,6 +28,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await authService.login(user);
       if (response.authToken) {
@@ -69,6 +71,7 @@ export default function Login() {
         theme: "light",
       });
     }
+    setTimeout(() => setLoading(false), 2000); // Delay for 2 seconds
   };
 
   useEffect(() => {
@@ -118,9 +121,21 @@ export default function Login() {
             </span>
           </div>
         </div>
-        <button className="cta-button" type="submit">
-          Log in{" "}
+        <div className="text-center mt-4">
+        <button
+          type="submit"
+          className={`cta-button full100 ${loading ? "loading" : ""}`}
+          disabled={loading}
+        >
+          {loading ? (
+            <div className="spinner-container">
+              <div className="spinner"></div>
+            </div>
+          ) : (
+            "Log in"
+          )}
         </button>
+        </div>
         <p className="cta-small-text">
           <small>Don't have an account?</small>
           <br></br>

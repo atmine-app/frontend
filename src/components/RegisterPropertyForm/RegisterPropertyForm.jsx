@@ -22,6 +22,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   };
 
   const [formData, setFormData] = useState(initialState);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleFormImageChange = (updatedImageArray) => {
@@ -57,6 +58,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const propertyData = {
         ...formData,
@@ -80,8 +82,8 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
       <BackNavigationFloat />
       <div className="register-list">
         <h2>Register your property</h2>
-        <form onSubmit={handleSubmit} class="generic-form">
-          <div class="form-field">
+        <form onSubmit={handleSubmit} className="generic-form">
+          <div className="form-field">
             <label for="title">Title:</label>
             <input
               type="text"
@@ -93,7 +95,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
             />
           </div>
 
-          <div class="form-field">
+          <div className="form-field">
             <label for="category">Category:</label>
             <select
               id="category"
@@ -114,7 +116,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
             </select>
           </div>
 
-          <div class="form-field">
+          <div className="form-field">
             <label for="description">Description:</label>
             <textarea
               id="description"
@@ -125,7 +127,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
             ></textarea>
           </div>
 
-          <div class="form-field">
+          <div className="form-field">
             <label for="price">Price:</label>
             <input
               type="number"
@@ -137,7 +139,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
             />
           </div>
 
-          <div class="form-field">
+          <div className="form-field">
             <label for="size">Size:</label>
             <input
               type="number"
@@ -154,7 +156,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
 
           <div>
             <label>Amenities:</label>
-            <div class="amenities">
+            <div className="amenities">
               {amenitiesOptions.map((amenity) => (
                 <label key={amenity.value}>
                   <input
@@ -169,7 +171,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
             </div>
           </div>
 
-          <div class="form-field">
+          <div className="form-field">
             <label for="address">Address:</label>
             <input
               type="text"
@@ -181,7 +183,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
             />
           </div>
 
-          <div class="form-field">
+          <div className="form-field">
             <label for="city">City:</label>
             <input
               type="text"
@@ -192,7 +194,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
               required
             />
           </div>
-          <div class="form-field">
+          <div className="form-field">
             <label for="country">Country:</label>
             <input
               type="text"
@@ -204,7 +206,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
             />
           </div>
 
-          <div class="form-field">
+          <div className="form-field">
             <label for="zipCode">Zip Code:</label>
             <input
               type="text"
@@ -215,10 +217,21 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
               required
             />
           </div>
-
-          <button className="cta-button propertyForm" type="submit">
-            Register Property
-          </button>
+          <div className="text-center mt-4">
+            <button
+              type="submit"
+              className={`cta-button full100 ${loading ? "loading" : ""}`}
+              disabled={loading}
+            >
+              {loading ? (
+                <div className="spinner-container">
+                  <div className="spinner"></div>
+                </div>
+              ) : (
+                "Register Property"
+              )}
+            </button>
+          </div>
         </form>
       </div>
     </div>

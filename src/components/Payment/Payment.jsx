@@ -108,7 +108,7 @@ const CheckoutForm = ({
       <div className="text-center mt-4">
         <button
           type="submit"
-          className={`cta-button payment ${loading ? "loading" : ""}`}
+          className={`cta-button full100 ${loading ? "loading" : ""}`}
           disabled={!stripe || loading}
         >
           {loading ? (

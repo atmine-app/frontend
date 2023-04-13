@@ -1,4 +1,4 @@
-.payment {
+.full100 {
   width: 100%;
 }
 
@@ -22,11 +22,6 @@
 
 .payment-card {
   margin-bottom: 20px;
-}
-
-.cta-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .payment-security {

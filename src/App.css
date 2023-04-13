@@ -252,6 +252,11 @@ button:focus {
   font-size: 16px;
 }
 
+.cta-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .danger {
   background-color: var(--color-primary-red) !important;
   color: var(--color-primary-white) !important;

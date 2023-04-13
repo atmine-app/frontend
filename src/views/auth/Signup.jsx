@@ -15,6 +15,7 @@ export default function Signup() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordControl, setShowPasswordControl] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -36,6 +37,7 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await authService.signup({
         username: user.username,
@@ -43,7 +45,7 @@ export default function Signup() {
         password,
       });
       navigate("/login");
-      toast.success("Welcome to atmine, please verify your email!", {
+      toast.success("Welcome! Please verify your email to log in.", {
         position: "top-right",
         autoClose: 2500,
         hideProgressBar: false,
@@ -67,6 +69,7 @@ export default function Signup() {
         theme: "light",
       });
     }
+    setTimeout(() => setLoading(false), 2000); // Delay for 2 seconds
   };
 
   const togglePasswordVisibility = () => {
@@ -76,6 +79,7 @@ export default function Signup() {
   const togglePasswordControlVisibility = () => {
     setShowPasswordControl((prev) => !prev);
   };
+
 
   return (
     <div className="form-container">
@@ -140,9 +144,21 @@ export default function Signup() {
             </span>
           </div>
         </div>
-        <button className="cta-button" type="submit">
-          Register
+        <div className="text-center mt-4">
+        <button
+          type="submit"
+          className={`cta-button full100 ${loading ? "loading" : ""}`}
+          disabled={loading}
+        >
+          {loading ? (
+            <div className="spinner-container">
+              <div className="spinner"></div>
+            </div>
+          ) : (
+            "Register"
+          )}
         </button>
+        </div>
         <p className="cta-small-text">
           <small>Already a member?</small>
           <br></br>
