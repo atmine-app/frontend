@@ -10,15 +10,14 @@
     color: var(--color-primary-lime);
   }
 
-  h1 {
+  .my-spalsh-title {
     font-size: 28px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-align: center;
   }
 
   .my-splash-text {
     text-align: center;
-    margin-bottom: 10px;
     font-size: 20px;
   }
   

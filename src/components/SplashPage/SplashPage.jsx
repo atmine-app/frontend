@@ -40,7 +40,7 @@ function SplashPage() {
       <div className="my-loader-container">
         <PuffLoader color={"#dbef98"} size={60} loading={loading} />
       </div>
-      <h1>Welcome to atmine</h1>
+      <h1 className="my-splash-title">Welcome to atmine</h1>
 
       <p className="my-splash-text">{firstText}</p>
       <p
