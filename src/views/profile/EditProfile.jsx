@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useAuth } from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 import userService from "../../services/userService";
 import SingleImageUpload from "../../components/SingleUpload/SingleImageUpload";
 import BackNavigationFloat from "../../components/BackNavigation/BackNavigationFloat";
@@ -11,6 +13,7 @@ export default function EditProfile() {
   const { user } = useAuth();
   const [avatarImage, setAvatarImage] = useState("");
   const [showAvatarUpload, setShowAvatarUpload] = useState(false);
+  const navigate = useNavigate();
 
   const handleAvatarUpload = (imageData) => {
     setAvatarImage(imageData);
@@ -27,6 +30,17 @@ export default function EditProfile() {
 
   const handleLogout = () => {
     logOutUser();
+    toast.success("Successful Logout! Come back soon 🔥", {
+      position: "top-right",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    navigate("/");
   };
 
   const handleUpdateAvatar = () => {
