@@ -30,6 +30,7 @@ import SplashPage from "./components/SplashPage/SplashPage";
 function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const [showNavbar, setShowNavbar] = useState(true);
 
   useEffect(() => {
     const hasVisitedHomePage = localStorage.getItem("hasVisitedHomePage");
@@ -57,6 +58,11 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const isPropertyDetailPage = /^\/properties\/[^/]+$/.test(location.pathname);
+    setShowNavbar(!isPropertyDetailPage);
+  }, [location.pathname]);
+  
   if (loading) {
     return <SplashPage />;
   }
@@ -75,7 +81,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
-      <Navbar />
+      {showNavbar && <Navbar />}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />

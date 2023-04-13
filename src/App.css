@@ -185,7 +185,7 @@ select:focus {
 .form-field select:focus,
 .form-field textarea:focus {
   outline: none;
-  border-color: var(--color-primary-pruple);
+  border-color: var(--color-primary-purple);
 }
 
 .cta-small-text {
@@ -241,7 +241,7 @@ button:focus {
 .cta-button:hover,
 .cta-button:focus {
   background-color: var(--color-primary-lime);
-  color: var(--color-primary-pruple);
+  color: var(--color-primary-purple);
 }
 
 .cta-button {
@@ -285,7 +285,7 @@ button:focus {
 
 .spinner {
   border: 2px solid rgba(0, 0, 0, 0.1);
-  border-top-color: var(--color-primary-pruple);
+  border-top-color: var(--color-primary-purple);
   border-radius: 50%;
   width: 16px;
   height: 16px;

@@ -22,6 +22,8 @@ import { HiStar } from "react-icons/hi";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import Description from "../../components/Description/Description";
 import Amenities from "../../components/Ameties/Amenities";
+import BookingNav from "../../components/Navbar/BookingNav";
+import { addDays } from "date-fns";
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -33,7 +35,10 @@ export default function PropertyDetail() {
   const [userVote, setUserVote] = useState({});
   const [userReview, setUserReview] = useState(null);
   const navigate = useNavigate();
- 
+  const [selectedRange, setSelectedRange] = useState({
+    startDate: new Date(),
+    endDate: addDays(new Date(), 7),
+  });
 
   const getUserVote = async () => {
     try {
@@ -223,6 +228,12 @@ export default function PropertyDetail() {
   return (
     <div className="page">
       <BackNavigationFloat />
+      <BookingNav
+        startDate={selectedRange.startDate}
+        endDate={selectedRange.endDate}
+        pricePerDay={property.price}
+        propertyId={property._id}
+      />
       <div className="propertyCardDetail">
       <div
           ref={heartIconRef} // Add this line to assign the reference to the heart icon
@@ -276,8 +287,10 @@ export default function PropertyDetail() {
         handleUpdate={handleUpdate}
         rating={rating}
       />
-      <h2 className="section-title">Check availability</h2>
-      <Calendar propertyId={propertyId} className="section" property={property} />
+      <h2 className="section-title" id="calendar">Check availability</h2>
+      <Calendar propertyId={propertyId} className="section" property={property}
+       onRangeChange={(newRange) => setSelectedRange(newRange)}
+       />
       <ReviewForm
         propertyId={propertyId}
         initialReviewText={userReview && userReview.review}

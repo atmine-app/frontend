@@ -1,5 +1,5 @@
 .dropzone {
-  border: 2px dashed var(--color-primary-pruple) !important;
+  border: 2px dashed var(--color-primary-purple) !important;
   border-radius: 5px;
   background: whitesmoke !important;
   min-height: 104px;
@@ -10,7 +10,7 @@
 
 .dropzone span {
   font-size: 60px;
-  color: var(--color-primary-pruple);
+  color: var(--color-primary-purple);
   margin-bottom: 10px;
 }
 
@@ -80,7 +80,7 @@
   border-radius: 50%;
   box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
   cursor: pointer;
-  color: var(--color-primary-pruple);
+  color: var(--color-primary-purple);
   font-size: 12px;
   padding: 0.5rem 0.5rem;
   font-family: unset;
@@ -101,7 +101,7 @@
   border-radius: 50%;
   box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.75);
   cursor: pointer;
-  color: var(--color-primary-pruple);
+  color: var(--color-primary-purple);
   font-size: 12px;
   padding: 0.5rem 0.5rem;
   font-family: unset;

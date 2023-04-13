@@ -9,7 +9,7 @@ import "./Calendar.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-export default function CalendarComp({ propertyId, property }) {
+export default function CalendarComp({ propertyId, property,onRangeChange }) {
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -58,9 +58,10 @@ export default function CalendarComp({ propertyId, property }) {
     //eslint-disable-next-line
   }, [propertyId]);
 
+  
   return (
     <div className="calendarWrap section">
-      {isLoggedIn ? ( // Only show the calendar if the user is logged in
+      {isLoggedIn ? (
         <>
           <button
             className="cta-button"
@@ -81,6 +82,7 @@ export default function CalendarComp({ propertyId, property }) {
                       "yyyy-MM-dd"
                     )}&${format(item.selection.endDate, "yyyy-MM-dd")}`;
                     setRangeString(rangeString);
+                    onRangeChange(item.selection); // Pass the new range to the parent component
                   }}
                   moveRangeOnFirstSelection={false}
                   ranges={range}
