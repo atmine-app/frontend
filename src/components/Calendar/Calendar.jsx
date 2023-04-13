@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { DateRange } from "react-date-range";
 import format from "date-fns/format";
 import { addDays, parseISO } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import bookingService from "../../services/bookingsServices"; // import the bookingService you created
+import bookingService from "../../services/bookingsServices";
 import "./Calendar.css";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
-export default function CalendarComp({ propertyId,property }) {
+export default function CalendarComp({ propertyId, property }) {
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -21,6 +22,7 @@ export default function CalendarComp({ propertyId,property }) {
   const refOne = useRef(null);
   const [rangeString, setRangeString] = useState("");
   const [calendarVisible, setCalendarVisible] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
 
   const hideOnOutsideClick = (event) => {
     if (refOne.current && !refOne.current.contains(event.target)) {
@@ -58,51 +60,52 @@ export default function CalendarComp({ propertyId,property }) {
 
   return (
     <div className="calendarWrap section">
-      <button
-        className="cta-button"
-        onClick={() => setCalendarVisible(!calendarVisible)}
-      >
-        Check availability
-      </button>
-      {calendarVisible && (
+      {isLoggedIn ? ( // Only show the calendar if the user is logged in
         <>
-          {/* <input
-            value={`${format(range[0].startDate, "dd/MM/yyyy")} - ${format(
-              range[0].endDate,
-              "dd/MM/yyyy"
-            )} `}
-            readOnly
-            className="inputBox"
-          /> */}
-          <div ref={refOne}>
-            {calendarVisible && (
-              <DateRange
-                direction="horizontal"
-                editableDateInputs={true}
-                onChange={(item) => {
-                  setRange([item.selection]);
-                  const rangeString = `${format(
-                    item.selection.startDate,
-                    "yyyy-MM-dd"
-                  )}&${format(item.selection.endDate, "yyyy-MM-dd")}`;
-                  setRangeString(rangeString);
-                }}
-                moveRangeOnFirstSelection={false}
-                ranges={range}
-                months={1}
-                className="calendarElement expand"
-                disabledDates={bookedDates}
-                rangeColors={["#605cb8"]}
-              />
-            )}
-          </div>
-          <Link
-            to={`/properties/${propertyId}/${rangeString}`}
-            className="nav-link"
+          <button
+            className="cta-button"
+            onClick={() => setCalendarVisible(!calendarVisible)}
           >
-            <button className="cta-button">Book for {property.price}€ a day</button>
-          </Link>
+            Check availability
+          </button>
+          {calendarVisible && (
+            <>
+              <div ref={refOne}>
+                <DateRange
+                  direction="horizontal"
+                  editableDateInputs={true}
+                  onChange={(item) => {
+                    setRange([item.selection]);
+                    const rangeString = `${format(
+                      item.selection.startDate,
+                      "yyyy-MM-dd"
+                    )}&${format(item.selection.endDate, "yyyy-MM-dd")}`;
+                    setRangeString(rangeString);
+                  }}
+                  moveRangeOnFirstSelection={false}
+                  ranges={range}
+                  months={1}
+                  className="calendarElement expand"
+                  disabledDates={bookedDates}
+                  rangeColors={["#605cb8"]}
+                />
+              </div>
+              <Link
+                to={`/properties/${propertyId}/${rangeString}`}
+                className="nav-link"
+              >
+                <button className="cta-button">
+                  Book for {property.price}€ a day
+                </button>
+              </Link>
+            </>
+          )}
         </>
+      ) : (
+        // Redirect the user to the login page if they are not logged in
+        <Link to="/login" className="nav-link">
+          <button className="cta-button">Log in to book</button>
+        </Link>
       )}
     </div>
   );
