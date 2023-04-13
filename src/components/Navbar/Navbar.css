@@ -19,7 +19,7 @@ nav a {
   display: flex;
   /* justify-content: center; 
   align-items: center; */
-  color: var(--color-primary-pruple);
+  color: var(--color-primary-purple);
   font-size: 0.75rem;
 }
 

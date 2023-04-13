@@ -30,7 +30,7 @@
   font-size: 16px;
   margin-top: 0;
   margin-bottom: 12px; 
-  color: var(--color-primary-pruple);
+  color: var(--color-primary-purple);
 }
 
 .booking-item__date-price {
@@ -64,7 +64,7 @@
 }
 
 .booking-item__arrow {
-  color: var(--color-primary-pruple);
+  color: var(--color-primary-purple);
 }
 
 .bold {

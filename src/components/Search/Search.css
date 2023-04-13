@@ -79,7 +79,7 @@
   background-color: transparent;
   margin-top: 5px;
   font-size: 1.1rem;
-  color: var(--color-primary-pruple);
+  color: var(--color-primary-purple);
 }
 
 /* Categories */
@@ -103,7 +103,7 @@
     font-size: 1rem;
     text-align: center;
     margin: 0 1rem;
-    color: var(--color-primary-pruple);
+    color: var(--color-primary-purple);
   }
   
   .categoryItem {
