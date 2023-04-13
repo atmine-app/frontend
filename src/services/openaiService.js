@@ -3,7 +3,7 @@ import axios from "axios";
 
 const openAIService = {
   async summarize(description) {
-    const prompt = `You are given this text that is the description of a property, i want you to summarize it in less than 20 words: ${description}
+    const prompt = `You are given this text that is the description of a property, i want you to summarize it in less than 15 words: ${description}
 `;
     const apiKey = process.env.REACT_APP_OPENAI_API_KEY ; // Do NOT expose your API key on the client-side
 
@@ -12,7 +12,7 @@ const openAIService = {
         "https://api.openai.com/v1/engines/text-davinci-003/completions",
         {
           prompt: prompt,
-          max_tokens: 50,
+          max_tokens: 35,
           stop: null,
           temperature: 0.7,
         },

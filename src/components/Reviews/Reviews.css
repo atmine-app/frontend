@@ -59,23 +59,39 @@
 }
 
 /* RATINGS  */
+.ratingsContainer {
+  width:90vw;
+  margin: 0 auto;
+}
+.rating-bar-container span {
+  flex-shrink: 0;
+  width: 120px; /* Adjust this value according to your desired label width */
+  text-align: right;
+  margin-right: 10px;
+}
 
-.rating-bar-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-  
-  .rating-bar {
-    flex-grow: 1;
-    height: 10px;
-    background-color: #ddd;
-    margin-left: 5px;
-  }
-  
-  .rating-bar-fill {
-    height: 100%;
-    background-color: var(--color-secondary-green);
-  }
+.rating-bar {
+  flex-grow: 1;
+  height: 10px;
+  background-color: #ddd;
+}
+
+.rating-bar-fill {
+  height: 100%;
+  background-color: var(--color-primary-green)
+}
+
+
+.rating-star-icon {
+  vertical-align: middle;
+  color: var(--color-primary-green);
+  font-weight: 800;
+}
+.rating-value{
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-secondary-green);
+  margin-left: 5px;
+}
 
  

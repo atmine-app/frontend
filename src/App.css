@@ -14,7 +14,7 @@
   --color-primary-white: white;
   --color-secondary-white: whitesmoke;
   --color-primary-lime: #dbef98;
-  --color-primary-pruple: #605cb8;
+  --color-primary-purple: #605cb8;
   --color-primary-green: #06b782;
   --color-secondary-green: #60c2a4;
   --color-secondary-green-strong: #2f9059;
@@ -53,7 +53,7 @@ body {
 .section {
   margin-bottom: 30px;
   border-bottom: 1px solid #ececec;
-  padding: 10px 0;
+  padding: 20px 0;
   width: 90vw;
   margin: 0 auto;
 }
@@ -218,7 +218,6 @@ input[type="password"] {
   font-family: sans-serif;
   -webkit-text-security: disc;
   -moz-text-security: disc;
-  text-security: disc;
 }
 
 /* BUTTONS */

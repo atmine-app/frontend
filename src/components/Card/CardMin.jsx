@@ -83,11 +83,8 @@ export default function Card({ property }) {
         </Swiper>
         <div className="card-info-flex new-card-info-flex">
           <div className="card-title-avatar">
-            <img
-              className="card-avatar"
-              src={property.owner.avatar}
-              alt="property owner avatar"
-            />
+          <img className="card-avatar" src={property.owner?.avatar} alt="property owner avatar" />
+
             <h3 className="card-title">{property.title}</h3>
           </div>
           <div className="card-rating new-card-rating">

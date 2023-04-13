@@ -15,7 +15,7 @@ export default function UserInfo ({property}){
             </div>
             }
             <div className="user-info-details"> 
-               <h2>Host: {owner.username}</h2>
+               <h3>Host: {owner.username}</h3>
                 <p>Joined {formatTimestamp(owner.createdAt)}</p>
             </div>
         </div>

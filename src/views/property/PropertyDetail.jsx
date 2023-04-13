@@ -21,6 +21,7 @@ import PropertyInfo from "../../components/PropertyInfo/PropertyInfo";
 import { HiStar } from "react-icons/hi";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import Description from "../../components/Description/Description";
+import Amenities from "../../components/Ameties/Amenities";
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -257,12 +258,12 @@ export default function PropertyDetail() {
         {property.owner && <UserInfo property={property} />}
         <Description property={property} />
        
-        
+        <Amenities property={property} />
       </div>
       <div>
         <h2 className="section-title">Where is the {property.category}?</h2>
       <GoogleMapsProvider>
-        <Map formData={property} />
+        <Map formData={property} className="section" />
       </GoogleMapsProvider>
       </div>
       <br />
