@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ReviewForm.css";
+import { toast } from "react-toastify";
 
 export default function ReviewForm({ initialReviewText, handleReviewSubmit, userBooking }) {
   const [review, setReview] = useState(initialReviewText || "");
@@ -12,6 +13,16 @@ export default function ReviewForm({ initialReviewText, handleReviewSubmit, user
     event.preventDefault();
     handleReviewSubmit(review);
     setReview("");
+    toast.success("Review submitted! Thank you", {
+      position: "top-right",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   // Hide the component if the user has not completed a booking for the property or is not logged in

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
+import { toast } from "react-toastify";
 import "./Rating.css";
 import "../../App.css";
 
@@ -20,10 +21,24 @@ const RatingForm = ({ propertyId, onSubmit, initialRating, userBooking}) => {
     amenities: initialRating?.amenities || 0,
   });
 
-  const handleRatingChange = async (category, value) => {
-    const updatedRatings = { ...ratings, [category]: value };
+  const handleRatingChange = async (categoryKey, value) => {
+    const updatedRatings = { ...ratings, [categoryKey]: value };
     setRatings(updatedRatings);
     await onSubmit(propertyId, updatedRatings);
+  
+    // Find the category label
+    const categoryLabel = categories.find((cat) => cat.key === categoryKey).label;
+  
+    toast.success(`${categoryLabel} rated with ${value} saved!`, {
+      position: "top-right",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   // Hide the component if the user has not completed a booking for the property or is not logged in
