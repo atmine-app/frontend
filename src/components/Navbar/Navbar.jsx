@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./Navbar.css";
 import { AiOutlineSearch, AiOutlineHeart } from "react-icons/ai";
@@ -62,15 +62,15 @@ export default function Navbar() {
           </li>
         )}
         {isLoggedIn && (
-  <li>
-    <NavLink to="/messages">
-      <div className="navItem">
-        <BiMessage className="navIcon" />
-        Inbox
-      </div>
-    </NavLink>
-  </li>
-)}
+          <li>
+            <NavLink to="/messages">
+              <div className="navItem">
+                <BiMessage className="navIcon" />
+                Inbox
+              </div>
+            </NavLink>
+          </li>
+        )}
         {isLoggedIn && (
           <li>
             <NavLink to="/profile">
