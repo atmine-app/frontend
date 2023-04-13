@@ -26,8 +26,7 @@ export default function NewProperty() {
           onFormDataChange={handleFormChange}
           coordinates={coordinates}
         />
-        <label>
-          Property Location:
+        <label id="map-container-register">
           <GoogleMapsProvider>
             <Map formData={formData} onLocationChange={handleLocationChange} />
           </GoogleMapsProvider>

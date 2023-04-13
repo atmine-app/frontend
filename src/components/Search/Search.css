@@ -1,11 +1,11 @@
 /* Search */
-.sticky__searchBar {
+/* .sticky__searchBar {
   position: sticky;
   top: 0;
   background-color: #fff;
   z-index: 999;
   padding: 5px;
-}
+} */
 
 .header {
   margin-top: 1rem;
@@ -82,6 +82,7 @@
   color: var(--color-primary-purple);
 }
 
+
 /* Categories */
 
 .searchCategoryContainer {
@@ -92,6 +93,8 @@
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;  /* Firefox */
     margin-bottom: 5px;
+    display: flex;
+    align-content: center;
   }
   
   .searchCategoryContainer::-webkit-scrollbar { /* Chrome, Safari, and Edge */
@@ -122,3 +125,31 @@
   .categoryText {
     font-size: 0.8rem; /* Decrease text font size */
   }
+  .searchCategoryContainer > div.selected {
+    color: var(--color-secondary-green);
+  }
+
+  /* Search filter  */
+
+  
+  .search-filter .two-columns {
+    display: flex;
+    flex-wrap: wrap;
+
+  }
+  
+  .search-filter .two-columns label {
+    width: 45%;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+  }
+  .side-by-side {
+    display: flex;
+  }
+  .search-filter.expand {
+    height: calc(90vh - 100px); /* Adjust the height according to your needs */
+    overflow-y: auto; /* Make the content scrollable */
+    padding: 15px; /* Add some padding to the right to prevent scrollbar overlap */
+  }
+  
+ 

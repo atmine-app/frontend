@@ -1,21 +1,14 @@
-import React from "react";
-import {
-  FaCar,
-  FaSwimmingPool,
-  FaWarehouse,
-  FaTree,
-  FaHome,
-  FaUtensils,
-  FaCamera,
-  FaPlusSquare,
-} from "react-icons/fa";
+import React, { useState } from "react";
 import { BiSliderAlt } from "react-icons/bi";
 import "./Search.css";
 import { AiOutlineSearch } from "react-icons/ai";
 import logo from "../../assets/atmine_small.png";
+import categories from "../../data/categories";
+import { AiOutlineAppstore } from "react-icons/ai";
 
 const SearchBar = (props) => {
   const { handleSearchValue, handleCategorySelect, handleFilterClick } = props;
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleChange = (e) => {
     handleSearchValue(e.target.value);
@@ -23,20 +16,8 @@ const SearchBar = (props) => {
 
   const handleIconClick = (category) => {
     handleCategorySelect(category);
+    setSelectedCategory(category);
     console.log(category);
-  };
-
-  const categoryIcons = {
-    parking: <FaCar className="icon" />,
-    storage: <FaWarehouse className="icon" />,
-    garden: <FaTree className="icon" />,
-    garage: <FaHome className="icon" />,
-    basement: <FaHome className="icon" />,
-    attic: <FaHome className="icon" />,
-    pool: <FaSwimmingPool className="icon" />,
-    barbecue: <FaUtensils className="icon" />,
-    photostudio: <FaCamera className="icon" />,
-    other: <FaPlusSquare className="icon" />,
   };
 
   return (
@@ -60,24 +41,34 @@ const SearchBar = (props) => {
               placeholder="What are you looking for?"
             />
             <div className="search-icon-button">
-            <button onClick={handleFilterClick}>
-              
+              <button onClick={handleFilterClick}>
                 <BiSliderAlt />
-              
-            </button>
+              </button>
             </div>
-            
           </div>
         </div>
       </div>
 
       <div className="searchCategoryContainer">
-        {Object.keys(categoryIcons).map((category) => (
-          <div key={category} onClick={() => handleIconClick(category)}>
-            <div className="categoryItem">
-              {categoryIcons[category]}
-              <span className="categoryText">{category}</span>
-            </div>
+      <div
+          className={`categoryItem ${
+            selectedCategory === "all" ? "selected" : ""
+          }`}
+          onClick={() => handleIconClick("all")}
+        >
+          <AiOutlineAppstore className="icon" />
+          <div className="categoryText">All</div>
+        </div>
+        {categories.map((category) => (
+          <div
+            key={category.value}
+            onClick={() => handleIconClick(category.value)}
+            className={`categoryItem ${
+              selectedCategory === category.value ? "selected" : ""
+            }`} 
+          >
+            <category.icon className="icon" />
+            <span className="categoryText">{category.label}</span>
           </div>
         ))}
       </div>

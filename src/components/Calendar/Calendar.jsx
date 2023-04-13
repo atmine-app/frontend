@@ -90,6 +90,7 @@ export default function CalendarComp({ propertyId, property,onRangeChange }) {
                   className="calendarElement expand"
                   disabledDates={bookedDates}
                   rangeColors={["#605cb8"]}
+                  minDate={new Date()}
                 />
               </div>
               <Link

@@ -24,12 +24,13 @@ export default function WishList() {
             .filter((favorite) => favorite.user === user._id) 
             .map((favorite) => favorite.property)
         );
-        console.log("propertyIds:", propertyIds);
+
         const properties = await Promise.all(
           [...propertyIds].map(async (propertyId) => {
             return await propertyService.getProperty(propertyId);
           })
         );
+        console.log("properties:", properties);
         setLikedProperties(properties);
         setLoading(false);
       } catch (error) {
@@ -46,7 +47,7 @@ export default function WishList() {
   return (
     <div>
     <BackNavigationFloat />
-    <div className="wish-list">
+    <div className="cards-flex">
       <h2>Wishlist</h2>
       {likedProperties.length === 0 ? (
         <p>No properties added to wishlist</p>
