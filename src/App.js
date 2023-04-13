@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./views/Home";
@@ -20,32 +20,45 @@ import BookingList from "./views/booking/bookingList/BookingList";
 import BookingDetail from "./views/booking/bookingDetail/BookingDetail";
 import ChatComponent from "./components/Chat/ChatComponent";
 import InboxComponent from "./components/Chat/InboxComponent";
-import PuffLoader from "react-spinners/PuffLoader";
 import EditProfile from "./views/profile/EditProfile";
 import WishList from "./views/wishlist/WishList";
 import MyReservations from "./views/profile/MyReservations";
 import MyProperties from "./views/profile/MyProperties";
 import MyPropertyDetails from "./views/profile/MyPropertyDetails";
+import SplashPage from "./components/SplashPage/SplashPage";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
+    const hasVisitedHomePage = localStorage.getItem("hasVisitedHomePage");
+    if (location.pathname === "/" && !hasVisitedHomePage) {
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+        localStorage.setItem("hasVisitedHomePage", true);
+      }, 5000);
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    } else {
       setLoading(false);
-    }, 1000);
+    }
+  }, [location.pathname]);
 
+  useEffect(() => {
+    const cleanupLocalStorage = () => {
+      localStorage.removeItem("hasVisitedHomePage");
+    };
+
+    window.addEventListener("beforeunload", cleanupLocalStorage);
     return () => {
-      clearTimeout(timeoutId);
+      window.removeEventListener("beforeunload", cleanupLocalStorage);
     };
   }, []);
 
   if (loading) {
-    return (
-      <div className="loading-container">
-        <PuffLoader color={"#60c2a4"} />
-      </div>
-    );
+    return <SplashPage />;
   }
 
   return (

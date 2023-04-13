@@ -249,7 +249,7 @@ button:focus {
   border: var(--border-grey);
   background-color: var(--color-primary-green);
   color: var(--color-primary-white);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
 }
 

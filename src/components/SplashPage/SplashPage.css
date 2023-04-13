@@ -1,0 +1,34 @@
+@media (max-width: 767px) {
+  .my-splash-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    background-color: var(--color-primary-pruple);
+    color: var(--color-primary-lime);
+  }
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 20px;
+    text-align: center;}
+
+  .my-splash-text {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .my-loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+}
