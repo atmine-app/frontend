@@ -34,7 +34,9 @@ button .rdrDay:active,
 button .rdrDay:focus {
   background-color: transparent;
 }
-
+.page{
+  margin-bottom: 100px;
+}
 html {
   scroll-behavior: smooth;
 }

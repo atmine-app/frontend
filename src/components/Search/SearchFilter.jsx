@@ -1,58 +1,6 @@
 import React from "react";
-
-import {
-  FaCar,
-  FaWarehouse,
-  FaTree,
-  FaHome,
-  FaSwimmingPool,
-  FaUtensils,
-  FaCamera,
-  FaPlusSquare,
-} from "react-icons/fa";
-import {
-  FaWifi,
-  FaMusic,
-  FaTv,
-  FaWind,
-  FaBurn,
-  FaSnowflake,
-  FaTshirt,
-  FaDog,
-  FaSmoking,
-  FaChild,
-  FaGlassCheers,
-  FaQuestion,
-} from "react-icons/fa";
-
-const categoryIcons = {
-  parking: <FaCar />,
-  storage: <FaWarehouse />,
-  garden: <FaTree />,
-  garage: <FaHome />,
-  basement: <FaHome />,
-  attic: <FaHome />,
-  pool: <FaSwimmingPool />,
-  barbecue: <FaUtensils />,
-  photostudio: <FaCamera />,
-  other: <FaPlusSquare />,
-};
-
-const amenitiesIcons = {
-  wifi: <FaWifi />,
-  music: <FaMusic />,
-  tv: <FaTv />,
-  airConditioning: <FaWind />,
-  heating: <FaBurn />,
-  washer: <FaSnowflake />,
-  dryer: <FaTshirt />,
-  elevator: <FaDog />,
-  petFriendly: <FaDog />,
-  smokingAllowed: <FaSmoking />,
-  kidFriendly: <FaChild />,
-  eventFriendly: <FaGlassCheers />,
-  other: <FaQuestion />,
-};
+import amenities from "../../data/amenities";
+import categories from "../../data/categories";
 
 const SearchFilter = ({
   isOpen,
@@ -64,7 +12,7 @@ const SearchFilter = ({
   const handleApplyFilters = () => {
     applyFilters(filters);
   };
- 
+
   if (!isOpen) return null;
 
   return (
@@ -113,74 +61,36 @@ const SearchFilter = ({
         <p>{filters.minRating}</p>
       </div>
       <div>
-        <h3>Category</h3>
-        {Object.entries(categoryIcons).map(([key, icon]) => (
-          <label key={key}>
-            <input
-              type="checkbox"
-              value={key}
-              checked={filters.selectedCategories.includes(key)}
-              onChange={(e) => {
-                if (e.target.checked) {
-                  setFilters({
-                    ...filters,
-                    selectedCategories: [...filters.selectedCategories, key],
-                  });
-                } else {
-                  setFilters({
-                    ...filters,
-                    selectedCategories: filters.selectedCategories.filter(
-                      (cat) => cat !== key
-                    ),
-                  });
-                }
-              }}
-            />
-            {icon} {key}
-          </label>
-        ))}
-      </div>
-      <div>
         <h3>Amenities</h3>
-        {Object.entries(amenitiesIcons).map(([key, icon]) => (
-          <label key={key}>
+        <div className="two-columns">
+        {amenities.map(({ value, label, icon:IconComponent }) => (
+          <label key={value}>
             <input
               type="checkbox"
-              value={key}
-              checked={filters.selectedAmenities.includes(key)}
+              value={value}
+              checked={filters.selectedAmenities.includes(value)}
               onChange={(e) => {
                 if (e.target.checked) {
                   setFilters({
                     ...filters,
-                    selectedAmenities: [...filters.selectedAmenities, key],
+                    selectedAmenities: [...filters.selectedAmenities, value],
                   });
                 } else {
                   setFilters({
                     ...filters,
                     selectedAmenities: filters.selectedAmenities.filter(
-                      (amenity) => amenity !== key
+                      (amenity) => amenity !== value
                     ),
                   });
                 }
               }}
             />
-            {icon} {key}
+             <IconComponent /> {label}
           </label>
         ))}
+        </div>
       </div>
 
-      {/* <div>
-    <h3>City</h3>
-    <select value={city} onChange={(e) => setCity(e.target.value)}>
-      <option
-value="">Select a city</option>
-{cities.map((city) => (
-<option key={city} value={city}>
-{city}
-</option>
-))}
-</select>
-</div> */}
       <button onClick={handleApplyFilters}>Apply filters</button>
       <button onClick={closeFilter}>Close</button>
     </div>

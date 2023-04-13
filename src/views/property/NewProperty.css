@@ -1,7 +1,4 @@
-.contentWrapper {
-  position: relative;
-  height: calc(100vh - 60px); /* subtract the height of the navigation bar */
-}
+
 
 .registerPropertyForm {
   position: absolute;
@@ -43,5 +40,8 @@
 .MapContainer {
   width: 100%;
   height: 400px;
-  margin-bottom: 24px;
+}
+
+#map-container-register{
+  padding-bottom: 300px;
 }

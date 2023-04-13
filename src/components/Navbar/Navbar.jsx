@@ -9,7 +9,7 @@ import { BiMessage } from "react-icons/bi";
 
 export default function Navbar() {
   const { isLoggedIn } = useContext(AuthContext);
-  // const navigate = useNavigate();
+  
   return (
     <nav className="navbar">
       <ul className="navbarList">

@@ -25,7 +25,7 @@ export default function Properties() {
 
   const handleFilterClick = () => {
     setShowFilter(!showFilter);
-    setMapVisible(!mapVisible);
+    setMapVisible(true);
   };
 
   const applyFilters = (appliedFilters) => {
@@ -34,15 +34,28 @@ export default function Properties() {
   };
 
   const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-    setMapVisible(true);
-    setFilters({
-      priceRange: [0, 1000],
-      minRating: 0,
-      selectedCategories: [],
-      selectedAmenities: [],
-    });
+    if (category === "all") {
+      setSelectedCategory("");
+      setMapVisible(false); // Close the map when "All" is pressed
+      setFilters({ // Clear the filters
+        priceRange: [0, 1000],
+        minRating: 0,
+        selectedCategories: [],
+        selectedAmenities: [],
+      });
+    } else {
+      setSelectedCategory(category);
+      setMapVisible(true);
+      setFilters({
+        priceRange: [0, 1000],
+        minRating: 0,
+        selectedCategories: [],
+        selectedAmenities: [],
+      });
+    }
   };
+  
+  
 
   const closeFilter = () => {
     setShowFilter(false);
@@ -64,6 +77,7 @@ export default function Properties() {
       const response = await propertyService.getAllProperties();
       response.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       setProperties(response);
+      console.log(response)
     } catch (error) {
       console.log(error);
     }
@@ -168,6 +182,7 @@ export default function Properties() {
                   lng: filteredProperties[0].coordinates.lng,
                 }}
                 properties={filteredProperties}
+                
               />
             </GoogleMapsProvider>
           </div>
