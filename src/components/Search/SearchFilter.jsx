@@ -1,6 +1,6 @@
 import React from "react";
 import amenities from "../../data/amenities";
-import categories from "../../data/categories";
+
 
 const SearchFilter = ({
   isOpen,

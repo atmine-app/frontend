@@ -41,6 +41,7 @@ const BookingList = () => {
     };
 
     fetchBookings();
+    //eslint-disable-next-line
   }, [user._id]);
 
   const handleStatusChange = (newStatus) => {
