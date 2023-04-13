@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 import "./Rating.css";
 import "../../App.css";
 
-const RatingForm = ({ propertyId, onSubmit,initialRating}) => {
+const RatingForm = ({ propertyId, onSubmit, initialRating, userBooking}) => {
   const categories = [
     { label: "Location", key: "location" },
     { label: "Cleanliness", key: "cleanliness" },
@@ -25,6 +25,11 @@ const RatingForm = ({ propertyId, onSubmit,initialRating}) => {
     setRatings(updatedRatings);
     await onSubmit(propertyId, updatedRatings);
   };
+
+  // Hide the component if the user has not completed a booking for the property or is not logged in
+  if (!userBooking || userBooking.status !== "completed") {
+    return null;
+  }
 
   const styles = {
     display: "none",

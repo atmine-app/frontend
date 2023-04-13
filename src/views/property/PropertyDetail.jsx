@@ -52,11 +52,13 @@ export default function PropertyDetail() {
         console.log("booking.renter._id:", booking.renter._id);
         console.log("user._id:", user._id);
         return (
-          booking.property && booking.property._id === propertyId &&
-          booking.renter && booking.renter._id === user._id
+          booking.property &&
+          booking.property._id === propertyId &&
+          booking.renter &&
+          booking.renter._id === user._id
         );
       });
-      console.log(booking)
+      console.log(booking);
       setUserBooking(booking);
     } catch (error) {
       console.error("Error fetching user booking:", error);
@@ -71,7 +73,6 @@ export default function PropertyDetail() {
     }
     // eslint-disable-next-line
   }, [propertyId, user]);
-
 
   const getUserVote = async () => {
     try {
@@ -221,7 +222,6 @@ export default function PropertyDetail() {
     }
   };
 
-
   const handleRatingSubmit = async (propertyId, rating) => {
     // Calculate the average rating only for rated categories
     const ratedCategories = Object.values(rating).filter((value) => value > 0);
@@ -239,7 +239,7 @@ export default function PropertyDetail() {
     }
   };
 
-  const heartIconRef = useRef(); 
+  const heartIconRef = useRef();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -268,7 +268,7 @@ export default function PropertyDetail() {
         propertyId={property._id}
       />
       <div className="propertyCardDetail">
-      <div
+        <div
           ref={heartIconRef} // Add this line to assign the reference to the heart icon
           className="heart-container heart-container-detail"
           style={{ pointerEvents: "auto" }}
@@ -280,7 +280,6 @@ export default function PropertyDetail() {
           )}
         </div>
         <div className="DetailImageSection">
-         
           <Swiper
             className=" ImageContainer mySwiper"
             spaceBetween={0}
@@ -301,17 +300,21 @@ export default function PropertyDetail() {
         <PropertyInfo property={property} rating={rating} />
         {property.owner && <UserInfo property={property} />}
         <Description property={property} />
-       
+
         <Amenities property={property} />
       </div>
       <div>
         <h2 className="section-title">Where is the {property.category}?</h2>
-      <GoogleMapsProvider>
-        <Map formData={property} className="section" />
-      </GoogleMapsProvider>
+        <GoogleMapsProvider>
+          <Map formData={property} className="section" />
+        </GoogleMapsProvider>
       </div>
       <br />
-      <h2 className="section-title">Users Reviews -  <HiStar color="var(--color-secondary-green)" fontSize="1.7rem" />{rating.averageRating}</h2>
+      <h2 className="section-title">
+        Users Reviews -{" "}
+        <HiStar color="var(--color-secondary-green)" fontSize="1.7rem" />
+        {rating.averageRating}
+      </h2>
       <Reviews
         reviews={reviews.filter(
           (review) => !user || review.user._id !== user.id
@@ -320,30 +323,37 @@ export default function PropertyDetail() {
         handleUpdate={handleUpdate}
         rating={rating}
       />
-      <h2 className="section-title" id="calendar">Check availability</h2>
-      <Calendar propertyId={propertyId} className="section" property={property}
-       onRangeChange={(newRange) => setSelectedRange(newRange)}
-       />
-      {user && bookingFetched && (
-      <ReviewForm
-        initialReviewText=""
-        handleReviewSubmit={handleReviewSubmit}
-        userBooking={userBooking}
+      <h2 className="section-title" id="calendar">
+        Check availability
+      </h2>
+      <Calendar
+        propertyId={propertyId}
+        className="section"
+        property={property}
+        onRangeChange={(newRange) => setSelectedRange(newRange)}
       />
-)}
+      {user && bookingFetched && (
+        <ReviewForm
+          initialReviewText=""
+          handleReviewSubmit={handleReviewSubmit}
+          userBooking={userBooking}
+        />
+      )}
+      {user && bookingFetched && (
       <StarForm
         propertyId={propertyId}
         onSubmit={handleRatingSubmit}
         rating={rating}
         initialRating={userVote}
+        userBooking={userBooking}
       />
+      )}
       <button onClick={() => navigate(`/chat/${property.owner._id}`)}>
         Chat with owner
       </button>
     </div>
   );
 }
-
 
 // {/* <div className="card-buttons">
 //           <>
@@ -362,12 +372,12 @@ export default function PropertyDetail() {
 //           </>
 //         </div> */}
 
-          // const handlePropertyDelete = async (propertyId) => {
-  //   try {
-  //     await propertyService.deleteProperty(propertyId);
-  //   } catch (error) {
-  //     console.error(error);
-  //   } finally {
-  //     navigate("/");
-  //   }
-  // };
+// const handlePropertyDelete = async (propertyId) => {
+//   try {
+//     await propertyService.deleteProperty(propertyId);
+//   } catch (error) {
+//     console.error(error);
+//   } finally {
+//     navigate("/");
+//   }
+// };

@@ -1,30 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../../hooks/useAuth';
-import bookingService from '../../../services/bookingsServices';
-import './BookingList.css';
-import BackNavigationFloat from '../../../components/BackNavigation/BackNavigationFloat';
-import BookingItem from '../bookingItem/BookingItem';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
+import bookingService from "../../../services/bookingsServices";
+import "./BookingList.css";
+import BackNavigationFloat from "../../../components/BackNavigation/BackNavigationFloat";
+import BookingItem from "../bookingItem/BookingItem";
 
 const BookingList = () => {
   const { user } = useAuth();
   const [bookings, setBookings] = useState([]);
-  const [status, setStatus] = useState('Confirmed');
+  const [status, setStatus] = useState("Confirmed");
 
   useEffect(() => {
     const fetchBookings = async () => {
-      
-        try {
-          console.log('User:', user);
-          console.log('User._id:', user._id)
-          const allBookings = await bookingService.getAllBookings();
-          console.log('All bookings:', allBookings);
-      
-          const filteredBookings = allBookings.filter(
-            (booking) => booking.renter && booking.renter._id === user._id
-          );
-          
-        
+      try {
+        console.log("User:", user);
+        console.log("User._id:", user._id);
+        const allBookings = await bookingService.getAllBookings();
+        console.log("All bookings:", allBookings);
+
+        const filteredBookings = allBookings.filter(
+          (booking) => booking.renter && booking.renter._id === user._id
+        );
+
         // Sort bookings by start date, with the nearest date first
         const sortedBookings = filteredBookings.sort((a, b) => {
           const startDateA = new Date(a.startDate);
@@ -34,9 +32,9 @@ const BookingList = () => {
 
           return timeDiffA - timeDiffB;
         });
-        
+
         setBookings(sortedBookings);
-        console.log(filteredBookings)
+        console.log(filteredBookings);
       } catch (error) {
         console.log(error);
       }
@@ -51,12 +49,12 @@ const BookingList = () => {
 
   const filteredBookings = bookings.filter((booking) => {
     switch (status) {
-      case 'Confirmed':
-        return booking.status === 'confirmed';
-      case 'Past':
-        return booking.status === 'completed';
-      case 'Cancelled':
-        return booking.status === 'cancelled';
+      case "Confirmed":
+        return booking.status === "confirmed";
+      case "Past":
+        return booking.status === "completed";
+      case "Cancelled":
+        return booking.status === "cancelled";
       default:
         return true;
     }
@@ -69,20 +67,20 @@ const BookingList = () => {
         <h2>Bookings</h2>
         <div className="booking-list__filters">
           <button
-            className={`cta-button ${status === 'Confirmed' ? 'active' : ''}`}
-            onClick={() => handleStatusChange('Confirmed')}
+            className={`cta-button ${status === "Confirmed" ? "active" : ""}`}
+            onClick={() => handleStatusChange("Confirmed")}
           >
             Confirmed
           </button>
           <button
-            className={`cta-button ${status === 'Past' ? 'active' : ''}`}
-            onClick={() => handleStatusChange('Past')}
+            className={`cta-button ${status === "Past" ? "active" : ""}`}
+            onClick={() => handleStatusChange("Past")}
           >
             Past
           </button>
           <button
-            className={`cta-button ${status === 'Cancelled' ? 'active' : ''}`}
-            onClick={() => handleStatusChange('Cancelled')}
+            className={`cta-button ${status === "Cancelled" ? "active" : ""}`}
+            onClick={() => handleStatusChange("Cancelled")}
           >
             Cancelled
           </button>
