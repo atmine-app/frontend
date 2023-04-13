@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ReviewForm.css";
 
-export default function ReviewForm({ initialReviewText, handleReviewSubmit }) {
+export default function ReviewForm({ initialReviewText, handleReviewSubmit, userBooking }) {
   const [review, setReview] = useState(initialReviewText || "");
 
   const handleReviewChange = (event) => {
@@ -13,6 +13,11 @@ export default function ReviewForm({ initialReviewText, handleReviewSubmit }) {
     handleReviewSubmit(review);
     setReview("");
   };
+
+  // Hide the component if the user has not completed a booking for the property or is not logged in
+  if (!userBooking || userBooking.status !== "completed") {
+    return null;
+  }
 
   return (
     <div className="section">

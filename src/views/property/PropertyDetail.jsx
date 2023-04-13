@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Map from "../../components/Map/Map";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import Reviews from "../../components/Reviews/Reviews";
+import bookingService from "../../services/bookingsServices";
 import propertyService from "../../services/propertyService";
 import reviewService from "../../services/reviewService";
 import Calendar from "../../components/Calendar/Calendar";
@@ -34,11 +35,43 @@ export default function PropertyDetail() {
   const [reviews, setReviews] = useState([]);
   const [userVote, setUserVote] = useState({});
   const [userReview, setUserReview] = useState(null);
+  const [userBooking, setUserBooking] = useState(null);
+  const [bookingFetched, setBookingFetched] = useState(false);
   const navigate = useNavigate();
   const [selectedRange, setSelectedRange] = useState({
     startDate: new Date(),
     endDate: addDays(new Date(), 7),
   });
+
+  const getUserBooking = async () => {
+    try {
+      const bookings = await bookingService.getAllBookings();
+      const booking = bookings.find((booking) => {
+        console.log("booking.property._id:", booking.property._id);
+        console.log("propertyId:", propertyId);
+        console.log("booking.renter._id:", booking.renter._id);
+        console.log("user._id:", user._id);
+        return (
+          booking.property && booking.property._id === propertyId &&
+          booking.renter && booking.renter._id === user._id
+        );
+      });
+      console.log(booking)
+      setUserBooking(booking);
+    } catch (error) {
+      console.error("Error fetching user booking:", error);
+    } finally {
+      setBookingFetched(true);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      getUserBooking();
+    }
+    // eslint-disable-next-line
+  }, [propertyId, user]);
+
 
   const getUserVote = async () => {
     try {
@@ -291,11 +324,13 @@ export default function PropertyDetail() {
       <Calendar propertyId={propertyId} className="section" property={property}
        onRangeChange={(newRange) => setSelectedRange(newRange)}
        />
+      {user && bookingFetched && (
       <ReviewForm
-        propertyId={propertyId}
-        initialReviewText={userReview && userReview.review}
+        initialReviewText=""
         handleReviewSubmit={handleReviewSubmit}
+        userBooking={userBooking}
       />
+)}
       <StarForm
         propertyId={propertyId}
         onSubmit={handleRatingSubmit}

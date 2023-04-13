@@ -13,11 +13,18 @@ const BookingList = () => {
 
   useEffect(() => {
     const fetchBookings = async () => {
-      try {
-        const allBookings = await bookingService.getAllBookings();
-        const filteredBookings = allBookings.filter(
-          (booking) => booking.renter === user._id
-        );
+      
+        try {
+          console.log('User:', user);
+          console.log('User._id:', user._id)
+          const allBookings = await bookingService.getAllBookings();
+          console.log('All bookings:', allBookings);
+      
+          const filteredBookings = allBookings.filter(
+            (booking) => booking.renter && booking.renter._id === user._id
+          );
+          
+        
         // Sort bookings by start date, with the nearest date first
         const sortedBookings = filteredBookings.sort((a, b) => {
           const startDateA = new Date(a.startDate);
@@ -27,8 +34,9 @@ const BookingList = () => {
 
           return timeDiffA - timeDiffB;
         });
-
+        
         setBookings(sortedBookings);
+        console.log(filteredBookings)
       } catch (error) {
         console.log(error);
       }
