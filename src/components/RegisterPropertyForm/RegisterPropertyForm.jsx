@@ -6,6 +6,7 @@ import openAIService from "../../services/openaiService";
 import amenitiesOptions from "../../data/amenities";
 import "./RegisterPropertyForm.css";
 import BackNavigationFloat from "../BackNavigation/BackNavigationFloat";
+import { toast } from 'react-toastify';
 
 const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   const [images, setImages] = useState({ array: [] });
@@ -72,6 +73,16 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
       const createdProperty = await propertyService.addProperty(propertyData);
       navigate(`/properties/${createdProperty._id}`);
       setFormData(initialState);
+      toast.success('Property successfully created!', {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true, 
+        progress: undefined,
+        theme: "light",
+      });
     } catch (error) {
       console.log(error);
     }
