@@ -34,11 +34,15 @@ function App() {
 
   useEffect(() => {
     const hasVisitedHomePage = localStorage.getItem("hasVisitedHomePage");
-    if (location.pathname === "/" && !hasVisitedHomePage) {
+    const hasSeenSplashPage = localStorage.getItem("hasSeenSplashPage");
+
+    if (location.pathname === "/" && !hasVisitedHomePage && !hasSeenSplashPage) {
       const timeoutId = setTimeout(() => {
         setLoading(false);
         localStorage.setItem("hasVisitedHomePage", true);
+        localStorage.setItem("hasSeenSplashPage", true);
       }, 5000);
+
       return () => {
         clearTimeout(timeoutId);
       };

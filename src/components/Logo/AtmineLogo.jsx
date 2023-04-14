@@ -4,6 +4,7 @@ import purpleLogo from "../../assets/purple.svg";
 import greenLogo from "../../assets/darkgreen.svg";
 
 const AtmineLogo = ({ onClick, handleResetColors, color }) => {
+  // eslint-disable-next-line no-unused-vars
   const [isClicked, setIsClicked] = useState(false);
   const [currentColor, setCurrentColor] = useState(color);
 

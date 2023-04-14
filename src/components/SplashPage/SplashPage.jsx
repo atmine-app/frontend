@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PuffLoader from "react-spinners/PuffLoader";
 import "./SplashPage.css";
-import atminelogo from "../../assets/atmine_1.svg";
+import atminelogo from "../../assets/atmine_1_green.svg";
 
 function SplashPage() {
   const [firstText, setFirstText] = useState("");
@@ -39,7 +39,7 @@ function SplashPage() {
   return (
     <div className="my-splash-container">
       <div className="my-loader-container">
-        <PuffLoader color={"#dbef98"} size={60} loading={loading} />
+        <PuffLoader color={"#6bd8b7"} size={60} loading={loading} />
       </div>
       <div className="my-splash-heading-container">
         <h1 className="my-splash-title">Welcome to</h1>

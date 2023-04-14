@@ -10,15 +10,18 @@
     color: var(--color-primary-lime);
   }
 
-  .my-spalsh-title {
-    font-size: 28px;
-    margin-bottom: 30px;
+  .my-splash-title {
+    font-size: 32px;
+    margin-bottom: 10px;
     text-align: center;
+    color: var(--color-secondary-green);
   }
 
   .my-splash-text {
     text-align: center;
     font-size: 20px;
+    color: var(--color-secondary-green);
+
   }
   
   .my-loader-container {
