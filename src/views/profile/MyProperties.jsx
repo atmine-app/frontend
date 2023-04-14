@@ -6,6 +6,7 @@ import '../booking/bookingList/BookingList.css';
 import BackNavigationFloat from '../../components/BackNavigation/BackNavigationFloat';
 import PropertyItem from '../property/PropertyItem';
 import { RxUpload } from 'react-icons/rx';
+import NotFound from '../../components/NotFound/NotFound';
 
 const MyProperties = () => {
   const [properties, setProperties] = useState([]);
@@ -48,6 +49,7 @@ const MyProperties = () => {
         ) : (
           <>
             <p>No properties found.</p>
+            <NotFound />
             <div className="profileSection section" onClick={handleHosting}>
               <RxUpload className="profileIcon" />
               <h2 className="profileSectionTitle">Hosting</h2>

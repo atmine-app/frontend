@@ -1,5 +1,7 @@
-.wish-list {
-  padding: 25px;
-  margin-top: 30px;
-  color: var(--color-primary-purple)
+.cards-flex-p {
+  margin-left: 7px;
+}
+
+.top160 {
+  margin-top: 160px;
 }
