@@ -10,7 +10,7 @@ import NotFound from "../../../components/NotFound/NotFound";
 const BookingList = () => {
   const { user } = useAuth();
   const [bookings, setBookings] = useState([]);
-  const [status, setStatus] = useState("Confirmed");
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -43,6 +43,21 @@ const BookingList = () => {
 
     fetchBookings();
     //eslint-disable-next-line
+    const confirmedCount = bookings.filter(
+      (booking) => booking.status === "confirmed"
+    ).length;
+    const pastCount = bookings.filter(
+      (booking) => booking.status === "completed"
+    ).length;
+
+    if (confirmedCount > 0) {
+      setStatus("Confirmed");
+    } else if (pastCount > 0) {
+      setStatus("Past");
+    } else {
+      setStatus("Cancelled");
+    }
+    //eslint-disable-next-line
   }, [user._id]);
 
   const handleStatusChange = (newStatus) => {
@@ -62,16 +77,31 @@ const BookingList = () => {
     }
   });
 
+  const mapStatusToBookingStatus = (status) => {
+    switch (status) {
+      case "Confirmed":
+        return "confirmed";
+      case "Past":
+        return "completed";
+      case "Cancelled":
+        return "cancelled";
+      default:
+        return "";
+    }
+  };
+
   return (
     <div>
       <BackNavigationFloat />
       <div className="booking-list">
         <h2>Bookings</h2>
-        {filteredBookings.length > 0 ? (
+        {bookings.length > 0 ? (
           <>
             <div className="booking-list__filters">
               <button
-                className={`cta-button ${status === "Confirmed" ? "active" : ""}`}
+                className={`cta-button ${
+                  status === "Confirmed" ? "active" : ""
+                }`}
                 onClick={() => handleStatusChange("Confirmed")}
               >
                 Confirmed
@@ -83,28 +113,44 @@ const BookingList = () => {
                 Past
               </button>
               <button
-                className={`cta-button ${status === "Cancelled" ? "active" : ""}`}
+                className={`cta-button ${
+                  status === "Cancelled" ? "active" : ""
+                }`}
                 onClick={() => handleStatusChange("Cancelled")}
               >
                 Cancelled
               </button>
             </div>
-            <ul>
-              {filteredBookings.map((booking) => (
-                <Link to={`/bookings/${booking._id}`} key={booking._id}>
-                  <li className="booking-list__item">
-                    <BookingItem booking={booking} />
-                  </li>
+            {filteredBookings.length > 0 ? (
+              <ul>
+                {filteredBookings.map((booking) => (
+                  <Link to={`/bookings/${booking._id}`} key={booking._id}>
+                    <li className="booking-list__item">
+                      <BookingItem booking={booking} />
+                    </li>
+                  </Link>
+                ))}
+              </ul>
+            ) : (
+              <>
+                <p>No bookings {mapStatusToBookingStatus(status)} found.</p>
+                <NotFound />
+                <Link to="/">
+                  <button className="cta-button full100 top90">
+                    Start Exploring
+                  </button>
                 </Link>
-              ))}
-            </ul>
+              </>
+            )}
           </>
         ) : (
           <>
             <p>No bookings found.</p>
             <NotFound />
             <Link to="/">
-              <button className="cta-button full100 top160">Start Exploring</button>
+              <button className="cta-button full100 top160">
+                Start Exploring
+              </button>
             </Link>
           </>
         )}
