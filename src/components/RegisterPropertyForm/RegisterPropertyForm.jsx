@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Multiupload from "../Multiupload/Multiupload";
 import openAIService from "../../services/openaiService";
 import amenitiesOptions from "../../data/amenities";
+import categories from "../../data/categories";
 import "./RegisterPropertyForm.css";
 import BackNavigationFloat from "../BackNavigation/BackNavigationFloat";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   const [images, setImages] = useState({ array: [] });
@@ -25,6 +26,16 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   const [formData, setFormData] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const scrollToElementWithOffset = (element, offset) => {
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
+  };
+
+  const handleAddressInputFocus = () => {
+  const addressContainer = document.getElementById("address-container");
+  scrollToElementWithOffset(addressContainer, 60);
+};
 
   const handleFormImageChange = (updatedImageArray) => {
     setImages(updatedImageArray.array);
@@ -73,13 +84,13 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
       const createdProperty = await propertyService.addProperty(propertyData);
       navigate(`/properties/${createdProperty._id}`);
       setFormData(initialState);
-      toast.success('Property successfully created!', {
+      toast.success("Property successfully created!", {
         position: "top-right",
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-        draggable: true, 
+        draggable: true,
         progress: undefined,
         theme: "light",
       });
@@ -116,14 +127,11 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
               required
             >
               <option value="">Select a category</option>
-              <option value="parking">Parking</option>
-              <option value="storage">Storage</option>
-              <option value="garden">Garden</option>
-              <option value="garage">Garage</option>
-              <option value="basement">Basement</option>
-              <option value="attic">Attic</option>
-              <option value="photostudio">Photostudio</option>
-              <option value="other">Other</option>
+              {categories.map((category) => (
+                <option key={category.value} value={category.value}>
+                  {category.label}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -182,17 +190,20 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
             </div>
           </div>
 
-          <div className="form-field">
-            <label for="address">Address:</label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              required
-            />
-          </div>
+          <div id="address-container">
+  <div className="form-field">
+    <label htmlFor="address">Address:</label>
+    <input
+      type="text"
+      id="address"
+      name="address"
+      value={formData.address}
+      onChange={handleChange}
+      onFocus={handleAddressInputFocus}
+      required
+    />
+  </div>
+</div>
 
           <div className="form-field">
             <label for="city">City:</label>

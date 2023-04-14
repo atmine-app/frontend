@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, OverlayView } from "@react-google-maps/api";
+import { CiLocationOn } from "react-icons/ci";
+import categories from "../../data/categories";
 
 const Map = ({ formData, onLocationChange = () => {} }) => {
   // set initial state for selectedLocation and center
@@ -32,7 +34,7 @@ const Map = ({ formData, onLocationChange = () => {} }) => {
       if (status === "OK") {
         const location = results[0].geometry.location;
         const coordinates = { lat: location.lat(), lng: location.lng() }; // create a new object
-       console.log(coordinates)
+        console.log(coordinates);
         setSelectedLocation(coordinates);
         setCenter(coordinates);
         onLocationChange(coordinates); // pass the new object to onLocationChange callback function
@@ -42,10 +44,46 @@ const Map = ({ formData, onLocationChange = () => {} }) => {
     });
   }, [formData, onLocationChange]);
 
+  const getMarkerIcon = () => {
+    const category = categories.find((cat) => cat.value === formData.category);
+    if (!category) {
+      return <CiLocationOn size={30} style={{color:"white"}}/>;
+    }
+    const IconComponent = category.icon;
+    return <IconComponent size={30} style={{color:"white"}}/>;
+  };
+
+  const markerIcon = getMarkerIcon();
+
+  const renderOverlayView = (position) => (
+    <OverlayView
+      position={position}
+      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+    >
+      <div
+        style={{
+          backgroundColor: "#60C2A4",
+          borderRadius: "10px",
+          padding: "5px 10px",
+          border: "2px solid #605cb8",
+          textAlign: "center",
+          fontSize: "14px",
+          cursor: "pointer",
+        }}
+      >
+        {markerIcon}
+      </div>
+    </OverlayView>
+  );
+
   return center ? (
-    // if center state is not null, return Google Map component with marker at selectedLocation
     <GoogleMap
-      mapContainerStyle={{ height: "400px", width: "90%",margin:"0 auto", borderRadius:"20px"}}
+      mapContainerStyle={{
+        height: "400px",
+        width: "90%",
+        margin: "0 auto",
+        borderRadius: "20px",
+      }}
       center={center}
       zoom={15}
       options={{
@@ -54,16 +92,15 @@ const Map = ({ formData, onLocationChange = () => {} }) => {
         mapTypeControl: false,
       }}
     >
-      {selectedLocation && selectedLocation.lat && selectedLocation.lng && (
-        <Marker position={selectedLocation} />
-      )}
+      {selectedLocation &&
+        selectedLocation.lat &&
+        selectedLocation.lng &&
+        renderOverlayView(selectedLocation)}
     </GoogleMap>
   ) : (
-    // if center state is null, display loading message or placeholder
     <div>
       <p>Loading map...</p>
     </div>
   );
 };
-
 export default Map;
