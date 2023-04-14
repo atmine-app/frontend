@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CardMin from "../../components/Card/CardMin";
+import { Link } from "react-router-dom";
 import favoriteService from "../../services/favoriteService";
 import propertyService from "../../services/propertyService";
 import { useAuth } from "../../hooks/useAuth";
@@ -54,6 +55,9 @@ export default function WishList() {
           <div className="cards-flex-content">
             <p className="cards-flex-p">No properties added to wishlist</p>
             <NotFound />
+            <Link to="/">
+            <button className="cta-button full100 top160">Start Exploring</button>
+            </Link>
           </div>
         ) : (
           likedProperties

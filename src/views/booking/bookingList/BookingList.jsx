@@ -67,43 +67,45 @@ const BookingList = () => {
       <BackNavigationFloat />
       <div className="booking-list">
         <h2>Bookings</h2>
-        <div className="booking-list__filters">
-          <button
-            className={`cta-button ${status === "Confirmed" ? "active" : ""}`}
-            onClick={() => handleStatusChange("Confirmed")}
-          >
-            Confirmed
-          </button>
-          <button
-            className={`cta-button ${status === "Past" ? "active" : ""}`}
-            onClick={() => handleStatusChange("Past")}
-          >
-            Past
-          </button>
-          <button
-            className={`cta-button ${status === "Cancelled" ? "active" : ""}`}
-            onClick={() => handleStatusChange("Cancelled")}
-          >
-            Cancelled
-          </button>
-        </div>
         {filteredBookings.length > 0 ? (
-          <ul>
-            {filteredBookings.map((booking) => (
-              <Link to={`/bookings/${booking._id}`} key={booking._id}>
-                <li className="booking-list__item">
-                  <BookingItem booking={booking} />
-                </li>
-              </Link>
-            ))}
-          </ul>
+          <>
+            <div className="booking-list__filters">
+              <button
+                className={`cta-button ${status === "Confirmed" ? "active" : ""}`}
+                onClick={() => handleStatusChange("Confirmed")}
+              >
+                Confirmed
+              </button>
+              <button
+                className={`cta-button ${status === "Past" ? "active" : ""}`}
+                onClick={() => handleStatusChange("Past")}
+              >
+                Past
+              </button>
+              <button
+                className={`cta-button ${status === "Cancelled" ? "active" : ""}`}
+                onClick={() => handleStatusChange("Cancelled")}
+              >
+                Cancelled
+              </button>
+            </div>
+            <ul>
+              {filteredBookings.map((booking) => (
+                <Link to={`/bookings/${booking._id}`} key={booking._id}>
+                  <li className="booking-list__item">
+                    <BookingItem booking={booking} />
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          </>
         ) : (
           <>
-          <p>No bookings found.</p>
-          <NotFound />
-          <Link to="/">
-            <button className="cta-button full100 top90">Start Exploring</button>
-          </Link>
+            <p>No bookings found.</p>
+            <NotFound />
+            <Link to="/">
+              <button className="cta-button full100 top160">Start Exploring</button>
+            </Link>
           </>
         )}
       </div>
