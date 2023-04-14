@@ -47,10 +47,6 @@ export default function PropertyDetail() {
     try {
       const bookings = await bookingService.getAllBookings();
       const booking = bookings.find((booking) => {
-        console.log("booking.property._id:", booking.property._id);
-        console.log("propertyId:", propertyId);
-        console.log("booking.renter._id:", booking.renter._id);
-        console.log("user._id:", user._id);
         return (
           booking.property &&
           booking.property._id === propertyId &&
@@ -96,7 +92,6 @@ export default function PropertyDetail() {
     try {
       const response = await propertyService.getProperty(propertyId);
       setProperty(response);
-      console.log("property", response);
     } catch (error) {
       console.log(error);
     }
@@ -304,8 +299,8 @@ export default function PropertyDetail() {
       </div>
       <div>
         <h2 className="section-title">Where is the {property.category}?</h2>
-        <GoogleMapsProvider  className="section">
-          <Map formData={property}  />
+        <GoogleMapsProvider className="section">
+          <Map formData={property} />
         </GoogleMapsProvider>
       </div>
       <br />
@@ -339,13 +334,13 @@ export default function PropertyDetail() {
         />
       )}
       {user && bookingFetched && (
-      <StarForm
-        propertyId={propertyId}
-        onSubmit={handleRatingSubmit}
-        rating={rating}
-        initialRating={userVote}
-        userBooking={userBooking}
-      />
+        <StarForm
+          propertyId={propertyId}
+          onSubmit={handleRatingSubmit}
+          rating={rating}
+          initialRating={userVote}
+          userBooking={userBooking}
+        />
       )}
       <button onClick={() => navigate(`/chat/${property.owner._id}`)}>
         Chat with owner
@@ -354,29 +349,4 @@ export default function PropertyDetail() {
   );
 }
 
-// {/* <div className="card-buttons">
-//           <>
-//             <Link to={`/properties/${property._id}/edit`} className="nav-link">
-//               <button type="submit" className="cta-button">
-//                 Edit
-//               </button>
-//             </Link>
 
-//             <button
-//               type="submit"
-//               onClick={() => handlePropertyDelete(propertyId)}
-//             >
-//               Delete
-//             </button>
-//           </>
-//         </div> */}
-
-// const handlePropertyDelete = async (propertyId) => {
-//   try {
-//     await propertyService.deleteProperty(propertyId);
-//   } catch (error) {
-//     console.error(error);
-//   } finally {
-//     navigate("/");
-//   }
-// };

@@ -11,7 +11,6 @@ export default function NewProperty() {
 
   const handleFormChange = (updatedFormData) => {
     setFormData(updatedFormData);
-    console.log(formData);
   };
 
   const handleLocationChange = (coordinates) => {
