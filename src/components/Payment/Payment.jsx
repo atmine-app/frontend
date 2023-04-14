@@ -65,7 +65,7 @@ const CheckoutForm = ({
           "http://localhost:8080/api/checkout",
           {
             id,
-            amount: totalPrice, // Convert to cents
+            amount: Math.round(totalPrice * 100), // Convert to cents
             property,
             renter,
             startDate,
