@@ -56,7 +56,7 @@ const MapSearch = ({ properties }) => {
               borderRadius: "10px",
               padding: "5px 10px",
               border: "2px solid #60C2A4",
-              width: "50px",
+              width: "60px",
               textAlign: "center",
               fontSize: "14px",
               cursor: "pointer",

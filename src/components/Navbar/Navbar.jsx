@@ -21,6 +21,7 @@ export default function Navbar({ isBookingsActive, setIsBookingsActive }) {
     if (!/^\/bookings($|\/)/.test(window.location.pathname)) {
       setIsBookingsActive(false);
     }
+    //eslint-disable-next-line
   }, [window.location.pathname]);
 
   return (

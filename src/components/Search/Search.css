@@ -152,7 +152,6 @@
     display: flex;
   }
   .search-filter.expand {
-    height: 600px;
     overflow-y: auto;
     padding: 15px;
     position: relative;
@@ -209,7 +208,6 @@
 }
 
 .price-range-slider input[type=range] {
-  -webkit-appearance: none;
   width: 100%;
   background: transparent;
   position: absolute;
@@ -247,7 +245,6 @@
 }
 
 .rating-filter-slider {
-  -webkit-appearance: none;
   width: 100%;
   background: transparent;
   position: relative;
