@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
+import {Bs1CircleFill,Bs2CircleFill,Bs3CircleFill,Bs4CircleFill,Bs5CircleFill} from "react-icons/bs";
 import { toast } from "react-toastify";
 import "./Rating.css";
 import "../../App.css";
@@ -11,6 +11,13 @@ const RatingForm = ({ propertyId, onSubmit, initialRating, userBooking}) => {
     { label: "Communication", key: "communication" },
     { label: "Value for Money", key: "valueForMoney" },
     { label: "Amenities", key: "amenities" },
+  ];
+  const icons = [
+    <Bs1CircleFill />,
+    <Bs2CircleFill />,
+    <Bs3CircleFill />,
+    <Bs4CircleFill />,
+    <Bs5CircleFill />,
   ];
 
   const [ratings, setRatings] = useState({
@@ -51,33 +58,36 @@ const RatingForm = ({ propertyId, onSubmit, initialRating, userBooking}) => {
   };
 
   return (
-    <div>
+    <div className="section rating-section">
       {categories.map((category) => (
-        <div key={category.key}>
-          <span>{category.label}: </span>
-          {[...Array(5)].map((star, i) => {
-            const ratingValue = i + 1;
-            return (
-              <label key={i}>
-                <input
-                  type="radio"
-                  name={`rating-${category.key}`}
-                  style={styles}
-                  value={ratingValue}
-                  onClick={() => handleRatingChange(category.key, ratingValue)}
-                />
-                <FaStar
-                  className="star"
-                  color={
-                    ratingValue <= (ratings[category.key] || 0)
-                      ? "#ffc107"
-                      : "#e4e5e9"
-                  }
-                  size={20}
-                />
-              </label>
-            );
-          })}
+        <div key={category.key} style={{ textAlign: "center" }}>
+          <div>{category.label}</div>
+          <div 
+          className="rating-bs-container"
+          style={{ display: "inline-flex" }}>
+            {icons.map((icon, i) => {
+              const ratingValue = i + 1;
+              return (
+                <label key={i} style={{ margin: "0 2px" }}>
+                  <input
+                    type="radio"
+                    name={`rating-${category.key}`}
+                    style={styles}
+                    value={ratingValue}
+                    onClick={() => handleRatingChange(category.key, ratingValue)}
+                  />
+                  {React.cloneElement(icon, {
+                    className: "star",
+                    color:
+                      ratingValue <= (ratings[category.key] || 0)
+                        ? "#06b782"
+                        : "#e4e5e9",
+                    size: 20,
+                  })}
+                </label>
+              );
+            })}
+          </div>
         </div>
       ))}
     </div>
@@ -85,3 +95,8 @@ const RatingForm = ({ propertyId, onSubmit, initialRating, userBooking}) => {
 };
 
 export default RatingForm;
+
+
+
+
+

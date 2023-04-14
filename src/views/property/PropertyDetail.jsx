@@ -58,7 +58,6 @@ export default function PropertyDetail() {
           booking.renter._id === user._id
         );
       });
-      console.log(booking);
       setUserBooking(booking);
     } catch (error) {
       console.error("Error fetching user booking:", error);
@@ -305,12 +304,12 @@ export default function PropertyDetail() {
       </div>
       <div>
         <h2 className="section-title">Where is the {property.category}?</h2>
-        <GoogleMapsProvider>
-          <Map formData={property} className="section" />
+        <GoogleMapsProvider  className="section">
+          <Map formData={property}  />
         </GoogleMapsProvider>
       </div>
       <br />
-      <h2 className="section-title">
+      <h2 className="section-title user-reviews-title">
         Users Reviews -{" "}
         <HiStar color="var(--color-secondary-green)" fontSize="1.7rem" />
         {rating.averageRating}
