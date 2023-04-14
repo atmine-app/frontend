@@ -1,4 +1,3 @@
-import React from "react";
 import amenities from "../../data/amenities";
 
 
@@ -64,7 +63,7 @@ const SearchFilter = ({
         <h3>Amenities</h3>
         <div className="two-columns">
         {amenities.map(({ value, label, icon:IconComponent }) => (
-          <label key={value}>
+          <label key={value} >
             <input
               type="checkbox"
               value={value}

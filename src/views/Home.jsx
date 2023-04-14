@@ -158,7 +158,9 @@ export default function Properties() {
         handleCategorySelect={handleCategorySelect}
         handleFilterClick={handleFilterClick}
       />
+       </div>
       <SearchFilter
+       className="search-filter-container"
         isOpen={showFilter}
         applyFilters={applyFilters}
         closeFilter={closeFilter}
@@ -168,7 +170,7 @@ export default function Properties() {
         filters={filters}
         setFilters={setFilters}
       />
-      </div>
+     
       
 
       <div className="map-and-cards-container">

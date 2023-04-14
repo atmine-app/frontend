@@ -37,7 +37,7 @@ const amenitiesOptions = [
     { value: "hairDryer", label: "Hair Dryer" ,icon:MdOutlineAir},
     { value: "laptopFriendly", label: "Laptop Friendly",icon:BsLaptop },
     { value: "hangers", label: "Hangers",icon:TbHanger },
-    { value: "carbonMonoxideDetector", label: "Carbon Monoxide Detector",icon:RiAlarmWarningLine },
+    { value: "carbonMonoxideDetector", label: "CO2 Detector",icon:RiAlarmWarningLine },
     { value: "smokeDetector", label: "Smoke Detector",icon: RiAlarmWarningFill},
     { value: "firstAidKit", label: "First Aid Kit" ,icon:GrAidOption},
     { value: "grill", label: "Grill",icon:GiBarbecue },
