@@ -26,11 +26,23 @@ import MyReservations from "./views/profile/MyReservations";
 import MyProperties from "./views/profile/MyProperties";
 import MyPropertyDetails from "./views/profile/MyPropertyDetails";
 import SplashPage from "./components/SplashPage/SplashPage";
+import PuffLoader from "react-spinners/PuffLoader";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const [showNavbar, setShowNavbar] = useState(true);
+  const [puffLoading, setPuffLoading] = useState(true); 
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setPuffLoading(false);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   useEffect(() => {
     const hasVisitedHomePage = localStorage.getItem("hasVisitedHomePage");
@@ -69,6 +81,14 @@ function App() {
   
   if (loading) {
     return <SplashPage />;
+  }
+
+  if (puffLoading) {
+    return (
+      <div className="loading-container">
+        <PuffLoader color={"#60c2a4"}/>
+      </div>
+    );
   }
 
   return (
