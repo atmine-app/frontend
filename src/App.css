@@ -7,6 +7,7 @@
   list-style: none;
   text-decoration: none;
   background-color: transparent;
+  
 }
 
 :root {
@@ -40,7 +41,9 @@ button .rdrDay:focus {
 html {
   scroll-behavior: smooth;
 }
-
+h3{
+  color: var(--color-primary-black)
+}
 body {
   padding-bottom: 75px;
   color: var(--color-primary-black);
@@ -141,7 +144,7 @@ select:focus {
   border-color: var(--color-primary-purple);
 } */
 
-/* FORMS NEW */
+/* FORMS */
 
 .form-container {
   display: flex;

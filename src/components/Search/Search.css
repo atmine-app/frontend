@@ -180,6 +180,112 @@
   .search-filter.expand {
     scrollbar-width: thin;
     scrollbar-color: var(--color-primary-purple) #f1f1f1;
+    display: flex;
+    flex-direction: column;
   }
   
-  
+
+/* Price range */
+
+.price-range-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.price-range-content > div, .rating-filter-container>p {
+  border: 1px solid var(--color-secondary-green);
+  border-radius: var(--border-radius);
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.price-range-slider {
+  position: relative;
+  margin: 15px 0;
+}
+
+.price-range-slider input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+  position: absolute;
+  left: 0;
+}
+
+.price-range-slider input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: #36b37e;
+  cursor: pointer;
+  margin-top: -5px;
+  position: relative;
+  z-index: 1;
+}
+
+.price-range-slider input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  background: #e8e8e8;
+  border-radius: 3px;
+  border: none;
+}
+
+/* min rating */
+
+.rating-filter-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  gap: 10px;
+}
+
+.rating-filter-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+  position: relative;
+  left: 0;
+}
+
+.rating-filter-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: #36b37e;
+  cursor: pointer;
+  margin-top: -5px;
+  position: relative;
+  z-index: 1;
+}
+
+.rating-filter-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  background: #e8e8e8;
+  border-radius: 3px;
+  border: none;
+}
+
+.rating-filter-container>p{
+  width:max-content;
+  margin-top: 0;
+}
+
+/* buttons  */
+.filter-buttons-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+.search-filter > button{
+  width: max-content;
+}
