@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import "./BackNavigationFloat.css";
-import atminelogo from "../../assets//atmine_large.png";
+import atminelogo from "../../assets/atmine_1_purple.svg";
 
 const BackNavigationFloat = () => {
   const [showBackButton, setShowBackButton] = useState(false);

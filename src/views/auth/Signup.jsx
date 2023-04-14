@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/authService";
 import { toast } from "react-toastify";
-import atminelogo from "../../assets//atmine_large.png";
+import atminelogo from "../../assets/atmine_1_purple.svg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Signup() {
