@@ -31,7 +31,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const [showNavbar, setShowNavbar] = useState(true);
-  const [isBookingsActive, setIsBookingsActive] = useState(false);
 
   useEffect(() => {
     const hasVisitedHomePage = localStorage.getItem("hasVisitedHomePage");
@@ -83,10 +82,7 @@ function App() {
         theme="light"
       />
       {showNavbar && (
-        <Navbar
-          isBookingsActive={isBookingsActive}
-          setIsBookingsActive={setIsBookingsActive}
-        />
+        <Navbar />
       )}
       <Routes>
         <Route exact path="/" element={<Home />} />
