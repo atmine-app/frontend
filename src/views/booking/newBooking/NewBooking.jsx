@@ -35,7 +35,6 @@ export default function NewBooking() {
       setFormattedDateRange(
         `${formatDate(parsedStartDate)} - ${formatDate(parsedEndDate)}`
       );
-      console.log("days", days);
     }
   }, [property.price, startDate, endDate, bookingPrice, serviceFee]);
 
@@ -44,7 +43,6 @@ export default function NewBooking() {
   const getProperty = async () => {
     try {
       const response = await propertyService.getProperty(propertyId);
-      console.log(response);
       setProperty(response);
     } catch (error) {
       console.log(error);

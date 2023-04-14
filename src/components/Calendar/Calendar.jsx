@@ -34,7 +34,6 @@ export default function CalendarComp({ propertyId, property, onRangeChange }) {
       const propertyBookings = bookings.filter(
         (booking) => booking.property && booking.property._id === propertyId
       );
-      console.log("propertyBookings", propertyBookings);
       let bookedDatesArray = [];
       propertyBookings.forEach((booking) => {
         let currentDate = parseISO(booking.startDate);

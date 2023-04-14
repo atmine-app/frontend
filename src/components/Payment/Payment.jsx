@@ -33,15 +33,13 @@ const CheckoutForm = ({
     style: {
       base: {
         color: "#605cb8",
+        "::placeholder": {
+          color: "#666",
+        },
       },
-    },
-    classes: {
-      base: "form-control",
-      complete: "is-valid",
-      empty: "is-invalid",
-      error: "invalid-feedback",
-      invalid: "is-invalid",
-      webkitAutofill: "autocomplete",
+      invalid: {
+        color: "#9e2146",
+      },
     },
     disabled: false,
   };

@@ -77,7 +77,6 @@ export default function Properties() {
       const response = await propertyService.getAllProperties();
       response.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       setProperties(response);
-      console.log(response)
     } catch (error) {
       console.log(error);
     }
