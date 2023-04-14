@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import propertyService from "../../services/propertyService";
 import BackNavigationFloat from "../../components/BackNavigation/BackNavigationFloat";
-import Multiupload from "../../components/Multiupload/Multiupload";
+/* import Multiupload from "../../components/Multiupload/Multiupload"; */
 
 export default function EditProperty() {
   const { propertyId } = useParams();
