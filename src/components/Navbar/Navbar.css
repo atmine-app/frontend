@@ -33,6 +33,7 @@ nav a.active{
   color: var(--color-secondary-green)
 }
 
+
 .navbarList {
   width: 100%;
   display: flex;
@@ -63,4 +64,3 @@ nav a.active{
   width: 1.5rem; /* set a fixed width for the icon */
   height: 1.5rem; /* set a fixed height for the icon */
 }
-

@@ -6,22 +6,17 @@ import { AiOutlineSearch, AiOutlineHeart } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 import { BiMessage } from "react-icons/bi";
 import atmineLogoPurple from "../../assets/purple.svg";
-import atmineLogoGreen from "../../assets/lightgreen.svg";
 
-export default function Navbar({ isBookingsActive, setIsBookingsActive }) {
+export default function Navbar() {
   const { isLoggedIn } = useContext(AuthContext);
   const [showNavbar, setShowNavbar] = useState(true);
 
   useEffect(() => {
-    const isPropertyDetailPage = /^\/properties\/[^/]+$/.test(window.location.pathname);
+    const isPropertyDetailPage = /^\/properties\/[^/]+$/.test(
+      window.location.pathname
+    );
     setShowNavbar(!isPropertyDetailPage);
   }, []);
-
-  useEffect(() => {
-    if (!/^\/bookings($|\/)/.test(window.location.pathname)) {
-      setIsBookingsActive(false);
-    }
-  }, [window.location.pathname]);
 
   return (
     <>
@@ -68,14 +63,10 @@ export default function Navbar({ isBookingsActive, setIsBookingsActive }) {
             )}
             {isLoggedIn && (
               <li>
-                <NavLink
-                  to="/bookings"
-                  isActive={() => /^\/bookings($|\/)/.test(window.location.pathname)}
-                  onClick={() => setIsBookingsActive(true)}
-                >
+                <NavLink to="/bookings">
                   <div className="navItem">
                     <img
-                      src={isBookingsActive ? atmineLogoGreen : atmineLogoPurple}
+                      src={atmineLogoPurple}
                       alt="Bookings"
                       className="navIcon"
                     />
