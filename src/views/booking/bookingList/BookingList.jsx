@@ -5,6 +5,7 @@ import bookingService from "../../../services/bookingsServices";
 import "./BookingList.css";
 import BackNavigationFloat from "../../../components/BackNavigation/BackNavigationFloat";
 import BookingItem from "../bookingItem/BookingItem";
+import NotFound from "../../../components/NotFound/NotFound";
 
 const BookingList = () => {
   const { user } = useAuth();
@@ -96,7 +97,13 @@ const BookingList = () => {
             ))}
           </ul>
         ) : (
+          <>
           <p>No bookings found.</p>
+          <NotFound />
+          <Link to="/">
+            <button className="cta-button full100 top90">Start Exploring</button>
+          </Link>
+          </>
         )}
       </div>
     </div>
