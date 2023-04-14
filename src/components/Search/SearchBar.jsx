@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BiSliderAlt } from "react-icons/bi";
 import "./Search.css";
 import { AiOutlineSearch } from "react-icons/ai";
-import logo from "../../assets/atmine_small.png";
+import logo from "../../assets/atmine_2.svg";
 import categories from "../../data/categories";
 import { AiOutlineAppstore } from "react-icons/ai";
 
@@ -27,7 +27,7 @@ const SearchBar = (props) => {
           <img
             src={logo}
             alt="logo"
-            style={{ width: "45px", height: "45px" }}
+            style={{ width: "50px", height: "40px", marginTop: "5px" }}
             className="navbar-logo"
           />
           <div className="search-bar">

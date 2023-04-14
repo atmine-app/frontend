@@ -1,11 +1,11 @@
 /* Search */
-/* .sticky__searchBar {
+.sticky__searchBar {
   position: sticky;
   top: 0;
   background-color: #fff;
   z-index: 999;
   padding: 5px;
-} */
+}
 
 .header {
   margin-top: 1rem;
@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 1.5rem;
-  margin-left: 1rem;
+  margin-left: 0.9rem;
   margin-right: 1rem;
 }
 
@@ -95,6 +95,7 @@
     margin-bottom: 5px;
     display: flex;
     align-content: center;
+    margin-left: 5px;
   }
   
   .searchCategoryContainer::-webkit-scrollbar { /* Chrome, Safari, and Edge */
@@ -118,7 +119,7 @@
   }
   
   .icon {
-    font-size: 2rem; /* Increase icon size */
+    font-size: 1.5rem; /* Increase icon size */
     display: block; /* Make icon a block element */
   }
   
