@@ -25,13 +25,17 @@ import Description from "../../components/Description/Description";
 import Amenities from "../../components/Ameties/Amenities";
 import BookingNav from "../../components/Navbar/BookingNav";
 import { addDays } from "date-fns";
+import { toast } from "react-toastify";
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
   const [rating, setRating] = useState(0);
   const { user } = useAuth();
   const [property, setProperty] = useState({});
-  const { liked, handleAddFavorite } = usePropertyLike(property, user);
+  const { liked, handleAddFavorite } = usePropertyLike(property, user, {
+    onAdd: () => toast.success("Property added to wishlist!"),
+    onRemove: () => toast.success("Property removed from wishlist!"),
+  });
   const [reviews, setReviews] = useState([]);
   const [userVote, setUserVote] = useState({});
   const [userReview, setUserReview] = useState(null);
@@ -42,6 +46,8 @@ export default function PropertyDetail() {
     startDate: new Date(),
     endDate: addDays(new Date(), 7),
   });
+
+  
 
   const getUserBooking = async () => {
     try {
