@@ -1,3 +1,4 @@
+
 import React, { useContext, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -5,11 +6,12 @@ import "./Navbar.css";
 import { AiOutlineSearch, AiOutlineHeart } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 import { BiMessage } from "react-icons/bi";
-import atmineLogoPurple from "../../assets/purple.svg";
+import AtmineLogo from "../../components/Logo/AtmineLogo";
 
 export default function Navbar() {
   const { isLoggedIn } = useContext(AuthContext);
   const [showNavbar, setShowNavbar] = useState(true);
+  const [bookingsColor, setBookingsColor] = useState("purple");
 
   useEffect(() => {
     const isPropertyDetailPage = /^\/properties\/[^/]+$/.test(
@@ -17,6 +19,14 @@ export default function Navbar() {
     );
     setShowNavbar(!isPropertyDetailPage);
   }, []);
+
+  const handleBookingsClick = () => {
+    setBookingsColor("green");
+  };
+
+  const handleResetColors = () => {
+    setBookingsColor("purple");
+  };
 
   return (
     <>
@@ -53,7 +63,7 @@ export default function Navbar() {
             )}
             {isLoggedIn && (
               <li>
-                <NavLink to="/wishlist">
+                <NavLink to="/wishlist" onClick={handleResetColors}>
                   <div className="navItem">
                     <AiOutlineHeart className="navIcon" />
                     Wishlist
@@ -65,10 +75,10 @@ export default function Navbar() {
               <li>
                 <NavLink to="/bookings">
                   <div className="navItem">
-                    <img
-                      src={atmineLogoPurple}
-                      alt="Bookings"
-                      className="navIcon"
+                    <AtmineLogo
+                      onClick={handleBookingsClick}
+                      color={bookingsColor}
+                      handleResetColors={handleResetColors}
                     />
                     Bookings
                   </div>
@@ -77,7 +87,7 @@ export default function Navbar() {
             )}
             {isLoggedIn && (
               <li>
-                <NavLink to="/messages">
+                <NavLink to="/messages" onClick={handleResetColors}>
                   <div className="navItem">
                     <BiMessage className="navIcon" />
                     Inbox
@@ -87,7 +97,7 @@ export default function Navbar() {
             )}
             {isLoggedIn && (
               <li>
-                <NavLink to="/profile">
+                <NavLink to="/profile" onClick={handleResetColors}>
                   <div className="navItem">
                     <RxAvatar className="navIcon" />
                     Profile
