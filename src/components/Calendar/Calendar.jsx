@@ -93,14 +93,14 @@ export default function CalendarComp({ propertyId, property,onRangeChange }) {
                   minDate={new Date()}
                 />
               </div>
-              <Link
+              {/* <Link
                 to={`/properties/${propertyId}/${rangeString}`}
                 className="nav-link"
               >
                 <button className="cta-button">
                   Book for {property.price}€ a day
                 </button>
-              </Link>
+              </Link> */}
             </>
           )}
         </>
