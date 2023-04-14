@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import "./MapSearch.css";
 
 const MapSearch = ({ properties }) => {
+  
   const customMapStyle = [
     {
       featureType: "poi",
