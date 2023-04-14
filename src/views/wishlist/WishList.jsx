@@ -4,6 +4,7 @@ import favoriteService from "../../services/favoriteService";
 import propertyService from "../../services/propertyService";
 import { useAuth } from "../../hooks/useAuth";
 import BackNavigationFloat from "../../components/BackNavigation/BackNavigationFloat";
+import NotFound from "../../components/NotFound/NotFound";
 import "./WishList.css";
 
 export default function WishList() {
@@ -21,7 +22,7 @@ export default function WishList() {
         }
         const propertyIds = new Set(
           favorites
-            .filter((favorite) => favorite.user === user._id) 
+            .filter((favorite) => favorite.user === user._id)
             .map((favorite) => favorite.property)
         );
 
@@ -45,19 +46,21 @@ export default function WishList() {
   }
 
   return (
-    <div>
-    <BackNavigationFloat />
-    <div className="cards-flex">
+    <div className="booking-list">
       <h2>Wishlist</h2>
-      {likedProperties.length === 0 ? (
-        <p>No properties added to wishlist</p>
-      ) : (
-        likedProperties
-          .filter((property) => property !== null && property !== undefined)
-          .map((property) => <CardMin className="wish" key={property._id} property={property} />
-          )
-      )}
-    </div>
+      <BackNavigationFloat />
+      <div className="cards-flex">
+        {likedProperties.length === 0 ? (
+          <div className="cards-flex-content">
+            <p className="cards-flex-p">No properties added to wishlist</p>
+            <NotFound />
+          </div>
+        ) : (
+          likedProperties
+            .filter((property) => property !== null && property !== undefined)
+            .map((property) => <CardMin className="wish" key={property._id} property={property} />)
+        )}
+      </div>
     </div>
   );
 }

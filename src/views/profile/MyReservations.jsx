@@ -5,6 +5,7 @@ import propertyService from '../../services/propertyService';
 import '../booking/bookingList/BookingList.css';
 import BackNavigationFloat from '../../components/BackNavigation/BackNavigationFloat';
 import BookingItem from '../booking/bookingItem/BookingItem';
+import NotFound from '../../components/NotFound/NotFound';
 
 const MyReservations = () => {
   const { propertyId } = useParams();
@@ -44,7 +45,10 @@ const MyReservations = () => {
             ))}
           </ul>
         ) : (
+          <>
           <p>No reservations found.</p>
+          <NotFound />
+          </>
         )}
       </div>
     </div>
