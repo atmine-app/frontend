@@ -100,7 +100,8 @@ export default function Properties() {
           property.description
             .toLowerCase()
             .includes(searchValue.toLowerCase()) ||
-          property.category.toLowerCase().includes(searchValue.toLowerCase())
+          property.category.toLowerCase().includes(searchValue.toLowerCase()) ||
+          property.city.toLowerCase().includes(searchValue.toLowerCase())
       );
     }
 

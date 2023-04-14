@@ -23,3 +23,7 @@
     right: 15px;
     color:var(--color-secondary-green)
   }
+  .user-reviews-title{
+    padding-top: 10px;
+    border-top: 1px solid #ececec;;
+  }

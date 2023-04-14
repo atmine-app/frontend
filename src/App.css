@@ -41,7 +41,7 @@ button .rdrDay:focus {
 html {
   scroll-behavior: smooth;
 }
-h3{
+h3,h2,h1,h4,h5,h6,p {
   color: var(--color-primary-black)
 }
 body {

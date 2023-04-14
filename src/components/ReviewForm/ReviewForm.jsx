@@ -33,7 +33,7 @@ export default function ReviewForm({ initialReviewText, handleReviewSubmit, user
   return (
     <div className="section">
       <form onSubmit={handleFormSubmit} className="review-form">
-        <label htmlFor="comment">Tell us your experience</label>
+        <h2>Tell us your experience</h2>
         <textarea
           type="text"
           id="content"

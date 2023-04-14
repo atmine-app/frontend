@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { DateRange } from "react-date-range";
-import format from "date-fns/format";
 import { addDays, parseISO } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -20,7 +19,6 @@ export default function CalendarComp({ propertyId, property,onRangeChange }) {
 
   const [bookedDates, setBookedDates] = useState([]);
   const refOne = useRef(null);
-  const [rangeString, setRangeString] = useState("");
   const [calendarVisible, setCalendarVisible] = useState(false);
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -77,11 +75,6 @@ export default function CalendarComp({ propertyId, property,onRangeChange }) {
                   editableDateInputs={true}
                   onChange={(item) => {
                     setRange([item.selection]);
-                    const rangeString = `${format(
-                      item.selection.startDate,
-                      "yyyy-MM-dd"
-                    )}&${format(item.selection.endDate, "yyyy-MM-dd")}`;
-                    setRangeString(rangeString);
                     onRangeChange(item.selection); // Pass the new range to the parent component
                   }}
                   moveRangeOnFirstSelection={false}
@@ -93,14 +86,6 @@ export default function CalendarComp({ propertyId, property,onRangeChange }) {
                   minDate={new Date()}
                 />
               </div>
-              {/* <Link
-                to={`/properties/${propertyId}/${rangeString}`}
-                className="nav-link"
-              >
-                <button className="cta-button">
-                  Book for {property.price}€ a day
-                </button>
-              </Link> */}
             </>
           )}
         </>
