@@ -1,5 +1,9 @@
 
-  .rdrYearPicker
+.rdrCalendarWrapper, .rdrDateRangeWrapper, .calendarElement,.rdrMonths, .rdrMonthsHorizontal,.rdrMonth
   {
     width: 100%;
+  }
+
+  .rdrYearPicker{
+    width:50%
   }
