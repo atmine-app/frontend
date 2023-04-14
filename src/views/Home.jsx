@@ -158,7 +158,9 @@ export default function Properties() {
         handleCategorySelect={handleCategorySelect}
         handleFilterClick={handleFilterClick}
       />
+       </div>
       <SearchFilter
+       className="search-filter-container"
         isOpen={showFilter}
         applyFilters={applyFilters}
         closeFilter={closeFilter}
@@ -168,24 +170,22 @@ export default function Properties() {
         filters={filters}
         setFilters={setFilters}
       />
-      </div>
+     
       
 
+      <div className="map-and-cards-container">
       {(searchValue || mapVisible) &&
         filteredProperties.length > 0 &&
         filteredProperties[0].coordinates && (
-          <div style={{ height: "200px" }}>
-            <GoogleMapsProvider>
-              <MapSearch
-                center={{
-                  lat: filteredProperties[0].coordinates.lat,
-                  lng: filteredProperties[0].coordinates.lng,
-                }}
-                properties={filteredProperties}
-                
-              />
-            </GoogleMapsProvider>
-          </div>
+          <GoogleMapsProvider>
+            <MapSearch
+              center={{
+                lat: filteredProperties[0].coordinates.lat,
+                lng: filteredProperties[0].coordinates.lng,
+              }}
+              properties={filteredProperties}
+            />
+          </GoogleMapsProvider>
         )}
       <div>
         {properties !== null ? (
@@ -203,5 +203,6 @@ export default function Properties() {
         )}
       </div>
     </div>
-  );
+  </div>
+);
 }
