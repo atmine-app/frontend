@@ -46,6 +46,7 @@ const CheckoutForm = ({
     disabled: false,
   };
 
+  // eslint-disable-next-line no-unused-vars
   const [paymentDetails, setPaymentDetails] = useState(null);
 
   const handleSubmit = async (e) => {
