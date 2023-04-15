@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import propertyService from '../../services/propertyService';
 import '../booking/bookingList/BookingList.css';
@@ -22,7 +22,16 @@ const MyProperties = () => {
       try {
         const allProperties = await propertyService.getAllProperties();
         const userProperties = allProperties.filter(property => property.owner._id === user._id);
-        setProperties(userProperties);
+        const sortedProperties = userProperties.sort((a, b) => {
+          if (a.active && !b.active) {
+            return -1;
+          } else if (!a.active && b.active) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        setProperties(sortedProperties);
       } catch (error) {
         console.log(error);
       }

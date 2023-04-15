@@ -11,6 +11,7 @@ const PropertyItem = ({ property }) => {
       </div>
       <div className="booking-item__details">
         <h3 className="booking-item__title">{property?.title}</h3>
+        <p><span style={{ color: property.active ? 'green' : 'red' }}>{property.active ? 'Active' : 'Inactive'}</span></p>
       </div>
       <div className="booking-item__arrow">
         <HiOutlineChevronRight />
