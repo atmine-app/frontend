@@ -32,6 +32,21 @@ export default function Login() {
     try {
       const response = await authService.login(user);
       if (response.authToken) {
+        // Check user status before logging in
+        if (response.user.status === "inactive") {
+          toast.error("Unable to authenticate user", {
+            position: "top-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setLoading(false);
+          return;
+        }
         storeToken(response.authToken);
         authenticateUser();
         navigate("/");

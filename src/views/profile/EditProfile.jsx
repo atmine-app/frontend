@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import userService from "../../services/userService";
-import propertyService from "../../services/propertyService";
+import bookingService from "../../services/bookingService";
 import SingleImageUpload from "../../components/SingleUpload/SingleImageUpload";
 import BackNavigationFloat from "../../components/BackNavigation/BackNavigationFloat";
 import "./MyProfile.css";
@@ -52,28 +52,25 @@ export default function EditProfile() {
   useEffect(() => {
     const checkActiveBookings = async () => {
       try {
-        const allProperties = await propertyService.getAllProperties();
-        const userProperties = allProperties.filter(property => property.owner._id === user._id);
-        const activeBookings = userProperties.some(
-          property => property?.bookings?.some(booking => booking.status === 'active')
-        );
-        console.log(allProperties)
-        console.log(userProperties)
-        console.log(activeBookings)
-        setHasActiveBookings(activeBookings);
+        const bookings = await bookingService.getAllBookings();
+        const confirmedBookings = bookings.filter((booking) => booking.status === "confirmed");
+        const hasActiveBookings = confirmedBookings.length > 0;
+        console.log(hasActiveBookings)
+        setHasActiveBookings(hasActiveBookings);
       } catch (error) {
         console.log(error);
       }
     };
-
+  
     checkActiveBookings();
   }, [user._id]);
 
   const handleInactivateUser = async () => {
     try {
-      await userService.inactivateUser(user._id);
+      const updatedUser = { ...user, status: "inactive" };
+      await userService.updateUser(updatedUser);
       logOutUser();
-      toast.success("User successfully inactivated", {
+      toast.success("User successfully inactivated! See you soon", {
         position: "top-right",
         autoClose: 2500,
         hideProgressBar: false,
@@ -88,7 +85,6 @@ export default function EditProfile() {
       console.error(error);
     }
   };
-
 
   return (
     <div>
@@ -161,14 +157,20 @@ export default function EditProfile() {
         </div>
         {user.status === "active" && !hasActiveBookings && (
           <div className="editProfileLogoutSection section">
-            <button className="cta-button danger" onClick={handleInactivateUser}>
+            <button
+              className="cta-button danger"
+              onClick={handleInactivateUser}
+            >
               Inactivate User
             </button>
           </div>
         )}
         {hasActiveBookings && (
           <div className="editProfileLogoutSection section">
-            <p>You cannot inactivate your user while there are active bookings ahead.</p>
+            <p>
+              You cannot inactivate your user while there are active bookings
+              ahead.
+            </p>
           </div>
         )}
         <div className="editProfileLogoutSection section">
@@ -179,4 +181,4 @@ export default function EditProfile() {
       </div>
     </div>
   );
-        }
+}
