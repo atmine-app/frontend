@@ -36,6 +36,7 @@ function App() {
   const isPageLoading = usePageLoader();
 
   useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
     const timeoutId = setTimeout(() => {
       const hasVisitedHomePage = localStorage.getItem("hasVisitedHomePage");
       if (location.pathname === "/" && !hasVisitedHomePage) {
@@ -50,6 +51,7 @@ function App() {
         setLoading(false);
       }
     }, [location.pathname]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
