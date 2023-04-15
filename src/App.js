@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import usePageLoader from "./hooks/usePageLoader";
 import Home from "./views/Home";
 import Navbar from "./components/Navbar/Navbar";
 import ErrorPage from "./views/ErrorPage";
@@ -26,11 +27,13 @@ import MyReservations from "./views/profile/MyReservations";
 import MyProperties from "./views/profile/MyProperties";
 import MyPropertyDetails from "./views/profile/MyPropertyDetails";
 import SplashPage from "./components/SplashPage/SplashPage";
+import PuffLoader from "react-spinners/PuffLoader";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const [showNavbar, setShowNavbar] = useState(true);
+  const isPageLoading = usePageLoader();
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -64,7 +67,7 @@ function App() {
     const isPropertyDetailPage = /^\/properties\/[^/]+$/.test(location.pathname);
     setShowNavbar(!isPropertyDetailPage);
   }, [location.pathname]);
-  
+
   if (loading) {
     return <SplashPage />;
   }
@@ -83,110 +86,119 @@ function App() {
       pauseOnHover
       theme="light"
     />
-    {showNavbar && (
-      <Navbar />
-    )}
-    <Routes>
-      <Route exact path="/" element={<Home />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-      <Route
-        path="/profile"
-        element={
-          <IsPrivate>
-            <MyProfile />
-          </IsPrivate>
-        }
-      />
-      <Route
-        path="/profile/edit"
-        element={
-          <IsPrivate>
-            <EditProfile />
-          </IsPrivate>
-        }
-      />
-      <Route
-        path="/profile/properties"
-        element={
-          <IsPrivate>
-            <MyProperties />
-          </IsPrivate>
-        }
-      />
-      <Route
-        path="/profile/properties/:propertyId"
-        element={
-          <IsPrivate>
-            <MyPropertyDetails />
-          </IsPrivate>
-        }
-      />
-      <Route
-        path="/profile/properties/:propertyId/bookings"
-        element={
-          <IsPrivate>
-            <MyReservations />
-          </IsPrivate>
-        }
-      />
-      <Route
-        path="/profile/properties/:propertyId/edit"
-        element={
-          <IsPrivate>
-            <EditProperty />
-          </IsPrivate>
-        }
-      />
-      <Route
-        path="/private"
-        element={
-          <IsPrivate>
-            <PrivateView />
-          </IsPrivate>
-        }
-      />
-      <Route
-        path="/register-property"
-        element={
-          <IsPrivate>
-            <NewProperty />
-          </IsPrivate>
-        }
-      />
-      <Route
-        path="/wishlist"
-        element={
-          <IsPrivate>
-            <WishList />
-          </IsPrivate>
-        }
-      />
-      <Route path="/properties/:propertyId" element={<PropertyDetail />} />
-      <Route path="/properties/:propertyId/edit" element={<EditProperty />} />
-      <Route path="/properties/:propertyId/:range" element={<NewBooking />} />
-      <Route
-        path="/bookings"
-        element={
-          <IsPrivate>
-            <BookingList />
-          </IsPrivate>
-        }
-      />
-      <Route
-        path="/bookings/:bookingId"
-        element={
-          <IsPrivate>
-            <BookingDetail />
-          </IsPrivate>
-        }
-      />
-      <Route path="/error" element={<ErrorPage />} />
-      <Route path="/chat/:otherUserId" element={<ChatComponent />} />
-      <Route path="*" element={<NotFound />} />
-      <Route path="/messages" element={<InboxComponent />} />
-    </Routes>
-  </div>
+    {showNavbar && <Navbar />}
+  {isPageLoading && (
+    <div className="loading-container">
+      <PuffLoader color="#605cb8" loading={isPageLoading} size={60} />
+    </div>
+  )}
+  <Routes>
+    <Route exact path="/" element={<Home />} />
+    <Route path="/signup" element={<Signup />} />
+    <Route path="/login" element={<Login />} />
+    <Route
+      path="/profile"
+      element={
+        <IsPrivate>
+          <MyProfile />
+        </IsPrivate>
+      }
+    />
+    <Route
+      path="/profile/edit"
+      element={
+        <IsPrivate>
+          <EditProfile />
+        </IsPrivate>
+      }
+    />
+    <Route
+      path="/profile/properties"
+      element={
+        <IsPrivate>
+          <MyProperties />
+        </IsPrivate>
+      }
+    />
+    <Route
+      path="/profile/properties/:propertyId"
+      element={
+        <IsPrivate>
+          <MyPropertyDetails />
+        </IsPrivate>
+      }
+    />
+    <Route
+      path="/profile/properties/:propertyId/bookings"
+      element={
+        <IsPrivate>
+          <MyReservations />
+        </IsPrivate>
+      }
+    />
+    <Route
+      path="/profile/properties/:propertyId/edit"
+      element={
+        <IsPrivate>
+          <EditProperty />
+        </IsPrivate>
+      }
+    />
+    <Route
+      path="/private"
+      element={
+        <IsPrivate>
+          <PrivateView />
+        </IsPrivate>
+      }
+    />
+    <Route
+      path="/register-property"
+      element={
+        <IsPrivate>
+          <NewProperty />
+        </IsPrivate>
+      }
+    />
+    <Route
+      path="/wishlist"
+      element={
+        <IsPrivate>
+          <WishList />
+        </IsPrivate>
+      }
+    />
+    <Route path="/properties/:propertyId" element={<PropertyDetail />} />
+    <Route
+      path="/properties/:propertyId/edit"
+      element={<EditProperty />}
+    />
+    <Route
+      path="/properties/:propertyId/:range"
+      element={<NewBooking />}
+    />
+    <Route
+      path="/bookings"
+      element={
+        <IsPrivate>
+          <BookingList />
+        </IsPrivate>
+      }
+    />
+    <Route
+      path="/bookings/:bookingId"
+      element={
+        <IsPrivate>
+          <BookingDetail />
+        </IsPrivate>
+      }
+    />
+    <Route path="/error" element={<ErrorPage />} />
+    <Route path="/chat/:otherUserId" element={<ChatComponent />} />
+    <Route path="*" element={<NotFound />} />
+    <Route path="/messages" element={<InboxComponent />} />
+  </Routes>
+</div>
 );
       }
 

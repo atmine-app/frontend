@@ -290,11 +290,18 @@ button:focus {
 }
 
 /* LOADING PUFF */
-.loading-container {
+/* .loading-container {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+} */
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 /* SPINNER */
