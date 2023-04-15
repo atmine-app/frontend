@@ -20,9 +20,9 @@ export default function MyProfile() {
       try {
         const propertyData = await propertyService.getProperty(propertyId);
         setProperty(propertyData);
-        const bookingsData = await bookingService.getBookingsForProperty(propertyId);
+        const bookingsData = await bookingService.getAllBookings();
         const confirmedBookings = bookingsData.filter(
-          (booking) => booking.status === "confirmed" && new Date(booking.checkInDate) > new Date()
+          (booking) => booking.status === "confirmed" && booking.propertyId === propertyId && new Date(booking.checkInDate) > new Date()
         );
         setHasActiveBookings(confirmedBookings.length > 0);
       } catch (error) {
