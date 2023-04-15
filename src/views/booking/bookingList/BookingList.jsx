@@ -36,27 +36,21 @@ const BookingList = () => {
 
         setBookings(sortedBookings);
         console.log(filteredBookings);
+
+        const hasConfirmedBooking = sortedBookings.some(
+          (booking) => booking.status === "confirmed"
+        );
+        if (hasConfirmedBooking) {
+          setStatus("Confirmed");
+        } else {
+          setStatus("Cancelled");
+        }
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchBookings();
-    //eslint-disable-next-line
-    const confirmedCount = bookings.filter(
-      (booking) => booking.status === "confirmed"
-    ).length;
-    const pastCount = bookings.filter(
-      (booking) => booking.status === "completed"
-    ).length;
-
-    if (confirmedCount > 0) {
-      setStatus("Confirmed");
-    } else if (pastCount > 0) {
-      setStatus("Past");
-    } else {
-      setStatus("Cancelled");
-    }
     //eslint-disable-next-line
   }, [user._id]);
 
