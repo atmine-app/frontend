@@ -13,7 +13,6 @@ import { RiSecurePaymentFill } from "react-icons/ri";
 import visa from "../../assets/visa.svg";
 import mastercard from "../../assets/mastercard.svg";
 import americanexpress from "../../assets/americanexpress.svg";
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -50,18 +49,18 @@ const CheckoutForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
     });
     setLoading(true);
-  
+
     if (!error) {
       const { id } = paymentMethod;
       try {
         const { data } = await axios.post(
-          `${apiUrl}/api/checkout`,
+          "http://localhost:8080/api/checkout",
           {
             id,
             amount: Math.round(totalPrice * 100), // Convert to cents
@@ -71,23 +70,23 @@ const CheckoutForm = ({
             endDate,
           }
         );
-  
+
         console.log(data);
-        
+
         // Store payment details
         setPaymentDetails(data);
-  
+
         elements.getElement(CardElement).clear();
-  
+
         // Call onPaymentSuccess function
         onPaymentSuccess(data.transactionId);
-        toast.success('Successful payment!', {
+        toast.success("Successful payment!", {
           position: "top-right",
           autoClose: 2500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
-          draggable: true, 
+          draggable: true,
           progress: undefined,
           theme: "light",
         });
