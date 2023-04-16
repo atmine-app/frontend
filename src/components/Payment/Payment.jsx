@@ -13,6 +13,7 @@ import { RiSecurePaymentFill } from "react-icons/ri";
 import visa from "../../assets/visa.svg";
 import mastercard from "../../assets/mastercard.svg";
 import americanexpress from "../../assets/americanexpress.svg";
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -60,7 +61,7 @@ const CheckoutForm = ({
       const { id } = paymentMethod;
       try {
         const { data } = await axios.post(
-          "http://localhost:8080/api/checkout",
+          `${apiUrl}/api/checkout`,
           {
             id,
             amount: Math.round(totalPrice * 100), // Convert to cents
