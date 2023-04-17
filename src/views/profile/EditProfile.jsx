@@ -170,31 +170,31 @@ export default function EditProfile() {
               </div>
             </div>
             <div className="editProfileInfo section">
-            <div className="editProfileInfo section">
-  <div style={{ marginBottom: "1rem" }}>
-    <label htmlFor="email">Email:</label>
-    <input
-      type="email"
-      id="email"
-      name="email"
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      style={{ display: "block" }}
-    />
-  </div>
-  <div>
-    <label htmlFor="username">Username:</label>
-    <input
-      type="text"
-      id="username"
-      name="username"
-      value={username}
-      onChange={(e) => setUsername(e.target.value)}
-      style={{ display: "block" }}
-    />
-  </div>
-</div>
-</div>
+              <div className="editProfileInfo section">
+                <div style={{ marginBottom: "1rem" }}>
+                  <label htmlFor="email">Email:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    style={{ display: "block" }}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="username">Username:</label>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    style={{ display: "block" }}
+                  />
+                </div>
+              </div>
+            </div>
             <div>
               <button className="cta-button full100" onClick={handleSave}>
                 Save Changes
