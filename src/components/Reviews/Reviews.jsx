@@ -51,7 +51,7 @@ export default function Reviews({ reviews,rating }) {
                 <div className="review-slide-infocontainer">
                   <div className="review-slide-header">
                     <div className="review-slide-avatar">
-                      <RxAvatar className="review-slide-avatar"/>
+                      <img src={review.user.avatar} alt="user-avatar" className="review-slide-avatar"/>
                     </div>
                     <div className="review-slide-user-container">
                       <h4>{review.user.username}</h4>
@@ -67,7 +67,7 @@ export default function Reviews({ reviews,rating }) {
       )}
       <div className="ratingsContainer">
       <div id="see-ratings-btn-container">
-        <button onClick={toggleRatings} className="cta-button full100">
+        <button onClick={toggleRatings} className="cta-button">
           {showRatings ? "Hide Ratings" : "See Ratings"}
         </button>
       </div>
