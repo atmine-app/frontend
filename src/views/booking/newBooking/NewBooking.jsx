@@ -112,7 +112,7 @@ export default function NewBooking() {
       <BackNavigationFloat />
       <div className="property__card-detail">
         <Swiper
-          className=" ImageContainer mySwiper"
+          className="ImageContainer mySwiper"
           spaceBetween={30}
           pagination={{
             clickable: true,
@@ -127,7 +127,7 @@ export default function NewBooking() {
             ))}
         </Swiper>
         <div className="property__card-content section">
-          <h2>Booking Request at {property.title}</h2>
+          <h2>Booking Request at<br></br>{property.title}</h2>
           <table className="booking-table">
             <tbody>
               <tr>
