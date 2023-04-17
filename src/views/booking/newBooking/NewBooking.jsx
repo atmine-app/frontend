@@ -89,12 +89,12 @@ export default function NewBooking() {
         serviceFee: serviceFee,
         totalPrice: totalPrice,
         status: "confirmed",
-        transactionId: "* * *", // no transaction ID since payment is skipped
+        transactionId: "ATMINEFRIENDS23", // no transaction ID since payment is skipped
       };
 
       const response = await bookingService.createBooking(booking);
       navigate(`/bookings/${response._id}`);
-      toast.success("Booking created successfully");
+      toast.success("It's not free! You'll pay later 😈");
     } catch (error) {
       console.error("Error creating booking:", error);
     }
