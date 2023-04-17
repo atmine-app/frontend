@@ -160,7 +160,7 @@ export default function BookingDetail() {
                       : "button-half-width"
                   }`}
                   onClick={() =>
-                    navigate(`/chat/${booking.property.owner._id}`)
+                    navigate(`/chat/${booking.property.owner}`)
                   }
                 >
                   Chat with the owner
