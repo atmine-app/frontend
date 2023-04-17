@@ -21,6 +21,7 @@
   font-size: 14px;
   margin-top: 5px;
   margin-bottom: 10px;
+  color: var(--color-primary-black);
 }
 
 .booking-detail__confirmation-number {
@@ -40,6 +41,10 @@
   margin-top: 10px;
   display: flex;
   flex-direction: column;
+}
+
+.booking-confirmation__property-info p {
+  color: var(--color-primary-black) !important;
 }
 
 .booking-confirmation__property-icon {
@@ -78,4 +83,22 @@
 
 .booking-confirmation__cancel-button button {
   width: 100%;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.button-half-width {
+  width: 50%;
+  box-sizing: border-box;
+  margin-right: 0.5rem;
+  padding: 8px 12px; 
+  font-size: 0.9rem; 
+}
+
+.button-half-width:last-child {
+  margin-right: 0;
 }
