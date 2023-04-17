@@ -353,7 +353,7 @@ export default function PropertyDetail() {
       <div className="section">
       <h2 className="section-title">Have doubts?</h2>
       <div className="chat-button">
-      <button className="cta-button" onClick={() => navigate(`/chat/${property.owner._id}`)}>
+      <button className="cta-button full100" onClick={() => navigate(`/chat/${property.owner._id}`)}>
         Chat with owner <BsChatDots />
       </button>
       </div>
