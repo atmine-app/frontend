@@ -47,8 +47,6 @@ export default function PropertyDetail() {
     endDate: addDays(new Date(), 7),
   });
 
-  
-
   const getUserBooking = async () => {
     try {
       const bookings = await bookingService.getAllBookings();
@@ -269,17 +267,19 @@ export default function PropertyDetail() {
         propertyId={property._id}
       />
       <div className="propertyCardDetail">
-        <div
-          ref={heartIconRef} // Add this line to assign the reference to the heart icon
-          className="heart-container heart-container-detail"
-          style={{ pointerEvents: "auto" }}
-        >
-          {liked ? (
-            <AiFillHeart onClick={handleAddFavorite} />
-          ) : (
-            <AiOutlineHeart onClick={handleAddFavorite} />
-          )}
-        </div>
+        {user && (
+          <div
+            ref={heartIconRef} 
+            className="heart-container heart-container-detail"
+            style={{ pointerEvents: "auto" }}
+          >
+            {liked ? (
+              <AiFillHeart onClick={handleAddFavorite} />
+            ) : (
+              <AiOutlineHeart onClick={handleAddFavorite} />
+            )}
+          </div>
+        )}
         <div className="DetailImageSection">
           <Swiper
             className=" ImageContainer mySwiper"
@@ -350,16 +350,16 @@ export default function PropertyDetail() {
         />
       )}
       <div className="section">
-      <h2 className="section-title">Have doubts?</h2>
-      <div className="chat-button">
-      <button className="cta-button full100" onClick={() => navigate(`/chat/${property.owner._id}`)}>
-        Chat with owner
-      </button>
+        <h2 className="section-title">Have doubts?</h2>
+        <div className="chat-button">
+          <button
+            className="cta-button full100"
+            onClick={() => navigate(`/chat/${property.owner._id}`)}
+          >
+            Chat with owner
+          </button>
+        </div>
       </div>
-      </div>
-      
     </div>
   );
 }
-
-
