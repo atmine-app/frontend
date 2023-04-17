@@ -1,11 +1,13 @@
-# Project's name
+# atmine
 
 ## Description
 
-This application is called XXX. It is used for ...
+This application is a space rental app. The goal is to connect users that look for renting a space that they are not using with people that are in need of those spaces.
 
-> Add a picture (logo, design, actual screen, gif, etc, whichever you prefer.)
-![](picture.png)
+<p align="center">
+<img src="https://imgur.com/tCmnaqV.png">
+</p>
+
 
 ---
 ## Instructions
@@ -23,6 +25,9 @@ npm run start
 ```
 
 ---
+## Wireframes and screenshots
+<img src="https://i.imgur.com/vaFoy63.gif">
+
 ## User stories 
 
 ### MVP
