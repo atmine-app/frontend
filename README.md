@@ -6,7 +6,7 @@ This application is a space rental app. The goal is to connect users that look f
 
 <p align="center">
 <img width="32%" src="https://imgur.com/tCmnaqV.png">
-  <img width="32%" src="https://i.imgur.com/gP7xZXq.png">
+   <img width="32%" src="https://i.imgur.com/vaFoy63.gif">
     <img width="32%" src="https://i.imgur.com/BXqfecV.png">
   
 </p>
