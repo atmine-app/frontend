@@ -7,7 +7,7 @@
   list-style: none;
   text-decoration: none;
   background-color: transparent;
-  
+
 }
 
 :root {
@@ -35,15 +35,24 @@ button .rdrDay:active,
 button .rdrDay:focus {
   background-color: transparent;
 }
-.page{
+
+.page {
   margin-bottom: 100px;
 }
+
 html {
   scroll-behavior: smooth;
 }
-h3,h2,h1,h4,h5,h6,p {
-  color: var(--color-primary-black)
+
+h2,
+h1,
+h4,
+h5,
+h6,
+p {
+  color: var(--color-primary-purple)
 }
+
 body {
   padding-bottom: 75px;
   color: var(--color-primary-black);
@@ -102,12 +111,12 @@ img {
   align-items: center;
   justify-content: center;
   height: max-content;
-  padding-top: 60px; 
+  padding-top: 60px;
 }
 
 .not-found-content {
   text-align: center;
-  padding-top: 60px; 
+  padding-top: 60px;
 }
 
 /* .genericForm form {
