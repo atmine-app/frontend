@@ -1,10 +1,10 @@
 .booking-detail__header {
   background-color: var(--color-secondary-white);
-  padding: 10px 15px;
+  padding: 25px 15px;
 }
 
 .booking-detail__status {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   color: var(--color-secondary-green-strong);
   margin-bottom: 5px;

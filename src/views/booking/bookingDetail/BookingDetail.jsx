@@ -100,15 +100,16 @@ export default function BookingDetail() {
           >
             {booking.status === "completed" ? "completed" : booking.status}
           </div>
-          <h1 className="booking-detail__title">
-            Your Booking at {booking.property?.title}
-          </h1>
+          <h2 className="booking-detail__title">{booking.property?.title}</h2>
           <p className="booking-detail__paragraph">
             {booking.status === "cancelled"
-              ? `We've sent your cancellation email to: ${booking.renter?.email}.`
+              ? `We've sent your cancellation email to: `
               : booking.status === "completed"
               ? "We hope you've enjoyed your booking."
-              : `You're all set. We've sent your confirmation email to: ${booking.renter?.email}.`}
+              : `You're all set. We've sent your confirmation email to: `}
+            {booking.status !== "completed" && (
+              <strong>{booking.renter?.email}</strong>
+            )}
           </p>
           <div className="booking-detail__confirmation-number">
             <strong>Booking Confirmation Number</strong>
