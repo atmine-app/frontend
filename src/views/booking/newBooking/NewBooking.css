@@ -6,8 +6,8 @@
   border-collapse: collapse;
   width: 100%;
   max-width: 600px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .booking-table td {
@@ -32,4 +32,8 @@
 .booking-table td:last-child {
   text-align: right;
   width: 30%;
+}
+
+.property__card-content {
+  margin-bottom: -20px;
 }
