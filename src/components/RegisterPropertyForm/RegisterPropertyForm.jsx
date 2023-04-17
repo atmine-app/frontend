@@ -28,14 +28,15 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   const navigate = useNavigate();
 
   const scrollToElementWithOffset = (element, offset) => {
-    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const elementPosition =
+      element.getBoundingClientRect().top + window.pageYOffset;
     window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
   };
 
   const handleAddressInputFocus = () => {
-  const addressContainer = document.getElementById("address-container");
-  scrollToElementWithOffset(addressContainer, 60);
-};
+    const addressContainer = document.getElementById("address-container");
+    scrollToElementWithOffset(addressContainer, 60);
+  };
 
   const handleFormImageChange = (updatedImageArray) => {
     setImages(updatedImageArray.array);
@@ -64,8 +65,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
     }
   };
 
-  useEffect(() => {
-  }, [amenities]);
+  useEffect(() => {}, [amenities]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,6 +81,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
       const summary = await openAIService.summarize(formData.description);
       propertyData.summary = summary;
       const createdProperty = await propertyService.addProperty(propertyData);
+      console.log(createdProperty)
       navigate(`/properties/${createdProperty._id}`);
       setFormData(initialState);
       toast.success("Property successfully created!", {
@@ -190,19 +191,19 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
           </div>
 
           <div id="address-container">
-  <div className="form-field">
-    <label htmlFor="address">Address:</label>
-    <input
-      type="text"
-      id="address"
-      name="address"
-      value={formData.address}
-      onChange={handleChange}
-      onFocus={handleAddressInputFocus}
-      required
-    />
-  </div>
-</div>
+            <div className="form-field">
+              <label for="address">Address:</label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                onFocus={handleAddressInputFocus}
+                required
+              />
+            </div>
+          </div>
 
           <div className="form-field">
             <label for="city">City:</label>
