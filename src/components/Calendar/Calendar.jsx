@@ -61,7 +61,7 @@ export default function CalendarComp({ propertyId, property, onRangeChange }) {
       {isLoggedIn ? (
         <>
           <button
-            className="cta-button"
+            className="cta-button full100"
             onClick={() => setCalendarVisible(!calendarVisible)}
           >
             Check availability

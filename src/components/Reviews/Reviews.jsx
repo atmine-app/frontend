@@ -33,7 +33,7 @@ export default function Reviews({ reviews,rating }) {
   
 
   return (
-    <div className="user-reviews-section">
+    <div className="user-reviews-section section">
       {reviews.length > 0 && (
         <Swiper
           className="reviews-swiper mySwiper"
@@ -67,7 +67,7 @@ export default function Reviews({ reviews,rating }) {
       )}
       <div className="ratingsContainer">
       <div id="see-ratings-btn-container">
-        <button onClick={toggleRatings} className="cta-button">
+        <button onClick={toggleRatings} className="cta-button full100">
           {showRatings ? "Hide Ratings" : "See Ratings"}
         </button>
       </div>
@@ -81,7 +81,6 @@ export default function Reviews({ reviews,rating }) {
         </div>
       )}
       </div>
-      <div className="section"></div>
     </div>
   );
   

@@ -349,9 +349,15 @@ export default function PropertyDetail() {
           userBooking={userBooking}
         />
       )}
-      <button onClick={() => navigate(`/chat/${property.owner._id}`)}>
+      <div className="section">
+      <h2 className="section-title">Have doubts?</h2>
+      <div className="chat-button">
+      <button className="cta-button full100" onClick={() => navigate(`/chat/${property.owner._id}`)}>
         Chat with owner
       </button>
+      </div>
+      </div>
+      
     </div>
   );
 }

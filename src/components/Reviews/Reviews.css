@@ -1,7 +1,6 @@
 .user-reviews-section{
   display: flex;
   flex-direction: column;
-  gap:10px
 }
 .reviews-swiper {
     width: 100%;

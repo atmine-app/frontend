@@ -25,5 +25,9 @@
   }
   .user-reviews-title{
     padding-top: 10px;
-    border-top: 1px solid #ececec;;
+    border-top: 1px solid #ececec;
+  }
+
+  .chat-button {
+    padding-top: 10px;
   }
