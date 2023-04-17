@@ -23,12 +23,10 @@ export default function ChatComponent() {
 
   useEffect(() => {
     getRecipient();
-    console.log(recipient)
     // eslint-disable-next-line
   }, [otherUserId]);
 
   useEffect(() => {
-    console.log("recipient:", recipient);
   }, [recipient]);
 
   useEffect(() => {

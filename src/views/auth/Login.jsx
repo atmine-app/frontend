@@ -31,7 +31,6 @@ export default function Login() {
     setLoading(true);
     try {
       const response = await authService.login(user);
-      console.log(user)
       if (response.authToken) {
         storeToken(response.authToken);
         authenticateUser();

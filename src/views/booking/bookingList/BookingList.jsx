@@ -15,11 +15,7 @@ const BookingList = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        console.log("User:", user);
-        console.log("User._id:", user._id);
         const allBookings = await bookingService.getAllBookings();
-        console.log("All bookings:", allBookings);
-
         const filteredBookings = allBookings.filter(
           (booking) => booking.renter && booking.renter._id === user._id
         );
@@ -35,7 +31,6 @@ const BookingList = () => {
         });
 
         setBookings(sortedBookings);
-        console.log(filteredBookings);
 
         const hasConfirmedBooking = sortedBookings.some(
           (booking) => booking.status === "confirmed"
@@ -46,7 +41,7 @@ const BookingList = () => {
           setStatus("Cancelled");
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 

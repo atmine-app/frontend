@@ -55,10 +55,9 @@ export default function EditProfile() {
         const bookings = await bookingService.getAllBookings();
         const confirmedBookings = bookings.filter((booking) => booking.status === "confirmed");
         const hasActiveBookings = confirmedBookings.length > 0;
-        console.log(hasActiveBookings)
         setHasActiveBookings(hasActiveBookings);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
   

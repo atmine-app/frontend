@@ -79,7 +79,6 @@ export default function Properties() {
       activeProperties.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       setProperties(activeProperties);
     } catch (error) {
-      console.log(error);
     }
   };
 

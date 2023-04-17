@@ -23,7 +23,7 @@ export default function BookingDetail() {
       const response = await bookingService.getBooking(bookingId);
       setBooking(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -54,7 +54,7 @@ export default function BookingDetail() {
         theme: "light",
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
 };
 

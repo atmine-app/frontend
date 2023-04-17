@@ -19,10 +19,8 @@ class UserService {
     return this.api.get('/me').then(({ data }) => data);
   }
   getOtherUser(otherUserId) {
-    console.log("getOtherUser called with", otherUserId);
     return this.api.get(`/chat/${otherUserId}`)
       .then(({ data }) => {
-        console.log("getOtherUser response:", data);
         return data;
       });
   }

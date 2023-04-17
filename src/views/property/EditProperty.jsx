@@ -27,7 +27,7 @@ export default function EditProperty() {
       const response = await propertyService.getProperty(propertyId);
       setProperty(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -61,7 +61,7 @@ export default function EditProperty() {
       await propertyService.editProperty(propertyId, property);
       navigate(`/properties/${propertyId}`);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

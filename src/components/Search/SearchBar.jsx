@@ -17,7 +17,6 @@ const SearchBar = (props) => {
   const handleIconClick = (category) => {
     handleCategorySelect(category);
     setSelectedCategory(category);
-    console.log(category);
   };
 
   return (
