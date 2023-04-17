@@ -1,14 +1,20 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { DateRange } from "react-date-range";
-import { addDays, parseISO } from "date-fns";
+import { addDays, format, isBefore, parse, isSameDay } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import bookingService from "../../services/bookingsServices";
+import bookingService from "../../services/bookingService";
 import "./Calendar.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-export default function CalendarComp({ propertyId, property, onRangeChange }) {
+export default function CalendarComp({
+  propertyId,
+  onRangeChange,
+  profileSectionStyle,
+  alwaysVisible,
+  isOwner,
+}) {
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -17,10 +23,14 @@ export default function CalendarComp({ propertyId, property, onRangeChange }) {
     },
   ]);
 
+  const [ownerBlockedRanges, setOwnerBlockedRanges] = useState([]);
+  const [calendarVisible, setCalendarVisible] = useState(
+    alwaysVisible || false
+  );
   const [bookedDates, setBookedDates] = useState([]);
   const refOne = useRef(null);
-  const [calendarVisible, setCalendarVisible] = useState(false);
   const { isLoggedIn } = useContext(AuthContext);
+  const [blockedBookings, setBlockedBookings] = useState([]);
 
   const hideOnOutsideClick = (event) => {
     if (refOne.current && !refOne.current.contains(event.target)) {
@@ -34,16 +44,37 @@ export default function CalendarComp({ propertyId, property, onRangeChange }) {
       const propertyBookings = bookings.filter(
         (booking) => booking.property && booking.property._id === propertyId
       );
+      console.log("property bookings", propertyBookings);
       let bookedDatesArray = [];
+      let ownerBlockedDatesArray = [];
+
       propertyBookings.forEach((booking) => {
-        let currentDate = parseISO(booking.startDate);
-        const endDate = parseISO(booking.endDate);
-        while (currentDate <= endDate) {
-          bookedDatesArray.push(new Date(currentDate));
+        // Ensure consistent date format
+        let startDate = booking.startDate;
+        let endDate = booking.endDate;
+
+        // Parse dates to handle different formats
+        const parsedStartDate = parse(startDate, "yyyy-MM-dd", new Date());
+        const parsedEndDate = parse(endDate, "yyyy-MM-dd", new Date());
+        let currentDate = parsedStartDate;
+
+        console.log("booking 1", booking);
+
+        while (isBefore(currentDate, addDays(parsedEndDate, 1))) {
+          if (booking.status === "blocked" && isOwner) {
+            ownerBlockedDatesArray.push(new Date(currentDate));
+          } else if (booking.status === "confirmed" || !isOwner) {
+            bookedDatesArray.push(new Date(currentDate));
+          }
           currentDate = addDays(currentDate, 1);
         }
       });
+
+      setBlockedBookings(blockedBookings);
       setBookedDates(bookedDatesArray);
+      setOwnerBlockedRanges(ownerBlockedDatesArray);
+      console.log("owner blocked dates:", ownerBlockedDatesArray);
+      console.log("booked dates:", bookedDatesArray);
     } catch (error) {
       console.error("Error fetching bookings:", error);
     }
@@ -55,18 +86,84 @@ export default function CalendarComp({ propertyId, property, onRangeChange }) {
     //eslint-disable-next-line
   }, [propertyId]);
 
-  
+  const toggleBlockedDate = async (date) => {
+    // Check if the date is already blocked
+    const formattedDate = format(date, "yyyy-MM-dd");
+    const blockedBooking = blockedBookings.find(
+      (booking) => booking.startDate === formattedDate
+    );
+
+    if (blockedBooking) {
+      // Unblock the date
+      try {
+        await bookingService.deleteBooking(blockedBooking._id);
+        setBlockedBookings(
+          blockedBookings.filter(
+            (booking) => booking._id !== blockedBooking._id
+          )
+        );
+      } catch (error) {
+        console.error("Error unblocking date:", error);
+      }
+    } else {
+      // Block the date
+      try {
+        const newBooking = await bookingService.createBooking({
+          property: propertyId,
+          startDate: formattedDate,
+          endDate: formattedDate,
+          status: "blocked",
+        });
+        setBlockedBookings([...blockedBookings, newBooking]);
+      } catch (error) {
+        console.error("Error blocking date:", error);
+      }
+    }
+  };
+
+  const handleDateClick = (date) => {
+    if (!alwaysVisible || !isOwner) return;
+    toggleBlockedDate(date);
+    fetchBookings();
+  };
+
+  const dayContentRenderer = ({ date, view }) => {
+    if (view !== "month") return;
+
+    const formattedDate = format(date, "yyyy-MM-dd");
+
+    const isBlocked = ownerBlockedRanges.some((blockedDate) =>
+      isSameDay(blockedDate, date)
+    );
+
+    return (
+      <div
+        style={{
+          backgroundColor: isBlocked ? "rgba(96, 92, 184, 0.5)" : "transparent",
+        }}
+      >
+        {formattedDate}
+      </div>
+    );
+  };
+
   return (
-    <div className="calendarWrap section">
+    <div
+      className={`calendarWrap section${
+        profileSectionStyle ? " calendarProfile" : ""
+      }`}
+    >
       {isLoggedIn ? (
         <>
-          <button
-            className="cta-button"
-            onClick={() => setCalendarVisible(!calendarVisible)}
-          >
-            Check availability
-          </button>
-          {calendarVisible && (
+          {!alwaysVisible && (
+            <button
+              className="cta-button"
+              onClick={() => setCalendarVisible(!calendarVisible)}
+            >
+              Check availability
+            </button>
+          )}
+          {(calendarVisible || alwaysVisible) && (
             <>
               <div ref={refOne}>
                 <DateRange
@@ -83,6 +180,8 @@ export default function CalendarComp({ propertyId, property, onRangeChange }) {
                   disabledDates={bookedDates}
                   rangeColors={["#605cb8"]}
                   minDate={new Date()}
+                  onDateChange={(date) => handleDateClick(date)}
+                  dayContentRenderer={dayContentRenderer}
                 />
               </div>
             </>

@@ -42,3 +42,28 @@
   .rdrMonthPicker select {
     width: 130px;
   }
+
+
+  /* calendar profile */
+
+  .blockRange {
+    background-color: #605cb8;
+    color: white;
+    border: none;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .blockRange:hover {
+    background-color: #4d47a9;
+  }
+  
+  .blocked-date {
+    background-color: #ff9987;
+    border-radius: 50%;
+    color: white;
+  }

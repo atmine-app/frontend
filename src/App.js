@@ -36,7 +36,7 @@ function App() {
   const isPageLoading = usePageLoader();
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
+     setTimeout(() => {
       const hasVisitedHomePage = localStorage.getItem("hasVisitedHomePage");
       if (location.pathname === "/" && !hasVisitedHomePage) {
         const timeoutId = setTimeout(() => {
@@ -50,6 +50,7 @@ function App() {
         setLoading(false);
       }
     }, [location.pathname]);
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
