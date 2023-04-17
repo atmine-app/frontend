@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
+import { toast } from "react-toastify";
 
 export default function NewBooking() {
   const [property, setProperty] = useState({});
@@ -22,6 +23,7 @@ export default function NewBooking() {
   const [serviceFee, setServiceFee] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [formattedDateRange, setFormattedDateRange] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (property.price) {
@@ -37,8 +39,6 @@ export default function NewBooking() {
       );
     }
   }, [property.price, startDate, endDate, bookingPrice, serviceFee]);
-
-  const navigate = useNavigate();
 
   const getProperty = async () => {
     try {
@@ -77,6 +77,28 @@ export default function NewBooking() {
     }
   };
 
+  const handleSkipPayment = async () => {
+    try {
+      const booking = {
+        property: propertyId,
+        renter: user._id,
+        owner: property.owner._id,
+        startDate: startDate,
+        endDate: endDate,
+        bookingPrice: bookingPrice,
+        serviceFee: serviceFee,
+        totalPrice: totalPrice,
+        status: "confirmed",
+        transactionId: "* * *", // no transaction ID since payment is skipped
+      };
+
+      const response = await bookingService.createBooking(booking);
+      navigate(`/bookings/${response._id}`);
+      toast.success("Booking created successfully");
+    } catch (error) {
+      console.error("Error creating booking:", error);
+    }
+  };
   const formatDate = (date) => {
     const options = {
       day: "numeric",
@@ -89,7 +111,7 @@ export default function NewBooking() {
     <div>
       <BackNavigationFloat />
       <div className="property__card-detail">
-      <Swiper
+        <Swiper
           className=" ImageContainer mySwiper"
           spaceBetween={30}
           pagination={{
@@ -100,15 +122,12 @@ export default function NewBooking() {
           {property?.images?.length > 0 &&
             property.images.map((image, index) => (
               <SwiperSlide key={index}>
-                <img
-                  src={image}
-                  alt={`${property.title} - ${index + 1}`}
-                />
+                <img src={image} alt={`${property.title} - ${index + 1}`} />
               </SwiperSlide>
             ))}
         </Swiper>
         <div className="property__card-content section">
-        <h2>Booking Request at {property.title}</h2>
+          <h2>Booking Request at {property.title}</h2>
           <table className="booking-table">
             <tbody>
               <tr>
@@ -126,7 +145,7 @@ export default function NewBooking() {
                 <td>{totalPrice}€</td>
               </tr>
             </tbody>
-          </table>
+          </table>     
         </div>
         <Payment
           onPaymentSuccess={handlePaymentSuccess}
@@ -136,6 +155,9 @@ export default function NewBooking() {
           startDate={startDate}
           endDate={endDate}
         />
+        <div className="section">
+          <button className="cta-button full100" onClick={handleSkipPayment}>Skip Payment</button>
+        </div>
       </div>
     </div>
   );
