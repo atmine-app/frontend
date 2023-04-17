@@ -56,7 +56,10 @@ npm run start
 
 ### Backlog
 
-- User can ...
+- User can login with google
+- User can report properties
+- Notifications
+- Earning dashboard
 
 ---
 
