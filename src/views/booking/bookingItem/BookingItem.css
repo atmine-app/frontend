@@ -1,0 +1,72 @@
+.booking-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.booking-item__image {
+  flex: 0 0 60px;
+  height: 60px;
+  margin-right: 10px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.booking-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.booking-item__details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.booking-item__title {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 12px; 
+  color: var(--color-primary-purple);
+}
+
+.booking-item__date-price {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+  align-items: center; 
+}
+
+.booking-item__status.confirmed {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-secondary-green);
+}
+
+.booking-item__status.completed {
+  color: var(--color-primary-blue);
+}
+
+.booking-item__status.cancelled {
+  color: var(--color-primary-red);
+}
+
+.booking-item__status.completed .add-review {
+  color: var(--color-primary-black);
+}
+
+.booking-item__price {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.booking-item__arrow {
+  color: var(--color-primary-purple);
+}
+
+.bold {
+  font-weight: bold;
+}

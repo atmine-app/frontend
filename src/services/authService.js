@@ -26,6 +26,11 @@ class AuthService {
   me() {
     return this.api.get('/me').then((response) => response.data);
   }
+
+  getCurrentUser() {
+    return this.api.get('/me').then((response) => response.data);
+  }
+  
 }
 
 const authService = new AuthService();

@@ -1,0 +1,40 @@
+.booking-list {
+  padding: 25px;
+  margin-top: 30px;
+  color: var(--color-primary-purple)
+}
+
+.booking-list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.booking-list__item h3 {
+  margin: 0;
+}
+
+.booking-list__item p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.booking-list__filters {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.booking-list__filters button {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.top90 {
+  margin-top: 90px;
+}

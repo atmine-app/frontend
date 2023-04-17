@@ -1,0 +1,124 @@
+.profileContainer {
+  padding: 25px;
+  margin-top: 30px;
+}
+
+.profileIconContainer {
+  display:inline-flex;
+  align-items: center;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.profileIcon {
+  font-size: 36px;
+  margin-right: 16px;
+  color: var(--color-primary-purple);
+}
+
+.profileTitle {
+  font-size: 28px;
+  color: var(--color-primary-purple);
+}
+
+.profileBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:20px;
+}
+
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  padding: 24px;
+  width: 100%;
+  box-shadow: 1.2px 2.5px rgba(96, 194, 164, 0.4);
+}
+
+.profileSectionTitle {
+  font-size: 24px;
+  margin-top: 16px;
+  margin-bottom: 5px;
+  text-align: center;
+  color: var(--color-primary-purple);
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.profileAvatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.avatarActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileButton {
+  background-color: #008489;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.profileButton:hover {
+  background-color: #005f5f;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.profileInfoItem {
+  margin-bottom: 8px;
+}
+
+.logoutSection {
+  margin-top: 16px;
+}
+
+.profileSection p {
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.editProfileContainer {
+  padding: 25px;
+  margin-top: 30px;
+  color: var(--color-primary-purple)
+}
+
+.editProfileAvatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+

@@ -1,0 +1,69 @@
+
+.rdrCalendarWrapper, .rdrDateRangeWrapper, .calendarElement,.rdrMonths, .rdrMonthsHorizontal,.rdrMonth
+  {
+    width: 100%;
+  }
+
+  .rdrYearPicker{
+    width:50%
+  }
+
+  .rdrYearPicker{
+    width: 100%;
+  }
+  .rdrMonths .rdrMonthsHorizontal{
+    height:300px;
+  }
+  .rdrMonth{
+  padding:0;
+  }
+  .rdrCalendarWrapper, .rdrDateRangeWrapper, .calendarElement, .rdrMonths, .rdrMonthsHorizontal, .rdrMonth {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .rdrWeekDays {
+    height: 20px;
+  }
+  
+  .rdrMonths .rdrMonthsHorizontal {
+    height: 300px;
+  }
+  .rdrDays {
+    height: 100%;
+  }
+  .rdrCalendarWrapper {
+    color: #000000;
+    font-size: 12px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+  }
+
+  .rdrMonthPicker select {
+    width: 130px;
+  }
+
+
+  /* calendar profile */
+
+  .blockRange {
+    background-color: #605cb8;
+    color: white;
+    border: none;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .blockRange:hover {
+    background-color: #4d47a9;
+  }
+  
+  .blocked-date {
+    background-color: #ff9987;
+    border-radius: 50%;
+    color: white;
+  }

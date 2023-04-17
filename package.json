@@ -3,16 +3,36 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.27",
+    "@react-google-maps/api": "^2.18.1",
+    "@stripe/react-stripe-js": "^2.1.0",
+    "@stripe/stripe-js": "^1.52.0",
+    "@tensorflow-models/toxicity": "^1.2.2",
+    "@tensorflow/tfjs": "^4.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
-    "dotenv": "^16.0.2",
+    "base-64": "^1.0.0",
+    "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
+    "googleapis": "^117.0.0",
+    "openai": "^3.2.1",
     "react": "^18.2.0",
+    "react-date-range": "^1.4.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-hot-toast": "^2.3.0",
+    "react-icons": "^4.8.0",
+    "react-payment-icons": "^1.2.6",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
+    "react-toastify": "^9.1.2",
+    "reactstrap": "^9.1.8",
+    "stripe": "^11.17.0",
+    "swiper": "^9.2.0",
+    "talkjs": "^0.15.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -38,5 +58,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.0"
   }
 }

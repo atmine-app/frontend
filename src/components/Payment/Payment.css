@@ -1,0 +1,81 @@
+.full100 {
+  width: 100%;
+}
+
+.payment-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 15px;
+  background-color: whitesmoke;
+  border: var(--border-grey);
+  border-radius: var(--border-radius);
+}
+
+.payment-title {
+  margin-bottom: 10px;
+  margin-top: 0px;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--color-primary-purple);
+  text-align: left;
+}
+
+.payment-card {
+  margin-bottom: 20px;
+}
+
+.payment-security {
+  text-align: justify;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.payment-security small {
+  margin-left: 10px;
+}
+
+.payment-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.payment-methods-title {
+  text-align: center;
+  font-size: 10px;
+  margin-top: -5px;
+}
+
+.payment-methods-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.payment-methods-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.payment-methods-icon img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.payment-sm small {
+  font-size: 4px;
+}

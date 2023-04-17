@@ -1,0 +1,105 @@
+.back-navigation-float {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  z-index: 999;
+  background-color: transparent;
+  transition: background-color 0.5s ease;
+}
+
+.back-navigation-float #back-navigation-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.back-navigation-float #back-navigation-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.back-navigation-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.65);
+  width: 120px;
+  height: 45px;
+}
+
+@media screen and (max-width: 768px) {
+  .backNavigationFloat {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    /* z-index: 1000; */
+  }
+
+  .backNavigationFloat img {
+    width: 25px;
+    height: 25px;
+    margin-top: 12.5px;
+    margin-left: 12.5px;
+  }
+
+  .backNavigationFloat.show {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    padding: 10px 0;
+  }
+
+  .backNavigationFloat.show img {
+    margin-top: 0;
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .back-navigation-float {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    transition: background-color 0.2s ease;
+  }
+
+  .back-navigation-float #back-navigation-btn  {
+    margin-right: 20px;
+  }
+
+  .back-navigation-float.white {
+    background-color: #fff;
+  }
+
+  .show {
+    background-color: #fff;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    border: #f1f1f1 1px solid;
+  }
+
+  .show #back-navigation-btn {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  
+}

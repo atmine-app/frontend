@@ -1,0 +1,33 @@
+.swiper-pagination-clickable .swiper-pagination-bullet-active{
+    background: var(--color-primary-green);
+    color:var(--color-primary-lime);
+}
+
+.imageSwiper{
+    background: var(--color-bg-variant);
+    text-align: center;
+    border-radius: 2rem;
+    user-select: none;
+}
+
+.container.imageContainer{
+    width: 100vw;
+    padding-bottom: 4rem;
+}
+
+.heart-container-detail {
+    pointer-events: auto;
+    z-index: 999;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    color:var(--color-secondary-green)
+  }
+  .user-reviews-title{
+    padding-top: 10px;
+    border-top: 1px solid #ececec;
+  }
+
+  .chat-button {
+    padding-top: 10px;
+  }

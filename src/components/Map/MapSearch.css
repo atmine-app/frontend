@@ -1,0 +1,16 @@
+.map-search-container .expand {
+    margin-bottom: 100px;
+    max-height: 200px;
+    /* overflow: hidden; */
+    animation: expand 1.5s ease-in-out;
+  }
+
+  @keyframes expand {
+    0% {
+      max-height: 0;
+    }
+    100% {
+      max-height: calc((90vh - 100px)/2);
+    }
+  }
+  
