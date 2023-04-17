@@ -49,7 +49,8 @@
     margin-bottom: 7px;
 }
 .review-slide-avatar{
-    font-size: 2rem;
+   width: 40px;
+   border-radius: 50%;
 }
 .review-slide-user-container{
     display: flex;
@@ -62,6 +63,9 @@
     font-size: smaller;
 }
 
+#see-ratings-btn-container{
+  margin-top: 20px;
+}
 /* RATINGS  */
 .ratingsContainer {
   width:90vw;

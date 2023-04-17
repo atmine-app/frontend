@@ -26,6 +26,7 @@ import Amenities from "../../components/Ameties/Amenities";
 import BookingNav from "../../components/Navbar/BookingNav";
 import { addDays } from "date-fns";
 import { toast } from "react-toastify";
+import {BsChatDots} from "react-icons/bs";
 
 export default function PropertyDetail() {
   const { propertyId } = useParams();
@@ -350,15 +351,12 @@ export default function PropertyDetail() {
         />
       )}
       <div className="section">
-        <h2 className="section-title">Have doubts?</h2>
-        <div className="chat-button">
-          <button
-            className="cta-button full100"
-            onClick={() => navigate(`/chat/${property.owner._id}`)}
-          >
-            Chat with owner
-          </button>
-        </div>
+      <h2 className="section-title">Have doubts?</h2>
+      <div className="chat-button">
+      <button className="cta-button full100" onClick={() => navigate(`/chat/${property.owner._id}`)}>
+        Chat with owner <BsChatDots />
+      </button>
+      </div>
       </div>
     </div>
   );
