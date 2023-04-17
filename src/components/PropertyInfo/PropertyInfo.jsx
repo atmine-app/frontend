@@ -8,7 +8,7 @@ export default function PropertyInfo({property,rating}) {
   return (
     <div className="propertyInfo section">
       <div className="propertyInfo-title">
-        <h1>{property.title}</h1>
+        <h2>{property.title}</h2>
       </div>
       {rating && (
         <div className="propertyInfo-smallinfo ">

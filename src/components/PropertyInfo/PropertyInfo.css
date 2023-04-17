@@ -3,3 +3,7 @@
     align-items: center;
     gap: 0.1rem;
 }
+
+.propertyInfo-title > h2 {
+    color: var(--color-primary-purple) !important;
+}
