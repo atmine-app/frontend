@@ -12,12 +12,15 @@ export default function ChatComponent() {
   const [talkLoaded, markTalkLoaded] = useState(false);
   const [recipient, setRecipient] = useState(null);
 
+
   const getRecipient = async () => {
     try {
+      console.log("otherUserId", otherUserId)
       const response = await userService.getOtherUser(otherUserId);
-      setRecipient(response);
+      console.log("response", response)
+      setRecipient(response.data);
     } catch (error) {
-      console.error("Error fetching recipient:", error);
+      console.error("Error fetching recipient:", error.message, error.response);
     }
   };
 
