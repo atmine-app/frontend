@@ -34,6 +34,7 @@ class BookingService {
   deleteBooking(bookingId) {
     return this.api.delete(`/${bookingId}`).then(({ data }) => data).catch(err => console.error(err));;
   }
+  
   blockDateRange(property, startDate, endDate) {
     return this.api
       .post("/block", { property, startDate, endDate })
