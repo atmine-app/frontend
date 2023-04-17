@@ -26,7 +26,8 @@
 
 .payment-security {
   text-align: justify;
-  margin-top: 20px;
+  margin-top: 10px;
+  font-size: 12px;
 }
 
 .payment-security small {
@@ -51,7 +52,8 @@
 
 .payment-methods-title {
   text-align: center;
-  font-size: 14px;
+  font-size: 10px;
+  margin-top: -5px;
 }
 
 .payment-methods-icons {
@@ -75,6 +77,5 @@
 }
 
 .payment-sm small {
-  font-size: 6px;
+  font-size: 4px;
 }
-

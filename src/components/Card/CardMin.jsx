@@ -60,13 +60,15 @@ export default function Card({ property }) {
       onClick={handleCardClick}
     >
       <div className="card-box">
-        <div className="heart-container">
-          {liked ? (
-            <AiFillHeart onClick={handleAddRemoveFavorite} />
-          ) : (
-            <AiOutlineHeart onClick={handleAddRemoveFavorite} />
-          )}
-        </div>
+        {user && (
+          <div className="heart-container">
+            {liked ? (
+              <AiFillHeart onClick={handleAddRemoveFavorite} />
+            ) : (
+              <AiOutlineHeart onClick={handleAddRemoveFavorite} />
+            )}
+          </div>
+        )}
         <Swiper
           slidesPerView={1}
           spaceBetween={15}

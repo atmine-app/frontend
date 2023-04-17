@@ -91,7 +91,7 @@ export default function CalendarComp({ propertyId, property, onRangeChange }) {
       ) : (
         // Redirect the user to the login page if they are not logged in
         <Link to="/login" className="nav-link">
-          <button className="cta-button">Log in to book</button>
+          <button className="cta-button full100">Log in to book</button>
         </Link>
       )}
     </div>
