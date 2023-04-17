@@ -38,8 +38,21 @@ npm run start
 ### MVP
 
 - User can sign up and create a new account
+- User can deactivate user account
 - User can login
 - User can log out
+- User can upload properties to be rented
+- User can vote and rate properties that has rented
+- User can pick dates
+- User can pay per property
+- User can add/remove properties from wishlist
+- User can book/cacel booking
+- User can search/filter properties
+- User can chat with property owners
+- User can disable properties
+- User can block date ranges in properties
+- User can add reviews to properties
+- User can upload pictures for properties and user profile
 
 ### Backlog
 
