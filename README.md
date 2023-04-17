@@ -5,7 +5,10 @@
 This application is a space rental app. The goal is to connect users that look for renting a space that they are not using with people that are in need of those spaces.
 
 <p align="center">
-<img width="33%" src="https://imgur.com/tCmnaqV.png">
+<img width="32%" src="https://imgur.com/tCmnaqV.png">
+  <img width="32%" src="https://i.imgur.com/gP7xZXq.png">
+    <img width="32%" src="https://i.imgur.com/BXqfecV.png">
+  
 </p>
 
 
