@@ -34,7 +34,6 @@ const Map = ({ formData, onLocationChange = () => {} }) => {
       if (status === "OK") {
         const location = results[0].geometry.location;
         const coordinates = { lat: location.lat(), lng: location.lng() }; // create a new object
-        console.log(coordinates);
         setSelectedLocation(coordinates);
         setCenter(coordinates);
         onLocationChange(coordinates); // pass the new object to onLocationChange callback function

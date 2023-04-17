@@ -32,7 +32,6 @@ export default function WishList() {
             return await propertyService.getProperty(propertyId);
           })
         );
-        console.log("properties:", properties);
         setLikedProperties(properties);
         setLoading(false);
       } catch (error) {

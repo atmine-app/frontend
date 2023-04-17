@@ -65,7 +65,6 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   };
 
   useEffect(() => {
-    console.log("selected amenities: ", amenities);
   }, [amenities]);
 
   const handleSubmit = async (e) => {
@@ -95,7 +94,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
         theme: "light",
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

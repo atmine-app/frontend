@@ -26,7 +26,7 @@ export default function MyProfile() {
         );
         setHasActiveBookings(confirmedBookings.length > 0);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
   
@@ -47,7 +47,7 @@ export default function MyProfile() {
       setProperty({ ...property, active: false });
       toast.info("Property deactivated");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -57,7 +57,7 @@ export default function MyProfile() {
       setProperty({ ...property, active: true });
       toast.success("Property activated");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

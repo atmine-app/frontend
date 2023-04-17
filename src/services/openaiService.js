@@ -23,7 +23,6 @@ const openAIService = {
           },
         }
       );
-        console.log('response.data.choices[0].text.trim()', response.data.choices[0].text.trim())
       return response.data.choices[0].text.trim();
     } catch (error) {
       console.error("OpenAI API Error:", error.message);

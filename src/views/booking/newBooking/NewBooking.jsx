@@ -45,7 +45,7 @@ export default function NewBooking() {
       const response = await propertyService.getProperty(propertyId);
       setProperty(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

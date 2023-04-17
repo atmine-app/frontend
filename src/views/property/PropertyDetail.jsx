@@ -83,7 +83,7 @@ export default function PropertyDetail() {
       );
       setUserVote(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -99,7 +99,7 @@ export default function PropertyDetail() {
       const response = await propertyService.getProperty(propertyId);
       setProperty(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -117,7 +117,7 @@ export default function PropertyDetail() {
       setUserReview(userReview);
       setReviews(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -139,7 +139,7 @@ export default function PropertyDetail() {
       }
       getReviews();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -186,7 +186,7 @@ export default function PropertyDetail() {
 
       setRating(averageRatings);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -235,6 +235,7 @@ export default function PropertyDetail() {
       await propertyService.addPropertyVote(propertyId, ratingWithAverage);
       // handle successful vote submission
     } catch (error) {
+      console.error(error);
       // handle vote submission error
     }
   };

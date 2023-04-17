@@ -24,7 +24,7 @@ const MyReservations = () => {
         const property = await propertyService.getProperty(propertyId);
         setPropertyTitle(property.title);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 

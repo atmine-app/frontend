@@ -71,8 +71,6 @@ const CheckoutForm = ({
           }
         );
 
-        console.log(data);
-
         // Store payment details
         setPaymentDetails(data);
 
@@ -91,7 +89,7 @@ const CheckoutForm = ({
           theme: "light",
         });
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
       setLoading(false);
     }
