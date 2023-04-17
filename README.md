@@ -29,6 +29,8 @@ npm run start
 
 ---
 ## Wireframes and screenshots
+
+<img width="100%" src="https://i.imgur.com/sEACzvz.png">
 <img src="https://i.imgur.com/vaFoy63.gif">
 
 ## User stories 
