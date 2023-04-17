@@ -43,20 +43,23 @@ export default function BookingDetail() {
       const updatedBooking = { ...booking, status: "cancelled" };
       await bookingService.editBooking(bookingId, updatedBooking);
       setBooking(updatedBooking);
-      toast.error(`Your booking at ${booking.property.title} has been cancelled.`, {
-        position: "top-right",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error(
+        `Your booking at ${booking.property.title} has been cancelled.`,
+        {
+          position: "top-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        }
+      );
     } catch (error) {
       console.error(error);
     }
-};
+  };
 
   useEffect(() => {
     getBooking();
@@ -97,7 +100,9 @@ export default function BookingDetail() {
           >
             {booking.status === "completed" ? "completed" : booking.status}
           </div>
-          <h1 className="booking-detail__title">Your Booking at {booking.property?.title}</h1>
+          <h1 className="booking-detail__title">
+            Your Booking at {booking.property?.title}
+          </h1>
           <p className="booking-detail__paragraph">
             {booking.status === "cancelled"
               ? `We've sent your cancellation email to: ${booking.renter?.email}.`
@@ -106,8 +111,14 @@ export default function BookingDetail() {
               : `You're all set. We've sent your confirmation email to: ${booking.renter?.email}.`}
           </p>
           <div className="booking-detail__confirmation-number">
-            <strong>Booking Confirmation Number</strong><br></br>{booking._id}<br></br><br></br>
-            <strong>Payment Transaction Id</strong><br></br>{booking.transactionId}
+            <strong>Booking Confirmation Number</strong>
+            <br></br>
+            {booking._id}
+            <br></br>
+            <br></br>
+            <strong>Payment Transaction Id</strong>
+            <br></br>
+            {booking.transactionId}
           </div>
         </div>
         <div className="booking-confirmation">
@@ -130,22 +141,30 @@ export default function BookingDetail() {
                   Total Price: {booking.totalPrice} €
                 </p>
               </div>
-              {booking.status !== "cancelled" &&
-              booking.status !== "completed" ? (
-                <div className="booking-confirmation__cancel-button section">
-                  <button className="cta-button danger" onClick={cancelBooking}>
+              <div className="booking-confirmation__buttons buttons-container">
+                {booking.status !== "cancelled" &&
+                booking.status !== "completed" ? (
+                  <button
+                    className="cta-button danger button-half-width"
+                    onClick={cancelBooking}
+                  >
                     Cancel Booking
                   </button>
-                </div>
-              ) : null}
+                ) : null}
                 <button
-                  className="cta-button section"
+                  className={`cta-button ${
+                    booking.status === "cancelled" ||
+                    booking.status === "completed"
+                      ? "full100"
+                      : "button-half-width"
+                  }`}
                   onClick={() =>
                     navigate(`/chat/${booking.property.owner._id}`)
                   }
                 >
                   Chat with the owner
                 </button>
+              </div>
             </div>
           </div>
         </div>
