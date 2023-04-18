@@ -6,14 +6,18 @@ import SearchBar from "../components/Search/SearchBar";
 import MapSearch from "../components/Map/MapSearch";
 import GoogleMapsProvider from "../components/GoogleMapsProvider/GoogleMapsProvider";
 import SearchFilter from "../components/Search/SearchFilter";
+import NotFound from "../components/NotFound/NotFound";
+import { PuffLoader } from "react-spinners";
 
 export default function Properties() {
+  // State variables
   const [properties, setProperties] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [mapVisible, setMapVisible] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     priceRange: [0, 1000],
     minRating: 0,
@@ -21,8 +25,15 @@ export default function Properties() {
     selectedAmenities: [],
   });
 
+  // Check if filters are empty
   const areFiltersEmpty = () => {
-    const { priceRange, minRating, selectedCategories, selectedAmenities, city } = filters;
+    const {
+      priceRange,
+      minRating,
+      selectedCategories,
+      selectedAmenities,
+      city,
+    } = filters;
     return (
       priceRange[0] === 0 &&
       priceRange[1] === 1000 &&
@@ -32,7 +43,8 @@ export default function Properties() {
       !city
     );
   };
-  
+
+  // Toggle filter visibility and handle map visibility based on filter conditions
   const handleFilterClick = () => {
     setShowFilter(!showFilter);
     if (mapVisible && areFiltersEmpty()) {
@@ -42,6 +54,7 @@ export default function Properties() {
     }
   };
 
+  // Apply filters and handle map visibility based on applied filters
   const applyFilters = (appliedFilters) => {
     setFilters({ ...filters, ...appliedFilters });
     setShowFilter(false);
@@ -54,10 +67,12 @@ export default function Properties() {
     }
   };
 
+  // Handle category selection and map visibility
   const handleCategorySelect = (category) => {
     if (category === "all") {
       setSelectedCategory("");
-      setMapVisible(false); 
+      setMapVisible(false);
+      setMapVisible(false);
       setShowFilter(false);
       setFilters({
         // Clear the filters
@@ -78,6 +93,7 @@ export default function Properties() {
     }
   };
 
+  // Close filter and reset state variables
   const closeFilter = () => {
     setShowFilter(false);
     setMapVisible(false);
@@ -88,17 +104,22 @@ export default function Properties() {
       selectedAmenities: [],
     });
   };
+
+  // Scroll to top when map is visible
   useEffect(() => {
     if (mapVisible) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [filters, selectedCategory, searchValue,mapVisible]);
+  }, [filters, selectedCategory, searchValue, mapVisible]);
 
+  // Handle search input value
   const handleSearch = (value) => {
     setSearchValue(value);
   };
 
+  // Fetch all properties
   const getAllProperties = async () => {
+    setIsLoading(true);
     try {
       const response = await propertyService.getAllProperties();
       const activeProperties = response.filter((property) => property.active);
@@ -106,9 +127,13 @@ export default function Properties() {
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
       setProperties(activeProperties);
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
   };
 
+  // Get all properties when component mounts
   useEffect(() => {
     getAllProperties();
     return () => {
@@ -116,9 +141,9 @@ export default function Properties() {
     };
   }, []);
 
+  // Filter properties based on searchValue, filters, and selectedCategory
   useEffect(() => {
     let filtered = properties;
-
     if (searchValue) {
       filtered = filtered.filter(
         (property) =>
@@ -196,7 +221,6 @@ export default function Properties() {
         filters={filters}
         setFilters={setFilters}
       />
-
       <div className="map-and-cards-container">
         {(searchValue || mapVisible) &&
           filteredProperties.length > 0 &&
@@ -211,20 +235,21 @@ export default function Properties() {
               />
             </GoogleMapsProvider>
           )}
-        <div>
-          {properties !== null ? (
-            <div className="cards-flex">
-              {filteredProperties.map((property) => {
-                return (
-                  <div key={property._id}>
-                    <CardMin property={property} />
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div>Loading properties...</div>
-          )}
+        {isLoading ? (
+          <div className="loading-container">
+            <PuffLoader color="#ffffff" size={80} />
+          </div>
+        ) : (
+          filteredProperties.length === 0 && <NotFound />
+        )}
+        <div className="cards-flex">
+          {filteredProperties.map((property) => {
+            return (
+              <div key={property._id}>
+                <CardMin property={property} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -144,48 +144,68 @@ export default function CalendarComp({
 
   return (
     <div
-      className={`calendarWrap section${
-        profileSectionStyle ? " calendarProfile" : ""
-      }`}
+      className={`calendarWrap section${profileSectionStyle ? " calendarProfile" : ""}`}
     >
-      {isLoggedIn ? (
-        <>
-          <button
-            className="cta-button full100"
-            onClick={() => setCalendarVisible(!calendarVisible)}
-          >
-            Check availability
-          </button>
-          {calendarVisible && (
-            <>
-              <div ref={refOne}>
-                <DateRange
-                  direction="horizontal"
-                  editableDateInputs={true}
-                  onChange={(item) => {
-                    setRange([item.selection]);
-                    onRangeChange(item.selection); // Pass the new range to the parent component
-                  }}
-                  moveRangeOnFirstSelection={false}
-                  ranges={range}
-                  months={1}
-                  className="calendarElement expand"
-                  disabledDates={bookedDates}
-                  rangeColors={["#605cb8"]}
-                  minDate={new Date()}
-                  onDateChange={(date) => handleDateClick(date)}
-                  dayContentRenderer={dayContentRenderer}
-                />
-              </div>
-            </>
-          )}
-        </>
-      ) : (
+      {isLoggedIn && !isOwner ? (
+        <button
+          className="cta-button full100"
+          onClick={() => setCalendarVisible(!calendarVisible)}
+        >
+          Check availability
+        </button>
+      ) : null}
+  
+      {isOwner && (
+        <div ref={refOne}>
+          <DateRange
+            direction="horizontal"
+            editableDateInputs={true}
+            onChange={(item) => {
+              setRange([item.selection]);
+              onRangeChange(item.selection); // Pass the new range to the parent component
+            }}
+            moveRangeOnFirstSelection={false}
+            ranges={range}
+            months={1}
+            className="calendarElement expand"
+            disabledDates={bookedDates}
+            rangeColors={["#605cb8"]}
+            minDate={new Date()}
+            onDateChange={(date) => handleDateClick(date)}
+            dayContentRenderer={dayContentRenderer}
+          />
+        </div>
+      )}
+  
+      {!isLoggedIn && (
         // Redirect the user to the login page if they are not logged in
         <Link to="/login" className="nav-link">
           <button className="cta-button full100">Log in to book</button>
         </Link>
       )}
+  
+      {calendarVisible && isLoggedIn && !isOwner && (
+        <div ref={refOne}>
+          <DateRange
+            direction="horizontal"
+            editableDateInputs={true}
+            onChange={(item) => {
+              setRange([item.selection]);
+              onRangeChange(item.selection); // Pass the new range to the parent component
+            }}
+            moveRangeOnFirstSelection={false}
+            ranges={range}
+            months={1}
+            className="calendarElement expand"
+            disabledDates={bookedDates}
+            rangeColors={["#605cb8"]}
+            minDate={new Date()}
+            onDateChange={(date) => handleDateClick(date)}
+            dayContentRenderer={dayContentRenderer}
+          />
+        </div>
+      )}
     </div>
   );
 }
+  
