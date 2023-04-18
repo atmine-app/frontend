@@ -16,9 +16,7 @@ export default function ChatComponent() {
 
   const getRecipient = async () => {
     try {
-      console.log("otherUserId", otherUserId)
       const response = await userService.getOtherUser(otherUserId);
-      console.log("response", response)
       setRecipient(response.data);
     } catch (error) {
       console.error("Error fetching recipient:", error.message, error.response);

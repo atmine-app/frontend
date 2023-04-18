@@ -44,7 +44,6 @@ export default function CalendarComp({
       const propertyBookings = bookings.filter(
         (booking) => booking.property && booking.property._id === propertyId
       );
-      console.log("property bookings", propertyBookings);
       let bookedDatesArray = [];
       let ownerBlockedDatesArray = [];
 
@@ -57,8 +56,6 @@ export default function CalendarComp({
         const parsedStartDate = parse(startDate, "yyyy-MM-dd", new Date());
         const parsedEndDate = parse(endDate, "yyyy-MM-dd", new Date());
         let currentDate = parsedStartDate;
-
-        console.log("booking 1", booking);
 
         while (isBefore(currentDate, addDays(parsedEndDate, 1))) {
           if (booking.status === "blocked" && isOwner) {
@@ -73,8 +70,6 @@ export default function CalendarComp({
       setBlockedBookings(blockedBookings);
       setBookedDates(bookedDatesArray);
       setOwnerBlockedRanges(ownerBlockedDatesArray);
-      console.log("owner blocked dates:", ownerBlockedDatesArray);
-      console.log("booked dates:", bookedDatesArray);
     } catch (error) {
       console.error("Error fetching bookings:", error);
     }
