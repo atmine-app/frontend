@@ -37,7 +37,7 @@ export default function Properties() {
     } = filters;
     return (
       priceRange[0] === 0 &&
-      priceRange[1] === 1000 &&
+      priceRange[1] === 300 &&
       minRating === 0 &&
       selectedCategories.length === 0 &&
       selectedAmenities.length === 0 &&
@@ -99,7 +99,7 @@ export default function Properties() {
     setShowFilter(false);
     setMapVisible(false);
     setFilters({
-      priceRange: [0, 1000],
+      priceRange: [0, 300],
       minRating: 0,
       selectedCategories: [],
       selectedAmenities: [],
