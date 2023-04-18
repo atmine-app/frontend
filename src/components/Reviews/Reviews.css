@@ -52,8 +52,9 @@
 }
 
 .review-slide-avatar {
+  border-radius: 61%;
   width: 40px;
-  border-radius: 50%;
+  height: 40px;
 }
 
 .review-slide-user-container {
