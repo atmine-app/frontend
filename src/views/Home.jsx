@@ -6,6 +6,8 @@ import SearchBar from "../components/Search/SearchBar";
 import MapSearch from "../components/Map/MapSearch";
 import GoogleMapsProvider from "../components/GoogleMapsProvider/GoogleMapsProvider";
 import SearchFilter from "../components/Search/SearchFilter";
+import NotFound from "../components/NotFound/NotFound";
+import { PuffLoader } from "react-spinners";
 
 export default function Properties() {
   // State variables
@@ -15,6 +17,7 @@ export default function Properties() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [mapVisible, setMapVisible] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     priceRange: [0, 1000],
     minRating: 0,
@@ -69,6 +72,7 @@ export default function Properties() {
     if (category === "all") {
       setSelectedCategory("");
       setMapVisible(false);
+      setMapVisible(false);
       setShowFilter(false);
       setFilters({
         // Clear the filters
@@ -115,6 +119,7 @@ export default function Properties() {
 
   // Fetch all properties
   const getAllProperties = async () => {
+    setIsLoading(true);
     try {
       const response = await propertyService.getAllProperties();
       const activeProperties = response.filter((property) => property.active);
@@ -122,7 +127,10 @@ export default function Properties() {
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
       setProperties(activeProperties);
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // Get all properties when component mounts
@@ -227,20 +235,21 @@ export default function Properties() {
               />
             </GoogleMapsProvider>
           )}
-        <div>
-          {properties !== null ? (
-            <div className="cards-flex">
-              {filteredProperties.map((property) => {
-                return (
-                  <div key={property._id}>
-                    <CardMin property={property} />
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div>Loading properties...</div>
-          )}
+        {isLoading ? (
+          <div className="loading-container">
+            <PuffLoader color="#ffffff" size={80} />
+          </div>
+        ) : (
+          filteredProperties.length === 0 && <NotFound />
+        )}
+        <div className="cards-flex">
+          {filteredProperties.map((property) => {
+            return (
+              <div key={property._id}>
+                <CardMin property={property} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
