@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { GoogleMap, OverlayView } from "@react-google-maps/api";
 import { CiLocationOn } from "react-icons/ci";
 import categories from "../../data/categories";
+import NotFound from "../NotFound/NotFound";
 
 const Map = ({ formData, onLocationChange = () => {} }) => {
   // set initial state for selectedLocation and center
@@ -98,7 +99,7 @@ const Map = ({ formData, onLocationChange = () => {} }) => {
     </GoogleMap>
   ) : (
     <div>
-      <p>Loading map...</p>
+      <NotFound />
     </div>
   );
 };

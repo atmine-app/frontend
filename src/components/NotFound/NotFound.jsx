@@ -10,8 +10,8 @@ const NotFound = () => (
       height: "50vh",
     }}
   >
-    <div style={{ width: "350px", height: "350px" }}>
-      <NotFoundSVG width="100%" height="100%" />
+    <div style={{ width: "350px", height: "350px", marginTop: "-70px" }}>
+      <NotFoundSVG width="100%" height="100%"/>
     </div>
   </div>
 );
