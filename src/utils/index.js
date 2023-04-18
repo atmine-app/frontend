@@ -1,6 +1,5 @@
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow } from "date-fns";
 
 export const formatTimestamp = (timestamp) => {
-    return formatDistanceToNow(new Date(timestamp), { addSuffix: true });
-  };
-
+  return formatDistanceToNow(new Date(timestamp), { addSuffix: true });
+};

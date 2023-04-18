@@ -12,8 +12,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { usePropertyLike } from "../../hooks/usePropertyLike";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {CiLocationOn} from "react-icons/ci";
-
+import { CiLocationOn } from "react-icons/ci";
 
 export default function Card({ property }) {
   const { user } = useAuth();
@@ -87,7 +86,11 @@ export default function Card({ property }) {
         </Swiper>
         <div className="card-info-flex new-card-info-flex">
           <div className="card-title-avatar">
-          <img className="card-avatar" src={property.owner?.avatar} alt="property owner avatar" />
+            <img
+              className="card-avatar"
+              src={property.owner?.avatar}
+              alt="property owner avatar"
+            />
 
             <h3 className="card-title">{property.title}</h3>
           </div>
@@ -102,14 +105,18 @@ export default function Card({ property }) {
         </div>
         <div className="new-card-info-details">
           <p className="new-card-info">
-           <CiLocationOn className="location-icon-card"/> {property.address}, {property.city}, {property.country}
+            <CiLocationOn className="location-icon-card" /> {property.address},{" "}
+            {property.city}, {property.country}
           </p>
           <p className="new-card-summary">{property.summary}</p>
           <p className="new-card-price">
-            <span className="new-card-price-value">€<span className="new-card-price-number">{property.price}</span></span> day
+            <span className="new-card-price-value">
+              €<span className="new-card-price-number">{property.price}</span>
+            </span>{" "}
+            day
           </p>
+        </div>
       </div>
-    </div>
     </div>
   );
 }

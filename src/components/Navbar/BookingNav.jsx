@@ -34,7 +34,7 @@ export default function BookingNav({
     <nav className="booking-nav">
       <span className="booking-date">
         {formattedStartDate} - {formattedEndDate} ({totalDays} days) <br />
-         <a href="#calendar" onClick={scrollToCalendar} id="check-dates-link">
+        <a href="#calendar" onClick={scrollToCalendar} id="check-dates-link">
           Check availability
         </a>
       </span>

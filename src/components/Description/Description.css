@@ -9,7 +9,7 @@
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     position: relative;
-    max-height: calc(var(--line-height) * 5); /* Change this to your actual line height */
+    max-height: calc(var(--line-height) * 5);
 }
 
 .truncated::before {

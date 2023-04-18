@@ -81,7 +81,6 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
       const summary = await openAIService.summarize(formData.description);
       propertyData.summary = summary;
       const createdProperty = await propertyService.addProperty(propertyData);
-      console.log(createdProperty)
       navigate(`/properties/${createdProperty._id}`);
       setFormData(initialState);
       toast.success("Property successfully created!", {

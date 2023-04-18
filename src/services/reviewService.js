@@ -1,13 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
 class ReviewService {
   constructor() {
     this.api = axios.create({
-      baseURL: `${process.env.REACT_APP_BACKEND_URL}/reviews`
+      baseURL: `${process.env.REACT_APP_BACKEND_URL}/reviews`,
     });
 
-    this.api.interceptors.request.use(config => {
-      const storedToken = localStorage.getItem('authToken');
+    this.api.interceptors.request.use((config) => {
+      const storedToken = localStorage.getItem("authToken");
       if (storedToken) {
         config.headers = { Authorization: `Bearer ${storedToken}` };
       }
@@ -21,7 +21,7 @@ class ReviewService {
 
   createReview(propertyId, review) {
     const data = { propertyId, review };
-  return this.api.post("/", data).then(({ data }) => data);
+    return this.api.post("/", data).then(({ data }) => data);
   }
 
   updateReview(reviewId, review) {
@@ -31,10 +31,6 @@ class ReviewService {
   deleteReview(reviewId) {
     return this.api.delete(`/${reviewId}`).then(({ data }) => data);
   }
-
-//   getAllReviews() {
-//     return this.api.get('/').then(({ data }) => data);
-//   }
 }
 
 const reviewService = new ReviewService();

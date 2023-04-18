@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import bookingService from '../../services/bookingsServices';
-import propertyService from '../../services/propertyService';
-import '../booking/bookingList/BookingList.css';
-import BackNavigationFloat from '../../components/BackNavigation/BackNavigationFloat';
-import BookingItem from '../booking/bookingItem/BookingItem';
-import NotFound from '../../components/NotFound/NotFound';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import bookingService from "../../services/bookingsServices";
+import propertyService from "../../services/propertyService";
+import "../booking/bookingList/BookingList.css";
+import BackNavigationFloat from "../../components/BackNavigation/BackNavigationFloat";
+import BookingItem from "../booking/bookingItem/BookingItem";
+import NotFound from "../../components/NotFound/NotFound";
 
 const MyReservations = () => {
   const { propertyId } = useParams();
   const [bookings, setBookings] = useState([]);
-  const [propertyTitle, setPropertyTitle] = useState('');
+  const [propertyTitle, setPropertyTitle] = useState("");
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -46,8 +46,8 @@ const MyReservations = () => {
           </ul>
         ) : (
           <>
-          <p>No reservations found.</p>
-          <NotFound />
+            <p>No reservations found.</p>
+            <NotFound />
           </>
         )}
       </div>

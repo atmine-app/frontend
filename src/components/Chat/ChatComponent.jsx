@@ -1,9 +1,10 @@
 import Talk from "talkjs";
 import { useEffect, useState, useRef } from "react";
-import { useAuth } from "../../hooks/useAuth"; // Import your auth provider
+import { useAuth } from "../../hooks/useAuth"; 
 import { useParams } from "react-router-dom";
 import userService from "../../services/userService";
 import "./ChatComponent.css";
+import { PuffLoader } from "react-spinners";
 
 export default function ChatComponent() {
   const chatboxEl = useRef();
@@ -12,12 +13,9 @@ export default function ChatComponent() {
   const [talkLoaded, markTalkLoaded] = useState(false);
   const [recipient, setRecipient] = useState(null);
 
-
   const getRecipient = async () => {
     try {
-      console.log("otherUserId", otherUserId)
       const response = await userService.getOtherUser(otherUserId);
-      console.log("response", response)
       setRecipient(response.data);
     } catch (error) {
       console.error("Error fetching recipient:", error.message, error.response);
@@ -29,8 +27,7 @@ export default function ChatComponent() {
     // eslint-disable-next-line
   }, [otherUserId]);
 
-  useEffect(() => {
-  }, [recipient]);
+  useEffect(() => {}, [recipient]);
 
   useEffect(() => {
     Talk.ready.then(() => markTalkLoaded(true));
@@ -84,7 +81,10 @@ export default function ChatComponent() {
         }}
         ref={chatboxEl}
       >
-        Loading...
+        <div className="loading-container">
+          <PuffLoader color="#605cb8" size={60} />
+        </div>
+        );
       </div>
     </span>
   );

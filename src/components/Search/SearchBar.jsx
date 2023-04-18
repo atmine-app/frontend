@@ -49,7 +49,7 @@ const SearchBar = (props) => {
       </div>
 
       <div className="searchCategoryContainer">
-      <div
+        <div
           className={`categoryItem ${
             selectedCategory === "all" ? "selected" : ""
           }`}
@@ -64,7 +64,7 @@ const SearchBar = (props) => {
             onClick={() => handleIconClick(category.value)}
             className={`categoryItem ${
               selectedCategory === category.value ? "selected" : ""
-            }`} 
+            }`}
           >
             <category.icon className="icon" />
             <span className="categoryText">{category.label}</span>

@@ -108,7 +108,7 @@ const SearchFilter = ({
         </div>
       </div>
       <div className="filter-buttons-container">
-      <button onClick={closeFilter} className="cta-button danger">
+        <button onClick={closeFilter} className="cta-button danger">
           Close and clear
         </button>
         <button onClick={handleApplyFilters} className="cta-button">

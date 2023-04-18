@@ -7,6 +7,7 @@ import { useAuth } from "../../hooks/useAuth";
 import BackNavigationFloat from "../../components/BackNavigation/BackNavigationFloat";
 import NotFound from "../../components/NotFound/NotFound";
 import "./WishList.css";
+import { PuffLoader } from "react-spinners";
 
 export default function WishList() {
   const { user } = useAuth();
@@ -42,7 +43,13 @@ export default function WishList() {
   }, [user._id]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        <div className="loading-container">
+          <PuffLoader color="#605cb8" size={60} />
+        </div>
+      </>
+    );
   }
 
   return (
@@ -55,13 +62,21 @@ export default function WishList() {
             <p className="cards-flex-p">No properties added to wishlist</p>
             <NotFound />
             <Link to="/">
-            <button className="cta-button full100 top160">Start Exploring</button>
+              <button className="cta-button full100 top160">
+                Start Exploring
+              </button>
             </Link>
           </div>
         ) : (
           likedProperties
             .filter((property) => property !== null && property !== undefined)
-            .map((property) => <CardMin className="wish" key={property._id} property={property} />)
+            .map((property) => (
+              <CardMin
+                className="wish"
+                key={property._id}
+                property={property}
+              />
+            ))
         )}
       </div>
     </div>

@@ -1,5 +1,5 @@
-import React, { useState, createContext, useEffect } from 'react';
-import authService from '../services/authService';
+import React, { useState, createContext, useEffect } from "react";
+import authService from "../services/authService";
 
 const AuthContext = createContext();
 
@@ -11,17 +11,17 @@ function AuthProviderWrapper(props) {
 
   // Functions to store and delete the token received by the backend in the browser
   const storeToken = (token) => {
-    localStorage.setItem('authToken', token);
-  }
+    localStorage.setItem("authToken", token);
+  };
 
   const removeToken = () => {
-    localStorage.removeItem('authToken');
-  }
+    localStorage.removeItem("authToken");
+  };
 
   // Function to check if the user is already authenticated and update the states, accessible from anywhere
   const authenticateUser = async () => {
     setLoading(true);
-    const storedToken = localStorage.getItem('authToken');
+    const storedToken = localStorage.getItem("authToken");
     if (storedToken) {
       try {
         const response = await authService.me();
@@ -44,19 +44,27 @@ function AuthProviderWrapper(props) {
   const logOutUser = () => {
     removeToken();
     authenticateUser();
-  }
+  };
 
   // When the app first renders, let's see if the user's session is still active
   useEffect(() => {
     authenticateUser();
   }, []);
-  
+
   return (
-    <AuthContext.Provider value={{ user, isLoggedIn, isLoading, storeToken, authenticateUser, logOutUser }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isLoggedIn,
+        isLoading,
+        storeToken,
+        authenticateUser,
+        logOutUser,
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
-  )
+  );
 }
 
 export { AuthProviderWrapper, AuthContext };
-

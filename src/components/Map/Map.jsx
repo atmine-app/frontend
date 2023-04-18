@@ -46,10 +46,10 @@ const Map = ({ formData, onLocationChange = () => {} }) => {
   const getMarkerIcon = () => {
     const category = categories.find((cat) => cat.value === formData.category);
     if (!category) {
-      return <CiLocationOn size={30} style={{color:"white"}}/>;
+      return <CiLocationOn size={30} style={{ color: "white" }} />;
     }
     const IconComponent = category.icon;
-    return <IconComponent size={30} style={{color:"white"}}/>;
+    return <IconComponent size={30} style={{ color: "white" }} />;
   };
 
   const markerIcon = getMarkerIcon();
