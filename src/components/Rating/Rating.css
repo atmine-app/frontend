@@ -1,12 +1,12 @@
-.rating-bs-container{
+.rating-bs-container {
     display: flex;
     flex-direction: row;
-    gap:15px;
+    gap: 15px;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.rating-section{
+.rating-section {
     display: flex;
     flex-direction: column;
     gap: 10px;

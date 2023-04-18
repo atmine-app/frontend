@@ -45,16 +45,6 @@ export default function EditProperty() {
     });
   };
 
-  /* const handleFormImageChange = (imageData) => {
-    setProperty((prev) => {
-      return {
-        ...prev,
-        images: imageData,
-        
-      };
-    });
-  }; */
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

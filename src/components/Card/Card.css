@@ -53,10 +53,12 @@
   margin-left: 5px;
   gap: 0.5rem;
 }
-.location-icon-card{
+
+.location-icon-card {
   font-size: 1.2rem;
   vertical-align: middle;
 }
+
 .new-card-info {
   margin: 0;
   color: var(--font-grey);
@@ -87,6 +89,7 @@
 .card-box .swiper-pagination-bullet-active {
   background-color: var(--color-primary-green) !important;
 }
+
 .card-box .swiper-pagination-bullet {
   background-color: var(--color-primary-green) !important;
 }
@@ -130,6 +133,7 @@
 }
 
 @media only screen and (max-width: 1000px) {
+
   .swiper-container,
   .card-img {
     height: 400px;
@@ -138,6 +142,7 @@
 }
 
 @media only screen and (max-width: 800px) {
+
   .swiper-container,
   .card-img {
     height: 50%;

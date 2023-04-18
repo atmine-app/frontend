@@ -49,8 +49,7 @@ h1,
 h2,
 h4,
 h5,
-h6
-{
+h6 {
   color: var(--color-primary-purple);
 }
 
@@ -136,40 +135,6 @@ img {
   height: 100%;
   object-fit: cover;
 }
-
-/* .genericForm form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-} 
-
-label {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-top: 1rem;
-  width: 100%;
-}
-
-input[type="text"],
-input[type="number"],
-textarea,
-select {
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: var(--border-grey);
-  border-radius: var(--border-radius);
-  transition: border-color var(--transition)
-}
-
-input[type="text"]:focus,
-input[type="number"]:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  border-color: var(--color-primary-purple);
-} */
 
 /* FORMS */
 
@@ -277,12 +242,6 @@ button {
   transition: background-color var(--transition);
 }
 
-/* button:hover,
-button:focus {
-  background-color: var(--color-primary-lime);
-  color:var(--color-primary-black);
-} */
-
 .cta-button:hover,
 .cta-button:focus {
   background-color: var(--color-primary-lime);
@@ -317,12 +276,6 @@ button:focus {
 }
 
 /* LOADING PUFF */
-/* .loading-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
 
 .loading-container {
   display: flex;

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
-import propertyService from '../../services/propertyService';
-import '../booking/bookingList/BookingList.css';
-import BackNavigationFloat from '../../components/BackNavigation/BackNavigationFloat';
-import PropertyItem from '../property/PropertyItem';
-import { RxUpload } from 'react-icons/rx';
-import NotFound from '../../components/NotFound/NotFound';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import propertyService from "../../services/propertyService";
+import "../booking/bookingList/BookingList.css";
+import BackNavigationFloat from "../../components/BackNavigation/BackNavigationFloat";
+import PropertyItem from "../property/PropertyItem";
+import { RxUpload } from "react-icons/rx";
+import NotFound from "../../components/NotFound/NotFound";
 
 const MyProperties = () => {
   const [properties, setProperties] = useState([]);
@@ -14,14 +14,16 @@ const MyProperties = () => {
   const navigate = useNavigate();
 
   const handleHosting = () => {
-    navigate('/register-property');
+    navigate("/register-property");
   };
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
         const allProperties = await propertyService.getAllProperties();
-        const userProperties = allProperties.filter(property => property.owner._id === user._id);
+        const userProperties = allProperties.filter(
+          (property) => property.owner._id === user._id
+        );
         const sortedProperties = userProperties.sort((a, b) => {
           if (a.active && !b.active) {
             return -1;
@@ -48,7 +50,10 @@ const MyProperties = () => {
         {properties.length > 0 ? (
           <ul>
             {properties.map((property) => (
-              <Link to={`/profile/properties/${property._id}`} key={property._id}>
+              <Link
+                to={`/profile/properties/${property._id}`}
+                key={property._id}
+              >
                 <li className="booking-list__item" key={property._id}>
                   <PropertyItem property={property} />
                 </li>

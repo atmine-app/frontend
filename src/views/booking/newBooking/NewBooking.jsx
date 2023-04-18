@@ -127,7 +127,10 @@ export default function NewBooking() {
             ))}
         </Swiper>
         <div className="property__card-content section">
-          <h2>Booking Request at<br></br>{property.title}</h2>
+          <h2>
+            Booking Request at<br></br>
+            {property.title}
+          </h2>
           <table className="booking-table">
             <tbody>
               <tr>
@@ -145,7 +148,7 @@ export default function NewBooking() {
                 <td>{totalPrice}€</td>
               </tr>
             </tbody>
-          </table>     
+          </table>
         </div>
         <Payment
           onPaymentSuccess={handlePaymentSuccess}
@@ -156,7 +159,9 @@ export default function NewBooking() {
           endDate={endDate}
         />
         <div className="section">
-          <button className="cta-button full100" onClick={handleSkipPayment}>Skip Payment</button>
+          <button className="cta-button full100" onClick={handleSkipPayment}>
+            Skip Payment
+          </button>
         </div>
       </div>
     </div>

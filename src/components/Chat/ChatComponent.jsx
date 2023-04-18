@@ -1,6 +1,6 @@
 import Talk from "talkjs";
 import { useEffect, useState, useRef } from "react";
-import { useAuth } from "../../hooks/useAuth"; // Import your auth provider
+import { useAuth } from "../../hooks/useAuth"; 
 import { useParams } from "react-router-dom";
 import userService from "../../services/userService";
 import "./ChatComponent.css";
@@ -12,7 +12,6 @@ export default function ChatComponent() {
   const { otherUserId } = useParams();
   const [talkLoaded, markTalkLoaded] = useState(false);
   const [recipient, setRecipient] = useState(null);
-
 
   const getRecipient = async () => {
     try {
@@ -28,8 +27,7 @@ export default function ChatComponent() {
     // eslint-disable-next-line
   }, [otherUserId]);
 
-  useEffect(() => {
-  }, [recipient]);
+  useEffect(() => {}, [recipient]);
 
   useEffect(() => {
     Talk.ready.then(() => markTalkLoaded(true));
@@ -86,8 +84,7 @@ export default function ChatComponent() {
         <div className="loading-container">
           <PuffLoader color="#605cb8" size={60} />
         </div>
-
-    );
+        );
       </div>
     </span>
   );

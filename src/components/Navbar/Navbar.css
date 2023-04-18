@@ -61,6 +61,6 @@ nav a.active{
 .navIcon {
   font-size: 1.3rem;
   margin-bottom: 0.2rem;
-  width: 1.5rem; /* set a fixed width for the icon */
-  height: 1.5rem; /* set a fixed height for the icon */
+  width: 1.5rem; 
+  height: 1.5rem; 
 }

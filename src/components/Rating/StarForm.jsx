@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import {Bs1CircleFill,Bs2CircleFill,Bs3CircleFill,Bs4CircleFill,Bs5CircleFill} from "react-icons/bs";
+import {
+  Bs1CircleFill,
+  Bs2CircleFill,
+  Bs3CircleFill,
+  Bs4CircleFill,
+  Bs5CircleFill,
+} from "react-icons/bs";
 import { toast } from "react-toastify";
 import "./Rating.css";
 import "../../App.css";
 
-const RatingForm = ({ propertyId, onSubmit, initialRating, userBooking}) => {
+const RatingForm = ({ propertyId, onSubmit, initialRating, userBooking }) => {
   const categories = [
     { label: "Location", key: "location" },
     { label: "Cleanliness", key: "cleanliness" },
@@ -32,10 +38,12 @@ const RatingForm = ({ propertyId, onSubmit, initialRating, userBooking}) => {
     const updatedRatings = { ...ratings, [categoryKey]: value };
     setRatings(updatedRatings);
     await onSubmit(propertyId, updatedRatings);
-  
+
     // Find the category label
-    const categoryLabel = categories.find((cat) => cat.key === categoryKey).label;
-  
+    const categoryLabel = categories.find(
+      (cat) => cat.key === categoryKey
+    ).label;
+
     toast.success(`${categoryLabel} rated with ${value} saved!`, {
       position: "top-right",
       autoClose: 2500,
@@ -62,9 +70,10 @@ const RatingForm = ({ propertyId, onSubmit, initialRating, userBooking}) => {
       {categories.map((category) => (
         <div key={category.key} style={{ textAlign: "center" }}>
           <div>{category.label}</div>
-          <div 
-          className="rating-bs-container"
-          style={{ display: "inline-flex" }}>
+          <div
+            className="rating-bs-container"
+            style={{ display: "inline-flex" }}
+          >
             {icons.map((icon, i) => {
               const ratingValue = i + 1;
               return (
@@ -74,7 +83,9 @@ const RatingForm = ({ propertyId, onSubmit, initialRating, userBooking}) => {
                     name={`rating-${category.key}`}
                     style={styles}
                     value={ratingValue}
-                    onClick={() => handleRatingChange(category.key, ratingValue)}
+                    onClick={() =>
+                      handleRatingChange(category.key, ratingValue)
+                    }
                   />
                   {React.cloneElement(icon, {
                     className: "star",
@@ -95,8 +106,3 @@ const RatingForm = ({ propertyId, onSubmit, initialRating, userBooking}) => {
 };
 
 export default RatingForm;
-
-
-
-
-

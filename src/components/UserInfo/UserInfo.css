@@ -2,14 +2,15 @@
     display: flex;
     flex-direction: row;
 }
-.user-info-details{
+
+.user-info-details {
     display: flex;
     flex-direction: column;
     margin-left: 10px;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
-.user-info-avatar-detail{
+.user-info-avatar-detail {
     width: 70px;
     height: 70px;
     border-radius: 50%;
