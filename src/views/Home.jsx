@@ -6,6 +6,7 @@ import SearchBar from "../components/Search/SearchBar";
 import MapSearch from "../components/Map/MapSearch";
 import GoogleMapsProvider from "../components/GoogleMapsProvider/GoogleMapsProvider";
 import SearchFilter from "../components/Search/SearchFilter";
+import { removeAccents } from "../utils";
 
 export default function Properties() {
   // State variables
@@ -136,16 +137,20 @@ export default function Properties() {
   // Filter properties based on searchValue, filters, and selectedCategory
   useEffect(() => {
     let filtered = properties;
-    if (searchValue) {
-      filtered = filtered.filter(
-        (property) =>
-          property.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-          property.description
-            .toLowerCase()
-            .includes(searchValue.toLowerCase()) ||
-          property.category.toLowerCase().includes(searchValue.toLowerCase()) ||
-          property.city.toLowerCase().includes(searchValue.toLowerCase())
-      );
+    const searchValueNoAccents = removeAccents(searchValue).toLowerCase();
+    const searchTerms = searchValue ? searchValueNoAccents.split(" ") : [];
+
+    if (searchTerms.length > 0) {
+      filtered = filtered.filter((property) => {
+        return searchTerms.every((term) => {
+          return (
+            removeAccents(property.title.toLowerCase()).includes(term) ||
+            removeAccents(property.description.toLowerCase()).includes(term) ||
+            removeAccents(property.category.toLowerCase()).includes(term) ||
+            removeAccents(property.city.toLowerCase()).includes(term)
+          );
+        });
+      });
     }
 
     if (selectedCategory) {
