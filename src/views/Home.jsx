@@ -21,23 +21,47 @@ export default function Properties() {
     selectedAmenities: [],
   });
 
+  const areFiltersEmpty = () => {
+    const { priceRange, minRating, selectedCategories, selectedAmenities, city } = filters;
+    return (
+      priceRange[0] === 0 &&
+      priceRange[1] === 1000 &&
+      minRating === 0 &&
+      selectedCategories.length === 0 &&
+      selectedAmenities.length === 0 &&
+      !city
+    );
+  };
+  
   const handleFilterClick = () => {
     setShowFilter(!showFilter);
-    setMapVisible(true);
+    if (mapVisible && areFiltersEmpty()) {
+      setMapVisible(false);
+    } else {
+      setMapVisible(true);
+    }
   };
 
   const applyFilters = (appliedFilters) => {
     setFilters({ ...filters, ...appliedFilters });
     setShowFilter(false);
+    if (
+      Object.values(appliedFilters).some(
+        (filter) => filter && filter.length > 0
+      )
+    ) {
+      setMapVisible(true);
+    }
   };
 
   const handleCategorySelect = (category) => {
     if (category === "all") {
       setSelectedCategory("");
-      setMapVisible(false); // Close the map when "All" is pressed
+      setMapVisible(false); 
+      setShowFilter(false);
       setFilters({
         // Clear the filters
-        priceRange: [0, 1000],
+        priceRange: [0, 300],
         minRating: 0,
         selectedCategories: [],
         selectedAmenities: [],
@@ -46,7 +70,7 @@ export default function Properties() {
       setSelectedCategory(category);
       setMapVisible(true);
       setFilters({
-        priceRange: [0, 1000],
+        priceRange: [0, 300],
         minRating: 0,
         selectedCategories: [],
         selectedAmenities: [],
@@ -64,6 +88,11 @@ export default function Properties() {
       selectedAmenities: [],
     });
   };
+  useEffect(() => {
+    if (mapVisible) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [filters, selectedCategory, searchValue,mapVisible]);
 
   const handleSearch = (value) => {
     setSearchValue(value);
