@@ -12,6 +12,7 @@ import { BsCashCoin } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PuffLoader } from "react-spinners";
 
 export default function BookingDetail() {
   const { bookingId } = useParams();
@@ -67,7 +68,13 @@ export default function BookingDetail() {
   }, [bookingId]);
 
   if (!booking) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <div className="loading-container">
+          <PuffLoader color="#605cb8" size={60} />
+        </div>
+      </>
+    );
   }
 
   return (

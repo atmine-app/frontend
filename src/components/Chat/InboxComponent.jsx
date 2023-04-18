@@ -36,7 +36,7 @@ export default function InboxComponent() {
         <div style={{height: "85vh",
         width: '100%',
         margin: '30px 0 0 0',
-      }} ref={inboxContainer}>Loading...</div>
+      }} ref={inboxContainer}></div>
     </span>);;
   }
   
