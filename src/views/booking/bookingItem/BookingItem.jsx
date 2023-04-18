@@ -1,13 +1,14 @@
-import React from 'react';
-import './BookingItem.css';
-import { HiOutlineChevronRight } from 'react-icons/hi';
+import React from "react";
+import "./BookingItem.css";
+import { HiOutlineChevronRight } from "react-icons/hi";
 
 const BookingItem = ({ booking }) => {
   const startDate = new Date(booking.startDate);
   const endDate = new Date(booking.endDate);
-  const month = startDate.toLocaleString('default', { month: 'short' });
+  const month = startDate.toLocaleString("default", { month: "short" });
   const dateString = `${startDate.getDate()} - ${endDate.getDate()} ${month}`;
-  const status = booking.status.charAt(0).toUpperCase() + booking.status.slice(1);
+  const status =
+    booking.status.charAt(0).toUpperCase() + booking.status.slice(1);
 
   return (
     <div className="booking-item">
@@ -19,9 +20,7 @@ const BookingItem = ({ booking }) => {
         <p className="booking-item__date-price">
           <span className="bold"></span> {dateString} · {booking.totalPrice} €
         </p>
-        <p className={`booking-item__status ${booking.status}`}>
-          {status}
-        </p>
+        <p className={`booking-item__status ${booking.status}`}>{status}</p>
       </div>
       <div className="booking-item__arrow">
         <HiOutlineChevronRight />

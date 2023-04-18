@@ -1,13 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
 class BookingService {
   constructor() {
     this.api = axios.create({
-      baseURL: `${process.env.REACT_APP_BACKEND_URL}/bookings`
+      baseURL: `${process.env.REACT_APP_BACKEND_URL}/bookings`,
     });
 
-    this.api.interceptors.request.use(config => {
-      const storedToken = localStorage.getItem('authToken');
+    this.api.interceptors.request.use((config) => {
+      const storedToken = localStorage.getItem("authToken");
       if (storedToken) {
         config.headers = { Authorization: `Bearer ${storedToken}` };
       }
@@ -16,23 +16,38 @@ class BookingService {
   }
 
   getAllBookings() {
-    return this.api.get('/').then(({ data }) => data).catch(err => console.error(err));
+    return this.api
+      .get("/")
+      .then(({ data }) => data)
+      .catch((err) => console.error(err));
   }
 
   getBooking(bookingId) {
-    return this.api.get(`/${bookingId}`).then(({ data }) => data).catch(err => console.error(err));
+    return this.api
+      .get(`/${bookingId}`)
+      .then(({ data }) => data)
+      .catch((err) => console.error(err));
   }
 
   createBooking(booking) {
-    return this.api.post('/', booking).then(({ data }) => data).catch(err => console.error(err));
+    return this.api
+      .post("/", booking)
+      .then(({ data }) => data)
+      .catch((err) => console.error(err));
   }
 
   editBooking(bookingId, body) {
-    return this.api.put(`/${bookingId}`, body).then(({ data }) => data).catch(err => console.error(err));
+    return this.api
+      .put(`/${bookingId}`, body)
+      .then(({ data }) => data)
+      .catch((err) => console.error(err));
   }
 
   deleteBooking(bookingId) {
-    return this.api.delete(`/${bookingId}`).then(({ data }) => data).catch(err => console.error(err));
+    return this.api
+      .delete(`/${bookingId}`)
+      .then(({ data }) => data)
+      .catch((err) => console.error(err));
   }
 }
 

@@ -5,7 +5,7 @@ const openAIService = {
   async summarize(description) {
     const prompt = `You are given this text that is the description of a property, i want you to summarize it in less than 15 words: ${description}
 `;
-    const apiKey = process.env.REACT_APP_OPENAI_API_KEY ; // Do NOT expose your API key on the client-side
+    const apiKey = process.env.REACT_APP_OPENAI_API_KEY; // Do NOT expose your API key on the client-side
 
     try {
       const response = await axios.post(
@@ -19,7 +19,7 @@ const openAIService = {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${apiKey}`,
+            Authorization: `Bearer ${apiKey}`,
           },
         }
       );
@@ -28,7 +28,11 @@ const openAIService = {
       console.error("OpenAI API Error:", error.message);
 
       if (error.response) {
-        console.error("OpenAI API Response:", error.response.status, error.response.data);
+        console.error(
+          "OpenAI API Response:",
+          error.response.status,
+          error.response.data
+        );
       } else {
         console.error("An error occurred during your request.");
       }

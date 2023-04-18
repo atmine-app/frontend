@@ -7,8 +7,6 @@ import MapSearch from "../components/Map/MapSearch";
 import GoogleMapsProvider from "../components/GoogleMapsProvider/GoogleMapsProvider";
 import SearchFilter from "../components/Search/SearchFilter";
 
-
-
 export default function Properties() {
   const [properties, setProperties] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -37,7 +35,8 @@ export default function Properties() {
     if (category === "all") {
       setSelectedCategory("");
       setMapVisible(false); // Close the map when "All" is pressed
-      setFilters({ // Clear the filters
+      setFilters({
+        // Clear the filters
         priceRange: [0, 1000],
         minRating: 0,
         selectedCategories: [],
@@ -54,8 +53,6 @@ export default function Properties() {
       });
     }
   };
-  
-  
 
   const closeFilter = () => {
     setShowFilter(false);
@@ -76,17 +73,18 @@ export default function Properties() {
     try {
       const response = await propertyService.getAllProperties();
       const activeProperties = response.filter((property) => property.active);
-      activeProperties.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      activeProperties.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
       setProperties(activeProperties);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
     getAllProperties();
-    return ()=>{
+    return () => {
       setSelectedCategory("");
-     }
+    };
   }, []);
 
   useEffect(() => {
@@ -107,8 +105,7 @@ export default function Properties() {
     if (selectedCategory) {
       filtered = filtered.filter(
         (property) =>
-          property.category.toLowerCase() ===
-          selectedCategory.toLowerCase()
+          property.category.toLowerCase() === selectedCategory.toLowerCase()
       );
     }
 
@@ -147,20 +144,20 @@ export default function Properties() {
     }
 
     setFilteredProperties(filtered);
-  }, [searchValue, properties, filters,selectedCategory]);
+  }, [searchValue, properties, filters, selectedCategory]);
 
   return (
     <div>
       <div className="sticky__searchBar">
-      <SearchBar
-        className="searchBarContainer"
-        handleSearchValue={handleSearch}
-        handleCategorySelect={handleCategorySelect}
-        handleFilterClick={handleFilterClick}
-      />
-       </div>
+        <SearchBar
+          className="searchBarContainer"
+          handleSearchValue={handleSearch}
+          handleCategorySelect={handleCategorySelect}
+          handleFilterClick={handleFilterClick}
+        />
+      </div>
       <SearchFilter
-       className="search-filter-container"
+        className="search-filter-container"
         isOpen={showFilter}
         applyFilters={applyFilters}
         closeFilter={closeFilter}
@@ -170,39 +167,37 @@ export default function Properties() {
         filters={filters}
         setFilters={setFilters}
       />
-     
-      
 
       <div className="map-and-cards-container">
-      {(searchValue || mapVisible) &&
-        filteredProperties.length > 0 &&
-        filteredProperties[0].coordinates && (
-          <GoogleMapsProvider>
-            <MapSearch
-              center={{
-                lat: filteredProperties[0].coordinates.lat,
-                lng: filteredProperties[0].coordinates.lng,
-              }}
-              properties={filteredProperties}
-            />
-          </GoogleMapsProvider>
-        )}
-      <div>
-        {properties !== null ? (
-          <div className="cards-flex">
-            {filteredProperties.map((property) => {
-              return (
-                <div key={property._id}>
-                  <CardMin property={property} />
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div>Loading properties...</div>
-        )}
+        {(searchValue || mapVisible) &&
+          filteredProperties.length > 0 &&
+          filteredProperties[0].coordinates && (
+            <GoogleMapsProvider>
+              <MapSearch
+                center={{
+                  lat: filteredProperties[0].coordinates.lat,
+                  lng: filteredProperties[0].coordinates.lng,
+                }}
+                properties={filteredProperties}
+              />
+            </GoogleMapsProvider>
+          )}
+        <div>
+          {properties !== null ? (
+            <div className="cards-flex">
+              {filteredProperties.map((property) => {
+                return (
+                  <div key={property._id}>
+                    <CardMin property={property} />
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div>Loading properties...</div>
+          )}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 }

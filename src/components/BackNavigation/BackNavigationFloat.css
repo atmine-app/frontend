@@ -83,7 +83,7 @@
     transition: background-color 0.2s ease;
   }
 
-  .back-navigation-float #back-navigation-btn  {
+  .back-navigation-float #back-navigation-btn {
     margin-right: 20px;
   }
 
@@ -101,5 +101,5 @@
     background-color: transparent;
     box-shadow: none;
   }
-  
+
 }

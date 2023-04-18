@@ -69,7 +69,7 @@ export default function Signup() {
         theme: "light",
       });
     }
-    setTimeout(() => setLoading(false), 2000); // Delay for 2 seconds
+    setTimeout(() => setLoading(false), 2000);
   };
 
   const togglePasswordVisibility = () => {
@@ -79,7 +79,6 @@ export default function Signup() {
   const togglePasswordControlVisibility = () => {
     setShowPasswordControl((prev) => !prev);
   };
-
 
   return (
     <div className="form-container">
@@ -145,19 +144,19 @@ export default function Signup() {
           </div>
         </div>
         <div className="text-center mt-4">
-        <button
-          type="submit"
-          className={`cta-button full100 ${loading ? "loading" : ""}`}
-          disabled={loading}
-        >
-          {loading ? (
-            <div className="spinner-container">
-              <div className="spinner"></div>
-            </div>
-          ) : (
-            "Register"
-          )}
-        </button>
+          <button
+            type="submit"
+            className={`cta-button full100 ${loading ? "loading" : ""}`}
+            disabled={loading}
+          >
+            {loading ? (
+              <div className="spinner-container">
+                <div className="spinner"></div>
+              </div>
+            ) : (
+              "Register"
+            )}
+          </button>
         </div>
         <p className="cta-small-text">
           <small>Already a member?</small>

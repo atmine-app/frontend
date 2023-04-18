@@ -43,7 +43,16 @@ function SplashPage() {
       </div>
       <div className="my-splash-heading-container">
         <h1 className="my-splash-title">Welcome to</h1>
-        <img src={atminelogo} alt="atminelogolime" style={{ width: "150px", height: "50px", marginLeft: "10px", marginBottom: "20px" }} />
+        <img
+          src={atminelogo}
+          alt="atminelogolime"
+          style={{
+            width: "150px",
+            height: "50px",
+            marginLeft: "10px",
+            marginBottom: "20px",
+          }}
+        />
       </div>
       <p className="my-splash-text">{firstText}</p>
       <p

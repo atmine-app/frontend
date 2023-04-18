@@ -3,8 +3,7 @@ import { HiStar } from "react-icons/hi";
 import "./PropertyInfo.css";
 import { CiLocationOn } from "react-icons/ci";
 
-export default function PropertyInfo({property,rating}) {
-
+export default function PropertyInfo({ property, rating }) {
   return (
     <div className="propertyInfo section">
       <div className="propertyInfo-title">
@@ -12,12 +11,14 @@ export default function PropertyInfo({property,rating}) {
       </div>
       {rating && (
         <div className="propertyInfo-smallinfo ">
-          <HiStar color="var(--color-secondary-green)" fontSize="1.3rem" /><p>{rating.averageRating}</p>
+          <HiStar color="var(--color-secondary-green)" fontSize="1.3rem" />
+          <p>{rating.averageRating}</p>
         </div>
       )}
       <div className="propertyInfo-adress">
         <p>
-        <CiLocationOn className="location-icon-card"/>{property.address}, {property.city}, {property.country}
+          <CiLocationOn className="location-icon-card" />
+          {property.address}, {property.city}, {property.country}
         </p>
       </div>
     </div>

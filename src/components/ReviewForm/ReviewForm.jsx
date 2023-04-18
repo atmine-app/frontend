@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "./ReviewForm.css";
 import { toast } from "react-toastify";
 
-export default function ReviewForm({ initialReviewText, handleReviewSubmit, userBooking }) {
+export default function ReviewForm({
+  initialReviewText,
+  handleReviewSubmit,
+  userBooking,
+}) {
   const [review, setReview] = useState(initialReviewText || "");
 
   const handleReviewChange = (event) => {
@@ -41,7 +45,9 @@ export default function ReviewForm({ initialReviewText, handleReviewSubmit, user
           value={review}
           onChange={handleReviewChange}
         />
-        <button className="cta-button" type="submit">Submit</button>
+        <button className="cta-button" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-
 function usePageLoader() {
   const location = useLocation();
   const [isPageLoading, setIsPageLoading] = useState(false);
@@ -11,7 +10,7 @@ function usePageLoader() {
       setIsPageLoading(true);
       const timer = setTimeout(() => {
         setIsPageLoading(false);
-      }, 500); // You can adjust the delay as needed
+      }, 500); 
 
       return () => {
         clearTimeout(timer);

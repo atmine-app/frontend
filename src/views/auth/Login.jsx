@@ -71,7 +71,7 @@ export default function Login() {
         theme: "light",
       });
     }
-    setTimeout(() => setLoading(false), 2000); // Delay for 2 seconds
+    setTimeout(() => setLoading(false), 2000); 
   };
 
   useEffect(() => {
@@ -122,19 +122,19 @@ export default function Login() {
           </div>
         </div>
         <div className="text-center mt-4">
-        <button
-          type="submit"
-          className={`cta-button full100 ${loading ? "loading" : ""}`}
-          disabled={loading}
-        >
-          {loading ? (
-            <div className="spinner-container">
-              <div className="spinner"></div>
-            </div>
-          ) : (
-            "Log in"
-          )}
-        </button>
+          <button
+            type="submit"
+            className={`cta-button full100 ${loading ? "loading" : ""}`}
+            disabled={loading}
+          >
+            {loading ? (
+              <div className="spinner-container">
+                <div className="spinner"></div>
+              </div>
+            ) : (
+              "Log in"
+            )}
+          </button>
         </div>
         <p className="cta-small-text">
           <small>Don't have an account?</small>
