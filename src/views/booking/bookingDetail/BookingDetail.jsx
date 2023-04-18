@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import bookingService from "../../../services/bookingsServices";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -107,7 +107,11 @@ export default function BookingDetail() {
           >
             {booking.status === "completed" ? "completed" : booking.status}
           </div>
-          <h2 className="booking-detail__title">{booking.property?.title}</h2>
+          <h2 className="booking-detail__title">
+          <Link to={`/properties/${booking.property?._id}`} className="link-no-decoration">
+  {booking.property?.title}
+</Link>
+          </h2>
           <p className="booking-detail__paragraph">
             {booking.status === "cancelled"
               ? `We've sent your cancellation email to: `
