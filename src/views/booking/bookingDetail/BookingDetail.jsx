@@ -108,9 +108,12 @@ export default function BookingDetail() {
             {booking.status === "completed" ? "completed" : booking.status}
           </div>
           <h2 className="booking-detail__title">
-          <Link to={`/properties/${booking.property?._id}`} className="link-no-decoration">
-  {booking.property?.title}
-</Link>
+            <Link
+              to={`/properties/${booking.property?._id}`}
+              className="link-no-decoration"
+            >
+              {booking.property?.title}
+            </Link>
           </h2>
           <p className="booking-detail__paragraph">
             {booking.status === "cancelled"
@@ -154,26 +157,65 @@ export default function BookingDetail() {
                 </p>
               </div>
               <div className="booking-confirmation__buttons buttons-container">
-                {booking.status !== "cancelled" &&
-                booking.status !== "completed" ? (
+                {booking.status === "confirmed" && (
+                  <>
+                    <button
+                      className="cta-button danger button-half-width"
+                      onClick={cancelBooking}
+                    >
+                      Cancel Booking
+                    </button>
+                    <button
+                      className="cta-button button-half-width"
+                      onClick={() =>
+                        navigate(`/chat/${booking.property.owner}`)
+                      }
+                    >
+                      Chat with the owner
+                    </button>
+                  </>
+                )}
+                {booking.status === "cancelled" && (
                   <button
-                    className="cta-button danger button-half-width"
-                    onClick={cancelBooking}
+                    className={`cta-button ${
+                      booking.status === "cancelled" ||
+                      booking.status === "completed"
+                        ? "full100"
+                        : "button-half-width"
+                    }`}
+                    onClick={() => navigate(`/chat/${booking.property.owner}`)}
                   >
-                    Cancel Booking
+                    Chat with the owner
                   </button>
-                ) : null}
-                <button
-                  className={`cta-button ${
-                    booking.status === "cancelled" ||
-                    booking.status === "completed"
-                      ? "full100"
-                      : "button-half-width"
-                  }`}
-                  onClick={() => navigate(`/chat/${booking.property.owner}`)}
-                >
-                  Chat with the owner
-                </button>
+                )}
+                {booking.status === "completed" && (
+                  <>
+                    <button
+                      className={`cta-button ${
+                        booking.status === "cancelled" ||
+                        booking.status === "completed"
+                          ? "full100"
+                          : "button-half-width"
+                      }`}
+                      onClick={() =>
+                        navigate(`/chat/${booking.property.owner}`)
+                      }
+                    >
+                      Chat with the owner
+                    </button>
+                    <button
+                      className={`cta-button ${
+                        booking.status === "cancelled" ||
+                        booking.status === "completed"
+                          ? "full100"
+                          : "button-half-width"
+                      }`}
+                      onClick={() => navigate(`/properties/${booking.property?._id}#reviews-section`)}
+                    >
+                      Add a Review
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>

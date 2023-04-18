@@ -339,6 +339,7 @@ export default function PropertyDetail() {
           initialReviewText=""
           handleReviewSubmit={handleReviewSubmit}
           userBooking={userBooking}
+          id="reviews-section"
         />
       )}
       {user && bookingFetched && (
