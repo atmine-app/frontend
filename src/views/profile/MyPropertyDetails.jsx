@@ -71,7 +71,6 @@ export default function MyProfile() {
   };
 
   const handleBlockRange = async (selectedRange) => {
-    console.log("Selected range:", selectedRange);
     try {
       await bookingService.blockDateRange(
         propertyId,
