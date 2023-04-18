@@ -4,6 +4,7 @@ import { useAuth } from "../../hooks/useAuth"; // Import your auth provider
 import { useParams } from "react-router-dom";
 import userService from "../../services/userService";
 import "./ChatComponent.css";
+import { PuffLoader } from "react-spinners";
 
 export default function ChatComponent() {
   const chatboxEl = useRef();
@@ -84,7 +85,11 @@ export default function ChatComponent() {
         }}
         ref={chatboxEl}
       >
-        Loading...
+        <div className="loading-container">
+          <PuffLoader color="#605cb8" size={60} />
+        </div>
+
+    );
       </div>
     </span>
   );
