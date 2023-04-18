@@ -102,3 +102,8 @@
 .button-half-width:last-child {
   margin-right: 0;
 }
+
+.link-no-decoration {
+  text-decoration: none;
+  color: var(--color-primary-purple)
+}

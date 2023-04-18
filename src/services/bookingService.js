@@ -24,7 +24,7 @@ class BookingService {
 
   getBooking(bookingId) {
     return this.api
-      .get(`/${bookingId}`)
+      .get(`/${bookingId}?populate=property`)
       .then(({ data }) => data)
       .catch((err) => console.error(err));
   }
