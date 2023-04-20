@@ -86,6 +86,7 @@ const MapSearch = ({ properties }) => {
           zoomControl: false,
           mapTypeControl: false,
           styles: customMapStyle,
+          clickableIcons: false,
         }}
       >
         {markers}
@@ -109,7 +110,8 @@ const MapSearch = ({ properties }) => {
               <p>Price: €{selectedMarker.price}</p>
               <p>{selectedMarker.description}</p>
               <Link to={`/properties/${selectedMarker._id}`}>
-                View Property
+                <button className="cta-button">View Property</button>
+                
               </Link>
             </div>
           </InfoWindow>
