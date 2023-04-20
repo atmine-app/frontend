@@ -249,6 +249,7 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
                 <input
                   type="text"
                   id="address"
+                  placeholder=""
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
