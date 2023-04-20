@@ -83,7 +83,7 @@ const MapSearch = ({ properties }) => {
         options={{
           disableDefaultUI: true,
           streetViewControl: false,
-          zoomControl: false,
+          zoomControl: true,
           mapTypeControl: false,
           styles: customMapStyle,
           clickableIcons: false,
