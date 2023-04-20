@@ -21,15 +21,15 @@ export default function NewProperty() {
     <div>
       <BackNavigationFloat />
       <div className="contentWrapper">
-        <RegisterPropertyForm
-          onFormDataChange={handleFormChange}
-          coordinates={coordinates}
-        />
-        <label id="map-container-register">
-          <GoogleMapsProvider>
+        <GoogleMapsProvider>
+          <RegisterPropertyForm
+            onFormDataChange={handleFormChange}
+            coordinates={coordinates}
+          />
+          <label id="map-container-register">
             <Map formData={formData} onLocationChange={handleLocationChange} />
-          </GoogleMapsProvider>
-        </label>
+          </label>
+        </GoogleMapsProvider>
       </div>
     </div>
   );
