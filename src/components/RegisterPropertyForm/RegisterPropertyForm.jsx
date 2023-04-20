@@ -8,6 +8,7 @@ import categories from "../../data/categories";
 import "./RegisterPropertyForm.css";
 import BackNavigationFloat from "../BackNavigation/BackNavigationFloat";
 import { toast } from "react-toastify";
+import { Autocomplete } from "@react-google-maps/api";
 
 const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
   const [images, setImages] = useState({ array: [] });
@@ -63,6 +64,55 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
         prevAmenities.filter((amenity) => amenity !== name)
       );
     }
+  };
+
+  const handleAddressAutoComplete = (autocomplete) => {
+    if (autocomplete) {
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        const lat = place.geometry.location.lat();
+        const lng = place.geometry.location.lng();
+
+        // Extract and update the address components
+        const addressComponents = place.address_components;
+        let street = "";
+        let city = "";
+        let country = "";
+        let zipCode = "";
+
+        addressComponents.forEach((component) => {
+          const types = component.types;
+
+          if (types.includes("street_number")) {
+            street = `${component.short_name} `;
+          } else if (types.includes("route")) {
+            street += component.short_name;
+          } else if (types.includes("locality")) {
+            city = component.long_name;
+          } else if (types.includes("country")) {
+            country = component.long_name;
+          } else if (types.includes("postal_code")) {
+            zipCode = component.short_name;
+          }
+        });
+
+        // Update the form data
+        const updatedFormData = {
+          ...formData,
+          address: street,
+          city,
+          country,
+          zipCode,
+          coordinates: { lat, lng },
+        };
+        setFormData(updatedFormData);
+        onFormDataChange(updatedFormData);
+      });
+    }
+  };
+
+  const onAutocompleteLoad = (autocomplete) => {
+    handleAddressAutoComplete(autocomplete);
   };
 
   useEffect(() => {}, [amenities]);
@@ -192,15 +242,21 @@ const RegisterPropertyForm = ({ onFormDataChange, coordinates }) => {
           <div id="address-container">
             <div className="form-field">
               <label for="address">Address:</label>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                onFocus={handleAddressInputFocus}
-                required
-              />
+              <Autocomplete
+                onLoad={onAutocompleteLoad}
+                onPlaceChanged={handleAddressAutoComplete}
+              >
+                <input
+                  type="text"
+                  id="address"
+                  placeholder=""
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  onFocus={handleAddressInputFocus}
+                  required
+                />
+              </Autocomplete>
             </div>
           </div>
 
