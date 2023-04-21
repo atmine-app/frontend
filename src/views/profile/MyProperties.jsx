@@ -38,11 +38,13 @@ const MyProperties = () => {
               (property) => property._id === booking.property._id
             )
         );
-
+        console.log("userBookings", userBookings);
         const propertyRevenues = userProperties.map((property) => {
           const propertyBookings = userBookings.filter(
             (booking) => booking.property._id === property._id
           );
+          console.log("Property:", property.title, "Bookings:", propertyBookings); // Add this line
+        
           const revenue = propertyBookings.reduce(
             (total, booking) => total + booking.totalPrice,
             0
@@ -73,9 +75,9 @@ const MyProperties = () => {
           Revenue Summary
         </h3>
         <RevenueSummaryTable
-          properties={properties.filter(
-            ({ revenue }) => !isNaN(revenue) && revenue > 0
-          )}
+          properties={properties
+            .filter(({ bookingCount }) => bookingCount > 0)
+            .filter(({ revenue }) => !isNaN(revenue) && revenue > 0)}
         />
         <h3 style={{ marginTop: "20px", marginBottom: "20px" }}>
           Property Listings
