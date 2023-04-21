@@ -15,6 +15,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PuffLoader } from "react-spinners";
+import amenitiesOptions from "../../../data/amenities";
 
 export default function BookingDetail() {
   const { bookingId } = useParams();
@@ -79,6 +80,15 @@ export default function BookingDetail() {
     }
   };
 
+  const getAmenitiesLabels = (amenities) => {
+    const amenitiesLabels = amenities.map((amenity) => {
+      const foundOption = amenitiesOptions.find((option) => option.value === amenity);
+      return foundOption ? foundOption.label : '';
+    });
+  
+    return amenitiesLabels.join(', ');
+  };
+
   const generateGoogleCalendarLink = () => {
     const startDate = new Date(booking.startDate);
     if (eventDetails.startTime) {
@@ -98,7 +108,7 @@ export default function BookingDetail() {
       `Booking at ${booking.property.title}`
     );
     const location = encodeURIComponent(
-      `${booking.property.coordinates.lat},${booking.property.coordinates.lng}`
+      `${booking.property.address}, ${booking.property.city}, ${booking.property.country}`
     );
     const description = encodeURIComponent(eventDetails.description);
 
@@ -108,12 +118,17 @@ export default function BookingDetail() {
 
   const generateMessage = () => {
     const calendarLink = generateGoogleCalendarLink();
+    const amenities = getAmenitiesLabels(booking.property.amenities);
     const message = `Hi! I just booked a stay at ${
       booking.property.title
     } from ${formatDate(booking.startDate)} to ${formatDate(
       booking.endDate
-    )}. Here's the Google Calendar event link: ${calendarLink}`;
-
+    )}. The property is a ${booking.property.category} in ${
+      booking.property.address
+    }, ${
+      booking.property.city
+    }. Amenities: ${amenities}. Here's the Google Calendar event link: ${calendarLink}.
+    Hope to see you there!`;
     return message;
   };
 
@@ -146,6 +161,16 @@ export default function BookingDetail() {
       </>
     );
   }
+
+  const scrollUpAndToggleShareContent = () => {
+    toggleShareContent();
+  
+    // Wait for 500ms before scrolling down
+    setTimeout(() => {
+      const maxScrollY = document.body.scrollHeight - window.innerHeight;
+      window.scrollTo({ top: maxScrollY, behavior: 'smooth' });
+    }, 500);
+  };
 
   return (
     <div>
@@ -247,7 +272,7 @@ export default function BookingDetail() {
                     </div>
                     <button
                       className="cta-button full100"
-                      onClick={toggleShareContent}
+                        onClick={scrollUpAndToggleShareContent}
                     >
                       Share
                     </button>
