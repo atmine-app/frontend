@@ -8,6 +8,8 @@ import { Pagination } from "swiper";
 import "./BookingDetail.css";
 import BackNavigationFloat from "../../../components/BackNavigation/BackNavigationFloat";
 import { IoCalendarNumberOutline } from "react-icons/io5";
+import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
+import { FaTelegramPlane } from "react-icons/fa";
 import { BsCashCoin } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
@@ -18,6 +20,16 @@ export default function BookingDetail() {
   const { bookingId } = useParams();
   const [booking, setBooking] = useState({});
   const navigate = useNavigate();
+  const [eventDetails, setEventDetails] = useState({
+    startTime: "",
+    endTime: "",
+    description: "",
+  });
+  const [showShareContent, setShowShareContent] = useState(false);
+
+  const toggleShareContent = () => {
+    setShowShareContent((prev) => !prev);
+  };
 
   const getBooking = async () => {
     try {
@@ -26,6 +38,11 @@ export default function BookingDetail() {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEventDetails((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const formatDate = (dateString) => {
@@ -60,6 +77,59 @@ export default function BookingDetail() {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const generateGoogleCalendarLink = () => {
+    const startDate = new Date(booking.startDate);
+    if (eventDetails.startTime) {
+      const [hours, minutes] = eventDetails.startTime.split(":");
+      startDate.setHours(hours, minutes);
+    }
+    const startDateTime = startDate.toISOString().replace(/-|:|\.\d+/g, "");
+
+    const endDate = new Date(booking.endDate);
+    if (eventDetails.endTime) {
+      const [hours, minutes] = eventDetails.endTime.split(":");
+      endDate.setHours(hours, minutes);
+    }
+    const endDateTime = endDate.toISOString().replace(/-|:|\.\d+/g, "");
+
+    const eventName = encodeURIComponent(
+      `Booking at ${booking.property.title}`
+    );
+    const location = encodeURIComponent(
+      `${booking.property.coordinates.lat},${booking.property.coordinates.lng}`
+    );
+    const description = encodeURIComponent(eventDetails.description);
+
+    const calendarLink = `https://www.google.com/calendar/render?action=TEMPLATE&dates=${startDateTime}%2F${endDateTime}&text=${eventName}&location=${location}&details=${description}`;
+    return calendarLink;
+  };
+
+  const generateMessage = () => {
+    const calendarLink = generateGoogleCalendarLink();
+    const message = `Hi! I just booked a stay at ${
+      booking.property.title
+    } from ${formatDate(booking.startDate)} to ${formatDate(
+      booking.endDate
+    )}. Here's the Google Calendar event link: ${calendarLink}`;
+
+    return message;
+  };
+
+  const generateGmailShareURL = () => {
+    const subject = encodeURIComponent(`Booking at ${booking.property.title}`);
+    const body = encodeURIComponent(generateMessage());
+    return `mailto:?subject=${subject}&body=${body}`;
+  };
+
+  const generateTelegramShareURL = () => {
+    const text = encodeURIComponent(generateMessage());
+    return `tg://msg_url?url=${text}`;
+  };
+  const generateWhatsAppMessage = () => {
+    const message = encodeURIComponent(generateMessage());
+    return `https://wa.me/?text=${message}`;
   };
 
   useEffect(() => {
@@ -159,20 +229,91 @@ export default function BookingDetail() {
               <div className="booking-confirmation__buttons buttons-container">
                 {booking.status === "confirmed" && (
                   <>
+                    <div className="buttons-container">
+                      <button
+                        className="cta-button danger button-half-width"
+                        onClick={cancelBooking}
+                      >
+                        Cancel Booking
+                      </button>
+                      <button
+                        className="cta-button button-half-width"
+                        onClick={() =>
+                          navigate(`/chat/${booking.property.owner}`)
+                        }
+                      >
+                        Chat with the owner
+                      </button>
+                    </div>
                     <button
-                      className="cta-button danger button-half-width"
-                      onClick={cancelBooking}
+                      className="cta-button full100"
+                      onClick={toggleShareContent}
                     >
-                      Cancel Booking
+                      Share
                     </button>
-                    <button
-                      className="cta-button button-half-width"
-                      onClick={() =>
-                        navigate(`/chat/${booking.property.owner}`)
-                      }
-                    >
-                      Chat with the owner
-                    </button>
+                    {showShareContent && (
+                      <>
+                        <div className="event-details-form expand">
+                          <label>
+                            Start Time:
+                            <input
+                              type="time"
+                              name="startTime"
+                              value={eventDetails.startTime}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                          <label>
+                            End Time:
+                            <input
+                              type="time"
+                              name="endTime"
+                              value={eventDetails.endTime}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                          <label>
+                            Description:
+                            <textarea
+                            className="description-input"
+                              type="text"
+                              name="description"
+                              value={eventDetails.description}
+                              onChange={handleInputChange}
+                            />
+                          </label>
+                        </div>
+                        <div className="share-buttons-container expand">
+                          <a
+                            href={generateWhatsAppMessage()}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <button className="share-cta-button button-third-width">
+                              <AiOutlineWhatsApp className="booking-confirmation__property-icon" />
+                            </button>
+                          </a>
+                          <a
+                            href={generateGmailShareURL()}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <button className="share-cta-button button-third-width">
+                              <AiOutlineMail className="booking-confirmation__property-icon" />
+                            </button>
+                          </a>
+                          <a
+                            href={generateTelegramShareURL()}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <button className="share-cta-button button-third-width">
+                              <FaTelegramPlane className="booking-confirmation__property-icon" />
+                            </button>
+                          </a>
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
                 {booking.status === "cancelled" && (
@@ -210,7 +351,11 @@ export default function BookingDetail() {
                           ? "full100"
                           : "button-half-width"
                       }`}
-                      onClick={() => navigate(`/properties/${booking.property?._id}#reviews-section`)}
+                      onClick={() =>
+                        navigate(
+                          `/properties/${booking.property?._id}#reviews-section`
+                        )
+                      }
                     >
                       Add a Review
                     </button>

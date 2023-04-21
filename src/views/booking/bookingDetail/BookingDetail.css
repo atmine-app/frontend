@@ -74,7 +74,10 @@
   align-items: center;
   margin-bottom: 10px;
 }
-
+.booking-confirmation__buttons{
+  display:flex;
+  flex-direction:column;
+}
 .booking-confirmation__cancel-button {
   display: flex;
   justify-content: center;
@@ -107,4 +110,85 @@
 .link-no-decoration {
   text-decoration: none;
   color: var(--color-primary-purple)
+}
+
+
+/* share buttons and form */
+
+.share-buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px 0;
+}
+
+.share-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--color-secondary-green);
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  position: relative;
+}
+
+.share-cta-button .booking-confirmation__property-icon {
+  font-size: 30px;
+  margin:0;
+}
+
+.event-details-form {
+  margin-top: 10px;
+}
+
+.event-details-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.event-details-form input[type="time"] {
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-family: inherit;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  margin-bottom: 10px;
+  background-color: var(--color-primary-green);
+}
+
+/* Change the clock icon color */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 1;
+}
+
+
+.event-details-form textarea[type="text"] {
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-family: inherit;
+  border: none;
+  border-radius: 4px;
+  border: 1px solid var(--color-primary-green);
+  color: var(--color-primary-black);
+  margin:10px auto 10px auto;
+
+}
+
+.description-input {
+  background-color: white;
+  height: 150px;
+  resize: none; /* To prevent the textarea from being resized */
+  border: 1px solid var(--color-primary-green);
+  text-align: left; 
+  vertical-align: top;
 }
