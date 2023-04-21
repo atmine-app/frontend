@@ -1,0 +1,27 @@
+.revenue-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.revenue-summary-table th,
+.revenue-summary-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.revenue-summary-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.revenue-summary-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.revenue-summary-table th:nth-child(2),
+.revenue-summary-table th:nth-child(3),
+.revenue-summary-table td:nth-child(2),
+.revenue-summary-table td:nth-child(3) {
+  text-align: center;
+}
