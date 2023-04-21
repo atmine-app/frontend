@@ -140,7 +140,12 @@
   font-size: 30px;
   margin:0;
 }
-
+.share-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:10px
+}
 .event-details-form {
   margin-top: 10px;
 }

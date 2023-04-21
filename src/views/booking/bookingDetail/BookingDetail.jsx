@@ -10,7 +10,7 @@ import BackNavigationFloat from "../../../components/BackNavigation/BackNavigati
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
 import { FaTelegramPlane } from "react-icons/fa";
-import { BsCashCoin } from "react-icons/bs";
+import { BsCashCoin,BsShare } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -271,10 +271,10 @@ export default function BookingDetail() {
                       </button>
                     </div>
                     <button
-                      className="cta-button full100"
+                      className="cta-button share-button full100"
                         onClick={scrollUpAndToggleShareContent}
                     >
-                      Share
+                       Share  <BsShare />
                     </button>
                     {showShareContent && (
                       <>
